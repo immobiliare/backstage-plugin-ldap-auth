@@ -40,7 +40,7 @@ export function parseJwtPayload(token: string): BackstageJWTPayload | never {
 }
 
 export function prepareBackstageIdentityResponse(
-  result: BackstageSignInResult,
+  result: BackstageSignInResult
 ): BackstageIdentityResponse {
   const { sub, ent } = parseJwtPayload(result.token);
 
@@ -56,7 +56,7 @@ export function prepareBackstageIdentityResponse(
 
 export const defaultSigninResolver: SignInResolver<LDAPUser> = async (
   { result },
-  ctx: AuthResolverContext,
+  ctx: AuthResolverContext
 ): Promise<BackstageSignInResult> => {
   const backstageIdentity: BackstageSignInResult =
     await ctx.signInWithCatalogUser({
@@ -68,7 +68,7 @@ export const defaultSigninResolver: SignInResolver<LDAPUser> = async (
 
 export const defaultAuthHandler: AuthHandler<LDAPUser> = async (
   { uid },
-  ctx: AuthResolverContext,
+  ctx: AuthResolverContext
 ): Promise<{ profile: ProfileInfo }> => {
   const backstageUserData = await ctx.findCatalogUser({
     entityRef: uid as string,
@@ -77,13 +77,13 @@ export const defaultAuthHandler: AuthHandler<LDAPUser> = async (
 };
 
 export const defaultLDAPAuthentication = function defaultLDAPAuthentication(
-  options: AuthenticationOptions,
+  options: AuthenticationOptions
 ): Promise<LDAPUser> {
   return authenticate(options);
 };
 
 function ldapClient(
-  ldapOpts: ldap.ClientOptions,
+  ldapOpts: ldap.ClientOptions
 ): Promise<ldap.Client | Error> {
   return new Promise((resolve, reject) => {
     ldapOpts.connectTimeout = ldapOpts.connectTimeout || 5000;
@@ -99,7 +99,7 @@ function ldapClient(
 
 export const defaultCheckUserExists = async (
   ldapOpts: ldap.ClientOptions,
-  uid: string,
+  uid: string
 ) => {
   const client = await ldapClient(ldapOpts);
   if (client instanceof Error)
