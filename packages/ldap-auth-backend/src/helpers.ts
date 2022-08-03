@@ -21,15 +21,18 @@ import {
   JWT_INVALID_TOKEN,
   LDAP_CONNECT_FAIL,
 } from './errors';
+import Keyv from 'keyv';
 
 export const COOKIE_FIELD_KEY = 'backstage-token';
+
+export const normalizeTime = (date: number) => Math.floor(date / 1000);
 
 export function parseJwtPayload(token: string): BackstageJWTPayload | never {
   try {
     const [_header, payload, _signature] = token.split('.');
     const parsed = JSON.parse(Buffer.from(payload, 'base64').toString());
     const { exp } = parsed;
-    if (Math.floor(Date.now() / 1000) > parseInt(exp, 10)) {
+    if (normalizeTime(Date.now()) > parseInt(exp, 10)) {
       // is expired?
       throw new Error(JWT_EXPIRED_TOKEN);
     }
@@ -40,7 +43,7 @@ export function parseJwtPayload(token: string): BackstageJWTPayload | never {
 }
 
 export function prepareBackstageIdentityResponse(
-  result: BackstageSignInResult
+  result: BackstageSignInResult,
 ): BackstageIdentityResponse {
   const { sub, ent } = parseJwtPayload(result.token);
 
@@ -56,7 +59,7 @@ export function prepareBackstageIdentityResponse(
 
 export const defaultSigninResolver: SignInResolver<LDAPUser> = async (
   { result },
-  ctx: AuthResolverContext
+  ctx: AuthResolverContext,
 ): Promise<BackstageSignInResult> => {
   const backstageIdentity: BackstageSignInResult =
     await ctx.signInWithCatalogUser({
@@ -68,7 +71,7 @@ export const defaultSigninResolver: SignInResolver<LDAPUser> = async (
 
 export const defaultAuthHandler: AuthHandler<LDAPUser> = async (
   { uid },
-  ctx: AuthResolverContext
+  ctx: AuthResolverContext,
 ): Promise<{ profile: ProfileInfo }> => {
   const backstageUserData = await ctx.findCatalogUser({
     entityRef: uid as string,
@@ -77,13 +80,13 @@ export const defaultAuthHandler: AuthHandler<LDAPUser> = async (
 };
 
 export const defaultLDAPAuthentication = function defaultLDAPAuthentication(
-  options: AuthenticationOptions
+  options: AuthenticationOptions,
 ): Promise<LDAPUser> {
   return authenticate(options);
 };
 
 function ldapClient(
-  ldapOpts: ldap.ClientOptions
+  ldapOpts: ldap.ClientOptions,
 ): Promise<ldap.Client | Error> {
   return new Promise((resolve, reject) => {
     ldapOpts.connectTimeout = ldapOpts.connectTimeout || 5000;
@@ -99,7 +102,7 @@ function ldapClient(
 
 export const defaultCheckUserExists = async (
   ldapOpts: ldap.ClientOptions,
-  uid: string
+  uid: string,
 ) => {
   const client = await ldapClient(ldapOpts);
   if (client instanceof Error)
@@ -119,21 +122,38 @@ export const defaultCheckUserExists = async (
   });
 };
 
+export interface TokenValidator {
+  logout(jwt: string, ts: number): Promise<void> | void;
+  isValid(jwt: string): Promise<boolean> | boolean;
+  invalidateToken(jwt: string): Promise<void> | void;
+}
+
 // TODO: Rework this to use the database for better scalabilities
-class JWTTokenCache extends Map {
+export class JWTTokenValidator implements TokenValidator {
+  private readonly store: Keyv;
+
+  constructor(store: Keyv) {
+    this.store = store;
+  }
+
+  async logout(jwt: string, ts: number): Promise<void> {
+    const { sub } = parseJwtPayload(jwt)
+    await this.store.set(sub, ts);
+  }
+
   // On logout and refresh set the new invalidBeforeDate for the user
-  setLastIssuedAtForUser(uid: string, invalidBeforeTimestamp: number) {
-    this.set(uid, invalidBeforeTimestamp);
-    return this;
+  async invalidateToken(jwt: string) {
+    const { sub } = parseJwtPayload(jwt)
+    await this.store.set(sub, normalizeTime(Date.now()));
   }
 
   // rejects tokens issued before logouts and refreshs
-  isValid(jwt: string) {
+  async isValid(jwt: string) {
     const { sub, iat } = parseJwtPayload(jwt);
 
     // // check if we have and entry in the cache
-    if (this.has(sub)) {
-      const invalidBeforeDate = this.get(sub);
+    if (await this.store.has(sub)) {
+      const invalidBeforeDate = await this.store.get(sub);
 
       // if user signed off
       if (invalidBeforeDate && iat < invalidBeforeDate) {
@@ -145,4 +165,14 @@ class JWTTokenCache extends Map {
   }
 }
 
-export const jwtTokenCache = new JWTTokenCache();
+
+export class TokenValidatorNoop implements TokenValidator {
+  // On logout and refresh set the new invalidBeforeDate for the user
+  async invalidateToken(_jwt: string) {}
+
+  async logout(_jwt: string, _ts: number) {}
+  // rejects tokens issued before logouts and refreshs
+  async isValid(_jwt: string) {
+    return true;
+  }
+}

@@ -14,9 +14,11 @@ import {
   defaultCheckUserExists,
   prepareBackstageIdentityResponse,
   parseJwtPayload,
-  jwtTokenCache,
   defaultLDAPAuthentication,
   COOKIE_FIELD_KEY,
+  TokenValidator,
+  TokenValidatorNoop,
+  normalizeTime,
 } from './helpers';
 
 import { AuthenticationError } from '@backstage/errors';
@@ -30,6 +32,7 @@ export class ProviderLdapAuthProvider implements AuthProviderRouteHandlers {
   private readonly signInResolver: typeof defaultSigninResolver;
   private readonly resolverContext: AuthResolverContext;
   private readonly LDAPAuthOpts: LDAPAuthOpts;
+  private readonly jwtValidator: TokenValidator;
 
   constructor(options: {
     cookieFieldKey: string;
@@ -39,6 +42,7 @@ export class ProviderLdapAuthProvider implements AuthProviderRouteHandlers {
     ldapAuthentication: typeof defaultLDAPAuthentication;
     resolverContext: AuthResolverContext;
     ldapConfings: LDAPAuthOpts;
+    tokenValidator?: TokenValidator;
   }) {
     this.authHandler = options.authHandler;
     this.signInResolver = options.signInResolver;
@@ -47,6 +51,7 @@ export class ProviderLdapAuthProvider implements AuthProviderRouteHandlers {
     this.resolverContext = options.resolverContext;
     this.LDAPAuthOpts = options.ldapConfings;
     this.cookieFieldKey = options.cookieFieldKey;
+    this.jwtValidator = options.tokenValidator || new TokenValidatorNoop();
   }
 
   // must keep this methods for the interface
@@ -94,7 +99,7 @@ export class ProviderLdapAuthProvider implements AuthProviderRouteHandlers {
         result = { uid: uid as string };
       } else if (token) {
         // this throws if the token is invalid
-        jwtTokenCache.isValid(token as string);
+        await this.jwtValidator.isValid(token as string);
 
         // throws if invalid/expired
         const { sub } = parseJwtPayload(token as string);
@@ -107,6 +112,9 @@ export class ProviderLdapAuthProvider implements AuthProviderRouteHandlers {
       } else {
         throw new AuthenticationError(AUTH_MISSING_CREDENTIALS);
       }
+
+      // invalidate old token
+      if (token) await this.jwtValidator.invalidateToken(token);
 
       // This is used to return a backstage formated profile object
       const { profile } = await this.authHandler(
@@ -128,12 +136,7 @@ export class ProviderLdapAuthProvider implements AuthProviderRouteHandlers {
         backstageIdentity: prepareBackstageIdentityResponse(backstageIdentity),
       };
 
-      // flag all tokens issued before this as invalid for this user
-      const { iat, sub, exp } = parseJwtPayload(
-        backstageIdentity.token as string,
-      );
-      jwtTokenCache.setLastIssuedAtForUser(sub, iat);
-
+      const { exp } = parseJwtPayload(backstageIdentity.token as string);
       // maxAge value should be relative to now()
       // if it's negative it's expired already
       // should not happen but in case it will trigger browser for login page
@@ -156,10 +159,9 @@ export class ProviderLdapAuthProvider implements AuthProviderRouteHandlers {
   async logout(req: Request, res: Response): Promise<void> {
     const token = req.cookies?.[this.cookieFieldKey];
     // this throws if the token is invalid
-    jwtTokenCache.isValid(token as string);
-    // flag all tokens issued before this as invalid for this user
-    const { sub } = parseJwtPayload(token);
-    jwtTokenCache.setLastIssuedAtForUser(sub, Math.floor(Date.now() / 1000));
+    await this.jwtValidator.isValid(token as string);
+
+    this.jwtValidator.logout(token, normalizeTime(Date.now()));
 
     res.clearCookie(this.cookieFieldKey);
     res.status(200).end();
@@ -174,6 +176,7 @@ export const ldap = createAuthProviderIntegration({
     };
     resolvers?: any;
     cookieFieldKey?: string;
+    tokenValidator?: TokenValidator;
   }) {
     return ({ config, resolverContext }) => {
       const cnf = config.getConfig(process.env.NODE_ENV || 'development');
@@ -207,6 +210,7 @@ export const ldap = createAuthProviderIntegration({
         ldapAuthentication,
         ldapConfings: parsedConf,
         resolverContext,
+        tokenValidator: options.tokenValidator,
       });
     };
   },
