@@ -1,1 +1,1 @@
-# ldap-auth-backend
+# @immobiliarelabs/backstage-plugin-ldap-auth-backend
