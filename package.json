@@ -17,6 +17,6 @@
   },
   "scripts": {
     "release": "lerna publish --conventional-commits --conventional-graduate --yes",
-    "next": "lerna version --conventional-commits --conventional-prerelease --yes"
+    "next": "lerna publish --conventional-commits --conventional-prerelease --yes"
   }
 }
