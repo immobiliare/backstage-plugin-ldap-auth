@@ -1,6 +1,6 @@
 {
   "name": "@immobiliarelabs/backstage-plugin-ldap-auth",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.1",
   "main": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "license": "MIT",
