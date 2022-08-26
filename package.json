@@ -16,7 +16,7 @@
     "node": "16.16.0"
   },
   "scripts": {
-    "release": "lerna publish --conventional-graduate --yes",
-    "next": "lerna version --conventional-prerelease"
+    "release": "lerna publish --conventional-commits --conventional-graduate --yes",
+    "next": "lerna version --conventional-commits --conventional-prerelease --yes"
   }
 }
