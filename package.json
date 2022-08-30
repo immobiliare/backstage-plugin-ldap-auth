@@ -13,6 +13,11 @@
     "prettier": "^2.7.1"
   },
   "volta": {
-    "node": "16.16.0"
+    "node": ">=16"
+  },
+  "scripts": {
+    "bootstrap": "npx lerna bootstrap",
+    "publish:ci": "lerna publish from-package --yes",
+    "version:ci": "lerna version --yes --conventional-commits --create-release github --message 'chore(release): publish'"
   }
 }
