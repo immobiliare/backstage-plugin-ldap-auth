@@ -17,6 +17,15 @@ Supports Node.js `>=14.0.0`
 
 <!-- toc -->
 
+-   [Installation](#installation)
+-   [Configurations](#configurations)
+    -   [Connection Configuration](#connection-configuration)
+    -   [Setup Backstage official LDAP plugin](#setup-backstage-official-ldap-plugin)
+    -   [Add authentication backend](#add-authentication-backend)
+-   [Powered Apps](#powered-apps)
+-   [Support & Contribute](#support--contribute)
+-   [License](#license)
+
 <!-- tocstop -->
 
 ## Installation
@@ -30,7 +39,7 @@ You can install it with `npm`
 $ npm i -S @immobiliarelabs/backstage-plugin-ldap-auth-backend @immobiliarelabs/backstage-plugin-ldap-auth
 ```
 
-or `yarn`
+or using `yarn`
 
 ```bash
 # lastest stable version
