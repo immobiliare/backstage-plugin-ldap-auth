@@ -24,6 +24,9 @@ jobs:
       - name: Bootstrap lerna
         run: yarn bootstrap
 
+      - name: Lerna build
+        run: yarn build
+
       - name: Bump versions
         run: yarn version:ci
         env:

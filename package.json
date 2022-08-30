@@ -16,6 +16,7 @@
     "node": ">=16"
   },
   "scripts": {
+    "build": "npx lerna run build",
     "bootstrap": "npx lerna bootstrap",
     "publish:ci": "lerna publish from-package --yes",
     "version:ci": "lerna version --yes --conventional-commits --create-release github --message 'chore(release): publish'"
