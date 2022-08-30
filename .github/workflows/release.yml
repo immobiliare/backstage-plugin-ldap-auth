@@ -1,7 +1,6 @@
-on:
-  push:
-    branches:
-    - main
+name: Release
+
+on: [workflow_dispatch]
 
 jobs:
   release:
@@ -17,3 +16,5 @@ jobs:
       with:
         github_token:  ${{ secrets.GH_NODE_TOKEN }}
         npm_token: ${{ secrets.NPM_PUBLISH_TOKEN }}
+        name: "${{ github.actor }}"
+        email: "${{ github.actor }}"
