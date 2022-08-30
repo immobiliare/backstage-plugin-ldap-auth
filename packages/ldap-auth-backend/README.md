@@ -8,34 +8,14 @@ It works both on simple single process installation and on scaled infrastracture
 
 This plugin is not meant to be used alone but with in pair with:
 
-- The official [@backstage/plugin-catalog-backend-module-ldap](https://www.npmjs.com/package/@backstage/plugin-catalog-backend-module-ldap) which keeps in sync your LDAP users with Backstage user catalogs!
-- Its sibling frontend package [@immobiliarelabs/backstage-plugin-ldap-auth](https://www.npmjs.com/package/@immobiliarelabs/backstage-plugin-ldap-auth)
+-   The official [@backstage/plugin-catalog-backend-module-ldap](https://www.npmjs.com/package/@backstage/plugin-catalog-backend-module-ldap) which keeps in sync your LDAP users with Backstage user catalogs!
+-   Its sibling frontend package [@immobiliarelabs/backstage-plugin-ldap-auth](https://www.npmjs.com/package/@immobiliarelabs/backstage-plugin-ldap-auth)
 
 Supports Node.js `>=14.0.0`
 
 ## Table of Content
 
 <!-- toc -->
-
--   [Installation](#installation)
--   [Usage](#usage)
-    -   [Generic](#generic)
-    -   [Namespacing with Hostname/PID](#namespacing-with-hostnamepid)
-    -   [TCP Client](#tcp-client)
--   [API](#api)
-    -   [`Client`](#client)
-        -   [`new Client(options)`](#new-clientoptions)
-        -   [`Client.close([cb])`](#clientclosecb)
-        -   [`Client.connect()`](#clientconnect)
-        -   [`Client.counter(string[, value, sampling])`](#clientcounterstring-value-sampling)
-        -   [`Client.timing(string, value[, sampling])`](#clienttimingstring-value-sampling)
-        -   [`Client.gauge(string, value)`](#clientgaugestring-value)
-        -   [`Client.set(string, value)`](#clientsetstring-value)
--   [Dats Mock](#dats-mock)
--   [Benchmarks](#benchmarks)
--   [Powered Apps](#powered-apps)
--   [Support & Contribute](#support--contribute)
--   [License](#license)
 
 <!-- tocstop -->
 
@@ -67,15 +47,15 @@ This documentation assumes that you scaffolded your Backstage instance from the 
 
 ```yml
 auth:
-  environment: ENV_NAME
-  providers:
-    ldap:
-      ENV_NAME:
-        url: 
-          - 'ldaps://123.123.123.123'
-        rejectUnauthorized: false
-        userDn: 'ou=usr,dc=ns,dc=frm'
-        userSearchBase: 'dc=ns,dc=frm'
+    environment: ENV_NAME
+    providers:
+        ldap:
+            ENV_NAME:
+                url:
+                    - 'ldaps://123.123.123.123'
+                rejectUnauthorized: false
+                userDn: 'ou=usr,dc=ns,dc=frm'
+                userSearchBase: 'dc=ns,dc=frm'
 ```
 
 ### Setup Backstage official LDAP plugin
@@ -128,18 +108,18 @@ import { PluginEnvironment } from '../types';
 import { ldap } from '@immobiliarelabs/backstage-plugin-ldap-auth-backend';
 
 export default async function createPlugin(
-  env: PluginEnvironment,
+    env: PluginEnvironment
 ): Promise<Router> {
-  return await createRouter({
-    logger: env.logger,
-    config: env.config,
-    database: env.database,
-    discovery: env.discovery,
-    tokenManager: env.tokenManager,
-    providerFactories: {
-      ldap: ldap.create({}),
-    },
-  });
+    return await createRouter({
+        logger: env.logger,
+        config: env.config,
+        database: env.database,
+        discovery: env.discovery,
+        tokenManager: env.tokenManager,
+        providerFactories: {
+            ldap: ldap.create({}),
+        },
+    });
 }
 ```
 
