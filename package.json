@@ -26,10 +26,12 @@
         "node": "16.16.0"
     },
     "scripts": {
+        "style:lint": "eslint src --ext .ts",
+        "style:prettier": "prettier \"src/**/*.ts\" --list-different --write",
         "build": "npx lerna run build",
         "bootstrap": "npx lerna bootstrap",
         "publish:ci": "lerna publish from-package --yes",
         "version:ci": "lerna version --yes --conventional-commits --create-release github --message 'chore(release): publish'",
-        "prepare": "husky install"
+        "prepare": "node prepare.js || echo 'Skipping prepare'"
     }
 }
