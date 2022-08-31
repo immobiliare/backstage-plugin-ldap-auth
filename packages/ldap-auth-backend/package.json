@@ -1,44 +1,45 @@
 {
-  "name": "@immobiliarelabs/backstage-plugin-ldap-auth-backend",
-  "version": "1.0.0-alpha.1",
-  "main": "dist/index.cjs.js",
-  "types": "dist/index.d.ts",
-  "license": "MIT",
-  "publishConfig": {
-    "access": "public"
-  },
-  "backstage": {
-    "role": "backend-plugin-module"
-  },
-  "scripts": {
-    "start": "backstage-cli package start",
-    "prebuild": "tsc",
-    "build": "backstage-cli package build",
-    "lint": "backstage-cli package lint",
-    "test": "backstage-cli package test",
-    "clean": "backstage-cli package clean",
-    "prepack": "backstage-cli package prepack",
-    "postpack": "backstage-cli package postpack"
-  },
-  "dependencies": {
-    "@backstage/core-plugin-api": "^1.0.3",
-    "@backstage/errors": "^1.1.0",
-    "@backstage/plugin-auth-backend": "^0.15.0",
-    "keyv": "^4.3.3",
-    "ldap-authentication": "^2.2.9",
-    "ldap-escape": "^2.0.6",
-    "ldapjs": "^2.3.3"
-  },
-  "peerDependencies": {
-    "react": "^16.13.1 || ^17.0.0"
-  },
-  "devDependencies": {
-    "@backstage/cli": "^0.18.0",
-    "@types/ldap-authentication": "^2.2.0",
-    "@types/ldap-escape": "^2.0.0",
-    "@types/node": "^16.11.26"
-  },
-  "files": [
-    "dist"
-  ]
+    "name": "@immobiliarelabs/backstage-plugin-ldap-auth-backend",
+    "description": "Backstage LDAP Authentication plugin, this packages adds backend authentication and token generation/validation/management; sibling of @immobiliarelabs/backstage-plugin-ldap-auth",
+    "version": "1.0.0-alpha.1",
+    "main": "dist/index.cjs.js",
+    "types": "dist/index.d.ts",
+    "license": "MIT",
+    "publishConfig": {
+        "access": "public"
+    },
+    "backstage": {
+        "role": "backend-plugin-module"
+    },
+    "scripts": {
+        "start": "backstage-cli package start",
+        "prebuild": "tsc",
+        "build": "backstage-cli package build",
+        "lint": "backstage-cli package lint",
+        "test": "backstage-cli package test",
+        "clean": "backstage-cli package clean",
+        "prepack": "backstage-cli package prepack",
+        "postpack": "backstage-cli package postpack"
+    },
+    "dependencies": {
+        "@backstage/core-plugin-api": "^1.0.3",
+        "@backstage/errors": "^1.1.0",
+        "@backstage/plugin-auth-backend": "^0.15.0",
+        "keyv": "^4.3.3",
+        "ldap-authentication": "^2.2.9",
+        "ldap-escape": "^2.0.6",
+        "ldapjs": "^2.3.3"
+    },
+    "peerDependencies": {
+        "react": "^16.13.1 || ^17.0.0"
+    },
+    "devDependencies": {
+        "@backstage/cli": "^0.18.0",
+        "@types/ldap-authentication": "^2.2.0",
+        "@types/ldap-escape": "^2.0.0",
+        "@types/node": "^16.11.26"
+    },
+    "files": [
+        "dist"
+    ]
 }

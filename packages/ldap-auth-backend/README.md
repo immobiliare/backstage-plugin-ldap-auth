@@ -1,17 +1,20 @@
 # @immobiliarelabs/backstage-plugin-ldap-auth-backend
 
-> Customizable LDAP Backend Authentication provider for Backstage
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier?style=flat-square)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square)](https://github.com/semantic-release/semantic-release)
+![license](https://img.shields.io/github/license/immobiliare/backstage-plugin-ldap-auth?style=flat-square)
+![npm (scoped)](https://img.shields.io/npm/v/@immobiliarelabs/backstage-plugin-ldap-auth-backend?style=flat-square)
 
-This plugin helps you add authentication to your ldap server to your Backstage deployment easily out of the box!
+> Customizable Authentication backend provider for LDAP servers for your [Backstage](https://backstage.io/) deployment
 
-It works both on simple single process installation and on scaled infrastracture spanning multiple processes/deployments using the shared PostgreSQL instance that Backstage already uses!
+Works either on simple stand-alone process or scaled infrastracture spanning multiple deployments using the shared PostgreSQL instance that Backstage already uses!
 
-This plugin is not meant to be used alone but with in pair with:
+This plugin is not meant to be used alone but in pair with:
 
 -   The official [@backstage/plugin-catalog-backend-module-ldap](https://www.npmjs.com/package/@backstage/plugin-catalog-backend-module-ldap) which keeps in sync your LDAP users with Backstage user catalogs!
 -   Its sibling frontend package [@immobiliarelabs/backstage-plugin-ldap-auth](https://www.npmjs.com/package/@immobiliarelabs/backstage-plugin-ldap-auth)
 
-Supports Node.js `>=14.0.0`
+All the current LTS versions are supported.
 
 ## Table of Content
 
@@ -22,6 +25,7 @@ Supports Node.js `>=14.0.0`
     -   [Connection Configuration](#connection-configuration)
     -   [Setup Backstage official LDAP plugin](#setup-backstage-official-ldap-plugin)
     -   [Add authentication backend](#add-authentication-backend)
+    -   [Add the login form](#add-the-login-form)
 -   [Powered Apps](#powered-apps)
 -   [Support & Contribute](#support--contribute)
 -   [License](#license)
@@ -30,29 +34,26 @@ Supports Node.js `>=14.0.0`
 
 ## Installation
 
-The package is available at [npm](https://www.npmjs.com/package/@immobiliarelabs/backstage-plugin-ldap-auth-backend).
+> These packages are available on npm.
 
-You can install it with `npm`
-
-```bash
-# lastest stable version
-$ npm i -S @immobiliarelabs/backstage-plugin-ldap-auth-backend @immobiliarelabs/backstage-plugin-ldap-auth
-```
-
-or using `yarn`
+You can install them in your backstage installation using `yarn workspace`
 
 ```bash
-# lastest stable version
-$ yarn add @immobiliarelabs/backstage-plugin-ldap-auth-backend @immobiliarelabs/backstage-plugin-ldap-auth
+# install yarn if you don't have it
+$ npm install -g yarn
+# install backend plugin
+$ yarn workspace backend add @immobiliarelabs/backstage-plugin-ldap-auth-backend
+# install frontend plugin
+$ yarn workspace app add @immobiliarelabs/backstage-plugin-ldap-auth
 ```
 
 ## Configurations
 
-This documentation assumes that you scaffolded your Backstage instance from the official `@backstage/create-app`, all files that we're going to customize here are the one already created by the CLI!
+> This documentation assumes that you have already scaffolded your Backstage instance from the official `@backstage/create-app`, all files that we're going to customize here are the one already created by the CLI!
 
 ### Connection Configuration
 
-> Add this at the root level of your Backstage `app-config.yaml`
+> Adds connection configuration inside your backstage YAML config file, eg: `app-config.yaml`
 
 ```yml
 auth:
@@ -69,10 +70,11 @@ auth:
 
 ### Setup Backstage official LDAP plugin
 
-> Import and keep in sync your LDAP users
+If you didn't have already, we need to configure the official LDAP plugin to imports and keep in syncs users
+
+> `packages/backend/src/plugins/catalog.ts`
 
 ```ts
-// `packages/backend/src/plugins/catalog.ts`
 import type { Router } from 'express';
 import type { PluginEnvironment } from '../types';
 
@@ -108,7 +110,11 @@ export default async function createPlugin(
 
 ### Add authentication backend
 
-> This assumes a basic usage: single process without custom auth function or user object customization and in-memory token storage
+This assumes a basic usage: single process without custom auth function or user object customization and in-memory token storage
+
+For more uses cases you can see the [example folders](https://github.com/immobiliare/backstage-plugin-ldap-auth/examples/)
+
+> `packages/backend/src/plugins/auth.ts`
 
 ```ts
 import { createRouter } from '@backstage/plugin-auth-backend';
@@ -132,24 +138,50 @@ export default async function createPlugin(
 }
 ```
 
-And you're ready to go! If you need more use cases, like having multiple processes and need a shared token store instead of in-memory look at the [examples folder](https://github.com/immobiliare/backstage-plugin-ldap-auth/examples)
+### Add the login form
+
+> More on this in the frontend plugin documentation [here](../ldap-auth/README.md)
+
+We need to replace the existing Backstage demo authentication page with our custom one!
+
+In the `App.tsx` file, change the `createApp` function adding a `components` with our custom `SignInPage`In the `App.tsx` file change the `createApp` function to provide use our custom `SignInPage` in the `components` key.
+
+**Note:** This components isn't only UI, it also brings all the token state management and HTTP API calls to the backstage auth routes we already configured in the backend part.
+
+> `packages/app/src/App.tsx`
+
+```tsx
+import { LdapAuthFrontendPage } from '@immobiliarelabs/backstage-plugin-ldap-auth';
+
+const app = createApp({
+    // ...
+    components: {
+        SignInPage: (props) => (
+            <LdapAuthFrontendPage {...props} provider="ldap" />
+        ),
+    },
+    // ...
+});
+```
+
+And you're ready to go! If you need more use cases, like having multiple processes and need a shared token store instead of in-memory look at the [example folders](https://github.com/immobiliare/backstage-plugin-ldap-auth/examples/)
 
 ## Powered Apps
 
-dats was created by the amazing Node.js team at ImmobiliareLabs, the Tech dept of [Immobiliare.it](https://www.immobiliare.it), the #1 real estate company in Italy.
+backstage-plugin-ldap-auth was created by the amazing Node.js team at [ImmobiliareLabs](http://labs.immobiliare.it/), the Tech dept of [Immobiliare.it](https://www.immobiliare.it), the #1 real estate company in Italy.
 
-We are currently using dats in our products as well as our internal toolings.
+We are currently using backstage-plugin-ldap-auth in our products as well as our internal toolings.
 
-**If you are using dats in production [drop us a message](mailto:opensource@immobiliare.it)**.
+**If you are using backstage-plugin-ldap-auth in production [drop us a message](mailto:opensource@immobiliare.it)**.
 
 ## Support & Contribute
 
-Made with ❤️ by [ImmobiliareLabs](https://github.com/immobiliare) & [Contributors](./CONTRIBUTING.md#contributors)
+Made with ❤️ by [ImmobiliareLabs](https://github.com/immobiliare) & [Contributors](https://github.com/immobiliare/backstage-plugin-ldap-auth/CONTRIBUTING.md#contributors)
 
-We'd love for you to contribute to dats!
-If you have any questions on how to use dats, bugs and enhancement please feel free to reach out by opening a [GitHub Issue](https://github.com/immobiliare/dats/issues).
+We'd love for you to contribute to backstage-plugin-ldap-auth!
+If you have any questions on how to use backstage-plugin-ldap-auth, bugs and enhancement please feel free to reach out by opening a [GitHub Issue](https://github.com/immobiliare/backstage-plugin-ldap-auth).
 
 ## License
 
-dats is licensed under the MIT license.  
-See the [LICENSE](./LICENSE) file for more information.
+backstage-plugin-ldap-auth is licensed under the MIT license.  
+See the [LICENSE](https://github.com/immobiliare/backstage-plugin-ldap-auth/LICENSE) file for more information.

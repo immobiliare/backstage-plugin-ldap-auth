@@ -1,6 +1,6 @@
 ## 🚨 Proposed changes
 
-> Please review the [guidelines for contributing](../../CONTRIBUTING.md) to this repository.
+> Please review the [guidelines for contributing](https://github.com/immobiliare/backstage-plugin-ldap-auth/CONTRIBUTING.md) to this repository.
 
 [[Describe the big picture of your changes here to communicate to the maintainers why we should accept this pull request. If it fixes a bug or resolves a feature request, be sure to link to that issue.]]
 
