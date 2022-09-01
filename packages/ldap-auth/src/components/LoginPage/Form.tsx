@@ -9,6 +9,8 @@ export type LoginFormProps = {
     error?: Error;
     helperTextUsername?: string;
     helperTextPassword?: string;
+    validateUsername?: (usr: string) => boolean;
+    validatePassword?: (pass: string) => boolean;
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -35,7 +37,14 @@ export const LoginForm = ({
     error,
     helperTextUsername,
     helperTextPassword,
+    validatePassword,
+    validateUsername,
 }: LoginFormProps) => {
+    const validatePasswd =
+        validatePassword || passwordSchema.validate.bind(passwordSchema);
+    const validateUsern =
+        validateUsername || usernameSchema.validate.bind(usernameSchema);
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [uError, setUError] = useState(Boolean(error));
@@ -43,8 +52,8 @@ export const LoginForm = ({
     const classes = useStyles();
 
     function onClick() {
-        const isUsernameValid = usernameSchema.validate(username) as boolean;
-        const isPasswordValid = passwordSchema.validate(password) as boolean;
+        const isUsernameValid = validateUsern(username) as boolean;
+        const isPasswordValid = validatePasswd(password) as boolean;
         setUError(!isUsernameValid);
         setPError(!isPasswordValid);
 

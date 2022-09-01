@@ -36,6 +36,8 @@ export type LdapSignInPageProps = SignInPageProps & {
   options?: {
     helperTextPassword?: string;
     helperTextUsername?: string;
+    validateUsername?: (usr: string) => boolean;
+    validatePassword?: (pass: string) => boolean;
   }
 };
 
