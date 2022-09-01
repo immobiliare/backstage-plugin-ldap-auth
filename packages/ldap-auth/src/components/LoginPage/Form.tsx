@@ -7,6 +7,8 @@ import PasswordValidator from 'password-validator';
 export type LoginFormProps = {
     onSubmit: (username: string, password: string) => void;
     error?: Error;
+    helperTextUsername?: string;
+    helperTextPassword?: string;
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -28,7 +30,12 @@ const usernameSchema = new PasswordValidator();
 passwordSchema.is().min(4).not().spaces();
 usernameSchema.is().min(4).is().max(40).not().spaces();
 
-export const LoginForm = ({ onSubmit, error }: LoginFormProps) => {
+export const LoginForm = ({
+    onSubmit,
+    error,
+    helperTextUsername,
+    helperTextPassword,
+}: LoginFormProps) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [uError, setUError] = useState(Boolean(error));
@@ -74,7 +81,7 @@ export const LoginForm = ({ onSubmit, error }: LoginFormProps) => {
                             value={username}
                             id="username"
                             error={uError}
-                            helperText={``}
+                            helperText={helperTextUsername}
                             fullWidth
                             size="small"
                             margin="dense"
@@ -87,6 +94,7 @@ export const LoginForm = ({ onSubmit, error }: LoginFormProps) => {
                             id="password"
                             type="password"
                             error={pError}
+                            helperText={helperTextPassword}
                             fullWidth
                             size="small"
                             margin="dense"

@@ -33,6 +33,10 @@ import { LoginForm } from './Form';
 export type LdapSignInPageProps = SignInPageProps & {
   provider: string;
   children?: React.ReactElement;
+  options?: {
+    helperTextPassword?: string;
+    helperTextUsername?: string;
+  }
 };
 
 /**
@@ -99,7 +103,7 @@ export const LdapSignInPage = (props: LdapSignInPageProps) => {
   return (
     <>
       {props.children}
-      <LoginForm onSubmit={onSubmit} error={error} />)
+      <LoginForm onSubmit={onSubmit} error={error} {...props.options} />)
     </>
   );
 };
