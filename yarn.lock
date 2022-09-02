@@ -1353,20 +1353,7 @@
     zen-observable "^0.8.15"
     zod "^3.11.6"
 
-"@backstage/core-plugin-api@^1.0.3", "@backstage/core-plugin-api@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.npmjs.org/@backstage/core-plugin-api/-/core-plugin-api-1.0.4.tgz"
-  integrity sha512-fMMpjqW2RjwclnHUJsSyPCTguplflQYEWv7wsk7IoanEkWx39pensi8OsdIBawXrOixXEnI47dgxtVMOQUxOKA==
-  dependencies:
-    "@backstage/config" "^1.0.1"
-    "@backstage/types" "^1.0.0"
-    "@backstage/version-bridge" "^1.0.1"
-    history "^5.0.0"
-    prop-types "^15.7.2"
-    react-router-dom "6.0.0-beta.0"
-    zen-observable "^0.8.15"
-
-"@backstage/core-plugin-api@^1.0.5":
+"@backstage/core-plugin-api@^1.0.3", "@backstage/core-plugin-api@^1.0.4", "@backstage/core-plugin-api@^1.0.5":
   version "1.0.5"
   resolved "https://registry.npmjs.org/@backstage/core-plugin-api/-/core-plugin-api-1.0.5.tgz"
   integrity sha512-4d9X8+nu2n4t7Vu26LNzTKMW3U2peHoC1wWGKVDLwbMdewG0EXrbUIRo7Daon0xwyDrZWBUCrDiFElgLOb61Bg==
