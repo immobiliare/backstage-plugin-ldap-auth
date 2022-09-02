@@ -1231,23 +1231,7 @@
     "@backstage/types" "^1.0.0"
     lodash "^4.17.21"
 
-"@backstage/core-app-api@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.npmjs.org/@backstage/core-app-api/-/core-app-api-1.0.4.tgz"
-  integrity sha512-mUF5EL74nes3fdQbfUMce/7wkgtQe6XRyDYhyP2eFdsaYFFhcexqBgJNBv6DZLRCjqc1iw5t0ZXCvMeO30l4Xw==
-  dependencies:
-    "@backstage/config" "^1.0.1"
-    "@backstage/core-plugin-api" "^1.0.4"
-    "@backstage/types" "^1.0.0"
-    "@backstage/version-bridge" "^1.0.1"
-    "@types/prop-types" "^15.7.3"
-    prop-types "^15.7.2"
-    react-router-dom "6.0.0-beta.0"
-    react-use "^17.2.4"
-    zen-observable "^0.8.15"
-    zod "^3.11.6"
-
-"@backstage/core-app-api@^1.0.5":
+"@backstage/core-app-api@^1.0.4", "@backstage/core-app-api@^1.0.5":
   version "1.0.5"
   resolved "https://registry.npmjs.org/@backstage/core-app-api/-/core-app-api-1.0.5.tgz"
   integrity sha512-4ryzdaeeCul6F9Scx1V6Dp84o4ZxotTxcpeOT9I/rO6nJEpY335FXmiXkfh+bqa1psrn08DSvOO/zAUhuivVOw==
@@ -1353,20 +1337,7 @@
     zen-observable "^0.8.15"
     zod "^3.11.6"
 
-"@backstage/core-plugin-api@^1.0.3", "@backstage/core-plugin-api@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.npmjs.org/@backstage/core-plugin-api/-/core-plugin-api-1.0.4.tgz"
-  integrity sha512-fMMpjqW2RjwclnHUJsSyPCTguplflQYEWv7wsk7IoanEkWx39pensi8OsdIBawXrOixXEnI47dgxtVMOQUxOKA==
-  dependencies:
-    "@backstage/config" "^1.0.1"
-    "@backstage/types" "^1.0.0"
-    "@backstage/version-bridge" "^1.0.1"
-    history "^5.0.0"
-    prop-types "^15.7.2"
-    react-router-dom "6.0.0-beta.0"
-    zen-observable "^0.8.15"
-
-"@backstage/core-plugin-api@^1.0.5":
+"@backstage/core-plugin-api@^1.0.3", "@backstage/core-plugin-api@^1.0.4", "@backstage/core-plugin-api@^1.0.5":
   version "1.0.5"
   resolved "https://registry.npmjs.org/@backstage/core-plugin-api/-/core-plugin-api-1.0.5.tgz"
   integrity sha512-4d9X8+nu2n4t7Vu26LNzTKMW3U2peHoC1wWGKVDLwbMdewG0EXrbUIRo7Daon0xwyDrZWBUCrDiFElgLOb61Bg==
@@ -17226,12 +17197,7 @@ zip-stream@^4.1.0:
     compress-commons "^4.1.0"
     readable-stream "^3.6.0"
 
-zod@^3.11.6:
-  version "3.17.10"
-  resolved "https://registry.npmjs.org/zod/-/zod-3.17.10.tgz"
-  integrity sha512-IHXnQYQuOOOL/XgHhgl8YjNxBHi3xX0mVcHmqsvJgcxKkEczPshoWdxqyFwsARpf41E0v9U95WUROqsHHxt0UQ==
-
-zod@^3.17.3:
+zod@^3.11.6, zod@^3.17.3:
   version "3.18.0"
   resolved "https://registry.npmjs.org/zod/-/zod-3.18.0.tgz"
   integrity sha512-gwTm8RfUCe8l9rDwN5r2A17DkAa8Ez4Yl4yXqc5VqeGaXaJahzYYXbTwvhroZi0SNBqTwh/bKm2N0mpCzuw4bA==
