@@ -12,7 +12,7 @@
 
 _This is meant to be used in pair with the official [@backstage/plugin-catalog-backend-module-ldap](https://www.npmjs.com/package/@backstage/plugin-catalog-backend-module-ldap) which imports and keeps in sync your LDAP users but won't authenticate them._
 
-All the current LTS versions are supported.
+<img src="./screen.png" width="600px" />
 
 ## Plugins
 

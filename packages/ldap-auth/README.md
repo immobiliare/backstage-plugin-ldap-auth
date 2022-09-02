@@ -49,7 +49,7 @@ $ yarn workspace backend add @immobiliarelabs/backstage-plugin-ldap-auth-backend
 
 The component out of the box only shows the form, but you can pass down children components to render your logos/top bar os whatever you want!
 
-<img src="./screen.jpg" width="600px" align="center"/>
+<img src="./screen.png" width="600px" />
 
 <br />
 
