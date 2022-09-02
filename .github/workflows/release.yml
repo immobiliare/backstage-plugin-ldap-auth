@@ -4,7 +4,7 @@ on: [workflow_dispatch]
 
 jobs:
     release:
-        name: Release to NPM
+        name: Release
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
