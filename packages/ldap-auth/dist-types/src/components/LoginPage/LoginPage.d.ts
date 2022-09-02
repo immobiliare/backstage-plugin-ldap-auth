@@ -24,4 +24,6 @@ export declare type LdapSignInPageProps = SignInPageProps & {
  *
  * @public
  */
-export declare const LdapSignInPage: (props: LdapSignInPageProps) => JSX.Element | null;
+export declare const LdapSignInPage: (
+    props: LdapSignInPageProps
+) => JSX.Element | null;

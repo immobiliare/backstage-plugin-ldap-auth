@@ -1,4 +1,9 @@
-import { BackstageUserIdentity, discoveryApiRef, IdentityApi, ProfileInfo } from '@backstage/core-plugin-api';
+import {
+    BackstageUserIdentity,
+    discoveryApiRef,
+    IdentityApi,
+    ProfileInfo,
+} from '@backstage/core-plugin-api';
 import { LdapSession } from './types';
 export declare const DEFAULTS: {
     readonly defaultTokenExpiryMillis: number;

@@ -1,8 +1,19 @@
 import type { Request, Response } from 'express';
 import type { LDAPAuthOpts } from './types';
-import { AuthProviderRouteHandlers, AuthResolverContext } from '@backstage/plugin-auth-backend';
-import { defaultAuthHandler, defaultSigninResolver, defaultCheckUserExists, defaultLDAPAuthentication, TokenValidator } from './helpers';
-export declare class ProviderLdapAuthProvider implements AuthProviderRouteHandlers {
+import {
+    AuthProviderRouteHandlers,
+    AuthResolverContext,
+} from '@backstage/plugin-auth-backend';
+import {
+    defaultAuthHandler,
+    defaultSigninResolver,
+    defaultCheckUserExists,
+    defaultLDAPAuthentication,
+    TokenValidator,
+} from './helpers';
+export declare class ProviderLdapAuthProvider
+    implements AuthProviderRouteHandlers
+{
     private readonly cookieFieldKey;
     private readonly checkUserExists;
     private readonly ldapAuthentication;
@@ -29,13 +40,23 @@ export declare class ProviderLdapAuthProvider implements AuthProviderRouteHandle
 }
 export declare const ldap: Readonly<{
     create: (options: {
-        authHandler?: import("@backstage/plugin-auth-backend").AuthHandler<Partial<import("./types").LDAPResponse>> | undefined;
-        signIn?: {
-            resolver?: import("@backstage/plugin-auth-backend").SignInResolver<Partial<import("./types").LDAPResponse>> | undefined;
-        } | undefined;
+        authHandler?:
+            | import('@backstage/plugin-auth-backend').AuthHandler<
+                  Partial<import('./types').LDAPResponse>
+              >
+            | undefined;
+        signIn?:
+            | {
+                  resolver?:
+                      | import('@backstage/plugin-auth-backend').SignInResolver<
+                            Partial<import('./types').LDAPResponse>
+                        >
+                      | undefined;
+              }
+            | undefined;
         resolvers?: any;
         cookieFieldKey?: string | undefined;
         tokenValidator?: TokenValidator | undefined;
-    }) => import("@backstage/plugin-auth-backend").AuthProviderFactory;
+    }) => import('@backstage/plugin-auth-backend').AuthProviderFactory;
     resolvers: never;
 }>;

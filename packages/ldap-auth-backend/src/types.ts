@@ -23,10 +23,10 @@
  * @public
  */
 export interface BackstageSignInResult {
-  /**
-   * The token used to authenticate the user within Backstage.
-   */
-  token: string;
+    /**
+     * The token used to authenticate the user within Backstage.
+     */
+    token: string;
 }
 
 /**
@@ -36,10 +36,10 @@ export interface BackstageSignInResult {
  * @public
  */
 export interface BackstageIdentityResponse extends BackstageSignInResult {
-  /**
-   * A plaintext description of the identity that is encapsulated within the token.
-   */
-  identity: BackstageUserIdentity;
+    /**
+     * A plaintext description of the identity that is encapsulated within the token.
+     */
+    identity: BackstageUserIdentity;
 }
 
 /**
@@ -48,36 +48,36 @@ export interface BackstageIdentityResponse extends BackstageSignInResult {
  * @public
  */
 export type BackstageUserIdentity = {
-  /**
-   * The type of identity that this structure represents. In the frontend app
-   * this will currently always be 'user'.
-   */
-  type: 'user';
+    /**
+     * The type of identity that this structure represents. In the frontend app
+     * this will currently always be 'user'.
+     */
+    type: 'user';
 
-  /**
-   * The entityRef of the user in the catalog.
-   * For example User:default/sandra
-   */
-  userEntityRef: string;
+    /**
+     * The entityRef of the user in the catalog.
+     * For example User:default/sandra
+     */
+    userEntityRef: string;
 
-  /**
-   * The user and group entities that the user claims ownership through
-   */
-  ownershipEntityRefs: string[];
+    /**
+     * The user and group entities that the user claims ownership through
+     */
+    ownershipEntityRefs: string[];
 };
 
 export type LDAPResponse = {
-  dn: string;
-  controls?: [];
-  uid: string;
-  givenName: string;
-  cn: string;
-  uidNumber: string;
-  gidNumber: string;
-  homeDirectory: string;
-  mail: string;
-  sn: string;
-  objectClass: string[];
+    dn: string;
+    controls?: [];
+    uid: string;
+    givenName: string;
+    cn: string;
+    uidNumber: string;
+    gidNumber: string;
+    homeDirectory: string;
+    mail: string;
+    sn: string;
+    objectClass: string[];
 };
 
 export type LDAPUser = Partial<LDAPResponse>;
@@ -85,17 +85,17 @@ export type LDAPUser = Partial<LDAPResponse>;
 export type UserIdentityId = Pick<LDAPResponse, 'uid'>;
 
 export type LDAPAuthOpts = {
-  url: string[];
-  rejectUnauthorized: boolean;
-  userDn: string;
-  userSearchBase: string;
+    url: string[];
+    rejectUnauthorized: boolean;
+    userDn: string;
+    userSearchBase: string;
 };
 
 export type BackstageJWTPayload = {
-  iss: string;
-  sub: string;
-  ent: string[];
-  aud: string;
-  iat: number;
-  exp: number;
+    iss: string;
+    sub: string;
+    ent: string[];
+    aud: string;
+    iat: number;
+    exp: number;
 };

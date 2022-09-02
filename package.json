@@ -26,8 +26,8 @@
         "node": "16.16.0"
     },
     "scripts": {
-        "style:lint": "eslint src --ext .ts",
-        "style:prettier": "prettier \"src/**/*.ts\" --list-different --write",
+        "style:lint": "eslint packages --ext .ts",
+        "style:prettier": "prettier \"packages/**/*.ts\" --list-different --write",
         "build": "npx lerna run build",
         "bootstrap": "npx lerna bootstrap",
         "publish:ci": "lerna publish from-package --yes",

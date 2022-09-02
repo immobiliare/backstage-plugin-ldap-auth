@@ -13,6 +13,7 @@
         "plugin:@typescript-eslint/recommended",
         "plugin:prettier/recommended"
     ],
+    "ignorePatterns": [".eslintrc.js", "**/dist/**", "**/dist-types/**"],
     "rules": {
         "@typescript-eslint/no-var-requires": "off",
         "prefer-rest-params": "off",
