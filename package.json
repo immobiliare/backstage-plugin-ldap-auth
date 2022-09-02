@@ -1,18 +1,37 @@
 {
-  "name": "@immobiliarelabs/backstage-plugin-ldap-auth",
-  "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
-  "devDependencies": {
-    "eslint": "^8.21.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "husky": "^8.0.1",
-    "lerna": "^5.3.0",
-    "prettier": "^2.7.1"
-  },
-  "volta": {
-    "node": "16.16.0"
-  }
+    "name": "@immobiliarelabs/backstage-plugin-ldap-auth",
+    "private": true,
+    "workspaces": [
+        "packages/*"
+    ],
+    "devDependencies": {
+        "@commitlint/cli": "^17.1.2",
+        "@commitlint/config-conventional": "^17.1.0",
+        "@typescript-eslint/eslint-plugin": "^5.36.0",
+        "@typescript-eslint/parser": "^5.36.0",
+        "eslint": "^8.23.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-prettier": "^4.2.1",
+        "husky": "^6.0.0",
+        "is-ci": "^3.0.1",
+        "lerna": "^5.3.0",
+        "lint-staged": "^13.0.3",
+        "markdown-toc": "^1.2.0",
+        "prettier": "^2.7.1"
+    },
+    "engines": {
+        "node": ">=16"
+    },
+    "volta": {
+        "node": "16.16.0"
+    },
+    "scripts": {
+        "style:lint": "eslint packages --ext .ts",
+        "style:prettier": "prettier \"packages/**/*.ts\" --list-different --write",
+        "build": "npx lerna run build",
+        "bootstrap": "npx lerna bootstrap",
+        "publish:ci": "lerna publish from-package --yes",
+        "version:ci": "lerna version --yes --conventional-commits --create-release github --message 'chore(release): publish'",
+        "prepare": "node prepare.js || echo 'Skipping prepare'"
+    }
 }
