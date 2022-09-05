@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v1.0.0-alpha.1...v1.0.0) (2022-09-05)
+
+
+### Features
+
+* added custom validate functions ([8994ec4](https://github.com/immobiliare/backstage-plugin-ldap-auth/commit/8994ec4cdee76a617b53e6c585367604ea1041a3))
+* **frontend:** added helperText ([3060996](https://github.com/immobiliare/backstage-plugin-ldap-auth/commit/30609964082f8de9496eb75d9216b70da860aac0))
+
+
+
+
+
 # [1.0.0-alpha.1](https://github.com/immobiliare/backstage-ldap-auth/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2022-08-26)
 
 **Note:** Version bump only for package @immobiliarelabs/backstage-plugin-ldap-auth
