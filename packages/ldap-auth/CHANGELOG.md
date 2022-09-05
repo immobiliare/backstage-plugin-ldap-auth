@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.2](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v1.0.1...v1.0.2) (2022-09-05)
+
+
+### Bug Fixes
+
+* package.json repository field ([6dc00dd](https://github.com/immobiliare/backstage-plugin-ldap-auth/commit/6dc00dd26eb1d81c3ddc9b354faa7fedd21b49aa))
+
+
+
+
+
 ## [1.0.1](https://github.com/simonecorsi/backstage-plugin-ldap-auth/compare/v1.0.0...v1.0.1) (2022-09-05)
 
 
