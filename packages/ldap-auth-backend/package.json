@@ -8,6 +8,11 @@
     "publishConfig": {
         "access": "public"
     },
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:simonecorsi/backstage-plugin-ldap-auth.git",
+        "directory": "packages/ldap-auth-backend"
+    },
     "backstage": {
         "role": "backend-plugin-module"
     },

@@ -11,6 +11,11 @@
     "backstage": {
         "role": "frontend-plugin"
     },
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:simonecorsi/backstage-plugin-ldap-auth.git",
+        "directory": "packages/ldap-auth"
+    },
     "scripts": {
         "start": "backstage-cli package start",
         "prebuild": "tsc",
