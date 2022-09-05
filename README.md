@@ -8,13 +8,11 @@
 ![npm (scoped)](https://img.shields.io/npm/v/@immobiliarelabs/backstage-plugin-ldap-auth?style=flat-square)
 ![npm (scoped)](https://img.shields.io/npm/v/@immobiliarelabs/backstage-plugin-ldap-auth-backend?style=flat-square)
 
-> [Backstage](https://backstage.io/) plugin to authenticate users using an LDAP server
+> [Backstage](https://backstage.io/) plugins to authenticate users to an LDAP server
 
-_This is meant to be used in pair with the official [@backstage/plugin-catalog-backend-module-ldap](https://www.npmjs.com/package/@backstage/plugin-catalog-backend-module-ldap) which imports and keeps in sync your LDAP users but won't authenticate them._
+This is a monorepo containing two Backstage plugins, one for the frontend and one for the backend, both used to provide login screen, token management and serer-side auth logic to your LDAP server.
 
-<p align="center">
-  <img src="./screen.png" width="600px" />
-</p>
+This project is also meant to be used in pair with the official [@backstage/plugin-catalog-backend-module-ldap](https://www.npmjs.com/package/@backstage/plugin-catalog-backend-module-ldap) which imports and keeps in sync your LDAP users but won't authenticate them.
 
 ## Plugins
 
@@ -23,22 +21,26 @@ _This is meant to be used in pair with the official [@backstage/plugin-catalog-b
 -   [`packages/ldap-auth-backend`](./packages/ldap-auth-backend/README.md) - Back to back authentication and token validation and management
 -   [`packages/ldap-auth`](./packages/ldap-auth/README.md)- Frontend Login Page and token usage and retention logics
 
+<p align="center">
+  <img src="./screen.png" width="600px" />
+</p>
+
 ## Powered Apps
 
-backstage-plugin-ldap-auth was created by the amazing Node.js team at [ImmobiliareLabs](http://labs.immobiliare.it/), the Tech dept of [Immobiliare.it](https://www.immobiliare.it), the #1 real estate company in Italy.
+Backstage Plugin LDAP Auth was created by the amazing Node.js team at [ImmobiliareLabs](http://labs.immobiliare.it/), the Tech dept of [Immobiliare.it](https://www.immobiliare.it), the #1 real estate company in Italy.
 
-We are currently using backstage-plugin-ldap-auth in our products as well as our internal toolings.
+We are currently using Backstage Plugin LDAP Auth in our products as well as our internal toolings.
 
-**If you are using backstage-plugin-ldap-auth in production [drop us a message](mailto:opensource@immobiliare.it)**.
+**If you are using Backstage Plugin LDAP Auth in production [drop us a message](mailto:opensource@immobiliare.it)**.
 
 ## Support & Contribute
 
 Made with ❤️ by [ImmobiliareLabs](https://github.com/immobiliare) & [Contributors](https://github.com/immobiliare/backstage-plugin-ldap-auth/CONTRIBUTING.md#contributors)
 
-We'd love for you to contribute to backstage-plugin-ldap-auth!
-If you have any questions on how to use backstage-plugin-ldap-auth, bugs and enhancement please feel free to reach out by opening a [GitHub Issue](https://github.com/immobiliare/backstage-plugin-ldap-auth).
+We'd love for you to contribute to Backstage Plugin LDAP Auth!
+If you have any questions on how to use Backstage Plugin LDAP Auth, bugs and enhancement please feel free to reach out by opening a [GitHub Issue](https://github.com/immobiliare/backstage-plugin-ldap-auth).
 
 ## License
 
-backstage-plugin-ldap-auth is licensed under the MIT license.  
+Backstage Plugin LDAP Auth is licensed under the MIT license.  
 See the [LICENSE](https://github.com/immobiliare/backstage-plugin-ldap-auth/LICENSE) file for more information.
