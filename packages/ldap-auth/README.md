@@ -77,20 +77,20 @@ Now follow instructions at [@immobiliarelabs/backstage-plugin-ldap-auth-backend]
 
 ## Powered Apps
 
-backstage-plugin-ldap-auth was created by the amazing Node.js team at [ImmobiliareLabs](http://labs.immobiliare.it/), the Tech dept of [Immobiliare.it](https://www.immobiliare.it), the #1 real estate company in Italy.
+Backstage Plugin LDAP Auth was created by the amazing Node.js team at [ImmobiliareLabs](http://labs.immobiliare.it/), the Tech dept of [Immobiliare.it](https://www.immobiliare.it), the #1 real estate company in Italy.
 
-We are currently using backstage-plugin-ldap-auth in our products as well as our internal toolings.
+We are currently using Backstage Plugin LDAP Auth in our products as well as our internal toolings.
 
-**If you are using backstage-plugin-ldap-auth in production [drop us a message](mailto:opensource@immobiliare.it)**.
+**If you are using Backstage Plugin LDAP Auth in production [drop us a message](mailto:opensource@immobiliare.it)**.
 
 ## Support & Contribute
 
 Made with ❤️ by [ImmobiliareLabs](https://github.com/immobiliare) & [Contributors](https://github.com/immobiliare/backstage-plugin-ldap-auth/CONTRIBUTING.md#contributors)
 
-We'd love for you to contribute to backstage-plugin-ldap-auth!
-If you have any questions on how to use backstage-plugin-ldap-auth, bugs and enhancement please feel free to reach out by opening a [GitHub Issue](https://github.com/immobiliare/backstage-plugin-ldap-auth).
+We'd love for you to contribute to Backstage Plugin LDAP Auth!
+If you have any questions on how to use Backstage Plugin LDAP Auth, bugs and enhancement please feel free to reach out by opening a [GitHub Issue](https://github.com/immobiliare/backstage-plugin-ldap-auth).
 
 ## License
 
-backstage-plugin-ldap-auth is licensed under the MIT license.  
+Backstage Plugin LDAP Auth is licensed under the MIT license.  
 See the [LICENSE](https://github.com/immobiliare/backstage-plugin-ldap-auth/LICENSE) file for more information.
