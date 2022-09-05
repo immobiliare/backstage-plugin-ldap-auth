@@ -8,13 +8,11 @@
 ![npm (scoped)](https://img.shields.io/npm/v/@immobiliarelabs/backstage-plugin-ldap-auth?style=flat-square)
 ![npm (scoped)](https://img.shields.io/npm/v/@immobiliarelabs/backstage-plugin-ldap-auth-backend?style=flat-square)
 
-> [Backstage](https://backstage.io/) plugin to authenticate users using an LDAP server
+> [Backstage](https://backstage.io/) plugins to authenticate users to an LDAP server
 
-_This is meant to be used in pair with the official [@backstage/plugin-catalog-backend-module-ldap](https://www.npmjs.com/package/@backstage/plugin-catalog-backend-module-ldap) which imports and keeps in sync your LDAP users but won't authenticate them._
+This is a monorepo containing two Backstage plugins, one for the frontend and one for the backend, both used to provide login screen, token management and serer-side auth logic to your LDAP server.
 
-<p align="center">
-  <img src="./screen.png" width="600px" />
-</p>
+This project is also meant to be used in pair with the official [@backstage/plugin-catalog-backend-module-ldap](https://www.npmjs.com/package/@backstage/plugin-catalog-backend-module-ldap) which imports and keeps in sync your LDAP users but won't authenticate them.
 
 ## Plugins
 
@@ -22,6 +20,10 @@ _This is meant to be used in pair with the official [@backstage/plugin-catalog-b
 
 -   [`packages/ldap-auth-backend`](./packages/ldap-auth-backend/README.md) - Back to back authentication and token validation and management
 -   [`packages/ldap-auth`](./packages/ldap-auth/README.md)- Frontend Login Page and token usage and retention logics
+
+<p align="center">
+  <img src="./screen.png" width="600px" />
+</p>
 
 ## Powered Apps
 
