@@ -10,7 +10,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git@github.com:simonecorsi/backstage-plugin-ldap-auth.git",
+        "url": "git@github.com:immobiliare/backstage-plugin-ldap-auth.git",
         "directory": "packages/ldap-auth-backend"
     },
     "backstage": {
