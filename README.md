@@ -22,7 +22,7 @@ This project is also meant to be used in pair with the official [@backstage/plug
 -   [`packages/ldap-auth`](./packages/ldap-auth/README.md)- Frontend Login Page and token usage and retention logics
 
 <p align="center">
-  <img src="./screen.png" width="600px" />
+  <img src="https://github.com/immobiliare/backstage-plugin-ldap-auth/blob/main/screen.png?raw=true" width="600px" />
 </p>
 
 ## Powered Apps

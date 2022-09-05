@@ -50,7 +50,7 @@ $ yarn workspace backend add @immobiliarelabs/backstage-plugin-ldap-auth-backend
 The component out of the box only shows the form, but you can pass down children components to render your logos/top bar os whatever you want!
 
 <p align="center">
-  <img src="./screen.png?cdn=1" width="600px" />
+  <img src="https://github.com/immobiliare/backstage-plugin-ldap-auth/blob/main/screen.png?raw=true?cdn=1" width="600px" />
 </p>
 
 In the `App.tsx` file, change the `createApp` function adding a `components` with our custom `SignInPage`
