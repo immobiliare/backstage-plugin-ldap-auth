@@ -1,4 +1,7 @@
-# @immobiliarelabs/backstage-plugin-ldap-auth-backend
+<p align="center">
+  <img src="https://avatars.githubusercontent.com/u/10090828?s=200&v=4" width="200px" alt="logo"/>
+</p>
+<h1 align="center">@immobiliarelabs/backstage-plugin-ldap-auth-backend</h1>
 
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier?style=flat-square)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square)](https://github.com/semantic-release/semantic-release)
