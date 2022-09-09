@@ -14,7 +14,7 @@ import {
 
 import jwt from 'jsonwebtoken';
 
-describe('helpers functions', () => {
+describe('parseJwtPayload', () => {
     it('should parse jwt', () => {
         const payload = { sub: 'username' };
         const j = jwt.sign(payload, 'secret', {
@@ -35,5 +35,19 @@ describe('helpers functions', () => {
         });
 
         expect(() => parseJwtPayload(j)).toThrow();
+    });
+});
+
+describe('prepareBackstageIdentityResponse', () => {
+    it('Should return correctly formated backstage identity', () => {
+        const payload = { sub: 'username' };
+        const token = jwt.sign(payload, 'secret', {
+            expiresIn: '1min',
+        });
+        const result = prepareBackstageIdentityResponse({ token });
+        expect(result.token).toBe(token);
+        expect(result?.identity?.type).toBe('user');
+        expect(result?.identity?.userEntityRef).toBe(payload.sub);
+        expect(result?.identity?.ownershipEntityRefs).toStrictEqual([]);
     });
 });
