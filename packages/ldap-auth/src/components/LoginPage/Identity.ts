@@ -155,7 +155,7 @@ export class LdapSignInIdentity implements IdentityApi {
         });
     }
 
-    getSessionSync(): LdapSession {
+    private getSessionSync(): LdapSession {
         if (this.state.type === 'active') {
             return this.state.session;
         } else if (this.state.type === 'fetching' && this.state.previous) {
@@ -166,7 +166,9 @@ export class LdapSignInIdentity implements IdentityApi {
         );
     }
 
-    async getSessionAsync(forceRefresh?: boolean): Promise<LdapSession> {
+    private async getSessionAsync(
+        forceRefresh?: boolean
+    ): Promise<LdapSession> {
         if (this.state.type === 'fetching') {
             return this.state.promise;
         } else if (
@@ -207,7 +209,7 @@ export class LdapSignInIdentity implements IdentityApi {
         return promise;
     }
 
-    async loginAsync(auth: Auth): Promise<LdapSession> {
+    private async loginAsync(auth: Auth): Promise<LdapSession> {
         if (this.state.type === 'fetching') {
             return this.state.promise;
         } else if (
@@ -247,7 +249,7 @@ export class LdapSignInIdentity implements IdentityApi {
         return promise;
     }
 
-    async fetchSessionWithAuth(auth: Auth): Promise<LdapSession> {
+    private async fetchSessionWithAuth(auth: Auth): Promise<LdapSession> {
         const baseUrl = await this.options.discoveryApi.getBaseUrl('auth');
 
         // Note that we do not use the fetchApi here, since this all happens before
@@ -274,7 +276,7 @@ export class LdapSignInIdentity implements IdentityApi {
         return ldapSessionSchema.parse(await response.json());
     }
 
-    async fetchSession(): Promise<LdapSession> {
+    private async fetchSession(): Promise<LdapSession> {
         const baseUrl = await this.options.discoveryApi.getBaseUrl('auth');
 
         // Note that we do not use the fetchApi here, since this all happens before

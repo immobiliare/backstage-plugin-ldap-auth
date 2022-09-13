@@ -15,9 +15,9 @@
  */
 
 import {
-  discoveryApiRef,
-  SignInPageProps,
-  useApi,
+    discoveryApiRef,
+    SignInPageProps,
+    useApi,
 } from '@backstage/core-plugin-api';
 import React, { useState, useEffect } from 'react';
 import { useAsync } from '@react-hookz/web';
@@ -31,14 +31,14 @@ import { LoginForm } from './Form';
  * @public
  */
 export type LdapSignInPageProps = SignInPageProps & {
-  provider: string;
-  children?: React.ReactElement;
-  options?: {
-    helperTextPassword?: string;
-    helperTextUsername?: string;
-    validateUsername?: (usr: string) => boolean;
-    validatePassword?: (pass: string) => boolean;
-  }
+    provider: string;
+    children?: React.ReactElement;
+    options?: {
+        helperTextPassword?: string;
+        helperTextUsername?: string;
+        validateUsername?: (usr: string) => boolean;
+        validatePassword?: (pass: string) => boolean;
+    };
 };
 
 /**
@@ -57,55 +57,54 @@ export type LdapSignInPageProps = SignInPageProps & {
  * @public
  */
 export const LdapSignInPage = (props: LdapSignInPageProps) => {
-  const discoveryApi = useApi(discoveryApiRef);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [identity] = useState(
-    new LdapSignInIdentity({
-      provider: props.provider,
-      discoveryApi,
-    }),
-  );
+    const discoveryApi = useApi(discoveryApiRef);
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [identity] = useState(
+        new LdapSignInIdentity({
+            provider: props.provider,
+            discoveryApi,
+        })
+    );
 
-  const [{ status, error }, { execute }] = useAsync(async () => {
-    await identity.login({ username, password });
+    const [{ status, error }, { execute }] = useAsync(async () => {
+        await identity.login({ username, password });
 
-    props.onSignInSuccess(identity);
-  });
+        props.onSignInSuccess(identity);
+    });
 
-  const [{ status: statusRefresh }, { execute: executeRefresh }] = useAsync(
-    async () => {
-      await identity.fetch();
+    const [{ status: statusRefresh }, { execute: executeRefresh }] = useAsync(
+        async () => {
+            await identity.fetch();
 
-      props.onSignInSuccess(identity);
-    },
-  );
+            props.onSignInSuccess(identity);
+        }
+    );
 
-  useEffect(() => {
-    executeRefresh();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    useEffect(() => {
+        executeRefresh();
+    }, []);
 
-  function onSubmit(u: string, p: string) {
-    setUsername(u);
-    setPassword(p);
-    setTimeout(execute, 0);
-  }
+    function onSubmit(u: string, p: string) {
+        setUsername(u);
+        setPassword(p);
+        setTimeout(execute, 0);
+    }
 
-  if (
-    status === 'loading' ||
-    statusRefresh === 'loading' ||
-    statusRefresh === 'not-executed'
-  ) {
-    return <Progress />;
-  } else if (status === 'success' || statusRefresh === 'success') {
-    return null;
-  }
+    if (
+        status === 'loading' ||
+        statusRefresh === 'loading' ||
+        statusRefresh === 'not-executed'
+    ) {
+        return <Progress />;
+    } else if (status === 'success' || statusRefresh === 'success') {
+        return null;
+    }
 
-  return (
-    <>
-      {props.children}
-      <LoginForm onSubmit={onSubmit} error={error} {...props.options} />)
-    </>
-  );
+    return (
+        <>
+            {props.children}
+            <LoginForm onSubmit={onSubmit} error={error} {...props.options} />)
+        </>
+    );
 };
