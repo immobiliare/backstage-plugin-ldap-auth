@@ -153,6 +153,7 @@ export class ProviderLdapAuthProvider implements AuthProviderRouteHandlers {
             res.cookie(this.cookieFieldKey, backstageIdentity.token, {
                 maxAge,
                 httpOnly: true,
+                secure: this.LDAPAuthOpts.rejectUnauthorized,
             });
 
             res.json(response);

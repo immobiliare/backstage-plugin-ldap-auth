@@ -58,6 +58,15 @@ $ yarn workspace app add @immobiliarelabs/backstage-plugin-ldap-auth
 
 > Adds connection configuration inside your backstage YAML config file, eg: `app-config.yaml`
 
+This fields are all required
+
+| key                  | description                                                      |
+| -------------------- | ---------------------------------------------------------------- |
+| `url`                | Array of ldap connection strings                                 |
+| `rejectUnauthorized` | Reject non HTTPS traffic, this also set secure cookies when true |
+| `userDn`             | User distinguished name directory location                       |
+| `userSearchBase`     | Userbase search location                                         |
+
 ```yml
 auth:
     environment: ENV_NAME
@@ -66,7 +75,7 @@ auth:
             ENV_NAME:
                 url:
                     - 'ldaps://123.123.123.123'
-                rejectUnauthorized: false
+                rejectUnauthorized: true
                 userDn: 'ou=usr,dc=ns,dc=frm'
                 userSearchBase: 'dc=ns,dc=frm'
 ```
