@@ -8,9 +8,7 @@
 ![license](https://img.shields.io/github/license/immobiliare/backstage-plugin-ldap-auth?style=flat-square)
 ![npm (scoped)](https://img.shields.io/npm/v/@immobiliarelabs/backstage-plugin-ldap-auth?style=flat-square)
 
-> Customizable Authentication backend provider for LDAP servers for your [Backstage](https://backstage.io/) deployment
-
-Works either on simple stand-alone process or scaled infrastracture spanning multiple deployments using the shared PostgreSQL instance that Backstage already uses!
+> Login page and client-side token management for BAckstage LDAP Authentication Plugin
 
 This plugin is not meant to be used alone but in pair with:
 
