@@ -32,7 +32,7 @@
         "bootstrap": "npx lerna bootstrap",
         "publish:ci": "lerna publish from-package --yes",
         "version:ci": "lerna version --yes --conventional-commits --conventional-graduate --create-release github --message 'chore(release): publish'",
-        "version:next:ci": "lerna version --yes --conventional-commits --conventional-prerelease --create-release github --message 'chore(release): publish'",
+        "version:next:ci": "lerna version --yes --conventional-commits --conventional-prerelease --message 'chore(release): publish'",
         "prepare": "node prepare.js || echo 'Skipping prepare'"
     }
 }
