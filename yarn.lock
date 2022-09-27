@@ -1335,15 +1335,6 @@
     cross-fetch "^3.1.5"
     serialize-error "^8.0.1"
 
-"@backstage/errors@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@backstage/errors/-/errors-1.1.1.tgz#e637737ccf4075a7d3b3ec9911d209266e5204f5"
-  integrity sha512-eSm5oc4+PmpdzREHZ00lFOYOm2JqZsC+NbRV3ChOOXId4ibdzQk97kgSw1a1n2vqu+9MNKpD55lpVMKnADRo7g==
-  dependencies:
-    "@backstage/types" "^1.0.0"
-    cross-fetch "^3.1.5"
-    serialize-error "^8.0.1"
-
 "@backstage/integration-react@^1.1.3":
   version "1.1.3"
   resolved "https://registry.npmjs.org/@backstage/integration-react/-/integration-react-1.1.3.tgz"
@@ -3792,9 +3783,9 @@
     "@types/react-dom" "<18.0.0"
 
 "@testing-library/user-event@^14.0.0":
-  version "14.3.0"
-  resolved "https://registry.npmjs.org/@testing-library/user-event/-/user-event-14.3.0.tgz"
-  integrity sha512-P02xtBBa8yMaLhK8CzJCIns8rqwnF6FxhR9zs810flHOBXUYCFjLd8Io1rQrAkQRWEmW2PGdZIEdMxf/KLsqFA==
+  version "14.4.3"
+  resolved "https://registry.yarnpkg.com/@testing-library/user-event/-/user-event-14.4.3.tgz#af975e367743fa91989cd666666aec31a8f50591"
+  integrity sha512-kCUc5MEwaEMakkO5x7aoD+DLi02ehmEM2QCGWvNqAS1dV/fAvORWEjnjsEIvml59M7Y5kCkWN6fCCyPOe8OL6Q==
 
 "@tootallnate/once@1":
   version "1.1.2"
