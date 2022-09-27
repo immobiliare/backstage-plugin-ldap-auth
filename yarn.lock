@@ -1405,9 +1405,9 @@
     zen-observable "^0.8.15"
 
 "@backstage/errors@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/@backstage/errors/-/errors-1.1.0.tgz"
-  integrity sha512-cWy7TpjrUvsMJ74et1PFvh0YYzzLDtK4qGJTwmF5AQBTZbNsi1UlNYET0sPVdlWbr6FRqa1QQNZwUkvpllB6YQ==
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@backstage/errors/-/errors-1.1.1.tgz#e637737ccf4075a7d3b3ec9911d209266e5204f5"
+  integrity sha512-eSm5oc4+PmpdzREHZ00lFOYOm2JqZsC+NbRV3ChOOXId4ibdzQk97kgSw1a1n2vqu+9MNKpD55lpVMKnADRo7g==
   dependencies:
     "@backstage/types" "^1.0.0"
     cross-fetch "^3.1.5"
