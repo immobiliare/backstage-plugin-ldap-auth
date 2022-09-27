@@ -10992,11 +10992,11 @@ lazystream@^1.0.0:
     readable-stream "^2.0.5"
 
 ldap-authentication@^2.2.9:
-  version "2.2.9"
-  resolved "https://registry.npmjs.org/ldap-authentication/-/ldap-authentication-2.2.9.tgz"
-  integrity sha512-a3o8wlJ0XOMDJIWEYKUXkYIl68fioJCbkJPOJXkLCBhyYzqLm3/TGLK1OkfBm79V+85+xl5I6X8agVfpFlKCcA==
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/ldap-authentication/-/ldap-authentication-2.3.1.tgz#c20eee46d05f7ddc707daa9de19d98cccfe61191"
+  integrity sha512-pLWpUyzkuv943ih0YyGcwElsBjSMAP/bJ7DQ7TGyX3hAi6em/4nCmjC86sLlqHHAJU+vVw/TKrjbtuwf77K1dA==
   dependencies:
-    ldapjs "^2.3.1"
+    ldapjs "^2.3.3"
 
 ldap-escape@^2.0.6:
   version "2.0.6"
@@ -11010,7 +11010,7 @@ ldap-filter@^0.3.3:
   dependencies:
     assert-plus "^1.0.0"
 
-ldapjs@^2.3.1, ldapjs@^2.3.3:
+ldapjs@^2.3.3:
   version "2.3.3"
   resolved "https://registry.npmjs.org/ldapjs/-/ldapjs-2.3.3.tgz"
   integrity sha512-75QiiLJV/PQqtpH+HGls44dXweviFwQ6SiIK27EqzKQ5jU/7UFrl2E5nLdQ3IYRBzJ/AVFJI66u0MZ0uofKYwg==
