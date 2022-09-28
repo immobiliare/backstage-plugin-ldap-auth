@@ -1,5 +1,5 @@
 {
-    "name": "@immobiliarelabs/backstage-plugin-ldap-auth",
+    "name": "root",
     "private": true,
     "workspaces": [
         "packages/*"
