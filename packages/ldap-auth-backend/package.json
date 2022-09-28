@@ -42,7 +42,7 @@
         "@backstage/cli": "^0.19.0",
         "@types/ldap-escape": "^2.0.0",
         "@types/ldapjs": "^2.2.4",
-        "@types/node": "^16.11.26"
+        "@types/node": "^18.7.23"
     },
     "files": [
         "dist"
