@@ -30,7 +30,7 @@ This project is also meant to be used in pair with the official [@backstage/plug
 
 | backstage |
 | --------- |
-| 1.5.x     |
+| 1.6.x     |
 
 ## Powered Apps
 
