@@ -11142,9 +11142,9 @@ lazystream@^1.0.0:
     readable-stream "^2.0.5"
 
 ldap-authentication@^2.2.9:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/ldap-authentication/-/ldap-authentication-2.3.1.tgz#c20eee46d05f7ddc707daa9de19d98cccfe61191"
-  integrity sha512-pLWpUyzkuv943ih0YyGcwElsBjSMAP/bJ7DQ7TGyX3hAi6em/4nCmjC86sLlqHHAJU+vVw/TKrjbtuwf77K1dA==
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/ldap-authentication/-/ldap-authentication-2.3.2.tgz#f5584853b5c38dcdbc587e575316802eb22762a7"
+  integrity sha512-Qck5FLJBlSNdzi91bpkesybT3q4CifmLLXNwmMaZpl6+v9kSb6RPwjMFm+kuFKEEDWFaDdwZLvuUwHYL8y47YQ==
   dependencies:
     ldapjs "^2.3.3"
 
