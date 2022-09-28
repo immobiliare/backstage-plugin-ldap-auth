@@ -26,6 +26,12 @@ This project is also meant to be used in pair with the official [@backstage/plug
   <img src="https://github.com/immobiliare/backstage-plugin-ldap-auth/blob/main/screen.png?raw=true" width="600px" />
 </p>
 
+## Backstage compatibility
+
+| backstage |
+| --------- |
+| 1.5.x     |
+
 ## Powered Apps
 
 Backstage Plugin LDAP Auth was created by the amazing Node.js team at [ImmobiliareLabs](http://labs.immobiliare.it/), the Tech dept of [Immobiliare.it](https://www.immobiliare.it), the #1 real estate company in Italy.
