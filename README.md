@@ -28,9 +28,10 @@ This project is also meant to be used in pair with the official [@backstage/plug
 
 ## Backstage compatibility
 
-| backstage |
-| --------- |
-| 1.6.x     |
+| backstage | |
+| --------- | --- |
+| 1.6.x | `stable` |
+| <=1.5.x | `not tested` |
 
 ## Powered Apps
 
