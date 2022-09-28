@@ -4136,22 +4136,15 @@
   dependencies:
     "@types/node" "*"
 
-"@types/ldap-authentication@^2.2.0":
-  version "2.2.0"
-  resolved "https://registry.npmjs.org/@types/ldap-authentication/-/ldap-authentication-2.2.0.tgz"
-  integrity sha512-ZRTGA22TbVgFNDYWT0WBHRuwev3XFGprKbxbq91WNBtOZ10N1DPntMqs4+axd83qQgDSdf3yj8Tn4T39s9T18w==
-  dependencies:
-    "@types/ldapjs" "*"
-
 "@types/ldap-escape@^2.0.0":
   version "2.0.0"
   resolved "https://registry.npmjs.org/@types/ldap-escape/-/ldap-escape-2.0.0.tgz"
   integrity sha512-N37qWU1T4S/ORJuIGZjt5JjgNfDaNSW1xFWWJaNCfNZwhAjxLIX242oD5A2PUbC4LZ2GS3qGL5PfJJ8InPmHUw==
 
-"@types/ldapjs@*":
-  version "2.2.3"
-  resolved "https://registry.npmjs.org/@types/ldapjs/-/ldapjs-2.2.3.tgz"
-  integrity sha512-S2ZiN6VwbM/IR9LubvEZmu0E4odpu24n9sIMVbKr4ajxahZSaJFJEwCJOGrkIoPOuZJq6C8iQmYbMMNmj83d4Q==
+"@types/ldapjs@^2.2.4":
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/@types/ldapjs/-/ldapjs-2.2.4.tgz#f784276f81f199b0118f66bc8325691b6750adf7"
+  integrity sha512-+ZMVolW4N1zpnQ4SgH8nfpIFuiDOfbnXSbwQoBiLaq8mF0vo8FOKotQzKkfoWxbV0lWU1d4V+keZZ07klyOSng==
   dependencies:
     "@types/node" "*"
 
@@ -11141,10 +11134,10 @@ lazystream@^1.0.0:
   dependencies:
     readable-stream "^2.0.5"
 
-ldap-authentication@^2.2.9:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/ldap-authentication/-/ldap-authentication-2.3.1.tgz#c20eee46d05f7ddc707daa9de19d98cccfe61191"
-  integrity sha512-pLWpUyzkuv943ih0YyGcwElsBjSMAP/bJ7DQ7TGyX3hAi6em/4nCmjC86sLlqHHAJU+vVw/TKrjbtuwf77K1dA==
+ldap-authentication@^2.3.2:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/ldap-authentication/-/ldap-authentication-2.3.2.tgz#f5584853b5c38dcdbc587e575316802eb22762a7"
+  integrity sha512-Qck5FLJBlSNdzi91bpkesybT3q4CifmLLXNwmMaZpl6+v9kSb6RPwjMFm+kuFKEEDWFaDdwZLvuUwHYL8y47YQ==
   dependencies:
     ldapjs "^2.3.3"
 

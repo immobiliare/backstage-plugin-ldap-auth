@@ -31,7 +31,7 @@
         "@backstage/errors": "^1.1.0",
         "@backstage/plugin-auth-backend": "^0.16.0",
         "keyv": "^4.3.3",
-        "ldap-authentication": "^2.2.9",
+        "ldap-authentication": "^2.3.2",
         "ldap-escape": "^2.0.6",
         "ldapjs": "^2.3.3"
     },
@@ -40,8 +40,8 @@
     },
     "devDependencies": {
         "@backstage/cli": "^0.18.0",
-        "@types/ldap-authentication": "^2.2.0",
         "@types/ldap-escape": "^2.0.0",
+        "@types/ldapjs": "^2.2.4",
         "@types/node": "^16.11.26"
     },
     "files": [
