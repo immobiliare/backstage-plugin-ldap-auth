@@ -25,7 +25,7 @@ jobs:
                   git remote set-url origin https://${{ github.actor }}:${{ secrets.GH_NODE_TOKEN }}@github.com/${{ github.repository }}
 
             - name: Bootstrap lerna
-              run: yarn bootstrap
+              run: yarn
 
             - name: Lerna build
               run: yarn build

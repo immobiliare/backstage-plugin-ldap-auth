@@ -57,6 +57,8 @@ export function prepareBackstageIdentityResponse(
     };
 }
 
+// TODO: this may have changed: https://backstage.io/docs/auth/identity-resolver
+// https://github.com/immobiliare/backstage-plugin-ldap-auth/pull/31
 export const defaultSigninResolver: SignInResolver<LDAPUser> = async (
     { result },
     ctx: AuthResolverContext
