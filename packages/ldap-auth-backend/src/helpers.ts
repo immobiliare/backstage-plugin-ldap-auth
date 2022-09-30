@@ -27,12 +27,18 @@ export const COOKIE_FIELD_KEY = 'backstage-token';
 
 export const normalizeTime = (date: number) => Math.floor(date / 1000);
 
-export function parseJwtPayload(token: string): BackstageJWTPayload | never {
+export function parseJwtPayload(
+    token: string,
+    increaseExpireMs?: number
+): BackstageJWTPayload | never {
     try {
         const [_header, payload, _signature] = token.split('.');
         const parsed = JSON.parse(Buffer.from(payload, 'base64').toString());
         const { exp } = parsed;
-        if (normalizeTime(Date.now()) > parseInt(exp, 10)) {
+        if (
+            normalizeTime(Date.now()) >
+            parseInt(exp, 10) + normalizeTime(increaseExpireMs ?? 0)
+        ) {
             // is expired?
             throw new Error(JWT_EXPIRED_TOKEN);
         }
@@ -136,26 +142,28 @@ export interface TokenValidator {
 
 // TODO: Rework this to use the database for better scalabilities
 export class JWTTokenValidator implements TokenValidator {
-    private readonly store: Keyv;
+    protected readonly store: Keyv;
+    protected readonly increaseTokenExpireMs: number | undefined;
 
-    constructor(store: Keyv) {
+    constructor(store: Keyv, increaseTokenExpireMs?: number) {
         this.store = store;
+        this.increaseTokenExpireMs = increaseTokenExpireMs;
     }
 
     async logout(jwt: string, ts: number): Promise<void> {
-        const { sub } = parseJwtPayload(jwt);
+        const { sub } = parseJwtPayload(jwt, this.increaseTokenExpireMs);
         await this.store.set(sub, ts);
     }
 
     // On logout and refresh set the new invalidBeforeDate for the user
     async invalidateToken(jwt: string) {
-        const { sub } = parseJwtPayload(jwt);
+        const { sub } = parseJwtPayload(jwt, this.increaseTokenExpireMs);
         await this.store.set(sub, normalizeTime(Date.now()));
     }
 
     // rejects tokens issued before logouts and refreshs
     async isValid(jwt: string) {
-        const { sub, iat } = parseJwtPayload(jwt);
+        const { sub, iat } = parseJwtPayload(jwt, this.increaseTokenExpireMs);
 
         // // check if we have and entry in the cache
         if (await this.store.has(sub)) {
