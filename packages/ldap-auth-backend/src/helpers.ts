@@ -136,7 +136,7 @@ export interface TokenValidator {
 
 // TODO: Rework this to use the database for better scalabilities
 export class JWTTokenValidator implements TokenValidator {
-    private readonly store: Keyv;
+    protected readonly store: Keyv;
 
     constructor(store: Keyv) {
         this.store = store;
