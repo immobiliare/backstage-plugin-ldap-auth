@@ -27,22 +27,10 @@ export const COOKIE_FIELD_KEY = 'backstage-token';
 
 export const normalizeTime = (date: number) => Math.floor(date / 1000);
 
-export function parseJwtPayload(
-    token: string,
-    increaseExpireMs?: number
-): BackstageJWTPayload | never {
+export function parseJwtPayload(token: string): BackstageJWTPayload | never {
     try {
         const [_header, payload, _signature] = token.split('.');
-        const parsed = JSON.parse(Buffer.from(payload, 'base64').toString());
-        const { exp } = parsed;
-        if (
-            normalizeTime(Date.now()) >
-            parseInt(exp, 10) + normalizeTime(increaseExpireMs ?? 0)
-        ) {
-            // is expired?
-            throw new Error(JWT_EXPIRED_TOKEN);
-        }
-        return parsed;
+        return JSON.parse(Buffer.from(payload, 'base64').toString());
     } catch (e) {
         throw new Error(JWT_INVALID_TOKEN);
     }
@@ -143,27 +131,39 @@ export interface TokenValidator {
 // TODO: Rework this to use the database for better scalabilities
 export class JWTTokenValidator implements TokenValidator {
     protected readonly store: Keyv;
-    protected readonly increaseTokenExpireMs: number | undefined;
+    readonly increaseTokenExpireMs: number;
 
     constructor(store: Keyv, increaseTokenExpireMs?: number) {
         this.store = store;
-        this.increaseTokenExpireMs = increaseTokenExpireMs;
+        this.increaseTokenExpireMs = isNaN(increaseTokenExpireMs ?? 0)
+            ? 0
+            : increaseTokenExpireMs ?? 0;
     }
 
     async logout(jwt: string, ts: number): Promise<void> {
-        const { sub } = parseJwtPayload(jwt, this.increaseTokenExpireMs);
+        await this.isValid(jwt);
+        const { sub } = parseJwtPayload(jwt);
         await this.store.set(sub, ts);
     }
 
     // On logout and refresh set the new invalidBeforeDate for the user
     async invalidateToken(jwt: string) {
-        const { sub } = parseJwtPayload(jwt, this.increaseTokenExpireMs);
+        await this.isValid(jwt);
+        const { sub } = parseJwtPayload(jwt);
         await this.store.set(sub, normalizeTime(Date.now()));
     }
 
     // rejects tokens issued before logouts and refreshs
     async isValid(jwt: string) {
-        const { sub, iat } = parseJwtPayload(jwt, this.increaseTokenExpireMs);
+        const { sub, iat, exp } = parseJwtPayload(jwt);
+
+        if (
+            normalizeTime(Date.now()) >
+            exp + normalizeTime(this.increaseTokenExpireMs)
+        ) {
+            // is expired?
+            throw new Error(JWT_EXPIRED_TOKEN);
+        }
 
         // // check if we have and entry in the cache
         if (await this.store.has(sub)) {
