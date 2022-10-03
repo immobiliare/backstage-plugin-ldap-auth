@@ -19,6 +19,7 @@ import {
     TokenValidator,
     TokenValidatorNoop,
     normalizeTime,
+    JWTTokenValidator,
 } from './helpers';
 
 import { AuthenticationError } from '@backstage/errors';
@@ -103,10 +104,9 @@ export class ProviderLdapAuthProvider implements AuthProviderRouteHandlers {
                 });
                 result = { uid: uid as string };
             } else if (token) {
-                // this throws if the token is invalid
+                // this throws if the token is invalid or expire
                 await this.jwtValidator.isValid(token as string);
 
-                // throws if invalid/expired
                 const { sub } = parseJwtPayload(token as string);
 
                 // user is in format `[<kind>:][<namespace>/]<username>`
@@ -147,7 +147,10 @@ export class ProviderLdapAuthProvider implements AuthProviderRouteHandlers {
             // if it's negative it's expired already
             // should not happen but in case it will trigger browser for login page
             const maxAge = Math.ceil(
-                new Date(exp * 1000).valueOf() - new Date().valueOf()
+                new Date(exp * 1000).valueOf() -
+                    new Date().valueOf() +
+                    ((this.jwtValidator as JWTTokenValidator)
+                        ?.increaseTokenExpireMs ?? 0)
             );
 
             res.cookie(this.cookieFieldKey, backstageIdentity.token, {
