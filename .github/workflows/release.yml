@@ -49,3 +49,11 @@ jobs:
               env:
                   GH_TOKEN: ${{ secrets.GH_NODE_TOKEN }}
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+
+            - name: merge main -> next
+              uses: actions/setup-node@v3
+              with:
+                  type: now
+                  from_branch: main
+                  target_branch: next
+                  github_token: ${{ secrets.GH_NODE_TOKEN }}
