@@ -5680,7 +5680,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:>=12.12.47, @types/node@npm:>=13.7.0, @types/node@npm:^18.7.23":
+"@types/node@npm:*, @types/node@npm:>=12.12.47, @types/node@npm:>=13.7.0":
   version: 18.8.0
   resolution: "@types/node@npm:18.8.0"
   checksum: 3433cbc22e90fafb047f93b3ef05ba01a07f780a24ff1af393f435f807537b533fe9e8a816586825f4c5fd5336c3e80225571f44ec3b6479c463408c072773e7
@@ -5705,6 +5705,13 @@ __metadata:
   version: 16.11.63
   resolution: "@types/node@npm:16.11.63"
   checksum: d0c905916560fea680cadca356418016bd07d0227b7374139b6342191e11cc0fa2251400453d08c49f111bd88c58728113271573b8ce8d90796d220b7d3a9b39
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^18.7.23":
+  version: 18.8.5
+  resolution: "@types/node@npm:18.8.5"
+  checksum: f7d896f54743178e64c534c6da16f582505acf18904ecd0ee8541cb4bc1d429ba514e7ecfd5145221b71adbd6ae1ff72df082f667e56d056fcd1a719df948e08
   languageName: node
   linkType: hard
 
