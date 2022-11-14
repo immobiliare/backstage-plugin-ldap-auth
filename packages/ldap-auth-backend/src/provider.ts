@@ -1,57 +1,56 @@
 import type { Request, Response } from 'express';
-import type { LDAPAuthOpts, UserIdentityId } from './types';
+import type { AuthenticationOptions } from 'ldap-authentication';
+import type {
+    BackstageLdapAuthConfiguration,
+    CookiesOptions,
+    ProviderConstructor,
+    ProviderCreateOptions,
+    UserIdentityId,
+} from './types';
 
-import { dn } from 'ldap-escape';
 import {
     AuthProviderRouteHandlers,
     AuthResolverContext,
     createAuthProviderIntegration,
 } from '@backstage/plugin-auth-backend';
 
+import { AuthenticationError } from '@backstage/errors';
+import { AUTH_MISSING_CREDENTIALS, JWT_INVALID_TOKEN } from './errors';
+
 import {
-    defaultAuthHandler,
-    defaultSigninResolver,
-    defaultCheckUserExists,
-    prepareBackstageIdentityResponse,
     parseJwtPayload,
-    defaultLDAPAuthentication,
     COOKIE_FIELD_KEY,
     TokenValidator,
     TokenValidatorNoop,
     normalizeTime,
     JWTTokenValidator,
-} from './helpers';
+} from './jwt';
+import {
+    defaultAuthHandler,
+    defaultSigninResolver,
+    prepareBackstageIdentityResponse,
+} from './auth';
 
-import { AuthenticationError } from '@backstage/errors';
-import { AUTH_MISSING_CREDENTIALS, JWT_INVALID_TOKEN } from './errors';
+import { defaultCheckUserExists, defaultLDAPAuthentication } from './ldap';
 
 export class ProviderLdapAuthProvider implements AuthProviderRouteHandlers {
-    private readonly cookieFieldKey: string;
     private readonly checkUserExists: typeof defaultCheckUserExists;
     private readonly ldapAuthentication: typeof defaultLDAPAuthentication;
     private readonly authHandler: typeof defaultAuthHandler;
     private readonly signInResolver: typeof defaultSigninResolver;
     private readonly resolverContext: AuthResolverContext;
-    private readonly LDAPAuthOpts: LDAPAuthOpts;
     private readonly jwtValidator: TokenValidator;
+    private readonly ldapAuthenticationOptions: AuthenticationOptions;
+    private readonly cookies: CookiesOptions;
 
-    constructor(options: {
-        cookieFieldKey: string;
-        authHandler: typeof defaultAuthHandler;
-        signInResolver: typeof defaultSigninResolver;
-        checkUserExists: typeof defaultCheckUserExists;
-        ldapAuthentication: typeof defaultLDAPAuthentication;
-        resolverContext: AuthResolverContext;
-        ldapConfings: LDAPAuthOpts;
-        tokenValidator?: TokenValidator;
-    }) {
+    constructor(options: ProviderConstructor) {
         this.authHandler = options.authHandler;
         this.signInResolver = options.signInResolver;
         this.checkUserExists = options.checkUserExists;
         this.ldapAuthentication = options.ldapAuthentication;
         this.resolverContext = options.resolverContext;
-        this.LDAPAuthOpts = options.ldapConfings;
-        this.cookieFieldKey = options.cookieFieldKey;
+        this.ldapAuthenticationOptions = options.ldapAuthenticationOptions;
+        this.cookies = options.cookies as CookiesOptions;
         this.jwtValidator = options.tokenValidator || new TokenValidatorNoop();
     }
 
@@ -64,15 +63,10 @@ export class ProviderLdapAuthProvider implements AuthProviderRouteHandlers {
     }
 
     async check(uid: string): Promise<void | Error> {
-        const exists = await this.checkUserExists(
-            {
-                url: this.LDAPAuthOpts.url,
-                tlsOptions: {
-                    rejectUnauthorized: this.LDAPAuthOpts.rejectUnauthorized,
-                },
-            },
-            uid
-        );
+        const exists = await this.checkUserExists({
+            ...this.ldapAuthenticationOptions,
+            username: uid,
+        });
         if (!exists) throw new Error(JWT_INVALID_TOKEN);
     }
 
@@ -83,25 +77,16 @@ export class ProviderLdapAuthProvider implements AuthProviderRouteHandlers {
             }
             const { username, password } = req.body;
             const ctx = this.resolverContext;
-            const token = req.cookies?.[this.cookieFieldKey];
+            const token = req.cookies?.[this.cookies.field];
 
             let result: UserIdentityId;
 
             if (username && password) {
-                const { uid } = await this.ldapAuthentication({
-                    ldapOpts: {
-                        url: this.LDAPAuthOpts.url,
-                        tlsOptions: {
-                            rejectUnauthorized:
-                                this.LDAPAuthOpts.rejectUnauthorized,
-                        },
-                    },
-                    userDn: dn`uid=${username},` + this.LDAPAuthOpts.userDn,
-                    userSearchBase: this.LDAPAuthOpts.userSearchBase,
-                    userPassword: password as string,
-                    usernameAttribute: 'uid',
-                    username: username as string,
-                });
+                const { uid } = await this.ldapAuthentication(
+                    username,
+                    password,
+                    this.ldapAuthenticationOptions
+                );
                 result = { uid: uid as string };
             } else if (token) {
                 // this throws if the token is invalid or expired
@@ -153,49 +138,43 @@ export class ProviderLdapAuthProvider implements AuthProviderRouteHandlers {
                         ?.increaseTokenExpireMs ?? 0)
             );
 
-            res.cookie(this.cookieFieldKey, backstageIdentity.token, {
+            res.cookie(this.cookies.field, backstageIdentity.token, {
                 maxAge,
                 httpOnly: true,
-                secure: this.LDAPAuthOpts.rejectUnauthorized,
+                secure: this.cookies.secure,
             });
 
             res.json(response);
         } catch (e) {
-            res.clearCookie(this.cookieFieldKey);
+            res.clearCookie(this.cookies.field);
             throw e;
         }
     }
 
     async logout(req: Request, res: Response): Promise<void> {
-        const token = req.cookies?.[this.cookieFieldKey];
+        const token = req.cookies?.[this.cookies.field];
         // this throws if the token is invalid
         await this.jwtValidator.isValid(token as string);
 
         this.jwtValidator.logout(token, normalizeTime(Date.now()));
 
-        res.clearCookie(this.cookieFieldKey);
+        res.clearCookie(this.cookies.field);
         res.status(200).end();
     }
 }
 
 export const ldap = createAuthProviderIntegration({
-    create(options: {
-        authHandler?: typeof defaultAuthHandler;
-        signIn?: {
-            resolver?: typeof defaultSigninResolver;
-        };
-        resolvers?: any;
-        cookieFieldKey?: string;
-        tokenValidator?: TokenValidator;
-    }) {
+    create(options: ProviderCreateOptions) {
         return ({ config, resolverContext }) => {
-            const cnf = config.getConfig(process.env.NODE_ENV || 'development');
+            const cnf = config.get(
+                process.env.NODE_ENV || 'development'
+            ) as BackstageLdapAuthConfiguration;
 
-            const parsedConf = {
-                url: cnf.getStringArray('url'),
-                rejectUnauthorized: cnf.getBoolean('rejectUnauthorized'),
-                userDn: cnf.getString('userDn'),
-                userSearchBase: cnf.getString('userSearchBase'),
+            // TODO: Validate fields, some should be required. Eg: search needs userDn
+
+            cnf.cookies = {
+                field: cnf?.cookies?.field ?? COOKIE_FIELD_KEY,
+                secure: cnf?.cookies?.secure ?? false,
             };
 
             const authHandler = options?.authHandler ?? defaultAuthHandler;
@@ -214,12 +193,12 @@ export const ldap = createAuthProviderIntegration({
                     : defaultCheckUserExists;
 
             return new ProviderLdapAuthProvider({
-                cookieFieldKey: options?.cookieFieldKey ?? COOKIE_FIELD_KEY,
+                ldapAuthenticationOptions: cnf.ldapAuthenticationOptions,
+                cookies: cnf.cookies,
                 authHandler,
                 signInResolver,
                 checkUserExists,
                 ldapAuthentication,
-                ldapConfings: parsedConf,
                 resolverContext,
                 tokenValidator: options.tokenValidator,
             });

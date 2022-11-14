@@ -84,13 +84,6 @@ export type LDAPUser = Partial<LDAPResponse>;
 
 export type UserIdentityId = Pick<LDAPResponse, 'uid'>;
 
-export type LDAPAuthOpts = {
-    url: string[];
-    rejectUnauthorized: boolean;
-    userDn: string;
-    userSearchBase: string;
-};
-
 export type BackstageJWTPayload = {
     iss: string;
     sub: string;
@@ -98,4 +91,43 @@ export type BackstageJWTPayload = {
     aud: string;
     iat: number;
     exp: number;
+};
+
+import type { TokenValidator } from './jwt';
+import type { AuthResolverContext } from '@backstage/plugin-auth-backend';
+import type { AuthenticationOptions } from 'ldap-authentication';
+import { defaultAuthHandler, defaultSigninResolver } from './auth';
+import { defaultCheckUserExists, defaultLDAPAuthentication } from './ldap';
+
+export type CookiesOptions = {
+    field: string;
+    secure: boolean;
+};
+
+export type BackstageLdapAuthConfiguration = {
+    cookies?: Partial<CookiesOptions>;
+    ldapAuthenticationOptions: AuthenticationOptions;
+};
+
+export type ProviderCreateOptions = {
+    // Backstage Provider AuthHandler
+    authHandler?: typeof defaultAuthHandler;
+    // Backstage Provider SignInResolver
+    signIn?: {
+        resolver?: typeof defaultSigninResolver;
+    };
+    resolvers?: any;
+    // Custom validator function for the JWT token if needed
+    tokenValidator?: TokenValidator;
+};
+
+export type ProviderConstructor = {
+    cookies: BackstageLdapAuthConfiguration['cookies'];
+    ldapAuthenticationOptions: AuthenticationOptions;
+    authHandler: typeof defaultAuthHandler;
+    signInResolver: typeof defaultSigninResolver;
+    checkUserExists: typeof defaultCheckUserExists;
+    ldapAuthentication: typeof defaultLDAPAuthentication;
+    resolverContext: AuthResolverContext;
+    tokenValidator?: TokenValidator;
 };
