@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-alpha.0](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v1.1.2-alpha.0...v2.0.0-alpha.0) (2022-11-17)
+
+### Bug Fixes
+
+-   allow no children to the LdapAuthFrontendPage ([7624203](https://github.com/immobiliare/backstage-plugin-ldap-auth/commit/7624203260d6201815a1f8c79a4be98ba880cb89))
+
 # [1.1.0](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v1.0.4...v1.1.0) (2022-09-30)
 
 ### Features
