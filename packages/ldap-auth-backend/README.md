@@ -31,7 +31,7 @@ All the current LTS versions are supported.
     -   [Setup](#setup)
     -   [Connection Configuration](#connection-configuration)
     -   [Add the authentication backend plugin](#add-the-authentication-backend-plugin)
-        -   [Custom configurations](#custom-configurations)
+        -   [Custom LDAP Configurations](#custom-ldap-configurations)
     -   [Add the login form](#add-the-login-form)
 -   [Powered Apps](#powered-apps)
 -   [Support & Contribute](#support--contribute)
@@ -124,15 +124,14 @@ auth:
 
                 ldapAuthentication:
                     # what is the user unique key in your ldap instance
-                    usernameAttribute: 'uid'
+                    usernameAttribute: 'uid' # REQUIRED
                     # directory where to search user
                     # default search will be `[userSearchBase]=[username],[userSearchBase]`
-                    userSearchBase: 'ou=users,dc=ns,dc=farm'
+                    userSearchBase: 'ou=users,dc=ns,dc=farm' # REQUIRED
 
                     # User able to list other users, this is used
                     # to check incoming JWT if user are already part of the LDAP
-
-                    # usually is [userSearchBase]=[username],[userSearchBase]
+                    # NOTE: If no admin user/pass provided we'll attempt a credential-less search
                     adminDn: uid={ADMIN_USERNAME},ou=users,dc=ns,dc=farm
                     adminPassword: ''
 
@@ -167,15 +166,19 @@ export default async function createPlugin(
         discovery: env.discovery,
         tokenManager: env.tokenManager,
         providerFactories: {
-            ldap: ldap.create(),
+            ldap: ldap.create({
+                /* Custom Configurations */
+            }),
         },
     });
 }
 ```
 
-#### Custom configurations
+#### Custom LDAP Configurations
 
-If you need more fine control over LDAP Configuration you can provide custom `LdapAuthenticationOptions` and/or `LdapClientOptions` when initializing the provider, [example here](#add-authentication-backend).
+If your LDAP server connection options requires more fine tune than we handle here you can inject your custom auth function, take a look at `ldap.create` types at `resolvers.ldapAuthentication`, you can copy the default function and change what you need!
+
+This can be also done for the `resolvers.checkUserExists` function, which runs when controlling a JWT token.
 
 ### Add the login form
 
