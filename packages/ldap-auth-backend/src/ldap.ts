@@ -65,14 +65,20 @@ export async function defaultLDAPAuthentication(
     ldapAuthOptions: AuthenticationOptions,
     authFunction: typeof authenticate = authenticate
 ): Promise<LDAPUser> {
-    const { usernameAttribute, userSearchBase } = ldapAuthOptions;
+    const usernameAttribute = ldapAuthOptions.usernameAttribute || 'uid';
+
+    const userDn =
+        dn`${usernameAttribute as string}=${username as string},` +
+        ldapAuthOptions.userSearchBase;
+
     const authObj = {
         ...ldapAuthOptions,
+        username,
+        usernameAttribute,
+        userDn,
         userPassword: password,
-        userDn:
-            dn`${usernameAttribute as string}=${username as string},` +
-            userSearchBase,
     };
+
     const user = await authFunction(authObj);
     if (!user[usernameAttribute as string]) {
         throw new Error(AUTH_USER_NOT_FOUND);
