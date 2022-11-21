@@ -116,7 +116,12 @@ export type ProviderCreateOptions = {
     signIn?: {
         resolver?: typeof defaultSigninResolver;
     };
-    resolvers?: any;
+
+    // Custom resolvers
+    resolvers?: {
+        checkUserExists?: typeof defaultCheckUserExists;
+        ldapAuthentication?: typeof defaultLDAPAuthentication;
+    };
     // Custom validator function for the JWT token if needed
     tokenValidator?: TokenValidator;
 };
