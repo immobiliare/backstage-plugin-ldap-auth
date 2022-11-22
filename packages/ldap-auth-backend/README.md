@@ -31,7 +31,9 @@ All the current LTS versions are supported.
     -   [Setup](#setup)
     -   [Connection Configuration](#connection-configuration)
     -   [Add the authentication backend plugin](#add-the-authentication-backend-plugin)
-        -   [Custom LDAP Configurations](#custom-ldap-configurations)
+    -   [Custom LDAP Configurations](#custom-ldap-configurations)
+        -   [Custom authentication function](#custom-authentication-function)
+        -   [Custom check if user exists](#custom-check-if-user-exists)
     -   [Add the login form](#add-the-login-form)
 -   [Powered Apps](#powered-apps)
 -   [Support & Contribute](#support--contribute)
@@ -123,11 +125,11 @@ auth:
                     field: '' # default to "backstage-token"
 
                 ldapAuthentication:
+                    userSearchBase: 'ou=users,dc=ns,dc=farm' # REQUIRED
                     # what is the user unique key in your ldap instance
-                    usernameAttribute: 'uid' # REQUIRED
+                    usernameAttribute: 'uid' # defaults to `uid`
                     # directory where to search user
                     # default search will be `[userSearchBase]=[username],[userSearchBase]`
-                    userSearchBase: 'ou=users,dc=ns,dc=farm' # REQUIRED
 
                     # User able to list other users, this is used
                     # to check incoming JWT if user are already part of the LDAP
@@ -137,7 +139,7 @@ auth:
 
                     ldapOpts:
                         url:
-                            - 'ldaps://172.16.0.154'
+                            - 'ldaps://123.123.123.123'
                         tlsOptions:
                             rejectUnauthorized: false
 ```
@@ -174,11 +176,67 @@ export default async function createPlugin(
 }
 ```
 
-#### Custom LDAP Configurations
+### Custom LDAP Configurations
 
 If your LDAP server connection options requires more fine tune than we handle here you can inject your custom auth function, take a look at `ldap.create` types at `resolvers.ldapAuthentication`, you can copy the default function and change what you need!
 
 This can be also done for the `resolvers.checkUserExists` function, which runs when controlling a JWT token.
+
+#### Custom authentication function
+
+```ts
+export default async function createPlugin(
+  env: PluginEnvironment,
+): Promise<Router> {
+  return await createRouter({
+    logger: env.logger,
+    config: env.config,
+    database: env.database,
+    discovery: env.discovery,
+    tokenManager: env.tokenManager,
+    providerFactories: {
+      ldap: ldap.create({
+        resolvers: {
+            async ldapAuthentication(username, password, ldapOptions, authFunction): LDAPUser {
+                // modify your ldapOptions and do whatever you need to format it
+                // ...
+                const user = await authFunction(ldapOptions)
+                return { uid: user.uid };
+            }
+        }
+    },
+  });
+}
+```
+
+#### Custom check if user exists
+
+```ts
+export default async function createPlugin(
+  env: PluginEnvironment,
+): Promise<Router> {
+  return await createRouter({
+    logger: env.logger,
+    config: env.config,
+    database: env.database,
+    discovery: env.discovery,
+    tokenManager: env.tokenManager,
+    providerFactories: {
+      ldap: ldap.create({
+        resolvers: {
+            async checkUserExists(ldapAuthOptions, searchFunction): Promise<boolean> {
+                const { username } = ldapAuthOptions;
+
+                // Do you custom checks
+                // ....
+
+                return true;
+            }
+        }
+    },
+  });
+}
+```
 
 ### Add the login form
 

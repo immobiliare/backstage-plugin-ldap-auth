@@ -40,11 +40,15 @@ async function _verifyUserExistsNoAdmin(
 export const defaultCheckUserExists = async (
     ldapAuthOptions: AuthenticationOptions,
     searchFunction = authenticate
-) => {
+): Promise<boolean> => {
     // This fallback is for clients with no need for an admin to list users
     // I'll remove this if we can add this option to the auth library.
     if (!ldapAuthOptions.adminDn || !ldapAuthOptions.adminPassword) {
-        const { username, usernameAttribute, userSearchBase } = ldapAuthOptions;
+        const {
+            username,
+            userSearchBase,
+            usernameAttribute = 'uid',
+        } = ldapAuthOptions;
         return _verifyUserExistsNoAdmin(
             dn`${usernameAttribute as string}=${username as string},` +
                 userSearchBase,
@@ -65,7 +69,7 @@ export async function defaultLDAPAuthentication(
     ldapAuthOptions: AuthenticationOptions,
     authFunction: typeof authenticate = authenticate
 ): Promise<LDAPUser> {
-    const usernameAttribute = ldapAuthOptions.usernameAttribute || 'uid';
+    const { usernameAttribute = 'uid' } = ldapAuthOptions;
 
     const userDn =
         dn`${usernameAttribute as string}=${username as string},` +
@@ -79,9 +83,16 @@ export async function defaultLDAPAuthentication(
         userPassword: password,
     };
 
-    const user = await authFunction(authObj);
-    if (!user[usernameAttribute as string]) {
-        throw new Error(AUTH_USER_NOT_FOUND);
+    try {
+        const user = await authFunction(authObj);
+        if (!user[usernameAttribute as string]) {
+            throw new Error(AUTH_USER_NOT_FOUND);
+        }
+        return { uid: user[usernameAttribute as string] };
+    } catch (e) {
+        console.error(
+            'There was an error when trying to login with ldap-authentication'
+        );
+        throw e;
     }
-    return { uid: user[usernameAttribute as string] };
 }
