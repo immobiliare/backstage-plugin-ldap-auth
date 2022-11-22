@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v1.1.3...v2.0.0) (2022-11-22)
+
+### Bug Fixes
+
+-   **ldap.ts:** default auth function signature ([9b7c25a](https://github.com/immobiliare/backstage-plugin-ldap-auth/commit/9b7c25a73d5eff55dce78f892f63e33c243dcd90))
+
+### Features
+
+-   reworked options and injectables ([3ecc9cb](https://github.com/immobiliare/backstage-plugin-ldap-auth/commit/3ecc9cb7cb111a5ac24981ab7eb8879809ad860a))
+
+### BREAKING CHANGES
+
+-   Structure and options
+
 # [2.0.0-alpha.2](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v2.0.0-alpha.1...v2.0.0-alpha.2) (2022-11-21)
 
 ### Bug Fixes
