@@ -3,14 +3,17 @@
 </p>
 <h1 align="center">@immobiliarelabs/backstage-plugin-ldap-auth-backend</h1>
 
+![npm (scoped)](https://img.shields.io/npm/v/@immobiliarelabs/backstage-plugin-ldap-auth-backend?style=flat-square)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier?style=flat-square)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square)](https://github.com/semantic-release/semantic-release)
 ![license](https://img.shields.io/github/license/immobiliare/backstage-plugin-ldap-auth?style=flat-square)
-![npm (scoped)](https://img.shields.io/npm/v/@immobiliarelabs/backstage-plugin-ldap-auth-backend?style=flat-square)
 
-> Customizable Authentication backend provider for LDAP servers for your [Backstage](https://backstage.io/) deployment
+> LDAP Authentication your [Backstage](https://backstage.io/) deployment
 
-Works either on simple stand-alone process or scaled infrastracture spanning multiple deployments using the shared PostgreSQL instance that Backstage already uses!
+This package is the Backend Provider to add LDAP authentication to your Backstage instance!
+
+-   Customizable: Authentication request format and marshaling of the response can be injected with custom ones;
+-   Works on simple stand-alone process or scaled infrastracture spanning multiple deployments using the shared PostgreSQL instance that Backstage already uses;
 
 This plugin is not meant to be used alone but in pair with:
 
@@ -25,9 +28,12 @@ All the current LTS versions are supported.
 
 -   [Installation](#installation)
 -   [Configurations](#configurations)
+    -   [Setup](#setup)
     -   [Connection Configuration](#connection-configuration)
-    -   [Setup Backstage official LDAP plugin](#setup-backstage-official-ldap-plugin)
-    -   [Add authentication backend](#add-authentication-backend)
+    -   [Add the authentication backend plugin](#add-the-authentication-backend-plugin)
+    -   [Custom LDAP Configurations](#custom-ldap-configurations)
+        -   [Custom authentication function](#custom-authentication-function)
+        -   [Custom check if user exists](#custom-check-if-user-exists)
     -   [Add the login form](#add-the-login-form)
 -   [Powered Apps](#powered-apps)
 -   [Support & Contribute](#support--contribute)
@@ -54,35 +60,14 @@ $ yarn workspace app add @immobiliarelabs/backstage-plugin-ldap-auth
 
 > This documentation assumes that you have already scaffolded your Backstage instance from the official `@backstage/create-app`, all files that we're going to customize here are the one already created by the CLI!
 
-### Connection Configuration
+### Setup
 
-> Adds connection configuration inside your backstage YAML config file, eg: `app-config.yaml`
+If you didn't have already, you need to configure Backstage's official LDAP plugin, that is needed to import and keep in syncs users your LDAP users.
 
-This fields are all required
-
-| key                  | description                                                      |
-| -------------------- | ---------------------------------------------------------------- |
-| `url`                | Array of ldap connection strings                                 |
-| `rejectUnauthorized` | Reject non HTTPS traffic, this also set secure cookies when true |
-| `userDn`             | User distinguished name directory location                       |
-| `userSearchBase`     | Userbase search location                                         |
-
-```yml
-auth:
-    environment: ENV_NAME
-    providers:
-        ldap:
-            ENV_NAME:
-                url:
-                    - 'ldaps://123.123.123.123'
-                rejectUnauthorized: true
-                userDn: 'ou=usr,dc=ns,dc=frm'
-                userSearchBase: 'dc=ns,dc=frm'
+```sh
+# in your backstage repo
+yarn add @backstage/plugin-catalog-backend-module-ldap
 ```
-
-### Setup Backstage official LDAP plugin
-
-If you didn't have already, we need to configure the official LDAP plugin to imports and keep in syncs users
 
 > `packages/backend/src/plugins/catalog.ts`
 
@@ -120,9 +105,48 @@ export default async function createPlugin(
 }
 ```
 
-### Add authentication backend
+### Connection Configuration
 
-This assumes a basic usage: single process without custom auth function or user object customization and in-memory token storage
+> Adds connection configuration inside your backstage YAML config file, eg: `app-config.yaml`
+
+We use [`ldap-authentication`](https://github.com/shaozi/ldap-authentication) for authentication, you can find all the configurations at this [link], `ldapOpts` fields are options provided to lower level ldap client read more at [`ldapjs` ](https://github.com/ldapjs/node-ldapjs)
+
+> Add in you You backstage configuration file
+
+```yml
+auth:
+    environment: { ENV_NAME } # eg: production|staging|review|develop
+    providers:
+        ldap:
+            # eg: production|staging|review|develop
+            { ENV_NAME }:
+                cookies:
+                    secure: false # https cookies or not
+                    field: '' # default to "backstage-token"
+
+                ldapAuthentication:
+                    userSearchBase: 'ou=users,dc=ns,dc=farm' # REQUIRED
+                    # what is the user unique key in your ldap instance
+                    usernameAttribute: 'uid' # defaults to `uid`
+                    # directory where to search user
+                    # default search will be `[userSearchBase]=[username],[userSearchBase]`
+
+                    # User able to list other users, this is used
+                    # to check incoming JWT if user are already part of the LDAP
+                    # NOTE: If no admin user/pass provided we'll attempt a credential-less search
+                    adminDn: uid={ADMIN_USERNAME},ou=users,dc=ns,dc=farm
+                    adminPassword: ''
+
+                    ldapOpts:
+                        url:
+                            - 'ldaps://123.123.123.123'
+                        tlsOptions:
+                            rejectUnauthorized: false
+```
+
+### Add the authentication backend plugin
+
+This is for a basic usage: - single process - No custom auth or user object marshaling - in-memory sessions
 
 For more uses cases you can see the [example folders](https://github.com/immobiliare/backstage-plugin-ldap-auth/examples/)
 
@@ -144,9 +168,73 @@ export default async function createPlugin(
         discovery: env.discovery,
         tokenManager: env.tokenManager,
         providerFactories: {
-            ldap: ldap.create({}),
+            ldap: ldap.create({
+                /* Custom Configurations */
+            }),
         },
     });
+}
+```
+
+### Custom LDAP Configurations
+
+If your LDAP server connection options requires more fine tune than we handle here you can inject your custom auth function, take a look at `ldap.create` types at `resolvers.ldapAuthentication`, you can copy the default function and change what you need!
+
+This can be also done for the `resolvers.checkUserExists` function, which runs when controlling a JWT token.
+
+#### Custom authentication function
+
+```ts
+export default async function createPlugin(
+  env: PluginEnvironment,
+): Promise<Router> {
+  return await createRouter({
+    logger: env.logger,
+    config: env.config,
+    database: env.database,
+    discovery: env.discovery,
+    tokenManager: env.tokenManager,
+    providerFactories: {
+      ldap: ldap.create({
+        resolvers: {
+            async ldapAuthentication(username, password, ldapOptions, authFunction): LDAPUser {
+                // modify your ldapOptions and do whatever you need to format it
+                // ...
+                const user = await authFunction(ldapOptions)
+                return { uid: user.uid };
+            }
+        }
+    },
+  });
+}
+```
+
+#### Custom check if user exists
+
+```ts
+export default async function createPlugin(
+  env: PluginEnvironment,
+): Promise<Router> {
+  return await createRouter({
+    logger: env.logger,
+    config: env.config,
+    database: env.database,
+    discovery: env.discovery,
+    tokenManager: env.tokenManager,
+    providerFactories: {
+      ldap: ldap.create({
+        resolvers: {
+            async checkUserExists(ldapAuthOptions, searchFunction): Promise<boolean> {
+                const { username } = ldapAuthOptions;
+
+                // Do you custom checks
+                // ....
+
+                return true;
+            }
+        }
+    },
+  });
 }
 ```
 
