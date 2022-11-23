@@ -15133,16 +15133,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"keyv@npm:^4.3.3":
-  version: 4.5.0
-  resolution: "keyv@npm:4.5.0"
-  dependencies:
-    json-buffer: 3.0.1
-  checksum: d294873cf88ec8f691e5edeb7b4b884f886c5f021a01902a0e243c362449db2b55419d7fb7187d059add747b7398321e39e44d391b65f94935174ce13452714d
-  languageName: node
-  linkType: hard
-
-"keyv@npm:^4.5.2":
+"keyv@npm:^4.3.3, keyv@npm:^4.5.2":
   version: 4.5.2
   resolution: "keyv@npm:4.5.2"
   dependencies:
