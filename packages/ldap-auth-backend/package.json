@@ -1,7 +1,7 @@
 {
     "name": "@immobiliarelabs/backstage-plugin-ldap-auth-backend",
     "description": "Backstage LDAP Authentication plugin, this packages adds backend authentication and token generation/validation/management; sibling of @immobiliarelabs/backstage-plugin-ldap-auth",
-    "version": "2.0.0",
+    "version": "2.0.1-alpha.2",
     "main": "dist/index.cjs.js",
     "types": "dist/index.d.ts",
     "license": "MIT",
@@ -39,7 +39,7 @@
         "react": "^16.13.1 || ^17.0.0"
     },
     "devDependencies": {
-        "@backstage/cli": "^0.19.0",
+        "@backstage/cli": "^0.21.1",
         "@types/ldap-escape": "^2.0.0",
         "@types/ldapjs": "^2.2.4",
         "@types/node": "^18.7.23"
