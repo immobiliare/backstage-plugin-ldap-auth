@@ -1880,18 +1880,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/errors@npm:^1.1.0, @backstage/errors@npm:^1.1.1":
-  version: 1.1.1
-  resolution: "@backstage/errors@npm:1.1.1"
-  dependencies:
-    "@backstage/types": ^1.0.0
-    cross-fetch: ^3.1.5
-    serialize-error: ^8.0.1
-  checksum: 8983eba72212a545bd3543d71f796b9836aacecfd85d6ac67a5a37da4af5566b8267533547ffc9caa01969c6c08a2197569626206aa84cb18fbfe4bf03ca8328
-  languageName: node
-  linkType: hard
-
-"@backstage/errors@npm:^1.1.3":
+"@backstage/errors@npm:^1.1.0, @backstage/errors@npm:^1.1.1, @backstage/errors@npm:^1.1.3":
   version: 1.1.3
   resolution: "@backstage/errors@npm:1.1.3"
   dependencies:
