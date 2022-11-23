@@ -1721,28 +1721,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/core-app-api@npm:^1.0.4, @backstage/core-app-api@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "@backstage/core-app-api@npm:1.1.0"
-  dependencies:
-    "@backstage/config": ^1.0.2
-    "@backstage/core-plugin-api": ^1.0.6
-    "@backstage/types": ^1.0.0
-    "@backstage/version-bridge": ^1.0.1
-    "@types/prop-types": ^15.7.3
-    prop-types: ^15.7.2
-    react-use: ^17.2.4
-    zen-observable: ^0.8.15
-    zod: ^3.11.6
-  peerDependencies:
-    "@types/react": ^16.13.1 || ^17.0.0
-    react: ^16.13.1 || ^17.0.0
-    react-router-dom: 6.0.0-beta.0 || ^6.3.0
-  checksum: e6fd2b754e855119e5bc5cb27ebc4cef8ddcc5479e602282c09ed2278f4a936c465c8f9b8d7653934902f2995bac57e1b45fd29bd1d59af9f25af32c482276b6
-  languageName: node
-  linkType: hard
-
-"@backstage/core-app-api@npm:^1.2.0":
+"@backstage/core-app-api@npm:^1.0.4, @backstage/core-app-api@npm:^1.1.0, @backstage/core-app-api@npm:^1.2.0":
   version: 1.2.0
   resolution: "@backstage/core-app-api@npm:1.2.0"
   dependencies:
