@@ -124,7 +124,7 @@ auth:
                     secure: false # https cookies or not
                     field: '' # default to "backstage-token"
 
-                ldapAuthentication:
+                ldapAuthenticationOptions:
                     userSearchBase: 'ou=users,dc=ns,dc=farm' # REQUIRED
                     # what is the user unique key in your ldap instance
                     usernameAttribute: 'uid' # defaults to `uid`
