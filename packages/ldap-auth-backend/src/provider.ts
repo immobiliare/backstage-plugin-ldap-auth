@@ -170,11 +170,9 @@ export const ldap = createAuthProviderIntegration({
                 process.env.NODE_ENV || 'development'
             ) as BackstageLdapAuthConfiguration;
 
-            // TODO: Validate fields, some should be required. Eg: search needs userDn
-
             cnf.cookies = {
-                field: cnf?.cookies?.field ?? COOKIE_FIELD_KEY,
-                secure: cnf?.cookies?.secure ?? false,
+                field: cnf?.cookies?.field || COOKIE_FIELD_KEY,
+                secure: cnf?.cookies?.secure || false,
             };
 
             const authHandler = options?.authHandler ?? defaultAuthHandler;

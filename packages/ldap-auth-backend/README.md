@@ -122,7 +122,7 @@ auth:
             { ENV_NAME }:
                 cookies:
                     secure: false # https cookies or not
-                    field: '' # default to "backstage-token"
+                    field: 'backstage-token' # default
 
                 ldapAuthenticationOptions:
                     userSearchBase: 'ou=users,dc=ns,dc=farm' # REQUIRED
