@@ -22,7 +22,7 @@ export function prepareBackstageIdentityResponse(
         identity: {
             type: 'user',
             userEntityRef: sub,
-            ownershipEntityRefs: ent ?? [],
+            ownershipEntityRefs: ent || [],
         },
     };
 }

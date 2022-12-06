@@ -29,9 +29,9 @@ export class JWTTokenValidator implements TokenValidator {
 
     constructor(store: Keyv, increaseTokenExpireMs?: number) {
         this.store = store;
-        this.increaseTokenExpireMs = isNaN(increaseTokenExpireMs ?? 0)
+        this.increaseTokenExpireMs = isNaN(increaseTokenExpireMs || 0)
             ? 0
-            : increaseTokenExpireMs ?? 0;
+            : increaseTokenExpireMs || 0;
     }
 
     async logout(jwt: string, ts: number): Promise<void> {

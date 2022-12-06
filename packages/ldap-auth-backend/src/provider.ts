@@ -135,7 +135,7 @@ export class ProviderLdapAuthProvider implements AuthProviderRouteHandlers {
                 new Date(exp * 1000).valueOf() -
                     new Date().valueOf() +
                     ((this.jwtValidator as JWTTokenValidator)
-                        ?.increaseTokenExpireMs ?? 0)
+                        ?.increaseTokenExpireMs || 0)
             );
 
             res.cookie(this.cookies.field, backstageIdentity.token, {
@@ -175,9 +175,15 @@ export const ldap = createAuthProviderIntegration({
                 secure: cnf?.cookies?.secure || false,
             };
 
-            const authHandler = options?.authHandler ?? defaultAuthHandler;
+            const authHandler =
+                typeof options?.authHandler === 'function'
+                    ? options?.authHandler
+                    : defaultAuthHandler;
+
             const signInResolver =
-                options?.signIn?.resolver ?? defaultSigninResolver;
+                typeof options?.signIn?.resolver === 'function'
+                    ? options?.signIn?.resolver
+                    : defaultSigninResolver;
 
             // this is LDAP specific
             const ldapAuthentication =
