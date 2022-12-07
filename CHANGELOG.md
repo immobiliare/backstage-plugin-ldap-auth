@@ -12,6 +12,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [2.0.2](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v2.0.1...v2.0.2) (2022-11-29)
 
+## [2.0.2-alpha.0](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v2.0.1...v2.0.2-alpha.0) (2022-11-29)
+
 ### Bug Fixes
 
 -   documentation typo ([ca575c0](https://github.com/immobiliare/backstage-plugin-ldap-auth/commit/ca575c0c1bc351c63a0f0c6d97695cc22ac968ed))
