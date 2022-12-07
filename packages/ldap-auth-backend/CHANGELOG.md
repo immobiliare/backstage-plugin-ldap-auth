@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.3](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v2.0.2...v2.0.3) (2022-12-07)
+
+### Bug Fixes
+
+-   default cookie field ([60cdd39](https://github.com/immobiliare/backstage-plugin-ldap-auth/commit/60cdd39e7b6de63757e106dd61090152900d9868)), closes [#142](https://github.com/immobiliare/backstage-plugin-ldap-auth/issues/142)
+-   removes ?? for || ([2c30828](https://github.com/immobiliare/backstage-plugin-ldap-auth/commit/2c30828bb815c87f12b3a3471ff7bfa81454e878))
+
 ## [2.0.2](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v2.0.1...v2.0.2) (2022-11-29)
 
 ### Bug Fixes
