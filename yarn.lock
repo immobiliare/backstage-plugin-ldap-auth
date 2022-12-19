@@ -2695,7 +2695,7 @@ __metadata:
     "@backstage/test-utils": ^1.1.2
     "@backstage/theme": ^0.2.16
     "@material-ui/core": ^4.12.2
-    "@react-hookz/web": ^19.2.0
+    "@react-hookz/web": ^20.0.2
     "@testing-library/jest-dom": ^5.10.1
     "@testing-library/react": ^13.4.0
     "@testing-library/user-event": ^14.0.0
@@ -4805,9 +4805,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-hookz/web@npm:^19.2.0":
-  version: 19.2.0
-  resolution: "@react-hookz/web@npm:19.2.0"
+"@react-hookz/web@npm:^20.0.2":
+  version: 20.0.2
+  resolution: "@react-hookz/web@npm:20.0.2"
   dependencies:
     "@react-hookz/deep-equal": ^1.0.3
   peerDependencies:
@@ -4817,7 +4817,7 @@ __metadata:
   peerDependenciesMeta:
     js-cookie:
       optional: true
-  checksum: 0fda3d3a0f967b6b38817f1e72d111711fc01036a8e6d0850bd4e3b3fa41af8635b260babf19e384402ac6d2dfa7db779585c0c8b16700cc0f568df9662ca517
+  checksum: 38e9f660d247cd434d1de428f9ae49baf243f65187af3ebe2d4cd8ac1ecd660e37c64cec916dc9e9d4b7d609071b4c31d486ace3193e506fda64b11db96c5321
   languageName: node
   linkType: hard
 
