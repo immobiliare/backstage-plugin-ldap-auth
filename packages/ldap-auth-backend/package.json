@@ -39,7 +39,7 @@
         "react": "^16.13.1 || ^17.0.0"
     },
     "devDependencies": {
-        "@backstage/cli": "^0.21.1",
+        "@backstage/cli": "^0.22.0",
         "@types/ldap-escape": "^2.0.0",
         "@types/ldapjs": "^2.2.4",
         "@types/node": "^18.7.23"
