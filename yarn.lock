@@ -2695,7 +2695,7 @@ __metadata:
     "@backstage/test-utils": ^1.1.2
     "@backstage/theme": ^0.2.16
     "@material-ui/core": ^4.12.2
-    "@react-hookz/web": ^19.2.0
+    "@react-hookz/web": ^21.0.0
     "@testing-library/jest-dom": ^5.10.1
     "@testing-library/react": ^13.4.0
     "@testing-library/user-event": ^14.0.0
@@ -4789,6 +4789,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-hookz/deep-equal@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "@react-hookz/deep-equal@npm:1.0.4"
+  checksum: 0923e364d309e32ee54e0850471a86488faf149d7a04ee838552cf5d54f493964623a8d742880ec82410cc1105530123f056e66dfc72b7da235d4cc93fad708f
+  languageName: node
+  linkType: hard
+
 "@react-hookz/web@npm:^15.0.0":
   version: 15.1.0
   resolution: "@react-hookz/web@npm:15.1.0"
@@ -4805,11 +4812,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-hookz/web@npm:^19.2.0":
-  version: 19.2.0
-  resolution: "@react-hookz/web@npm:19.2.0"
+"@react-hookz/web@npm:^21.0.0":
+  version: 21.0.0
+  resolution: "@react-hookz/web@npm:21.0.0"
   dependencies:
-    "@react-hookz/deep-equal": ^1.0.3
+    "@react-hookz/deep-equal": ^1.0.4
   peerDependencies:
     js-cookie: ^3.0.1
     react: ^16.8 || ^17 || ^18
@@ -4817,7 +4824,7 @@ __metadata:
   peerDependenciesMeta:
     js-cookie:
       optional: true
-  checksum: 0fda3d3a0f967b6b38817f1e72d111711fc01036a8e6d0850bd4e3b3fa41af8635b260babf19e384402ac6d2dfa7db779585c0c8b16700cc0f568df9662ca517
+  checksum: 9c14bf54c25ba67470cac1278dd614504a5574590ad9988c71a701adf837e2d47997c531dbabe2b8a42c226fe586734cb65c11adac6c4ac5bc1caf22402f95fc
   languageName: node
   linkType: hard
 
