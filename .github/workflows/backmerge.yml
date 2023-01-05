@@ -6,7 +6,7 @@ on:
             - 'main'
 
 jobs:
-    nightly-merge:
+    backmerge:
         runs-on: ubuntu-latest
 
         steps:
@@ -14,10 +14,9 @@ jobs:
               with:
                   persist-credentials: false
 
-            - name: Up Merge
-              uses: bambamboole/gha-upmerge@master
+            - uses: everlytic/branch-merge@1.1.2
               with:
-                  stable_branch: 'main'
-                  development_branch: 'next'
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GH_NODE_TOKEN }}
+                  github_token: ${{ github.GH_NODE_TOKEN }}
+                  source_ref: 'main'
+                  target_branch: 'next'
+                  commit_message_template: "Merge branch 'main' into 'next' [skip ci]"
