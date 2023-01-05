@@ -1,0 +1,23 @@
+name: Backmerge main -> next
+
+on:
+    push:
+        branches:
+            - 'main'
+
+jobs:
+    nightly-merge:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v3
+              with:
+                  persist-credentials: false
+
+            - name: Up Merge
+              uses: bambamboole/gha-upmerge@master
+              with:
+                  stable_branch: 'main'
+                  development_branch: 'next'
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GH_NODE_TOKEN }}
