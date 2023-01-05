@@ -14,9 +14,11 @@ jobs:
               with:
                   persist-credentials: false
 
-            - uses: everlytic/branch-merge@1.1.2
+            - name: Merge main -> next
+              uses: devmasx/merge-branch@master
               with:
-                  github_token: ${{ github.GH_NODE_TOKEN }}
-                  source_ref: 'main'
-                  target_branch: 'next'
-                  commit_message_template: "Merge branch 'main' into 'next' [skip ci]"
+                  type: now
+                  from_branch: main
+                  target_branch: next
+                  github_token: ${{ secrets.GH_NODE_TOKEN }}
+                  message: "Merge 'main' into 'next' [skip ci]"
