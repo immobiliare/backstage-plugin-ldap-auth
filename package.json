@@ -20,10 +20,10 @@
         "prettier": "^2.7.1"
     },
     "engines": {
-        "node": ">=16"
+        "node": ">=18.0.0"
     },
     "volta": {
-        "node": "16.16.0"
+        "node": "18.12.1"
     },
     "scripts": {
         "style:lint": "eslint packages --ext .ts",
