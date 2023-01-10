@@ -1835,7 +1835,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/core-app-api@npm:^1.0.4, @backstage/core-app-api@npm:^1.2.0":
+"@backstage/core-app-api@npm:^1.0.4":
   version: 1.2.0
   resolution: "@backstage/core-app-api@npm:1.2.0"
   dependencies:
@@ -1992,7 +1992,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/errors@npm:^1.1.0, @backstage/errors@npm:^1.1.3":
+"@backstage/errors@npm:^1.1.0":
   version: 1.1.3
   resolution: "@backstage/errors@npm:1.1.3"
   dependencies:
@@ -2160,20 +2160,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/plugin-permission-common@npm:^0.7.1":
-  version: 0.7.1
-  resolution: "@backstage/plugin-permission-common@npm:0.7.1"
-  dependencies:
-    "@backstage/config": ^1.0.4
-    "@backstage/errors": ^1.1.3
-    "@backstage/types": ^1.0.1
-    cross-fetch: ^3.1.5
-    uuid: ^8.0.0
-    zod: ^3.11.6
-  checksum: d0ed7f8f3ed4163087db140f46e0fd055cc85e8127c0b26b17a595801df4dc0fa21330513f782be75e10cffb64c5f42f82b541b669e46e63113c41052277b65e
-  languageName: node
-  linkType: hard
-
 "@backstage/plugin-permission-common@npm:^0.7.2":
   version: 0.7.2
   resolution: "@backstage/plugin-permission-common@npm:0.7.2"
@@ -2185,24 +2171,6 @@ __metadata:
     uuid: ^8.0.0
     zod: ~3.18.0
   checksum: a9247d57004fe5f811c60446a1db366cd7c7b7776bd8b9ee2e7da819e09fd1e24dd0c12f141cc2db2069c127096b2b85e8f406f6300354beca123a5816fa36e7
-  languageName: node
-  linkType: hard
-
-"@backstage/plugin-permission-react@npm:^0.4.7":
-  version: 0.4.7
-  resolution: "@backstage/plugin-permission-react@npm:0.4.7"
-  dependencies:
-    "@backstage/config": ^1.0.4
-    "@backstage/core-plugin-api": ^1.1.0
-    "@backstage/plugin-permission-common": ^0.7.1
-    cross-fetch: ^3.1.5
-    react-use: ^17.2.4
-    swr: ^1.1.2
-  peerDependencies:
-    "@types/react": ^16.13.1 || ^17.0.0
-    react: ^16.13.1 || ^17.0.0
-    react-router: 6.0.0-beta.0 || ^6.3.0
-  checksum: 4fac3ea7ac33012bf0690f6a4813ec63ea96c0e145a125012f1174a3b93cac84cc803854fe2f85735d84f29a6d11ee1f97391f6551b1a7907d62cb2351dc16be
   languageName: node
   linkType: hard
 
@@ -2243,35 +2211,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/test-utils@npm:^1.1.2":
-  version: 1.2.2
-  resolution: "@backstage/test-utils@npm:1.2.2"
-  dependencies:
-    "@backstage/config": ^1.0.4
-    "@backstage/core-app-api": ^1.2.0
-    "@backstage/core-plugin-api": ^1.1.0
-    "@backstage/plugin-permission-common": ^0.7.1
-    "@backstage/plugin-permission-react": ^0.4.7
-    "@backstage/theme": ^0.2.16
-    "@backstage/types": ^1.0.1
-    "@material-ui/core": ^4.12.2
-    "@material-ui/icons": ^4.9.1
-    "@testing-library/jest-dom": ^5.10.1
-    "@testing-library/react": ^12.1.3
-    "@testing-library/user-event": ^14.0.0
-    cross-fetch: ^3.1.5
-    zen-observable: ^0.8.15
-  peerDependencies:
-    "@types/react": ^16.13.1 || ^17.0.0
-    react: ^16.13.1 || ^17.0.0
-    react-dom: ^16.13.1 || ^17.0.0
-    react-router: 6.0.0-beta.0 || ^6.3.0
-    react-router-dom: 6.0.0-beta.0 || ^6.3.0
-  checksum: 1bdc87972ff7a218e464cb46ed8d46d1a14a5995dd283de8b27031427705e6dbb20af939d39f73ce9b41ff04a2501c72ab69e4f732d88831138048b86fae0e61
-  languageName: node
-  linkType: hard
-
-"@backstage/test-utils@npm:^1.2.3":
+"@backstage/test-utils@npm:^1.1.2, @backstage/test-utils@npm:^1.2.3":
   version: 1.2.3
   resolution: "@backstage/test-utils@npm:1.2.3"
   dependencies:
