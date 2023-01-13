@@ -1815,16 +1815,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/config@npm:^1.0.4":
-  version: 1.0.4
-  resolution: "@backstage/config@npm:1.0.4"
-  dependencies:
-    "@backstage/types": ^1.0.1
-    lodash: ^4.17.21
-  checksum: f18e1afa024a752fc2667e2d0e54eadedfab231d9346a0fc8f8c0a5a5c04138ac1814209d89b43ec50f14309a76ad77f16213116675122fecc00bf085236d83e
-  languageName: node
-  linkType: hard
-
 "@backstage/config@npm:^1.0.5":
   version: 1.0.5
   resolution: "@backstage/config@npm:1.0.5"
@@ -1835,28 +1825,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/core-app-api@npm:^1.0.4":
-  version: 1.2.0
-  resolution: "@backstage/core-app-api@npm:1.2.0"
-  dependencies:
-    "@backstage/config": ^1.0.4
-    "@backstage/core-plugin-api": ^1.1.0
-    "@backstage/types": ^1.0.1
-    "@backstage/version-bridge": ^1.0.2
-    "@types/prop-types": ^15.7.3
-    prop-types: ^15.7.2
-    react-use: ^17.2.4
-    zen-observable: ^0.8.15
-    zod: ^3.11.6
-  peerDependencies:
-    "@types/react": ^16.13.1 || ^17.0.0
-    react: ^16.13.1 || ^17.0.0
-    react-router-dom: 6.0.0-beta.0 || ^6.3.0
-  checksum: c980e1a79fa9082da276c4ba6f97ca5ee9a233be03e371eb88e6407abe072aa50d4e7e9dcd69158d5bd7df19d521bcf4b64d009e7cc257bd3cda060425ff47e5
-  languageName: node
-  linkType: hard
-
-"@backstage/core-app-api@npm:^1.3.0":
+"@backstage/core-app-api@npm:^1.0.4, @backstage/core-app-api@npm:^1.3.0":
   version: 1.3.0
   resolution: "@backstage/core-app-api@npm:1.3.0"
   dependencies:
@@ -1927,7 +1896,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/core-plugin-api@npm:^1.0.3, @backstage/core-plugin-api@npm:^1.0.4, @backstage/core-plugin-api@npm:^1.1.0, @backstage/core-plugin-api@npm:^1.2.0":
+"@backstage/core-plugin-api@npm:^1.0.3, @backstage/core-plugin-api@npm:^1.0.4, @backstage/core-plugin-api@npm:^1.2.0":
   version: 1.2.0
   resolution: "@backstage/core-plugin-api@npm:1.2.0"
   dependencies:
@@ -2218,27 +2187,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/types@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "@backstage/types@npm:1.0.1"
-  checksum: 4857bc916f6afb77516fee565bb8048f2110425e32621ae7f332b9b9d32a738df26886b641339e811f3342488d44383c7a2fdd799de897b08fcca2062f1a9a13
-  languageName: node
-  linkType: hard
-
 "@backstage/types@npm:^1.0.2":
   version: 1.0.2
   resolution: "@backstage/types@npm:1.0.2"
   checksum: 3fead10cfafa3d1a6490e664b52f383fa1bc2cc28cb4b63f2df9a299c654b1c7103c556f652eb8ebf17ca09133f841c75317a8215875c7701eb04737410d8321
-  languageName: node
-  linkType: hard
-
-"@backstage/version-bridge@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "@backstage/version-bridge@npm:1.0.2"
-  peerDependencies:
-    "@types/react": ^16.13.1 || ^17.0.0
-    react: ^16.13.1 || ^17.0.0
-  checksum: b45cbf5340afb7896d6baa2a650ee21e9a63743ee589d07a30139a6e035e7e5f996a5b9fa08f5db2ccdd95db288c4b4e73b17e419f7569e061065fd362f38e75
   languageName: node
   linkType: hard
 
@@ -23747,13 +23699,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zen-observable@npm:^0.8.15":
-  version: 0.8.15
-  resolution: "zen-observable@npm:0.8.15"
-  checksum: b7289084bc1fc74a559b7259faa23d3214b14b538a8843d2b001a35e27147833f4107590b1b44bf5bc7f6dfe6f488660d3a3725f268e09b3925b3476153b7821
-  languageName: node
-  linkType: hard
-
 "zip-stream@npm:^4.1.0":
   version: 4.1.0
   resolution: "zip-stream@npm:4.1.0"
@@ -23765,7 +23710,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:^3.11.6, zod@npm:^3.17.3":
+"zod@npm:^3.17.3":
   version: 3.20.2
   resolution: "zod@npm:3.20.2"
   checksum: 04172f7e9350372684ccd298d4716908edc9113751295b6c4e1b3ea84e2af8997e504b33ba36f4741417bb2a5dc90bfd40501f6b0e7389df10e42a63d6d8366c
