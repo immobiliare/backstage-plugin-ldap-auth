@@ -1927,25 +1927,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/core-plugin-api@npm:^1.0.3, @backstage/core-plugin-api@npm:^1.0.4, @backstage/core-plugin-api@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "@backstage/core-plugin-api@npm:1.1.0"
-  dependencies:
-    "@backstage/config": ^1.0.4
-    "@backstage/types": ^1.0.1
-    "@backstage/version-bridge": ^1.0.2
-    history: ^5.0.0
-    prop-types: ^15.7.2
-    zen-observable: ^0.8.15
-  peerDependencies:
-    "@types/react": ^16.13.1 || ^17.0.0
-    react: ^16.13.1 || ^17.0.0
-    react-router-dom: 6.0.0-beta.0 || ^6.3.0
-  checksum: e63d6ac2bcaa0678f3051c3f9e91dfbb302c16b25c01bf9b463f01aeda309aca616fc482774f0c7cc1ecf91647bcd2b4899a58712b71785831d3be62d3ff58f6
-  languageName: node
-  linkType: hard
-
-"@backstage/core-plugin-api@npm:^1.2.0":
+"@backstage/core-plugin-api@npm:^1.0.3, @backstage/core-plugin-api@npm:^1.0.4, @backstage/core-plugin-api@npm:^1.1.0, @backstage/core-plugin-api@npm:^1.2.0":
   version: 1.2.0
   resolution: "@backstage/core-plugin-api@npm:1.2.0"
   dependencies:
