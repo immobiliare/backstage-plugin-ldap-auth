@@ -32,7 +32,7 @@ import { LoginForm } from './Form';
  */
 export type LdapSignInPageProps = SignInPageProps & {
     provider: string;
-    children?: React.ReactElement | null;
+    children?: React.ReactNode | null;
     options?: {
         helperTextPassword?: string;
         helperTextUsername?: string;

@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.0](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v2.0.4...v3.0.0-alpha.0) (2023-01-13)
+
+### Features
+
+-   the children parameter type of LdapSignInPageProps type is now a ReactNode ([1d9632f](https://github.com/immobiliare/backstage-plugin-ldap-auth/commit/1d9632f55ce32888c9a5cc28659629582d126d99))
+
+### BREAKING CHANGES
+
+-   the children parameter type of LdapSignInPageProps type is now a ReactNode
+
 ## [2.0.4](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v2.0.3...v2.0.4) (2022-12-07)
 
 ## [2.0.2-alpha.0](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v2.0.1...v2.0.2-alpha.0) (2022-11-29)
