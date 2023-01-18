@@ -1708,12 +1708,12 @@ __metadata:
   linkType: hard
 
 "@backstage/cli@npm:^0.22.0":
-  version: 0.22.0
-  resolution: "@backstage/cli@npm:0.22.0"
+  version: 0.22.1
+  resolution: "@backstage/cli@npm:0.22.1"
   dependencies:
     "@backstage/cli-common": ^0.1.11
-    "@backstage/config": ^1.0.5
-    "@backstage/config-loader": ^1.1.7
+    "@backstage/config": ^1.0.6
+    "@backstage/config-loader": ^1.1.8
     "@backstage/errors": ^1.1.4
     "@backstage/release-manifests": ^0.0.8
     "@backstage/types": ^1.0.2
@@ -1814,7 +1814,7 @@ __metadata:
       optional: true
   bin:
     backstage-cli: bin/backstage-cli
-  checksum: e6755a69bb9aec177b2a0f0feeaef1560787d6147d23a01f5e6742228f6f85a7c4275ed41e218f1aa93d7aaa5140080cd4f93d36a3b3054439dbd2e9860cbcf7
+  checksum: 94f9d89b9290a29e8fe493d209b06671283041b3e983df57eb304c90c2281f98dad9e795028a94dd5b6973725709f778f47d3ff5e73cdf2710ecff2f77f224ea
   languageName: node
   linkType: hard
 
@@ -1838,6 +1838,29 @@ __metadata:
     yaml: ^2.0.0
     yup: ^0.32.9
   checksum: 26ed235949834cc374c384c87c0cde7881347389fb85dbf42951b368cd816a0ed3bb705f4380546f04c74e1041ab4f4bb846897f1804a78169d6f393657f8d7d
+  languageName: node
+  linkType: hard
+
+"@backstage/config-loader@npm:^1.1.8":
+  version: 1.1.8
+  resolution: "@backstage/config-loader@npm:1.1.8"
+  dependencies:
+    "@backstage/cli-common": ^0.1.11
+    "@backstage/config": ^1.0.6
+    "@backstage/errors": ^1.1.4
+    "@backstage/types": ^1.0.2
+    "@types/json-schema": ^7.0.6
+    ajv: ^8.10.0
+    chokidar: ^3.5.2
+    fs-extra: 10.1.0
+    json-schema: ^0.4.0
+    json-schema-merge-allof: ^0.8.1
+    json-schema-traverse: ^1.0.0
+    node-fetch: ^2.6.7
+    typescript-json-schema: ^0.55.0
+    yaml: ^2.0.0
+    yup: ^0.32.9
+  checksum: 96987239f4b1344b281e6fa8f7d139a2b4629824fe9722e654019581e999d1650f75f71defb9e80c7ca54751b78aa246917f1806763e3313a0272169d312c2b0
   languageName: node
   linkType: hard
 
