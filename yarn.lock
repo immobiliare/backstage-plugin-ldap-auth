@@ -1976,25 +1976,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/core-plugin-api@npm:^1.0.3, @backstage/core-plugin-api@npm:^1.0.4, @backstage/core-plugin-api@npm:^1.2.0":
-  version: 1.2.0
-  resolution: "@backstage/core-plugin-api@npm:1.2.0"
-  dependencies:
-    "@backstage/config": ^1.0.5
-    "@backstage/types": ^1.0.2
-    "@backstage/version-bridge": ^1.0.3
-    history: ^5.0.0
-    prop-types: ^15.7.2
-    zen-observable: ^0.10.0
-  peerDependencies:
-    "@types/react": ^16.13.1 || ^17.0.0
-    react: ^16.13.1 || ^17.0.0
-    react-router-dom: 6.0.0-beta.0 || ^6.3.0
-  checksum: 6d768e4e7df34a3e993a504207c2b5ffd5d1edd0f4243d66b267e1d2a66d86e2640d93b5efed3571e0430e0d6c01d14d7e055521193a9d190df320cd9b731047
-  languageName: node
-  linkType: hard
-
-"@backstage/core-plugin-api@npm:^1.3.0":
+"@backstage/core-plugin-api@npm:^1.0.3, @backstage/core-plugin-api@npm:^1.0.4, @backstage/core-plugin-api@npm:^1.2.0, @backstage/core-plugin-api@npm:^1.3.0":
   version: 1.3.0
   resolution: "@backstage/core-plugin-api@npm:1.3.0"
   dependencies:
