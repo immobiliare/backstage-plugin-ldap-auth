@@ -148,7 +148,7 @@ auth:
 
 This is for a basic usage: - single process - No custom auth or user object marshaling - in-memory sessions
 
-For more uses cases you can see the [example folders](https://github.com/immobiliare/backstage-plugin-ldap-auth/examples/)
+For more uses cases you can see the [example folders](https://github.com/immobiliare/backstage-plugin-ldap-auth/tree/main/examples)
 
 > `packages/backend/src/plugins/auth.ts`
 
@@ -156,7 +156,11 @@ For more uses cases you can see the [example folders](https://github.com/immobil
 import { createRouter } from '@backstage/plugin-auth-backend';
 import { Router } from 'express';
 import { PluginEnvironment } from '../types';
-import { ldap } from '@immobiliarelabs/backstage-plugin-ldap-auth-backend';
+import {
+    ldap,
+    JWTTokenValidator,
+} from '@immobiliarelabs/backstage-plugin-ldap-auth-backend';
+import Keyv from 'keyv';
 
 export default async function createPlugin(
     env: PluginEnvironment
@@ -168,6 +172,7 @@ export default async function createPlugin(
         discovery: env.discovery,
         tokenManager: env.tokenManager,
         providerFactories: {
+            tokenValidator: new JWTTokenValidator(new Keyv()),
             ldap: ldap.create({
                 /* Custom Configurations */
             }),
@@ -196,6 +201,7 @@ export default async function createPlugin(
     tokenManager: env.tokenManager,
     providerFactories: {
       ldap: ldap.create({
+        tokenValidator: new JWTTokenValidator(new Keyv()),
         resolvers: {
             async ldapAuthentication(username, password, ldapOptions, authFunction): LDAPUser {
                 // modify your ldapOptions and do whatever you need to format it
@@ -223,6 +229,7 @@ export default async function createPlugin(
     tokenManager: env.tokenManager,
     providerFactories: {
       ldap: ldap.create({
+        tokenValidator: new JWTTokenValidator(new Keyv()),
         resolvers: {
             async checkUserExists(ldapAuthOptions, searchFunction): Promise<boolean> {
                 const { username } = ldapAuthOptions;

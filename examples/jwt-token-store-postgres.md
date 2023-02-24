@@ -15,15 +15,12 @@ import {
     TokenValidator,
 } from '@immobiliarelabs/backstage-plugin-ldap-auth-backend';
 import Keyv from 'keyv';
-import { getRootLogger } from '@backstage/backend-common';
 
 const CONNECTION_STRING = 'backend.database.connection';
 
 export default async function createPlugin(
     env: PluginEnvironment
 ): Promise<Router> {
-    const logger = getRootLogger();
-
     const connection = env.config.getOptional(CONNECTION_STRING);
 
     const host = env.config.getOptionalString(`${CONNECTION_STRING}.host`);
@@ -54,3 +51,4 @@ export default async function createPlugin(
     });
 }
 ```
+
