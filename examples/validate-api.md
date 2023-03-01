@@ -118,7 +118,7 @@ function makeCreateEnv(config: Config) {
 ...
 ```
 
-4. Create `authMiddleware` and add it to the APIs.
+4. Create the function `createAuthMiddleware`
 
 `packages/backend/src/authMiddleware.ts`
 
@@ -163,10 +163,12 @@ export const createAuthMiddleware = async (appEnv: PluginEnvironment) => {
     return authMiddleware;
 };
 ```
-6. Create the authMiddleware and add it to the APIs you want to authenticate.
+5. Create the `authMiddleware` and add it to the APIs you want to authenticate.
 
 `packages/backend/src/index.ts`
 ```diff
++ import { createAuthMiddleware } from './authMiddleware';
+
 async function main() {
   ...
 + const authMiddleware = await createAuthMiddleware(appEnv);
