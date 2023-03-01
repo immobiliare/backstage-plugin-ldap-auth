@@ -11,7 +11,7 @@
 
 > [Backstage](https://backstage.io/) plugins to authenticate users to an LDAP server
 
-This is a monorepo containing two Backstage plugins, one for the frontend and one for the backend, both used to provide login screen, token management and serer-side auth logic to your LDAP server.
+This is a monorepo containing two Backstage plugins, one for the frontend and one for the backend, both used to provide login screen, token management and server-side auth logic to your LDAP server.
 
 This project is also meant to be used in pair with the official [@backstage/plugin-catalog-backend-module-ldap](https://www.npmjs.com/package/@backstage/plugin-catalog-backend-module-ldap) which imports and keeps in sync your LDAP users but won't authenticate them.
 
