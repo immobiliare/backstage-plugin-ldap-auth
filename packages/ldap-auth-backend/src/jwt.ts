@@ -47,7 +47,7 @@ export class JWTTokenValidator implements TokenValidator {
         await this.store.set(sub, normalizeTime(Date.now()));
     }
 
-    // rejects tokens issued before logouts and refreshs
+    // rejects tokens issued before logouts and refresh
     async isValid(jwt: string) {
         const { sub, iat, exp } = parseJwtPayload(jwt);
 
@@ -59,7 +59,7 @@ export class JWTTokenValidator implements TokenValidator {
             throw new Error(JWT_EXPIRED_TOKEN);
         }
 
-        // // check if we have and entry in the cache
+        // check if we have and entry in the cache
         if (await this.store.has(sub)) {
             const invalidBeforeDate = await this.store.get(sub);
 
