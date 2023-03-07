@@ -2982,6 +2982,10 @@ __metadata:
     cross-fetch: ^3.1.5
     msw: ^0.49.0
     password-validator: ^5.3.0
+    react: ^17.0.2
+    react-dom: ^17.0.2
+    react-router: ^6.4.5
+    react-router-dom: ^6.4.5
     react-use: ^17.2.4
     zod: ^3.17.3
   peerDependencies:
@@ -5109,6 +5113,13 @@ __metadata:
     js-cookie:
       optional: true
   checksum: 2edda4b2f2e1525a9a6f59ce78110516ffffc5ad8c7381b6f4deff7b85e79dfb4d98e4eae9d4348210c3759b8eae3e4b18fd5f80afc362c91cea39964dfbb302
+  languageName: node
+  linkType: hard
+
+"@remix-run/router@npm:1.3.3":
+  version: 1.3.3
+  resolution: "@remix-run/router@npm:1.3.3"
+  checksum: 9280f1c3e44c0fb84a74b401b5a47022dace06d5da0f26a7a68c7c0e57ad5ef95d30f3c2d333df2db3b63f84de81f7f8caa7e53189a7709d6c3eb466d126ed76
   languageName: node
   linkType: hard
 
@@ -15892,7 +15903,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"loose-envify@npm:^1.4.0":
+"loose-envify@npm:^1.1.0, loose-envify@npm:^1.4.0":
   version: 1.4.0
   resolution: "loose-envify@npm:1.4.0"
   dependencies:
@@ -17077,8 +17088,8 @@ __metadata:
   linkType: hard
 
 "msw@npm:^0.49.0":
-  version: 0.49.2
-  resolution: "msw@npm:0.49.2"
+  version: 0.49.3
+  resolution: "msw@npm:0.49.3"
   dependencies:
     "@mswjs/cookies": ^0.2.2
     "@mswjs/interceptors": ^0.17.5
@@ -17096,7 +17107,7 @@ __metadata:
     node-fetch: ^2.6.7
     outvariant: ^1.3.0
     path-to-regexp: ^6.2.0
-    strict-event-emitter: ^0.2.6
+    strict-event-emitter: ^0.4.3
     type-fest: ^2.19.0
     yargs: ^17.3.1
   peerDependencies:
@@ -17106,7 +17117,7 @@ __metadata:
       optional: true
   bin:
     msw: cli/index.js
-  checksum: 10ec35671e10e53c2a24ca22c5e7a2262d4cdfb409a403a3ffe221150af404805490e7661611a581986e61790bb8996ce8a0f057d521ef359498304c2431234a
+  checksum: 8322cd42cd69f289c05517d02bde22fc2f10e86fc2d0d209d9df54bd03d10b8123723c5587a2654dcd2cd0f314a016f9eccac88cffa30fafd1f9fead16db639e
   languageName: node
   linkType: hard
 
@@ -19576,6 +19587,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-dom@npm:^17.0.2":
+  version: 17.0.2
+  resolution: "react-dom@npm:17.0.2"
+  dependencies:
+    loose-envify: ^1.1.0
+    object-assign: ^4.1.1
+    scheduler: ^0.20.2
+  peerDependencies:
+    react: 17.0.2
+  checksum: 1c1eaa3bca7c7228d24b70932e3d7c99e70d1d04e13bb0843bbf321582bc25d7961d6b8a6978a58a598af2af496d1cedcfb1bf65f6b0960a0a8161cb8dab743c
+  languageName: node
+  linkType: hard
+
 "react-double-scrollbar@npm:0.0.15":
   version: 0.0.15
   resolution: "react-double-scrollbar@npm:0.0.15"
@@ -19697,6 +19721,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-router-dom@npm:^6.4.5":
+  version: 6.8.2
+  resolution: "react-router-dom@npm:6.8.2"
+  dependencies:
+    "@remix-run/router": 1.3.3
+    react-router: 6.8.2
+  peerDependencies:
+    react: ">=16.8"
+    react-dom: ">=16.8"
+  checksum: eddc8b88e26c66408df894bdcf95efd6731e21b7cbfd7417cd456f0043916279e0559b06c6cdc19c2a55c6aefc4cc745fa4065d3505e519a95adbef0cc89e77f
+  languageName: node
+  linkType: hard
+
+"react-router@npm:6.8.2, react-router@npm:^6.4.5":
+  version: 6.8.2
+  resolution: "react-router@npm:6.8.2"
+  dependencies:
+    "@remix-run/router": 1.3.3
+  peerDependencies:
+    react: ">=16.8"
+  checksum: 9e98d03e1f18bfd5a35144a0c675adaf7c46a9ad436efdea2b52ef3a6e501ac6174a67ea90004e1339cd45019d6b1eb370627518320f7af9323ae74e0c6756ad
+  languageName: node
+  linkType: hard
+
 "react-side-effect@npm:^2.1.0":
   version: 2.1.2
   resolution: "react-side-effect@npm:2.1.2"
@@ -19815,6 +19863,16 @@ __metadata:
     react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
     react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
   checksum: 1e122c29224781e70359978287a2e850ccdf509cd71ba16b16ea258725687a62f5c16ab69f52f732b4ed20df583196dbe2a04804f3e4a176bb3e62f3fc910452
+  languageName: node
+  linkType: hard
+
+"react@npm:^17.0.2":
+  version: 17.0.2
+  resolution: "react@npm:17.0.2"
+  dependencies:
+    loose-envify: ^1.1.0
+    object-assign: ^4.1.1
+  checksum: b254cc17ce3011788330f7bbf383ab653c6848902d7936a87b09d835d091e3f295f7e9dd1597c6daac5dc80f90e778c8230218ba8ad599f74adcc11e33b9d61b
   languageName: node
   linkType: hard
 
@@ -20700,6 +20758,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"scheduler@npm:^0.20.2":
+  version: 0.20.2
+  resolution: "scheduler@npm:0.20.2"
+  dependencies:
+    loose-envify: ^1.1.0
+    object-assign: ^4.1.1
+  checksum: c4b35cf967c8f0d3e65753252d0f260271f81a81e427241295c5a7b783abf4ea9e905f22f815ab66676f5313be0a25f47be582254db8f9241b259213e999b8fc
+  languageName: node
+  linkType: hard
+
 "schema-utils@npm:2.7.0":
   version: 2.7.0
   resolution: "schema-utils@npm:2.7.0"
@@ -21526,12 +21594,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"strict-event-emitter@npm:^0.2.6":
-  version: 0.2.8
-  resolution: "strict-event-emitter@npm:0.2.8"
-  dependencies:
-    events: ^3.3.0
-  checksum: 6ac06fe72a6ee6ae64d20f1dd42838ea67342f1b5f32b03b3050d73ee6ecee44b4d5c4ed2965a7154b47991e215f373d4e789e2b2be2769cd80e356126c2ca53
+"strict-event-emitter@npm:^0.4.3":
+  version: 0.4.3
+  resolution: "strict-event-emitter@npm:0.4.3"
+  checksum: ee335aba8a43bc6749d3337d78b9f6dbe8358d34b6eb38e7075dadf7f1cae621d96588663dda22dce17e6e7c7e281ddac79ca47421da8250bb4bf53b979508a5
   languageName: node
   linkType: hard
 
