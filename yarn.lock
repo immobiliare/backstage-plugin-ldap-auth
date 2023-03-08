@@ -1717,8 +1717,8 @@ __metadata:
   linkType: hard
 
 "@backstage/catalog-model@npm:^1.1.5":
-  version: 1.1.5
-  resolution: "@backstage/catalog-model@npm:1.1.5"
+  version: 1.2.0
+  resolution: "@backstage/catalog-model@npm:1.2.0"
   dependencies:
     "@backstage/config": ^1.0.6
     "@backstage/errors": ^1.1.4
@@ -1727,7 +1727,7 @@ __metadata:
     json-schema: ^0.4.0
     lodash: ^4.17.21
     uuid: ^8.0.0
-  checksum: 4a3418994047b616ae154202ef062b7b76bcbc00665998269a0f2242cb7b84e4200e3c3c3df57e10448479c70139ba09484795571f489edf1dd98ade85cc039a
+  checksum: d4e07e91e501b4ecbc9d0b754518277dd2ed93f22f801740cc539dbcbd905ba8111b1651d20fb725e44d7cd99a96faec6fd56cd51fdf8e1d7f39a6e177f31efa
   languageName: node
   linkType: hard
 
