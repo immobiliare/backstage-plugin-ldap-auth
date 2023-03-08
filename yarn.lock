@@ -1717,8 +1717,8 @@ __metadata:
   linkType: hard
 
 "@backstage/catalog-model@npm:^1.1.5":
-  version: 1.1.5
-  resolution: "@backstage/catalog-model@npm:1.1.5"
+  version: 1.2.0
+  resolution: "@backstage/catalog-model@npm:1.2.0"
   dependencies:
     "@backstage/config": ^1.0.6
     "@backstage/errors": ^1.1.4
@@ -1727,7 +1727,7 @@ __metadata:
     json-schema: ^0.4.0
     lodash: ^4.17.21
     uuid: ^8.0.0
-  checksum: 4a3418994047b616ae154202ef062b7b76bcbc00665998269a0f2242cb7b84e4200e3c3c3df57e10448479c70139ba09484795571f489edf1dd98ade85cc039a
+  checksum: d4e07e91e501b4ecbc9d0b754518277dd2ed93f22f801740cc539dbcbd905ba8111b1651d20fb725e44d7cd99a96faec6fd56cd51fdf8e1d7f39a6e177f31efa
   languageName: node
   linkType: hard
 
@@ -1872,16 +1872,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/config@npm:^1.0.5":
-  version: 1.0.5
-  resolution: "@backstage/config@npm:1.0.5"
-  dependencies:
-    "@backstage/types": ^1.0.2
-    lodash: ^4.17.21
-  checksum: 87cef5d3de2c211d57b12d575c6fc81af98e64d3763be0b6d954e979ee9ec19a2f6fd963578b2152154b799622d3e7f45a132c928451008576d75aaaa63eb69c
-  languageName: node
-  linkType: hard
-
 "@backstage/config@npm:^1.0.6":
   version: 1.0.6
   resolution: "@backstage/config@npm:1.0.6"
@@ -1942,25 +1932,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/core-plugin-api@npm:^1.0.3, @backstage/core-plugin-api@npm:^1.0.4":
-  version: 1.2.0
-  resolution: "@backstage/core-plugin-api@npm:1.2.0"
-  dependencies:
-    "@backstage/config": ^1.0.5
-    "@backstage/types": ^1.0.2
-    "@backstage/version-bridge": ^1.0.3
-    history: ^5.0.0
-    prop-types: ^15.7.2
-    zen-observable: ^0.10.0
-  peerDependencies:
-    "@types/react": ^16.13.1 || ^17.0.0
-    react: ^16.13.1 || ^17.0.0
-    react-router-dom: 6.0.0-beta.0 || ^6.3.0
-  checksum: 6d768e4e7df34a3e993a504207c2b5ffd5d1edd0f4243d66b267e1d2a66d86e2640d93b5efed3571e0430e0d6c01d14d7e055521193a9d190df320cd9b731047
-  languageName: node
-  linkType: hard
-
-"@backstage/core-plugin-api@npm:^1.4.0":
+"@backstage/core-plugin-api@npm:^1.0.3, @backstage/core-plugin-api@npm:^1.0.4, @backstage/core-plugin-api@npm:^1.4.0":
   version: 1.4.0
   resolution: "@backstage/core-plugin-api@npm:1.4.0"
   dependencies:
