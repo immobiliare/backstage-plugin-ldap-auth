@@ -2084,16 +2084,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/theme@npm:^0.2.16":
-  version: 0.2.16
-  resolution: "@backstage/theme@npm:0.2.16"
-  dependencies:
-    "@material-ui/core": ^4.12.2
-  checksum: 2880bea97ae66aef964130dcb474768d18d8410a161c310b2e5b7b8a5ba9503269d0dbc4abe7d02da92322cd3e174f1392b104876b9448eeea037b375e498ccf
-  languageName: node
-  linkType: hard
-
-"@backstage/theme@npm:^0.2.17":
+"@backstage/theme@npm:^0.2.16, @backstage/theme@npm:^0.2.17":
   version: 0.2.17
   resolution: "@backstage/theme@npm:0.2.17"
   dependencies:
