@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import type { AuthenticationOptions } from 'ldap-authentication';
+import { authenticate, AuthenticationOptions } from 'ldap-authentication';
 import type {
     BackstageLdapAuthConfiguration,
     CookiesOptions,
@@ -63,10 +63,13 @@ export class ProviderLdapAuthProvider implements AuthProviderRouteHandlers {
     }
 
     async check(uid: string): Promise<void | Error> {
-        const exists = await this.checkUserExists({
-            ...this.ldapAuthenticationOptions,
-            username: uid,
-        });
+        const exists = await this.checkUserExists(
+            {
+                ...this.ldapAuthenticationOptions,
+                username: uid,
+            },
+            authenticate
+        );
         if (!exists) throw new Error(JWT_INVALID_TOKEN);
     }
 
@@ -85,7 +88,8 @@ export class ProviderLdapAuthProvider implements AuthProviderRouteHandlers {
                 const { uid } = await this.ldapAuthentication(
                     username,
                     password,
-                    this.ldapAuthenticationOptions
+                    this.ldapAuthenticationOptions,
+                    authenticate
                 );
                 result = { uid: uid as string };
             } else if (token) {
