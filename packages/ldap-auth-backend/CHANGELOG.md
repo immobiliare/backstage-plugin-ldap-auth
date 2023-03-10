@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.1-alpha.1](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v3.0.1-alpha.0...v3.0.1-alpha.1) (2023-03-10)
+
+### Bug Fixes
+
+-   **backend:** authenticate function is undefined ([6a561d0](https://github.com/immobiliare/backstage-plugin-ldap-auth/commit/6a561d046b3bcba97ad84fd5a69a21c770bc55b9))
+
+## [3.0.1-alpha.0](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v3.0.0...v3.0.1-alpha.0) (2023-03-08)
+
+**Note:** Version bump only for package @immobiliarelabs/backstage-plugin-ldap-auth-backend
+
 # [3.0.0](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v3.0.0-alpha.0...v3.0.0) (2023-01-16)
 
 **Note:** Version bump only for package @immobiliarelabs/backstage-plugin-ldap-auth-backend

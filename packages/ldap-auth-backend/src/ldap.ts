@@ -39,7 +39,7 @@ async function _verifyUserExistsNoAdmin(
 
 export const defaultCheckUserExists = async (
     ldapAuthOptions: AuthenticationOptions,
-    searchFunction = authenticate
+    searchFunction: typeof authenticate
 ): Promise<boolean> => {
     // This fallback is for clients with no need for an admin to list users
     // I'll remove this if we can add this option to the auth library.
@@ -67,7 +67,7 @@ export async function defaultLDAPAuthentication(
     username: string,
     password: string,
     ldapAuthOptions: AuthenticationOptions,
-    authFunction: typeof authenticate = authenticate
+    authFunction: typeof authenticate
 ): Promise<LDAPUser> {
     const { usernameAttribute = 'uid' } = ldapAuthOptions;
 
