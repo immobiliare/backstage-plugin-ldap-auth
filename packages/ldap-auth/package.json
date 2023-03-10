@@ -1,7 +1,7 @@
 {
     "name": "@immobiliarelabs/backstage-plugin-ldap-auth",
     "description": "Backstage LDAP Authentication plugin, this packages adds frontend login page and token management sibling of @immobiliarelabs/backstage-plugin-ldap-auth-backend",
-    "version": "3.0.1-alpha.1",
+    "version": "3.0.1",
     "main": "dist/index.esm.js",
     "types": "dist/index.d.ts",
     "license": "MIT",
