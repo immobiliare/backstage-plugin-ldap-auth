@@ -30,7 +30,7 @@
     "dependencies": {
         "@backstage/core-plugin-api": "^1.0.3",
         "@backstage/errors": "^1.1.0",
-        "@backstage/plugin-auth-backend": "^0.17.0",
+        "@backstage/plugin-auth-backend": "^0.18.1",
         "keyv": "^4.3.3",
         "ldap-authentication": "^2.3.2",
         "ldap-escape": "^2.0.6",
