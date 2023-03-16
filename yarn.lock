@@ -3397,11 +3397,11 @@ __metadata:
   linkType: hard
 
 "@backstage/theme@npm:^0.2.16, @backstage/theme@npm:^0.2.17":
-  version: 0.2.17
-  resolution: "@backstage/theme@npm:0.2.17"
+  version: 0.2.18
+  resolution: "@backstage/theme@npm:0.2.18"
   dependencies:
     "@material-ui/core": ^4.12.2
-  checksum: 4be1d9bf2c3fce611a75f3b5b80f91365dcb67b8e5a417f9c760ffbc9c6f3dd9c243082347278569ad343cf017b76ebaf2143eb9aebfa07a58513c38dbbca97e
+  checksum: e5a7f1870666e556c5436b2d0db66edd6372151874bf6238395adfeeb85175aa3649a8d1e66ea9673d8ba0e9d7f8bf1e60eec2bc1b32cbb5508d27c7f9cb7369
   languageName: node
   linkType: hard
 
