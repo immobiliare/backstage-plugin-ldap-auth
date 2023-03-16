@@ -15583,11 +15583,11 @@ __metadata:
   linkType: hard
 
 "ldap-authentication@npm:^2.3.2":
-  version: 2.3.2
-  resolution: "ldap-authentication@npm:2.3.2"
+  version: 2.3.3
+  resolution: "ldap-authentication@npm:2.3.3"
   dependencies:
     ldapjs: ^2.3.3
-  checksum: 419054fc3b46786caeb1d918fc7f0c048ca821476d69cf33019ab29b49e1217adfe23fb3ce43faa6247349e5239b9313bcd64e73e9fde657202912cbbbd07b27
+  checksum: 638839f09d9d1a010b8c5133b3afe03948249927bbb316d4d1185109465c5519511266eda3ef90bc35d82e08c1e0ccf7d988d75c204635c4eb69324df2d72b0d
   languageName: node
   linkType: hard
 
