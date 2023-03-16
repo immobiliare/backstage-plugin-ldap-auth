@@ -3108,16 +3108,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/config@npm:^1.0.6":
-  version: 1.0.6
-  resolution: "@backstage/config@npm:1.0.6"
-  dependencies:
-    "@backstage/types": ^1.0.2
-    lodash: ^4.17.21
-  checksum: 5cd2b409237091eb523a61c11df49c183ad1548dce90df343c9b0204eec7147508f41c832f931f82783c458ccdcc9d9fb73511cdd373fdb023db67bc738fcc67
-  languageName: node
-  linkType: hard
-
 "@backstage/config@npm:^1.0.7":
   version: 1.0.7
   resolution: "@backstage/config@npm:1.0.7"
@@ -3178,25 +3168,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/core-plugin-api@npm:^1.0.3, @backstage/core-plugin-api@npm:^1.0.4":
-  version: 1.4.0
-  resolution: "@backstage/core-plugin-api@npm:1.4.0"
-  dependencies:
-    "@backstage/config": ^1.0.6
-    "@backstage/types": ^1.0.2
-    "@backstage/version-bridge": ^1.0.3
-    history: ^5.0.0
-    prop-types: ^15.7.2
-    zen-observable: ^0.10.0
-  peerDependencies:
-    "@types/react": ^16.13.1 || ^17.0.0
-    react: ^16.13.1 || ^17.0.0
-    react-router-dom: 6.0.0-beta.0 || ^6.3.0
-  checksum: 046d0fcb52b3110d6a926eeaf766486c753c2eeca70f7897f4ded45e0cf7da8591ec7df337433427bc50de7193e7a6d875356a027a8d1733fa07d87509e561a1
-  languageName: node
-  linkType: hard
-
-"@backstage/core-plugin-api@npm:^1.5.0":
+"@backstage/core-plugin-api@npm:^1.0.3, @backstage/core-plugin-api@npm:^1.0.4, @backstage/core-plugin-api@npm:^1.5.0":
   version: 1.5.0
   resolution: "@backstage/core-plugin-api@npm:1.5.0"
   dependencies:
