@@ -2965,13 +2965,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/cli-common@npm:^0.1.11":
-  version: 0.1.11
-  resolution: "@backstage/cli-common@npm:0.1.11"
-  checksum: 1773e3d6279bf806ab60beab5daab408ad570899e8faed427a6f84f802513d438f60e412f557b15a76631b07e2e6be1196e0a027fcad4e404b7b2898183073f7
-  languageName: node
-  linkType: hard
-
 "@backstage/cli-common@npm:^0.1.12":
   version: 0.1.12
   resolution: "@backstage/cli-common@npm:0.1.12"
@@ -2980,15 +2973,15 @@ __metadata:
   linkType: hard
 
 "@backstage/cli@npm:^0.22.0":
-  version: 0.22.3
-  resolution: "@backstage/cli@npm:0.22.3"
+  version: 0.22.4
+  resolution: "@backstage/cli@npm:0.22.4"
   dependencies:
-    "@backstage/cli-common": ^0.1.11
-    "@backstage/config": ^1.0.6
-    "@backstage/config-loader": ^1.1.8
-    "@backstage/errors": ^1.1.4
-    "@backstage/eslint-plugin": ^0.1.1
-    "@backstage/release-manifests": ^0.0.8
+    "@backstage/cli-common": ^0.1.12
+    "@backstage/config": ^1.0.7
+    "@backstage/config-loader": ^1.1.9
+    "@backstage/errors": ^1.1.5
+    "@backstage/eslint-plugin": ^0.1.2
+    "@backstage/release-manifests": ^0.0.9
     "@backstage/types": ^1.0.2
     "@esbuild-kit/cjs-loader": ^2.4.1
     "@manypkg/get-packages": ^1.1.3
@@ -3088,30 +3081,7 @@ __metadata:
       optional: true
   bin:
     backstage-cli: bin/backstage-cli
-  checksum: c4302d402087a7de1c46175e1f8efd4cc85ef901f2e83ae70f65857d12699464d13a217ea3516fac8f3ee12f7de81ee3a8d2c4066fecbdc4e20d6e9e315f6338
-  languageName: node
-  linkType: hard
-
-"@backstage/config-loader@npm:^1.1.8":
-  version: 1.1.8
-  resolution: "@backstage/config-loader@npm:1.1.8"
-  dependencies:
-    "@backstage/cli-common": ^0.1.11
-    "@backstage/config": ^1.0.6
-    "@backstage/errors": ^1.1.4
-    "@backstage/types": ^1.0.2
-    "@types/json-schema": ^7.0.6
-    ajv: ^8.10.0
-    chokidar: ^3.5.2
-    fs-extra: 10.1.0
-    json-schema: ^0.4.0
-    json-schema-merge-allof: ^0.8.1
-    json-schema-traverse: ^1.0.0
-    node-fetch: ^2.6.7
-    typescript-json-schema: ^0.55.0
-    yaml: ^2.0.0
-    yup: ^0.32.9
-  checksum: 96987239f4b1344b281e6fa8f7d139a2b4629824fe9722e654019581e999d1650f75f71defb9e80c7ca54751b78aa246917f1806763e3313a0272169d312c2b0
+  checksum: e0d818585ca4d14153dddc2a4318bb59b9f30e16d4b8dea0bef184abb9d5e3d80cffdda536bd559aafbfcce759b6f54100d74930a6ce02757349197a686739db
   languageName: node
   linkType: hard
 
@@ -3237,13 +3207,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/eslint-plugin@npm:^0.1.1":
-  version: 0.1.1
-  resolution: "@backstage/eslint-plugin@npm:0.1.1"
+"@backstage/eslint-plugin@npm:^0.1.2":
+  version: 0.1.2
+  resolution: "@backstage/eslint-plugin@npm:0.1.2"
   dependencies:
     "@manypkg/get-packages": ^1.1.3
     minimatch: ^5.1.2
-  checksum: 159ad2d885b4bddf0b9e4e62b5e7cc6be46c92154efaeaa73cc4fbfaaf47a12d28d86532dc941a54a0bd7f41a76512e3d191b299d8413ef3e9d027df3b109306
+  checksum: 4985ed57823546167946ee569a27ebe5ca909f784e1ba6cfefcf8aafb43c938cee0f50af793888d70a2cbd9220f6f1573a5b280c59e1b2e53b45daf696956540
   languageName: node
   linkType: hard
 
@@ -3376,12 +3346,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/release-manifests@npm:^0.0.8":
-  version: 0.0.8
-  resolution: "@backstage/release-manifests@npm:0.0.8"
+"@backstage/release-manifests@npm:^0.0.9":
+  version: 0.0.9
+  resolution: "@backstage/release-manifests@npm:0.0.9"
   dependencies:
     cross-fetch: ^3.1.5
-  checksum: 639f9b06e5889f850b40f00dc7664dd8efee416cfb4bb57dd1e2638275a96cbad677fc11007b196cb0651f7bfc876e694790e7541723c22bf6d3d1dc6285cf2a
+  checksum: 01174f2aae583ee70b463da07712641f1cb4f0877e67569911b6d88fb0e5633e0c9a2e5318e831501b7bbdd3e6d58e8bc51ae2af6ce95499b22931168aea9480
   languageName: node
   linkType: hard
 
