@@ -3129,13 +3129,13 @@ __metadata:
   linkType: hard
 
 "@backstage/core-components@npm:^0.12.4":
-  version: 0.12.4
-  resolution: "@backstage/core-components@npm:0.12.4"
+  version: 0.12.5
+  resolution: "@backstage/core-components@npm:0.12.5"
   dependencies:
-    "@backstage/config": ^1.0.6
-    "@backstage/core-plugin-api": ^1.4.0
-    "@backstage/errors": ^1.1.4
-    "@backstage/theme": ^0.2.17
+    "@backstage/config": ^1.0.7
+    "@backstage/core-plugin-api": ^1.5.0
+    "@backstage/errors": ^1.1.5
+    "@backstage/theme": ^0.2.18
     "@backstage/version-bridge": ^1.0.3
     "@material-table/core": ^3.1.0
     "@material-ui/core": ^4.12.2
@@ -3174,11 +3174,11 @@ __metadata:
     react: ^16.13.1 || ^17.0.0
     react-dom: ^16.13.1 || ^17.0.0
     react-router-dom: 6.0.0-beta.0 || ^6.3.0
-  checksum: 476160ad54a399e7393bb70fc34fc01b69519431606797fdecc974d5e826315527d8ab71af5dd4d1c8d88bfe797aa37e781fd5fd31d8293c19982704e4f7cfdc
+  checksum: 8308c1b90247911f6cf22963b530cef169287f508ff29d159d0c83758134dd43bd5acd2113350690a46a02246bc05dca975bcc38325000aefb1c93c80e2f19c7
   languageName: node
   linkType: hard
 
-"@backstage/core-plugin-api@npm:^1.0.3, @backstage/core-plugin-api@npm:^1.0.4, @backstage/core-plugin-api@npm:^1.4.0":
+"@backstage/core-plugin-api@npm:^1.0.3, @backstage/core-plugin-api@npm:^1.0.4":
   version: 1.4.0
   resolution: "@backstage/core-plugin-api@npm:1.4.0"
   dependencies:
@@ -3196,7 +3196,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/errors@npm:^1.1.0, @backstage/errors@npm:^1.1.4, @backstage/errors@npm:^1.1.5":
+"@backstage/core-plugin-api@npm:^1.5.0":
+  version: 1.5.0
+  resolution: "@backstage/core-plugin-api@npm:1.5.0"
+  dependencies:
+    "@backstage/config": ^1.0.7
+    "@backstage/types": ^1.0.2
+    "@backstage/version-bridge": ^1.0.3
+    history: ^5.0.0
+    prop-types: ^15.7.2
+    zen-observable: ^0.10.0
+  peerDependencies:
+    "@types/react": ^16.13.1 || ^17.0.0
+    react: ^16.13.1 || ^17.0.0
+    react-router-dom: 6.0.0-beta.0 || ^6.3.0
+  checksum: 2c167377fd38680de12c213caabfe971c4d2798b49ad150c481c01abb9c031a3bba660b88af04772c90e762ffed82217bbf2390ce943dd5819f5ea663c6c5371
+  languageName: node
+  linkType: hard
+
+"@backstage/errors@npm:^1.1.0, @backstage/errors@npm:^1.1.5":
   version: 1.1.5
   resolution: "@backstage/errors@npm:1.1.5"
   dependencies:
@@ -3355,7 +3373,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/theme@npm:^0.2.16, @backstage/theme@npm:^0.2.17":
+"@backstage/theme@npm:^0.2.16, @backstage/theme@npm:^0.2.18":
   version: 0.2.18
   resolution: "@backstage/theme@npm:0.2.18"
   dependencies:
