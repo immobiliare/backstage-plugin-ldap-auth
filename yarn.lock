@@ -2973,8 +2973,8 @@ __metadata:
   linkType: hard
 
 "@backstage/cli@npm:^0.22.0":
-  version: 0.22.4
-  resolution: "@backstage/cli@npm:0.22.4"
+  version: 0.22.5
+  resolution: "@backstage/cli@npm:0.22.5"
   dependencies:
     "@backstage/cli-common": ^0.1.12
     "@backstage/config": ^1.0.7
@@ -3081,7 +3081,7 @@ __metadata:
       optional: true
   bin:
     backstage-cli: bin/backstage-cli
-  checksum: e0d818585ca4d14153dddc2a4318bb59b9f30e16d4b8dea0bef184abb9d5e3d80cffdda536bd559aafbfcce759b6f54100d74930a6ce02757349197a686739db
+  checksum: c99f87c526ec4f42ca991c4dbf7397e5b31d7dcabc884320e374334e2d24be7a6a61caed80d1fc21cc873ce2a6b92046e2c1935a6a9d83821f46f3b338d24363
   languageName: node
   linkType: hard
 
