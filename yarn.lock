@@ -4049,7 +4049,7 @@ __metadata:
     "@types/ldapjs": ^2.2.4
     "@types/node": ^18.7.23
     keyv: ^4.3.3
-    ldap-authentication: ^2.3.2
+    ldap-authentication: ^3.0.3
     ldap-escape: ^2.0.6
     ldapjs: ^3.0.1
   peerDependencies:
@@ -7348,7 +7348,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"abstract-logging@npm:^2.0.0, abstract-logging@npm:^2.0.1":
+"abstract-logging@npm:^2.0.1":
   version: 2.0.1
   resolution: "abstract-logging@npm:2.0.1"
   checksum: 6967d15e5abbafd17f56eaf30ba8278c99333586fa4f7935fd80e93cfdc006c37fcc819c5d63ee373a12e6cb2d0417f7c3c6b9e42b957a25af9937d26749415e
@@ -15604,12 +15604,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ldap-authentication@npm:^2.3.2":
-  version: 2.3.3
-  resolution: "ldap-authentication@npm:2.3.3"
+"ldap-authentication@npm:^3.0.3":
+  version: 3.0.3
+  resolution: "ldap-authentication@npm:3.0.3"
   dependencies:
-    ldapjs: ^2.3.3
-  checksum: 638839f09d9d1a010b8c5133b3afe03948249927bbb316d4d1185109465c5519511266eda3ef90bc35d82e08c1e0ccf7d988d75c204635c4eb69324df2d72b0d
+    ldapjs: ^3.0.1
+  checksum: 2fbb4b72da4783a9d542b406194166ae01be43213152d221b2513064a3104ff8c8a0053da0e7192502eba8422599b7b4cc4e0708113e01dba238e2f21e44e52c
   languageName: node
   linkType: hard
 
@@ -15617,31 +15617,6 @@ __metadata:
   version: 2.0.6
   resolution: "ldap-escape@npm:2.0.6"
   checksum: f8a7ac2caa05e2285b22364f02df537494e488bea3ca4b9c306f0685354be4df6b91e88098b2c9fa77c00fcbd3ed73d3cea33fd9e7968edb1dcf87f87fbf3a14
-  languageName: node
-  linkType: hard
-
-"ldap-filter@npm:^0.3.3":
-  version: 0.3.3
-  resolution: "ldap-filter@npm:0.3.3"
-  dependencies:
-    assert-plus: ^1.0.0
-  checksum: 7e877a85686b26075cab0b3ecf812a14a8a6d21ac4b5cd894517d901ca6a2299d81557cee2acee4624664aabdac690d8b393ac9b60b2afe47d7975e1fe38d19c
-  languageName: node
-  linkType: hard
-
-"ldapjs@npm:^2.3.3":
-  version: 2.3.3
-  resolution: "ldapjs@npm:2.3.3"
-  dependencies:
-    abstract-logging: ^2.0.0
-    asn1: ^0.2.4
-    assert-plus: ^1.0.0
-    backoff: ^2.5.0
-    ldap-filter: ^0.3.3
-    once: ^1.4.0
-    vasync: ^2.2.0
-    verror: ^1.8.1
-  checksum: 791cf22812805db3888dfc8aa8e4db8337e67387b318522c9965d40e678ecdb64950a6ea5930083590ec3377038620a3e63f90e985173ae6aca40e7f485290e0
   languageName: node
   linkType: hard
 
@@ -23580,7 +23555,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vasync@npm:^2.2.0, vasync@npm:^2.2.1":
+"vasync@npm:^2.2.1":
   version: 2.2.1
   resolution: "vasync@npm:2.2.1"
   dependencies:
@@ -23600,7 +23575,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"verror@npm:^1.10.1, verror@npm:^1.8.1":
+"verror@npm:^1.10.1":
   version: 1.10.1
   resolution: "verror@npm:1.10.1"
   dependencies:
