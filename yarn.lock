@@ -4066,7 +4066,7 @@ __metadata:
     "@backstage/core-plugin-api": ^1.0.4
     "@backstage/theme": ^0.2.16
     "@material-ui/core": ^4.12.2
-    "@react-hookz/web": ^22.0.0
+    "@react-hookz/web": ^23.0.0
     "@testing-library/jest-dom": ^5.10.1
     "@types/jest": ^29.0.3
     "@types/node": ^18.7.23
@@ -5727,9 +5727,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-hookz/web@npm:^22.0.0":
-  version: 22.0.0
-  resolution: "@react-hookz/web@npm:22.0.0"
+"@react-hookz/web@npm:^23.0.0":
+  version: 23.0.0
+  resolution: "@react-hookz/web@npm:23.0.0"
   dependencies:
     "@react-hookz/deep-equal": ^1.0.4
   peerDependencies:
@@ -5739,7 +5739,7 @@ __metadata:
   peerDependenciesMeta:
     js-cookie:
       optional: true
-  checksum: 2edda4b2f2e1525a9a6f59ce78110516ffffc5ad8c7381b6f4deff7b85e79dfb4d98e4eae9d4348210c3759b8eae3e4b18fd5f80afc362c91cea39964dfbb302
+  checksum: 230bff62291bcafa65e0b9adcc3f0769fd63fabc226c77149e7797d1ea67362e9ad581ceff3cdfe2949698798d2deefb223c05bdfed1e465b5d92298d48cf3e5
   languageName: node
   linkType: hard
 
