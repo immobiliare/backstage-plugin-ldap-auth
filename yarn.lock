@@ -4567,9 +4567,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ldapjs/messages@npm:1.0.1":
-  version: 1.0.1
-  resolution: "@ldapjs/messages@npm:1.0.1"
+"@ldapjs/messages@npm:1.0.2":
+  version: 1.0.2
+  resolution: "@ldapjs/messages@npm:1.0.2"
   dependencies:
     "@ldapjs/asn1": 2.0.0
     "@ldapjs/attribute": 1.0.0
@@ -4579,7 +4579,7 @@ __metadata:
     "@ldapjs/filter": 2.0.0
     "@ldapjs/protocol": 1.2.1
     process-warning: ^2.1.0
-  checksum: a3a923a1bed14ee6d0d875fb60df4bfc07ac20c4bd5acc4401bcd718e98d9c86997b1f8db8d6b21a3dcf0c97c0979b52647292cef92797feb0ac0e7a0f6648aa
+  checksum: be4e1af4a4c83548dbd1e025a7a9b7a05cb8c4ed51f8e5242366ac98004d9787eb3ae7732500d942a1a7f2ac9eb313c524d6715e41cb94aca6b2eb2d5a502ce0
   languageName: node
   linkType: hard
 
@@ -15842,8 +15842,8 @@ __metadata:
   linkType: hard
 
 "ldapjs@npm:^3.0.1":
-  version: 3.0.1
-  resolution: "ldapjs@npm:3.0.1"
+  version: 3.0.2
+  resolution: "ldapjs@npm:3.0.2"
   dependencies:
     "@ldapjs/asn1": 2.0.0
     "@ldapjs/attribute": 1.0.0
@@ -15851,7 +15851,7 @@ __metadata:
     "@ldapjs/controls": 2.0.0
     "@ldapjs/dn": 1.0.0
     "@ldapjs/filter": 2.0.0
-    "@ldapjs/messages": 1.0.1
+    "@ldapjs/messages": 1.0.2
     "@ldapjs/protocol": ^1.2.1
     abstract-logging: ^2.0.1
     assert-plus: ^1.0.0
@@ -15859,7 +15859,7 @@ __metadata:
     once: ^1.4.0
     vasync: ^2.2.1
     verror: ^1.10.1
-  checksum: cff3946c13d5f2019bfbeff1ebce7a83d123b7be9e2595c6da399bd5e10bc6abd3f0d45b9c1755c8dd856523bd8af8afb7a23917d46a09965620c6e00206114d
+  checksum: e29c2c21c759c7269a3ae247154d13d22febd0a5f61952a870f8fd7764d2f11f1cbb12c4e6da0f09b1db613fda5b63cb490f83b6f34a0b40cc6b948f976570f0
   languageName: node
   linkType: hard
 
