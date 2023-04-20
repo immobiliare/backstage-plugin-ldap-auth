@@ -3104,29 +3104,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/config-loader@npm:^1.1.9":
-  version: 1.1.9
-  resolution: "@backstage/config-loader@npm:1.1.9"
-  dependencies:
-    "@backstage/cli-common": ^0.1.12
-    "@backstage/config": ^1.0.7
-    "@backstage/errors": ^1.1.5
-    "@backstage/types": ^1.0.2
-    "@types/json-schema": ^7.0.6
-    ajv: ^8.10.0
-    chokidar: ^3.5.2
-    fs-extra: 10.1.0
-    json-schema: ^0.4.0
-    json-schema-merge-allof: ^0.8.1
-    json-schema-traverse: ^1.0.0
-    node-fetch: ^2.6.7
-    typescript-json-schema: ^0.55.0
-    yaml: ^2.0.0
-    yup: ^0.32.9
-  checksum: 8fee6d5f06516e23fee40d4486e12ae4bea00a893e2d013dd5dfeaba2cf8066da3730bae5bbd530d3a987c4b934dd140b35bab34162d45c428caa28da1acd404
-  languageName: node
-  linkType: hard
-
 "@backstage/config-loader@npm:^1.2.0":
   version: 1.2.0
   resolution: "@backstage/config-loader@npm:1.2.0"
@@ -6657,12 +6634,12 @@ __metadata:
   linkType: hard
 
 "@types/jest@npm:*, @types/jest@npm:^29.0.0, @types/jest@npm:^29.0.3":
-  version: 29.5.0
-  resolution: "@types/jest@npm:29.5.0"
+  version: 29.5.1
+  resolution: "@types/jest@npm:29.5.1"
   dependencies:
     expect: ^29.0.0
     pretty-format: ^29.0.0
-  checksum: cd877e5c56d299cceb8bfdcbb1a77723c706750dd3c3bc47403bc3599b8faff590a3b009c68bb5b11bf7a8c77d1fb01de5e124329b4a08e65f1cdda28b0ecdb8
+  checksum: 0a22491dec86333c0e92b897be2c809c922a7b2b0aa5604ac369810d6b2360908b4a3f2c6892e8a237a54fa1f10ecefe0e823ec5fcb7915195af4dfe88d2197e
   languageName: node
   linkType: hard
 
