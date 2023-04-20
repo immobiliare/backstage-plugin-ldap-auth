@@ -3104,29 +3104,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/config-loader@npm:^1.1.9":
-  version: 1.1.9
-  resolution: "@backstage/config-loader@npm:1.1.9"
-  dependencies:
-    "@backstage/cli-common": ^0.1.12
-    "@backstage/config": ^1.0.7
-    "@backstage/errors": ^1.1.5
-    "@backstage/types": ^1.0.2
-    "@types/json-schema": ^7.0.6
-    ajv: ^8.10.0
-    chokidar: ^3.5.2
-    fs-extra: 10.1.0
-    json-schema: ^0.4.0
-    json-schema-merge-allof: ^0.8.1
-    json-schema-traverse: ^1.0.0
-    node-fetch: ^2.6.7
-    typescript-json-schema: ^0.55.0
-    yaml: ^2.0.0
-    yup: ^0.32.9
-  checksum: 8fee6d5f06516e23fee40d4486e12ae4bea00a893e2d013dd5dfeaba2cf8066da3730bae5bbd530d3a987c4b934dd140b35bab34162d45c428caa28da1acd404
-  languageName: node
-  linkType: hard
-
 "@backstage/config-loader@npm:^1.2.0":
   version: 1.2.0
   resolution: "@backstage/config-loader@npm:1.2.0"
@@ -6820,9 +6797,9 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:*, @types/node@npm:>=12.12.47, @types/node@npm:>=13.7.0, @types/node@npm:^18.11.17, @types/node@npm:^18.7.23":
-  version: 18.15.11
-  resolution: "@types/node@npm:18.15.11"
-  checksum: 977b4ad04708897ff0eb049ecf82246d210939c82461922d20f7d2dcfd81bbc661582ba3af28869210f7e8b1934529dcd46bff7d448551400f9d48b9d3bddec3
+  version: 18.15.12
+  resolution: "@types/node@npm:18.15.12"
+  checksum: dff7596db8d0a18bcd8da542dc62ed4377cba39546ff53baaa06d106f1482bc3e4e5e03644f5d1e3cef0904ffbe8ebbc244b2b0851f8025ab2a3959ee0ace58f
   languageName: node
   linkType: hard
 
@@ -6834,9 +6811,9 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:^16.9.2":
-  version: 16.18.23
-  resolution: "@types/node@npm:16.18.23"
-  checksum: 00e51db28fc7a182747f37215b3f25400b1c7a8525e09fa14e55be5798891a118ebf636a49d3197335a3580fcb8222fd4ecc20c2ccff69f1c0d233fc5697465d
+  version: 16.18.24
+  resolution: "@types/node@npm:16.18.24"
+  checksum: 0b221b7f56f3c4911e90dfcc217db3866eb13b7af9390b8f668377f1211b2b3ca808e0128a29d0cef8aa0944523852531e827b923b35e5fa9063db87af7b41a0
   languageName: node
   linkType: hard
 
