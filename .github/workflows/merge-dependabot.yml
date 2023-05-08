@@ -22,3 +22,10 @@ jobs:
               env:
                   GH_TOKEN: ${{ secrets.DEPENDABOT_NODE_TOKEN }}
                   PR_URL: ${{github.event.pull_request.html_url}}
+
+            - name: Enable auto-merge for Dependabot PRs
+              if: ${{ steps.dependabot-metadata.outputs.dependency-type == "direct:development" && steps.metadata.outputs.update-type == 'version-update:semver-minor' }}
+              run: gh pr merge --auto --merge "$PR_URL"
+              env:
+                  GH_TOKEN: ${{ secrets.DEPENDABOT_NODE_TOKEN }}
+                  PR_URL: ${{github.event.pull_request.html_url}}
