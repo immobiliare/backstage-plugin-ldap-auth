@@ -104,7 +104,7 @@ export const LdapSignInPage = (props: LdapSignInPageProps) => {
     return (
         <>
             {props.children}
-            <LoginForm onSubmit={onSubmit} error={error} {...props.options} />)
+            <LoginForm onSubmit={onSubmit} error={error} {...props.options} />
         </>
     );
 };
