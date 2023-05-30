@@ -2978,13 +2978,13 @@ __metadata:
   linkType: hard
 
 "@backstage/cli@npm:^0.22.0":
-  version: 0.22.6
-  resolution: "@backstage/cli@npm:0.22.6"
+  version: 0.22.7
+  resolution: "@backstage/cli@npm:0.22.7"
   dependencies:
     "@backstage/cli-common": ^0.1.12
     "@backstage/cli-node": ^0.1.0
     "@backstage/config": ^1.0.7
-    "@backstage/config-loader": ^1.2.0
+    "@backstage/config-loader": ^1.3.0
     "@backstage/errors": ^1.1.5
     "@backstage/eslint-plugin": ^0.1.3
     "@backstage/release-manifests": ^0.0.9
@@ -3089,7 +3089,7 @@ __metadata:
       optional: true
   bin:
     backstage-cli: bin/backstage-cli
-  checksum: e7da4d97ee8a6a003f232aadbd82bde5b92f03cfc2cf0ca427e0824f32e4939fc3e2600a531aafc79dcf3bce07f6971f994778f8a235bdefcfb3fa534e9dd6e7
+  checksum: dd471334f7562a5365edaad0a400e817950797f9f526d764df78e8c02d89eca98a355f267be8ee9445b60e319967555b2362863d07e154155ab813c11ad5fc13
   languageName: node
   linkType: hard
 
