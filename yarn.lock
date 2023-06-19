@@ -4040,7 +4040,7 @@ __metadata:
     "@backstage/errors": ^1.1.0
     "@backstage/plugin-auth-backend": ^0.18.1
     "@types/ldap-escape": ^2.0.0
-    "@types/ldapjs": ^2.2.4
+    "@types/ldapjs": ^3.0.0
     "@types/node": ^18.7.23
     keyv: ^4.3.3
     ldap-authentication: ^3.0.3
@@ -6658,12 +6658,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/ldapjs@npm:^2.2.4":
-  version: 2.2.5
-  resolution: "@types/ldapjs@npm:2.2.5"
+"@types/ldapjs@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "@types/ldapjs@npm:3.0.0"
   dependencies:
     "@types/node": "*"
-  checksum: 779e462f118f8a6643b7f49d35646e4dae339ff1c6290198950327a736a79bc03beca882e1356ede4c8d54f6dc19bf544f0d23b09279558d69222a93bacd459c
+  checksum: ccd0487a12be9c09c600187550d839976d8f2eb84c93213cd049ad32b6004c11ae9ea7d21150d5e964c1c10e878742d6511037a346ee8f7a22b16c8d3ed887fb
   languageName: node
   linkType: hard
 
@@ -7149,16 +7149,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/scope-manager@npm:5.59.8":
-  version: 5.59.8
-  resolution: "@typescript-eslint/scope-manager@npm:5.59.8"
-  dependencies:
-    "@typescript-eslint/types": 5.59.8
-    "@typescript-eslint/visitor-keys": 5.59.8
-  checksum: e1e810ee991cfeb433330b04ee949bb6784abe4dbdb7d9480aa7a7536671b4fec914b7803edf662516c8ecb1b31dcff126797f9923270a529c26e2b00b0ea96f
-  languageName: node
-  linkType: hard
-
 "@typescript-eslint/type-utils@npm:5.59.11":
   version: 5.59.11
   resolution: "@typescript-eslint/type-utils@npm:5.59.11"
@@ -7187,13 +7177,6 @@ __metadata:
   version: 5.59.11
   resolution: "@typescript-eslint/types@npm:5.59.11"
   checksum: 4bb667571a7254f8c2b0dc3e37100e7290f9be14978722cc31c7204dfababd8a346bed4125e70dcafd15d07be386fb55bb9738bd86662ac10b98a6c964716396
-  languageName: node
-  linkType: hard
-
-"@typescript-eslint/types@npm:5.59.8":
-  version: 5.59.8
-  resolution: "@typescript-eslint/types@npm:5.59.8"
-  checksum: 559473d5601c849eb0da1874a2ac67c753480beed484ad6f6cda62fa6023273f2c3005c7f2864d9c2afb7c6356412d0d304b57db10c53597207f18a7f6cd4f18
   languageName: node
   linkType: hard
 
@@ -7230,24 +7213,6 @@ __metadata:
     typescript:
       optional: true
   checksum: 516a828884e6939000aac17a27208088055670b0fd9bd22d137a7b2d359a8db9ce9cd09eedffed6f498f968be90ce3c2695a91d46abbd4049f87fd3b7bb986b5
-  languageName: node
-  linkType: hard
-
-"@typescript-eslint/typescript-estree@npm:5.59.8":
-  version: 5.59.8
-  resolution: "@typescript-eslint/typescript-estree@npm:5.59.8"
-  dependencies:
-    "@typescript-eslint/types": 5.59.8
-    "@typescript-eslint/visitor-keys": 5.59.8
-    debug: ^4.3.4
-    globby: ^11.1.0
-    is-glob: ^4.0.3
-    semver: ^7.3.7
-    tsutils: ^3.21.0
-  peerDependenciesMeta:
-    typescript:
-      optional: true
-  checksum: d93371cc866f573a6a1ddc0eb10d498a8e59f36763a99ce21da0737fff2b4c942eef1587216aad273f8d896ebc0b19003677cba63a27d2646aa2c087638963eb
   languageName: node
   linkType: hard
 
@@ -7302,16 +7267,6 @@ __metadata:
     "@typescript-eslint/types": 5.59.11
     eslint-visitor-keys: ^3.3.0
   checksum: 4894ec4b2b8da773b1f44398c836fcacb7f5a0c81f9404ecd193920e88d618091a7328659e0aa24697edda10479534db30bec7c8b0ba9fa0fce43f78222d5619
-  languageName: node
-  linkType: hard
-
-"@typescript-eslint/visitor-keys@npm:5.59.8":
-  version: 5.59.8
-  resolution: "@typescript-eslint/visitor-keys@npm:5.59.8"
-  dependencies:
-    "@typescript-eslint/types": 5.59.8
-    eslint-visitor-keys: ^3.3.0
-  checksum: 6bfa7918dbb0e08d8a7404aeeef7bcd1a85736dc8d01614d267c0c5ec10f94d2746b50a945bf5c82c54fda67926e8deaeba8565c919da17f725fc11209ef8987
   languageName: node
   linkType: hard
 
