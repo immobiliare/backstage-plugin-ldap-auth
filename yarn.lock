@@ -3208,13 +3208,13 @@ __metadata:
   linkType: hard
 
 "@backstage/errors@npm:^1.1.0, @backstage/errors@npm:^1.1.5":
-  version: 1.1.5
-  resolution: "@backstage/errors@npm:1.1.5"
+  version: 1.2.0
+  resolution: "@backstage/errors@npm:1.2.0"
   dependencies:
-    "@backstage/types": ^1.0.2
+    "@backstage/types": ^1.1.0
     cross-fetch: ^3.1.5
     serialize-error: ^8.0.1
-  checksum: fb8cc933345511454f31d899fed113cb28ab90ad0fbfaf5fd12d1e1204a0c52cd45bdc897feae70cc90ce0fa6cd331542036f2a4cb82ee0c935c3d0a687d6ee0
+  checksum: dd2aa686de547f8f218943f80e4bad24d65c92308bd8be9e654fc9d2df84c7639bc0d505a9e3eaa83300e44d3994a547e2b0b990df4b5b8fd7e4a5e19d0cdea9
   languageName: node
   linkType: hard
 
@@ -3384,6 +3384,13 @@ __metadata:
   version: 1.0.2
   resolution: "@backstage/types@npm:1.0.2"
   checksum: 3fead10cfafa3d1a6490e664b52f383fa1bc2cc28cb4b63f2df9a299c654b1c7103c556f652eb8ebf17ca09133f841c75317a8215875c7701eb04737410d8321
+  languageName: node
+  linkType: hard
+
+"@backstage/types@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "@backstage/types@npm:1.1.0"
+  checksum: e93c3d10f151db087f611b1e25fb7a5ed5ec82cb3040c7bc3b04c058c6d8f889505310019707bf17a2bb3aa545e199de3f779914262a9eeaea73ff6ecc8e1dc8
   languageName: node
   linkType: hard
 
