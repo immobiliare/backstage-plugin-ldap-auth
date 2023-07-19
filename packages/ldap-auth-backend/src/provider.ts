@@ -31,11 +31,12 @@ import {
     prepareBackstageIdentityResponse,
 } from './auth';
 
-import { defaultCheckUserExists, defaultLDAPAuthentication } from './ldap';
+import { defaultCheckUserExists, defaultLDAPAuthentication, defaultResultRenderer } from './ldap';
 
 export class ProviderLdapAuthProvider implements AuthProviderRouteHandlers {
     private readonly checkUserExists: typeof defaultCheckUserExists;
     private readonly ldapAuthentication: typeof defaultLDAPAuthentication;
+    private readonly renderResult: typeof defaultResultRenderer;
     private readonly authHandler: typeof defaultAuthHandler;
     private readonly signInResolver: typeof defaultSigninResolver;
     private readonly resolverContext: AuthResolverContext;
@@ -48,6 +49,7 @@ export class ProviderLdapAuthProvider implements AuthProviderRouteHandlers {
         this.signInResolver = options.signInResolver;
         this.checkUserExists = options.checkUserExists;
         this.ldapAuthentication = options.ldapAuthentication;
+        this.renderResult = options.resultRenderer;
         this.resolverContext = options.resolverContext;
         this.ldapAuthenticationOptions = options.ldapAuthenticationOptions;
         this.cookies = options.cookies as CookiesOptions;
@@ -85,24 +87,25 @@ export class ProviderLdapAuthProvider implements AuthProviderRouteHandlers {
             let result: UserIdentityId;
 
             if (username && password) {
-                const { uid } = await this.ldapAuthentication(
+                const ldapResult = await this.ldapAuthentication(
                     username,
                     password,
                     this.ldapAuthenticationOptions,
                     authenticate
                 );
-                result = { uid: uid as string };
+                result = await this.renderResult(ldapResult, undefined);
             } else if (token) {
                 // this throws if the token is invalid or expired
                 await this.jwtValidator.isValid(token as string);
 
-                const { sub } = parseJwtPayload(token as string);
+                const parsedToken = parseJwtPayload(token as string);
+                const sub = parsedToken.sub
 
                 // user is in format `[<kind>:][<namespace>/]<username>`
                 const uid = sub.split(':').at(-1)!.split('/').at(-1);
                 await this.check(uid as string);
 
-                result = { uid: uid as string };
+                result = await this.renderResult({ uid: uid as string }, parsedToken);
             } else {
                 throw new AuthenticationError(AUTH_MISSING_CREDENTIALS);
             }
@@ -195,6 +198,11 @@ export const ldap = createAuthProviderIntegration({
                     ? options?.resolvers?.ldapAuthentication
                     : defaultLDAPAuthentication;
 
+            const resultRenderer =
+              typeof options?.resolvers?.resultRenderer === 'function'
+                ? options?.resolvers?.resultRenderer
+                : defaultResultRenderer;
+
             const checkUserExists =
                 typeof options?.resolvers?.checkUserExists === 'function'
                     ? options?.resolvers?.checkUserExists
@@ -207,6 +215,7 @@ export const ldap = createAuthProviderIntegration({
                 signInResolver,
                 checkUserExists,
                 ldapAuthentication,
+                resultRenderer,
                 resolverContext,
                 tokenValidator: options.tokenValidator,
             });

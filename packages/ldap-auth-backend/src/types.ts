@@ -97,7 +97,12 @@ import type { TokenValidator } from './jwt';
 import type { AuthResolverContext } from '@backstage/plugin-auth-backend';
 import type { AuthenticationOptions } from 'ldap-authentication';
 import { defaultAuthHandler, defaultSigninResolver } from './auth';
-import { defaultCheckUserExists, defaultLDAPAuthentication } from './ldap';
+import { defaultCheckUserExists, defaultLDAPAuthentication, defaultResultRenderer } from './ldap';
+
+export type AuthenticationResult = {
+    uid: string,
+    [key: string]: any
+};
 
 export type CookiesOptions = {
     field: string;
@@ -121,6 +126,7 @@ export type ProviderCreateOptions = {
     resolvers?: {
         checkUserExists?: typeof defaultCheckUserExists;
         ldapAuthentication?: typeof defaultLDAPAuthentication;
+        resultRenderer?: typeof defaultResultRenderer;
     };
     // Custom validator function for the JWT token if needed
     tokenValidator?: TokenValidator;
@@ -133,6 +139,7 @@ export type ProviderConstructor = {
     signInResolver: typeof defaultSigninResolver;
     checkUserExists: typeof defaultCheckUserExists;
     ldapAuthentication: typeof defaultLDAPAuthentication;
+    resultRenderer: typeof defaultResultRenderer;
     resolverContext: AuthResolverContext;
     tokenValidator?: TokenValidator;
 };

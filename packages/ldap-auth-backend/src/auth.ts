@@ -2,6 +2,7 @@ import type {
     BackstageSignInResult,
     BackstageIdentityResponse,
     LDAPUser,
+    AuthenticationResult
 } from './types';
 
 import { ProfileInfo } from '@backstage/core-plugin-api';
@@ -27,7 +28,7 @@ export function prepareBackstageIdentityResponse(
     };
 }
 
-export const defaultSigninResolver: SignInResolver<LDAPUser> = async (
+export const defaultSigninResolver: SignInResolver<AuthenticationResult> = async (
     { result },
     ctx: AuthResolverContext
 ): Promise<BackstageSignInResult> => {

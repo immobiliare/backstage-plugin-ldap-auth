@@ -1,4 +1,4 @@
-import type { LDAPUser } from './types';
+import type { LDAPUser, AuthenticationResult } from './types';
 
 import ldap from 'ldapjs';
 import { dn } from 'ldap-escape';
@@ -95,4 +95,8 @@ export async function defaultLDAPAuthentication(
         );
         throw e;
     }
+}
+
+export async function defaultResultRenderer(result: AuthenticationResult, parsedToken: any) {
+  return { uid: result.uid as string };
 }
