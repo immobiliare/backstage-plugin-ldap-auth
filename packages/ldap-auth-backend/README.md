@@ -172,8 +172,8 @@ export default async function createPlugin(
         discovery: env.discovery,
         tokenManager: env.tokenManager,
         providerFactories: {
-            tokenValidator: new JWTTokenValidator(new Keyv()),
             ldap: ldap.create({
+                tokenValidator: new JWTTokenValidator(new Keyv()),
                 /* Custom Configurations */
             }),
         },
