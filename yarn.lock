@@ -4048,7 +4048,7 @@ __metadata:
     "@backstage/plugin-auth-backend": ^0.18.1
     "@types/ldap-escape": ^2.0.0
     "@types/ldapjs": ^2.2.4
-    "@types/node": ^18.7.23
+    "@types/node": ^20.4.8
     keyv: ^4.3.3
     ldap-authentication: ^3.0.3
     ldap-escape: ^2.0.6
@@ -4070,7 +4070,7 @@ __metadata:
     "@react-hookz/web": ^23.0.0
     "@testing-library/jest-dom": ^5.10.1
     "@types/jest": ^29.0.3
-    "@types/node": ^18.7.23
+    "@types/node": ^20.4.8
     cross-fetch: ^3.1.5
     password-validator: ^5.3.0
     react: ^18.2.0
@@ -6639,7 +6639,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:>=12.12.47, @types/node@npm:>=13.7.0, @types/node@npm:^18.11.17, @types/node@npm:^18.7.23":
+"@types/node@npm:*, @types/node@npm:>=12.12.47, @types/node@npm:>=13.7.0, @types/node@npm:^18.11.17":
   version: 18.16.3
   resolution: "@types/node@npm:18.16.3"
   checksum: 816b39d45b05ebdc6f362b630970df3f6d82f71d418a2555353522f4eeeb078fa201de5299f02c09a09faa975e43b2745fe19c263d44069f87ddf37d6c37b717
@@ -6657,6 +6657,13 @@ __metadata:
   version: 16.18.25
   resolution: "@types/node@npm:16.18.25"
   checksum: 181760ad6b54fcc498dfeb249e98bbf0be51d7c35e92e760e1a82004fa42b86e8c33a8f8dd7743b5ef872bda0753d9e6a5b8e3f0aed63e9eb79b4e65760c1fbe
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^20.4.8":
+  version: 20.4.8
+  resolution: "@types/node@npm:20.4.8"
+  checksum: 86a3963c0c7af3410553d1dfa4b018a20b3cb3ab4d8e8ffe27408b6338c5de0374b0bf379bc705da2205b466daa751ccfe062f453ba9bde34fdb0e5163ca6a68
   languageName: node
   linkType: hard
 
