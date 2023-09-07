@@ -3135,6 +3135,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@backstage/config@npm:^1.0.8":
+  version: 1.0.8
+  resolution: "@backstage/config@npm:1.0.8"
+  dependencies:
+    "@backstage/types": ^1.1.0
+    lodash: ^4.17.21
+  checksum: 78c38207d52de65bf83c1b9281c83fc89e0cda9869c680c39e69bffed5200e5d35035cd850816b57fd979a2ea24132f96ee938b1cddacaf96a43d0385930da9a
+  languageName: node
+  linkType: hard
+
 "@backstage/core-components@npm:^0.13.0":
   version: 0.13.1
   resolution: "@backstage/core-components@npm:0.13.1"
@@ -3189,11 +3199,11 @@ __metadata:
   linkType: hard
 
 "@backstage/core-plugin-api@npm:^1.0.3, @backstage/core-plugin-api@npm:^1.0.4, @backstage/core-plugin-api@npm:^1.5.1":
-  version: 1.5.1
-  resolution: "@backstage/core-plugin-api@npm:1.5.1"
+  version: 1.5.3
+  resolution: "@backstage/core-plugin-api@npm:1.5.3"
   dependencies:
-    "@backstage/config": ^1.0.7
-    "@backstage/types": ^1.0.2
+    "@backstage/config": ^1.0.8
+    "@backstage/types": ^1.1.0
     "@backstage/version-bridge": ^1.0.4
     "@types/react": ^16.13.1 || ^17.0.0
     history: ^5.0.0
@@ -3203,7 +3213,7 @@ __metadata:
     react: ^16.13.1 || ^17.0.0
     react-dom: ^16.13.1 || ^17.0.0
     react-router-dom: 6.0.0-beta.0 || ^6.3.0
-  checksum: 59d75c906040ddd436135ab8a281792aec5cf5432f573b1273dba9c0b8b6f35861a899e17cc62417fe596d46903fc5807e632e49c5a8e43d866c639d71c0b86c
+  checksum: d272b5af4f22cf8f2b91fb85d0fc860cc70220a596e4f03544a996493b045fd09663fc1d79044916ffd86303bfdd47795398dd86d66987d8514bade3dcbaad37
   languageName: node
   linkType: hard
 
@@ -3384,6 +3394,13 @@ __metadata:
   version: 1.0.2
   resolution: "@backstage/types@npm:1.0.2"
   checksum: 3fead10cfafa3d1a6490e664b52f383fa1bc2cc28cb4b63f2df9a299c654b1c7103c556f652eb8ebf17ca09133f841c75317a8215875c7701eb04737410d8321
+  languageName: node
+  linkType: hard
+
+"@backstage/types@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "@backstage/types@npm:1.1.0"
+  checksum: e93c3d10f151db087f611b1e25fb7a5ed5ec82cb3040c7bc3b04c058c6d8f889505310019707bf17a2bb3aa545e199de3f779914262a9eeaea73ff6ecc8e1dc8
   languageName: node
   linkType: hard
 
