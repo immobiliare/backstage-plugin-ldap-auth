@@ -42,7 +42,7 @@
     "devDependencies": {
         "@backstage/cli": "^0.22.0",
         "@types/ldap-escape": "^2.0.0",
-        "@types/ldapjs": "^2.2.4",
+        "@types/ldapjs": "^3.0.2",
         "@types/node": "^20.5.9"
     },
     "files": [
