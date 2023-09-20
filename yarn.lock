@@ -2715,6 +2715,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.20.6":
+  version: 7.22.15
+  resolution: "@babel/runtime@npm:7.22.15"
+  dependencies:
+    regenerator-runtime: ^0.14.0
+  checksum: 793296df1e41599a935a3d77ec01eb6088410d3fd4dbe4e92f06c6b7bb2f8355024e6d78621a3a35f44e0e23b0b59107f23d585384df4f3123256a1e1492040e
+  languageName: node
+  linkType: hard
+
 "@babel/template@npm:^7.18.10, @babel/template@npm:^7.3.3":
   version: 7.18.10
   resolution: "@babel/template@npm:7.18.10"
@@ -3135,6 +3144,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@backstage/config@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "@backstage/config@npm:1.1.0"
+  dependencies:
+    "@backstage/errors": ^1.2.2
+    "@backstage/types": ^1.1.1
+    lodash: ^4.17.21
+  checksum: 9c17ab41b3e4bd6a0ad75caaf46ed3fad198aa8d190cb9a85415140bc9d6506022a4d5450ea5810004fc2d7a3f7a0a00583b468af4a0fa1655ce444606283010
+  languageName: node
+  linkType: hard
+
 "@backstage/core-components@npm:^0.13.0":
   version: 0.13.1
   resolution: "@backstage/core-components@npm:0.13.1"
@@ -3189,21 +3209,22 @@ __metadata:
   linkType: hard
 
 "@backstage/core-plugin-api@npm:^1.0.3, @backstage/core-plugin-api@npm:^1.0.4, @backstage/core-plugin-api@npm:^1.5.1":
-  version: 1.5.1
-  resolution: "@backstage/core-plugin-api@npm:1.5.1"
+  version: 1.6.0
+  resolution: "@backstage/core-plugin-api@npm:1.6.0"
   dependencies:
-    "@backstage/config": ^1.0.7
-    "@backstage/types": ^1.0.2
-    "@backstage/version-bridge": ^1.0.4
+    "@backstage/config": ^1.1.0
+    "@backstage/types": ^1.1.1
+    "@backstage/version-bridge": ^1.0.5
     "@types/react": ^16.13.1 || ^17.0.0
     history: ^5.0.0
+    i18next: ^22.4.15
     prop-types: ^15.7.2
     zen-observable: ^0.10.0
   peerDependencies:
     react: ^16.13.1 || ^17.0.0
     react-dom: ^16.13.1 || ^17.0.0
     react-router-dom: 6.0.0-beta.0 || ^6.3.0
-  checksum: 59d75c906040ddd436135ab8a281792aec5cf5432f573b1273dba9c0b8b6f35861a899e17cc62417fe596d46903fc5807e632e49c5a8e43d866c639d71c0b86c
+  checksum: 540deb91d3c143ce1c3736359c3301af64fbd6eccbaae61bfc96f4e180654e7eb025bb1d4ff5be62b7ea3d6dac7ed617e4dba0c176cfdbf865400fde0f987ddb
   languageName: node
   linkType: hard
 
@@ -3215,6 +3236,17 @@ __metadata:
     cross-fetch: ^3.1.5
     serialize-error: ^8.0.1
   checksum: fb8cc933345511454f31d899fed113cb28ab90ad0fbfaf5fd12d1e1204a0c52cd45bdc897feae70cc90ce0fa6cd331542036f2a4cb82ee0c935c3d0a687d6ee0
+  languageName: node
+  linkType: hard
+
+"@backstage/errors@npm:^1.2.2":
+  version: 1.2.2
+  resolution: "@backstage/errors@npm:1.2.2"
+  dependencies:
+    "@backstage/types": ^1.1.1
+    cross-fetch: ^3.1.5
+    serialize-error: ^8.0.1
+  checksum: 2fd323d528023654ac0910a5bd8ea703fa97a4bd62ee34b6c75e1c992d1a78cae661f0929c1ffd72df5465a1bda69c1bcad2682f017e5e52daa73154e6284234
   languageName: node
   linkType: hard
 
@@ -3387,6 +3419,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@backstage/types@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "@backstage/types@npm:1.1.1"
+  checksum: 54bd9e53570cf2a7a8d9ae30e7181ee6b669b7f543949391a2168f616e1f7b13f0419f324941a87aa15f723d0313eda8f212db2077675421d6f91484f477c4f5
+  languageName: node
+  linkType: hard
+
 "@backstage/version-bridge@npm:^1.0.4":
   version: 1.0.4
   resolution: "@backstage/version-bridge@npm:1.0.4"
@@ -3397,6 +3436,19 @@ __metadata:
     react-dom: ^16.13.1 || ^17.0.0
     react-router-dom: 6.0.0-beta.0 || ^6.3.0
   checksum: ae2511afcc9aded46d78b5b1788a4da6502f8fd21ebd305f748eab489bf09b87bebfdafa9926214777e80afd0fe36aa561060b675272becb0389c5f3c8fce007
+  languageName: node
+  linkType: hard
+
+"@backstage/version-bridge@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "@backstage/version-bridge@npm:1.0.5"
+  dependencies:
+    "@types/react": ^16.13.1 || ^17.0.0
+  peerDependencies:
+    react: ^16.13.1 || ^17.0.0
+    react-dom: ^16.13.1 || ^17.0.0
+    react-router-dom: 6.0.0-beta.0 || ^6.3.0
+  checksum: 8430860bcd0eac3ec57fda30eb5b1a4d895c75cb5ae9609b79bb1264eee7a4f39169122ce0e71f5fcade8f4d0cfe9bc3dbf6e0b9a2adc7fafef2bbbde95545f8
   languageName: node
   linkType: hard
 
@@ -13890,6 +13942,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"i18next@npm:^22.4.15":
+  version: 22.5.1
+  resolution: "i18next@npm:22.5.1"
+  dependencies:
+    "@babel/runtime": ^7.20.6
+  checksum: 175f8ab7fac2abcee147b00cc2d8e7d4fa9b05cdc227f02cac841fc2fd9545ed4a6d88774f594f8ad12dc944e4d34cc8e88aa00c8b9947baef9e859d93abd305
+  languageName: node
+  linkType: hard
+
 "iconv-lite@npm:0.4.24, iconv-lite@npm:^0.4.24":
   version: 0.4.24
   resolution: "iconv-lite@npm:0.4.24"
@@ -21175,6 +21236,13 @@ __metadata:
   version: 0.13.9
   resolution: "regenerator-runtime@npm:0.13.9"
   checksum: 65ed455fe5afd799e2897baf691ca21c2772e1a969d19bb0c4695757c2d96249eb74ee3553ea34a91062b2a676beedf630b4c1551cc6299afb937be1426ec55e
+  languageName: node
+  linkType: hard
+
+"regenerator-runtime@npm:^0.14.0":
+  version: 0.14.0
+  resolution: "regenerator-runtime@npm:0.14.0"
+  checksum: 1c977ad82a82a4412e4f639d65d22be376d3ebdd30da2c003eeafdaaacd03fc00c2320f18120007ee700900979284fc78a9f00da7fb593f6e6eeebc673fba9a3
   languageName: node
   linkType: hard
 
