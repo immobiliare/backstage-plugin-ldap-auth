@@ -8,11 +8,12 @@ import type {
     UserIdentityId,
 } from './types';
 
+import { createAuthProviderIntegration } from '@backstage/plugin-auth-backend';
+
 import {
     AuthProviderRouteHandlers,
     AuthResolverContext,
-    createAuthProviderIntegration,
-} from '@backstage/plugin-auth-backend';
+} from '@backstage/plugin-auth-node';
 
 import { AuthenticationError } from '@backstage/errors';
 import { AUTH_MISSING_CREDENTIALS, JWT_INVALID_TOKEN } from './errors';

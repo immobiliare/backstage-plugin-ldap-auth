@@ -23,6 +23,10 @@
         "@typescript-eslint/no-var-requires": "off",
         "prefer-rest-params": "off",
         "@typescript-eslint/no-non-null-assertion": "off",
-        "@typescript-eslint/ban-ts-comment": "warn"
+        "@typescript-eslint/ban-ts-comment": "warn",
+        "@typescript-eslint/no-unused-vars": [
+            "error",
+            { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }
+        ]
     }
 }
