@@ -94,7 +94,7 @@ export type BackstageJWTPayload = {
 };
 
 import type { TokenValidator } from './jwt';
-import type { AuthResolverContext } from '@backstage/plugin-auth-backend';
+import type { AuthResolverContext } from '@backstage/plugin-auth-node';
 import type { AuthenticationOptions } from 'ldap-authentication';
 import { defaultAuthHandler, defaultSigninResolver } from './auth';
 import { defaultCheckUserExists, defaultLDAPAuthentication } from './ldap';

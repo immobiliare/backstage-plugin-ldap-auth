@@ -1,4 +1,4 @@
-import { AuthResolverContext } from '@backstage/plugin-auth-backend';
+import { AuthResolverContext } from '@backstage/plugin-auth-node';
 import { ProviderLdapAuthProvider } from './provider';
 import { defaultCheckUserExists, defaultLDAPAuthentication } from './ldap';
 import { defaultAuthHandler, defaultSigninResolver } from './auth';
