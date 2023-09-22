@@ -3,16 +3,6 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [8.0.0-alpha.0](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v3.0.2-alpha.0...v8.0.0-alpha.0) (2023-09-22)
-
-### Features
-
--   upgrade auth packages ([75f673e](https://github.com/immobiliare/backstage-plugin-ldap-auth/commit/75f673ee408cc51b610dc6dd11862a2731490372))
-
-### BREAKING CHANGES
-
--   This upgrade breaks the types with all Backstage versions minor of 1.18
-
 ## [3.0.2-alpha.0](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v3.0.1...v3.0.2-alpha.0) (2023-04-18)
 
 **Note:** Version bump only for package @immobiliarelabs/backstage-plugin-ldap-auth-backend
