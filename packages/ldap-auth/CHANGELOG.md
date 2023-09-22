@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.0.0-alpha.0](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v3.0.2-alpha.0...v8.0.0-alpha.0) (2023-09-22)
+
+### Bug Fixes
+
+-   removed parentheses being rendered after LoginForm component ([1604b78](https://github.com/immobiliare/backstage-plugin-ldap-auth/commit/1604b78d51e2e556fd8c513fbd62b85bc018b5aa))
+
 ## [3.0.2-alpha.0](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v3.0.1...v3.0.2-alpha.0) (2023-04-18)
 
 **Note:** Version bump only for package @immobiliarelabs/backstage-plugin-ldap-auth
