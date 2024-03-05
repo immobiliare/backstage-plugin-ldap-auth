@@ -3146,16 +3146,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/config@npm:^1.0.7":
-  version: 1.0.7
-  resolution: "@backstage/config@npm:1.0.7"
-  dependencies:
-    "@backstage/types": ^1.0.2
-    lodash: ^4.17.21
-  checksum: 73bc7cd9b007f6fb0f29a46b20c6232dcafad4b1b7f4572950d350f35ba4a35027daf86fa5f68ef7bc17f4794206721e8ae960b5ba5db25ac3457c4e7e4feafa
-  languageName: node
-  linkType: hard
-
 "@backstage/config@npm:^1.1.0":
   version: 1.1.0
   resolution: "@backstage/config@npm:1.1.0"
@@ -3200,59 +3190,6 @@ __metadata:
     react-dom: ^16.13.1 || ^17.0.0 || ^18.0.0
     react-router-dom: 6.0.0-beta.0 || ^6.3.0
   checksum: 0bacc65dc894a373db7bf542835a04ff4e354940dc4334fb11f61bccdbd83e07fbff9a24ec6a44dfd337880ebf9f50ed8b72c06f9cb0fbce3946176469fc4dd6
-  languageName: node
-  linkType: hard
-
-"@backstage/core-components@npm:^0.13.0":
-  version: 0.13.1
-  resolution: "@backstage/core-components@npm:0.13.1"
-  dependencies:
-    "@backstage/config": ^1.0.7
-    "@backstage/core-plugin-api": ^1.5.1
-    "@backstage/errors": ^1.1.5
-    "@backstage/theme": ^0.3.0
-    "@backstage/version-bridge": ^1.0.4
-    "@date-io/core": ^1.3.13
-    "@material-table/core": ^3.1.0
-    "@material-ui/core": ^4.12.2
-    "@material-ui/icons": ^4.9.1
-    "@material-ui/lab": 4.0.0-alpha.61
-    "@react-hookz/web": ^20.0.0
-    "@types/react": ^16.13.1 || ^17.0.0
-    "@types/react-sparklines": ^1.7.0
-    "@types/react-text-truncate": ^0.14.0
-    ansi-regex: ^6.0.1
-    classnames: ^2.2.6
-    d3-selection: ^3.0.0
-    d3-shape: ^3.0.0
-    d3-zoom: ^3.0.0
-    dagre: ^0.8.5
-    history: ^5.0.0
-    immer: ^9.0.1
-    linkify-react: 4.1.1
-    linkifyjs: 4.1.1
-    lodash: ^4.17.21
-    pluralize: ^8.0.0
-    prop-types: ^15.7.2
-    qs: ^6.9.4
-    rc-progress: 3.4.1
-    react-helmet: 6.1.0
-    react-hook-form: ^7.12.2
-    react-markdown: ^8.0.0
-    react-sparklines: ^1.7.0
-    react-syntax-highlighter: ^15.4.5
-    react-text-truncate: ^0.19.0
-    react-use: ^17.3.2
-    react-virtualized-auto-sizer: ^1.0.11
-    react-window: ^1.8.6
-    remark-gfm: ^3.0.1
-    zen-observable: ^0.10.0
-    zod: ^3.21.4
-  peerDependencies:
-    react: ^16.13.1 || ^17.0.0
-    react-dom: ^16.13.1 || ^17.0.0
-    react-router-dom: 6.0.0-beta.0 || ^6.3.0
-  checksum: 9b1b40edb51ab4de6018d0fe063386b0e3f1b56b0427c98421cd5ccaffa790ccd9a5f70d36f6ebf5ce381a1b34ae4df5ffeef38c9074800fe38c352bd173003a
   languageName: node
   linkType: hard
 
@@ -3307,7 +3244,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/core-plugin-api@npm:^1.0.3, @backstage/core-plugin-api@npm:^1.0.4, @backstage/core-plugin-api@npm:^1.5.1":
+"@backstage/core-plugin-api@npm:^1.0.3, @backstage/core-plugin-api@npm:^1.0.4":
   version: 1.6.0
   resolution: "@backstage/core-plugin-api@npm:1.6.0"
   dependencies:
@@ -3369,7 +3306,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/errors@npm:^1.1.0, @backstage/errors@npm:^1.1.5, @backstage/errors@npm:^1.2.2":
+"@backstage/errors@npm:^1.1.0, @backstage/errors@npm:^1.2.2":
   version: 1.2.2
   resolution: "@backstage/errors@npm:1.2.2"
   dependencies:
@@ -3887,30 +3824,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/types@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "@backstage/types@npm:1.0.2"
-  checksum: 3fead10cfafa3d1a6490e664b52f383fa1bc2cc28cb4b63f2df9a299c654b1c7103c556f652eb8ebf17ca09133f841c75317a8215875c7701eb04737410d8321
-  languageName: node
-  linkType: hard
-
 "@backstage/types@npm:^1.1.1":
   version: 1.1.1
   resolution: "@backstage/types@npm:1.1.1"
   checksum: 54bd9e53570cf2a7a8d9ae30e7181ee6b669b7f543949391a2168f616e1f7b13f0419f324941a87aa15f723d0313eda8f212db2077675421d6f91484f477c4f5
-  languageName: node
-  linkType: hard
-
-"@backstage/version-bridge@npm:^1.0.4":
-  version: 1.0.4
-  resolution: "@backstage/version-bridge@npm:1.0.4"
-  dependencies:
-    "@types/react": ^16.13.1 || ^17.0.0
-  peerDependencies:
-    react: ^16.13.1 || ^17.0.0
-    react-dom: ^16.13.1 || ^17.0.0
-    react-router-dom: 6.0.0-beta.0 || ^6.3.0
-  checksum: ae2511afcc9aded46d78b5b1788a4da6502f8fd21ebd305f748eab489bf09b87bebfdafa9926214777e80afd0fe36aa561060b675272becb0389c5f3c8fce007
   languageName: node
   linkType: hard
 
@@ -5226,7 +5143,7 @@ __metadata:
   resolution: "@immobiliarelabs/backstage-plugin-ldap-auth@workspace:packages/ldap-auth"
   dependencies:
     "@backstage/cli": ^0.22.0
-    "@backstage/core-components": ^0.13.0
+    "@backstage/core-components": ^0.14.0
     "@backstage/core-plugin-api": ^1.0.4
     "@backstage/dev-utils": ^1.0.27
     "@backstage/theme": ^0.3.0
@@ -7042,22 +6959,6 @@ __metadata:
   version: 1.0.4
   resolution: "@react-hookz/deep-equal@npm:1.0.4"
   checksum: 0923e364d309e32ee54e0850471a86488faf149d7a04ee838552cf5d54f493964623a8d742880ec82410cc1105530123f056e66dfc72b7da235d4cc93fad708f
-  languageName: node
-  linkType: hard
-
-"@react-hookz/web@npm:^20.0.0":
-  version: 20.1.0
-  resolution: "@react-hookz/web@npm:20.1.0"
-  dependencies:
-    "@react-hookz/deep-equal": ^1.0.4
-  peerDependencies:
-    js-cookie: ^3.0.1
-    react: ^16.8 || ^17 || ^18
-    react-dom: ^16.8 || ^17 || ^18
-  peerDependenciesMeta:
-    js-cookie:
-      optional: true
-  checksum: bb393f892c2c81deff37d5f18faf8ec17431a24994d72d88ec390dcc1579b27318a7c8c6260070c87b66e8c635e4daec4436c33abf2622f842d1567235ed457d
   languageName: node
   linkType: hard
 
@@ -16713,7 +16614,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"immer@npm:^9.0.1, immer@npm:^9.0.7":
+"immer@npm:^9.0.7":
   version: 9.0.15
   resolution: "immer@npm:9.0.15"
   checksum: 92e3d63e810e3c3c2bb61b70c45443e37ef983ad12924e3edaf03725ae5979618f5b473439bb3bb4a8c4769f25132f18dec10ea15c40f0b20da5691ff96ff611
@@ -19111,16 +19012,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"linkify-react@npm:4.1.1":
-  version: 4.1.1
-  resolution: "linkify-react@npm:4.1.1"
-  peerDependencies:
-    linkifyjs: ^4.0.0
-    react: ">= 15.0.0"
-  checksum: 2f213f134055d4a11587e7e0bc3e0ef7e372c8c0d1419dbc5bb8e3a280f325bea9ad9d8d6017fd79f8f86fa4127ed75cbe6f320ef9d92a00ae510f320db0f408
-  languageName: node
-  linkType: hard
-
 "linkify-react@npm:4.1.3":
   version: 4.1.3
   resolution: "linkify-react@npm:4.1.3"
@@ -19128,13 +19019,6 @@ __metadata:
     linkifyjs: ^4.0.0
     react: ">= 15.0.0"
   checksum: 1c28ab02774d5427fad9f4a5ad1c7b852b83aece983fd143fdb4ec95dedf7edc77da59883aaf6fb1a2c2060e8b5e72fdfad4d704d544fabc2b173a1b1eb6473d
-  languageName: node
-  linkType: hard
-
-"linkifyjs@npm:4.1.1":
-  version: 4.1.1
-  resolution: "linkifyjs@npm:4.1.1"
-  checksum: 312b75ec9bc6e7107f2b70e50682e8baccd7b94a64bf7b88cecd352032126b0d6fa7ea41394c417a178c718caa79b70e6ab3570eee7b96a12399689d666e68fb
   languageName: node
   linkType: hard
 
@@ -23605,20 +23489,6 @@ __metadata:
     iconv-lite: 0.4.24
     unpipe: 1.0.0
   checksum: 5362adff1575d691bb3f75998803a0ffed8c64eabeaa06e54b4ada25a0cd1b2ae7f4f5ec46565d1bec337e08b5ac90c76eaa0758de6f72a633f025d754dec29e
-  languageName: node
-  linkType: hard
-
-"rc-progress@npm:3.4.1":
-  version: 3.4.1
-  resolution: "rc-progress@npm:3.4.1"
-  dependencies:
-    "@babel/runtime": ^7.10.1
-    classnames: ^2.2.6
-    rc-util: ^5.16.1
-  peerDependencies:
-    react: ">=16.9.0"
-    react-dom: ">=16.9.0"
-  checksum: d4dce5231ea29bfa866935a59f05473711f9dfc944f95cc78b0fdcd1508a063983cc58973f54c2b20797f0b0f480c4a2b84aaa2ca185158c14800ec659163880
   languageName: node
   linkType: hard
 
