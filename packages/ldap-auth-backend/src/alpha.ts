@@ -9,14 +9,19 @@ import {
 import { authProvidersExtensionPoint } from '@backstage/plugin-auth-node';
 import { JWTTokenValidator, TokenValidator } from './jwt';
 import { ldap } from './provider';
-import { LDAPResponse } from './types';
+import {
+    LDAPResponse,
+    ProviderCreateOptions,
+    Resolvers,
+    SignInResolver,
+} from './types';
 import { AuthHandler } from '@backstage/plugin-auth-backend';
 import Keyv from 'keyv';
 
-interface AuthHandlerSetter {
-    set(handler: AuthHandler<Partial<LDAPResponse>>): void;
+interface LdapAuthSetter {
+    set(handler: ProviderCreateOptions): void;
 }
-export const ldapAuthExtensionPoint = createExtensionPoint<AuthHandlerSetter>({
+export const ldapAuthExtensionPoint = createExtensionPoint<LdapAuthSetter>({
     id: 'ldap-auth-extension',
 });
 
@@ -57,14 +62,21 @@ export default createBackendModule({
     moduleId: 'ldap',
     register(reg) {
         let authHandler: AuthHandler<Partial<LDAPResponse>> | undefined;
-        const authHandlerSetter = {
-            set(handler: AuthHandler<Partial<LDAPResponse>>) {
-                authHandler = handler;
+        let resolvers: Resolvers | undefined;
+        let signInResolver: SignInResolver | undefined;
+        let tokenValidatorExt: TokenValidator | undefined;
+
+        const ldapAuthSetter = {
+            set(opt: ProviderCreateOptions) {
+                authHandler = opt.authHandler;
+                resolvers = opt.resolvers;
+                signInResolver = opt.signIn;
+                tokenValidatorExt = opt.tokenValidator;
             },
         };
-        reg.registerExtensionPoint<AuthHandlerSetter>(
+        reg.registerExtensionPoint<LdapAuthSetter>(
             ldapAuthExtensionPoint,
-            authHandlerSetter
+            ldapAuthSetter
         );
 
         reg.registerInit({
@@ -76,8 +88,10 @@ export default createBackendModule({
                 providers.registerProvider({
                     providerId: 'ldap',
                     factory: ldap.create({
-                        tokenValidator,
+                        tokenValidator: tokenValidatorExt || tokenValidator,
                         authHandler,
+                        resolvers,
+                        signIn: signInResolver,
                     }),
                 });
             },
