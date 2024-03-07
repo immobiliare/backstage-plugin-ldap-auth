@@ -60,8 +60,6 @@ $ yarn workspace app add @immobiliarelabs/backstage-plugin-ldap-auth
 
 > This documentation assumes that you have already scaffolded your Backstage instance from the official `@backstage/create-app`, all files that we're going to customize here are the one already created by the CLI!
 
-**If you are using new backend system, follow [this Configurations guide](./NEW-BACKEND.md).**
-
 ### Setup
 
 If you didn't have already, you need to configure Backstage's official LDAP plugin, that is needed to import and keep in syncs users your LDAP users.
@@ -155,32 +153,35 @@ For more uses cases you can see the [example folders](https://github.com/immobil
 > `packages/backend/src/plugins/auth.ts`
 
 ```ts
-import { createRouter } from '@backstage/plugin-auth-backend';
-import { Router } from 'express';
-import { PluginEnvironment } from '../types';
-import {
-    ldap,
-    JWTTokenValidator,
-} from '@immobiliarelabs/backstage-plugin-ldap-auth-backend';
-import Keyv from 'keyv';
+const backend = createBackend();
+...
+backend.add(import('@immobiliarelabs/backstage-plugin-ldap-auth-backend'));
+...
+backend.start();
 
-export default async function createPlugin(
-    env: PluginEnvironment
-): Promise<Router> {
-    return await createRouter({
-        logger: env.logger,
-        config: env.config,
-        database: env.database,
-        discovery: env.discovery,
-        tokenManager: env.tokenManager,
-        providerFactories: {
-            ldap: ldap.create({
-                tokenValidator: new JWTTokenValidator(new Keyv()),
-                /* Custom Configurations */
-            }),
-        },
-    });
+```
+
+If you want to connect to Postgres for the store of the token (default is in memory):
+
+```ts
+// index.ts
+import { tokenValidatorFactory } from '@immobiliarelabs/backstage-plugin-ldap-auth-backend';
+...
+backend.add(import('@immobiliarelabs/backstage-plugin-ldap-auth-backend'));
+backend.add(tokenValidatorFactory({ createTokenValidator }));
+...
+backend.start();
+
+
+// auth.ts
+createTokenValidator(config: Config): TokenValidator {
+    ...
+    const url = `postgresql://${user}:${password}@${host}:${port}/mydb`;
+    return new JWTTokenValidator(
+      new Keyv(url, { table: 'token' })
+    );
 }
+
 ```
 
 ### Custom LDAP Configurations
@@ -192,59 +193,75 @@ This can be also done for the `resolvers.checkUserExists` function, which runs w
 #### Custom authentication function
 
 ```ts
-export default async function createPlugin(
-  env: PluginEnvironment,
-): Promise<Router> {
-  return await createRouter({
-    logger: env.logger,
-    config: env.config,
-    database: env.database,
-    discovery: env.discovery,
-    tokenManager: env.tokenManager,
-    providerFactories: {
-      ldap: ldap.create({
-        tokenValidator: new JWTTokenValidator(new Keyv()),
-        resolvers: {
-            async ldapAuthentication(username, password, ldapOptions, authFunction): LDAPUser {
-                // modify your ldapOptions and do whatever you need to format it
-                // ...
-                const user = await authFunction(ldapOptions)
-                return { uid: user.uid };
-            }
-        }
+import {
+    coreServices,
+    createBackendModule,
+} from '@backstage/backend-plugin-api';
+import { ldapAuthExtensionPoint } from '@immobiliarelabs/backstage-plugin-ldap-auth-backend';
+
+export default createBackendModule({
+    pluginId: 'auth',
+    moduleId: 'ldap-ext',
+    register(reg) {
+        reg.registerInit({
+            deps: {
+                config: coreServices.rootConfig,
+                ldapAuth: ldapAuthExtensionPoint,
+            },
+            async init({ config, ldapAuth }) {
+                ldapAuth.set({
+                    resolvers: {
+                        async ldapAuthentication(
+                            username,
+                            password,
+                            ldapOptions,
+                            authFunction
+                        ): LDAPUser {
+                            // modify your ldapOptions and do whatever you need to format it
+                            // ...
+                            const user = await authFunction(ldapOptions);
+                            return { uid: user.uid };
+                        },
+                    },
+                });
+            },
+        });
     },
-  });
-}
+});
 ```
 
 #### Custom check if user exists
 
 ```ts
-export default async function createPlugin(
-  env: PluginEnvironment,
-): Promise<Router> {
-  return await createRouter({
-    logger: env.logger,
-    config: env.config,
-    database: env.database,
-    discovery: env.discovery,
-    tokenManager: env.tokenManager,
-    providerFactories: {
-      ldap: ldap.create({
-        tokenValidator: new JWTTokenValidator(new Keyv()),
-        resolvers: {
-            async checkUserExists(ldapAuthOptions, searchFunction): Promise<boolean> {
-                const { username } = ldapAuthOptions;
+export default createBackendModule({
+    pluginId: 'auth',
+    moduleId: 'ldap-ext',
+    register(reg) {
+        reg.registerInit({
+            deps: {
+                config: coreServices.rootConfig,
+                ldapAuth: ldapAuthExtensionPoint,
+            },
+            async init({ config, ldapAuth }) {
+                ldapAuth.set({
+                    resolvers: {
+                        async checkUserExists(
+                            ldapAuthOptions,
+                            searchFunction
+                        ): Promise<boolean> {
+                            const { username } = ldapAuthOptions;
 
-                // Do you custom checks
-                // ....
+                            // Do you custom checks
+                            // ....
 
-                return true;
-            }
-        }
+                            return true;
+                        },
+                    },
+                });
+            },
+        });
     },
-  });
-}
+});
 ```
 
 ### Add the login form
