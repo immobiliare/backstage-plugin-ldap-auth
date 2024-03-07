@@ -5208,7 +5208,7 @@ __metadata:
     "@backstage/core-plugin-api": ^1.0.3
     "@backstage/errors": ^1.1.0
     "@backstage/plugin-auth-backend": ^0.19.0
-    "@backstage/plugin-auth-node": ^0.3.0
+    "@backstage/plugin-auth-node": ^0.4.8
     "@types/ldap-escape": ^2.0.0
     "@types/ldapjs": ^2.2.4
     "@types/node": ^20.5.9
