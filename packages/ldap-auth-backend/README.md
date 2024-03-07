@@ -60,6 +60,8 @@ $ yarn workspace app add @immobiliarelabs/backstage-plugin-ldap-auth
 
 > This documentation assumes that you have already scaffolded your Backstage instance from the official `@backstage/create-app`, all files that we're going to customize here are the one already created by the CLI!
 
+**If you are using new backend system, follow [this Configurations guide](./NEW-BACKEND.md).**
+
 ### Setup
 
 If you didn't have already, you need to configure Backstage's official LDAP plugin, that is needed to import and keep in syncs users your LDAP users.
