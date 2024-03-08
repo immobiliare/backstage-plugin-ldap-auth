@@ -9,7 +9,7 @@ import { AuthenticationError } from '@backstage/errors';
 import { AUTH_MISSING_CREDENTIALS, JWT_EXPIRED_TOKEN } from './errors';
 import Keyv from 'keyv';
 
-function createProvider() {
+export function createProvider() {
     const sub = 'my-uid-name';
     const token = jwt.sign({ sub }, 'secret', {
         expiresIn: '1min',

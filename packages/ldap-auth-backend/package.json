@@ -29,9 +29,9 @@
     },
     "dependencies": {
         "@backstage/backend-plugin-api": "^0.6.13",
-        "@backstage/core-plugin-api": "^1.0.3",
-        "@backstage/errors": "^1.1.0",
-        "@backstage/plugin-auth-backend": "^0.19.0",
+        "@backstage/core-plugin-api": "^1.9.0",
+        "@backstage/errors": "^1.2.3",
+        "@backstage/plugin-auth-backend": "^0.21.3",
         "@backstage/plugin-auth-node": "^0.4.8",
         "keyv": "^4.3.3",
         "ldap-authentication": "^3.0.3",
@@ -42,10 +42,13 @@
         "react": "^16.13.1 || ^17.0.0"
     },
     "devDependencies": {
-        "@backstage/cli": "^0.22.0",
+        "@backstage/backend-test-utils": "^0.3.3",
+        "@backstage/cli": "^0.25.2",
         "@types/ldap-escape": "^2.0.0",
         "@types/ldapjs": "^2.2.4",
-        "@types/node": "^20.5.9"
+        "@types/node": "^20.5.9",
+        "@types/supertest": "^6.0.2",
+        "supertest": "^6.3.4"
     },
     "files": [
         "dist"
