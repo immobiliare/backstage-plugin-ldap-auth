@@ -59,7 +59,6 @@ describe('ldapProvider new backend system', () => {
                                 ldapAuth: ldapAuthExtensionPoint,
                             },
                             async init({ ldapAuth }) {
-                                // this adds our Gitlab profile picture
                                 ldapAuth.set({
                                     tokenValidator: createTokenValidator(),
                                     resolvers: {
@@ -144,9 +143,7 @@ describe('ldapProvider new backend system', () => {
         const agent = request.agent(server);
         await agent
             .post('/api/auth/ldap/refresh')
-            .set('Cookie', [
-                `${COOKIE_FIELD_KEY}=eyJqd3QiOiJ`, // <-- No 'express:sess' (Cropped for demo)
-            ])
+            .set('Cookie', [`${COOKIE_FIELD_KEY}=eyJqd3QiOiJ`])
             .send({});
 
         expect(isValidMock).toHaveBeenCalled();
