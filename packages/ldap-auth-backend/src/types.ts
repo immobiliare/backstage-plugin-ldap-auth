@@ -109,19 +109,23 @@ export type BackstageLdapAuthConfiguration = {
     ldapAuthenticationOptions: AuthenticationOptions;
 };
 
+export type Resolvers = {
+    checkUserExists?: typeof defaultCheckUserExists;
+    ldapAuthentication?: typeof defaultLDAPAuthentication;
+};
+
+export type SignInResolver = {
+    resolver?: typeof defaultSigninResolver;
+};
+
 export type ProviderCreateOptions = {
     // Backstage Provider AuthHandler
     authHandler?: typeof defaultAuthHandler;
     // Backstage Provider SignInResolver
-    signIn?: {
-        resolver?: typeof defaultSigninResolver;
-    };
+    signIn?: SignInResolver;
 
     // Custom resolvers
-    resolvers?: {
-        checkUserExists?: typeof defaultCheckUserExists;
-        ldapAuthentication?: typeof defaultLDAPAuthentication;
-    };
+    resolvers?: Resolvers;
     // Custom validator function for the JWT token if needed
     tokenValidator?: TokenValidator;
 };
