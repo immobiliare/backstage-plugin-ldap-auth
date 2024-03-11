@@ -19,7 +19,33 @@ import { AuthHandler } from '@backstage/plugin-auth-backend';
 import Keyv from 'keyv';
 
 interface LdapAuthSetter {
-    set(handler: ProviderCreateOptions): void;
+    set(opt: ProviderCreateOptions): void;
+}
+
+class LdapAuthExt implements LdapAuthSetter {
+    #authHandler: AuthHandler<Partial<LDAPResponse>> | undefined;
+    #resolvers: Resolvers | undefined;
+    #signInResolver: SignInResolver | undefined;
+    #tokenValidatorExt: TokenValidator | undefined;
+    set(opt: ProviderCreateOptions): void {
+        this.#authHandler = opt.authHandler;
+        this.#resolvers = opt.resolvers;
+        this.#signInResolver = opt.signIn;
+        this.#tokenValidatorExt = opt.tokenValidator;
+    }
+
+    get authHandler() {
+        return this.#authHandler;
+    }
+    get resolvers() {
+        return this.#resolvers;
+    }
+    get signInResolver() {
+        return this.#signInResolver;
+    }
+    get tokenValidatorExt() {
+        return this.#tokenValidatorExt;
+    }
 }
 export const ldapAuthExtensionPoint = createExtensionPoint<LdapAuthSetter>({
     id: 'ldap-auth-extension',
@@ -61,19 +87,7 @@ export default createBackendModule({
     pluginId: 'auth',
     moduleId: 'ldap',
     register(reg) {
-        let authHandler: AuthHandler<Partial<LDAPResponse>> | undefined;
-        let resolvers: Resolvers | undefined;
-        let signInResolver: SignInResolver | undefined;
-        let tokenValidatorExt: TokenValidator | undefined;
-
-        const ldapAuthSetter = {
-            set(opt: ProviderCreateOptions) {
-                authHandler = opt.authHandler;
-                resolvers = opt.resolvers;
-                signInResolver = opt.signIn;
-                tokenValidatorExt = opt.tokenValidator;
-            },
-        };
+        const ldapAuthSetter = new LdapAuthExt();
         reg.registerExtensionPoint<LdapAuthSetter>(
             ldapAuthExtensionPoint,
             ldapAuthSetter
@@ -88,10 +102,11 @@ export default createBackendModule({
                 providers.registerProvider({
                     providerId: 'ldap',
                     factory: ldap.create({
-                        tokenValidator: tokenValidatorExt || tokenValidator,
-                        authHandler,
-                        resolvers,
-                        signIn: signInResolver,
+                        tokenValidator:
+                            ldapAuthSetter.tokenValidatorExt || tokenValidator,
+                        authHandler: ldapAuthSetter.authHandler,
+                        resolvers: ldapAuthSetter.resolvers,
+                        signIn: ldapAuthSetter.signInResolver,
                     }),
                 });
             },
