@@ -45,7 +45,7 @@
         "@backstage/backend-test-utils": "^0.3.3",
         "@backstage/cli": "^0.25.2",
         "@types/ldap-escape": "^2.0.0",
-        "@types/ldapjs": "^2.2.4",
+        "@types/ldapjs": "^3.0.6",
         "@types/node": "^20.5.9",
         "@types/supertest": "^6.0.2",
         "supertest": "^6.3.4"
