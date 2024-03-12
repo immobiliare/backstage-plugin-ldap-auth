@@ -9399,9 +9399,9 @@ __metadata:
   linkType: hard
 
 "@types/ldap-escape@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@types/ldap-escape@npm:2.0.0"
-  checksum: cc3218bafa368e6d4423e99ea6bd1126a722a07d367a7eaf75cd1b36471518f9356daa17bd0b069ce90f7ee945455172fe60d62856406408de578d92fbe01366
+  version: 2.0.2
+  resolution: "@types/ldap-escape@npm:2.0.2"
+  checksum: 7370df064df54213b0355608d36dac289c8ed01d75d946f8aed42192a78e439af3c21a5442599c4cc090f8b1215b3f18d15c264a94d8cbfde7dfd643c0ab11f3
   languageName: node
   linkType: hard
 
