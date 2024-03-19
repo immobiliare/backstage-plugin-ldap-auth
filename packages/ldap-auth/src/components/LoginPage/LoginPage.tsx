@@ -33,11 +33,13 @@ import { LoginForm } from './Form';
 export type LdapSignInPageProps = SignInPageProps & {
     provider: string;
     children?: React.ReactNode | null;
+    onSignInError?: (error: Error) => void;
     options?: {
         helperTextPassword?: string;
         helperTextUsername?: string;
         validateUsername?: (usr: string) => boolean;
         validatePassword?: (pass: string) => boolean;
+        usernameLabel?: string;
     };
 };
 
@@ -101,10 +103,19 @@ export const LdapSignInPage = (props: LdapSignInPageProps) => {
         return null;
     }
 
+    function onSignInError(error: Error) {
+        props?.onSignInError?.(error);
+    }
+
     return (
         <>
             {props.children}
-            <LoginForm onSubmit={onSubmit} error={error} {...props.options} />
+            <LoginForm
+                onSubmit={onSubmit}
+                onSignInError={onSignInError}
+                error={error}
+                {...props.options}
+            />
         </>
     );
 };
