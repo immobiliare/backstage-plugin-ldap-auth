@@ -6,11 +6,13 @@ import PasswordValidator from 'password-validator';
 
 export type LoginFormProps = {
     onSubmit: (username: string, password: string) => void;
+    onSignInError?: (error: Error) => void;
     error?: Error;
     helperTextUsername?: string;
     helperTextPassword?: string;
     validateUsername?: (usr: string) => boolean;
     validatePassword?: (pass: string) => boolean;
+    usernameLabel?: string;
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -34,11 +36,13 @@ usernameSchema.is().min(4).is().max(40).not().spaces();
 
 export const LoginForm = ({
     onSubmit,
+    onSignInError,
     error,
     helperTextUsername,
     helperTextPassword,
     validatePassword,
     validateUsername,
+    usernameLabel,
 }: LoginFormProps) => {
     const validatePasswd =
         validatePassword || passwordSchema.validate.bind(passwordSchema);
@@ -59,6 +63,12 @@ export const LoginForm = ({
 
         if (isUsernameValid && isPasswordValid) onSubmit(username, password);
     }
+
+    useEffect(() => {
+        if (error && onSignInError) {
+            onSignInError(error);
+        }
+    }, [error, onSignInError]);
 
     useEffect(() => {
         const keyDownHandler = (event: {
@@ -85,7 +95,7 @@ export const LoginForm = ({
                     <Paper elevation={4} className={classes.paper}>
                         <TextField
                             required
-                            label="LDAP Name"
+                            label={usernameLabel || 'LDAP Name'}
                             onChange={(e) => setUsername(e.target.value)}
                             value={username}
                             id="username"
