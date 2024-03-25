@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.2.0-alpha.0](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v4.1.0...v4.2.0-alpha.0) (2024-03-25)
+
+### Features
+
+-   Support for Signin Error; Parameterizing Username label ([84941fa](https://github.com/immobiliare/backstage-plugin-ldap-auth/commit/84941fae0c1d42e82edda5872dfd37ca5970666e))
+
 # [4.1.0](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v4.1.0-alpha.1...v4.1.0) (2024-03-11)
 
 **Note:** Version bump only for package @immobiliarelabs/backstage-plugin-ldap-auth
