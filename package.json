@@ -32,6 +32,7 @@
         "build": "npx lerna run build",
         "test": "lerna run test:ci",
         "bootstrap": "npx lerna bootstrap",
+        "start": "npx lerna --scope @immobiliarelabs/backstage-plugin-ldap-auth run start",
         "publish:ci": "lerna publish from-package --yes --pre-dist-tag alpha",
         "version:release": "lerna version --yes --conventional-commits --conventional-graduate --create-release github --message 'chore(release): publish'",
         "version:prerelease": "lerna version --yes --force-publish --conventional-commits --conventional-prerelease --create-release github --message 'chore(prerelease): publish'",

@@ -1,7 +1,7 @@
 import { Content, Page } from '@backstage/core-components';
 import React, { useEffect, useState } from 'react';
-import { Paper, TextField, Container, Button } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Paper, TextField, Container, Button } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import PasswordValidator from 'password-validator';
 
 export type LoginFormProps = {
@@ -15,17 +15,10 @@ export type LoginFormProps = {
     usernameLabel?: string;
 };
 
-const useStyles = makeStyles((theme) => ({
-    paper: {
-        padding: theme.spacing(2),
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
-    },
-    paperHead: {
-        marginBottom: theme.spacing(2),
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
-    },
+const StyledPaper = styled(Paper)(({ theme }) => ({
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
 }));
 
 const passwordSchema = new PasswordValidator();
@@ -53,7 +46,6 @@ export const LoginForm = ({
     const [password, setPassword] = useState('');
     const [uError, setUError] = useState(Boolean(error));
     const [pError, setPError] = useState(Boolean(error));
-    const classes = useStyles();
 
     function onClick() {
         const isUsernameValid = validateUsern(username) as boolean;
@@ -92,7 +84,7 @@ export const LoginForm = ({
         <Page themeId="tool">
             <Content>
                 <Container maxWidth="sm">
-                    <Paper elevation={4} className={classes.paper}>
+                    <StyledPaper elevation={4}>
                         <TextField
                             required
                             label={usernameLabel || 'LDAP Name'}
@@ -129,7 +121,7 @@ export const LoginForm = ({
                         >
                             Login
                         </Button>
-                    </Paper>
+                    </StyledPaper>
                 </Container>
             </Content>
         </Page>
