@@ -154,6 +154,9 @@ For more uses cases you can see the [example folders](https://github.com/immobil
 
 ```ts
 const backend = createBackend();
+
+// This is required to work
+backend.add(import('@backstage/plugin-auth-backend'));
 ...
 backend.add(import('@immobiliarelabs/backstage-plugin-ldap-auth-backend'));
 ...
@@ -166,6 +169,9 @@ If you want to connect to Postgres for the store of the token (default is in mem
 ```ts
 // index.ts
 import { tokenValidatorFactory } from '@immobiliarelabs/backstage-plugin-ldap-auth-backend';
+
+// This is required to work
+backend.add(import('@backstage/plugin-auth-backend'));
 ...
 backend.add(import('@immobiliarelabs/backstage-plugin-ldap-auth-backend'));
 backend.add(tokenValidatorFactory({ createTokenValidator }));
