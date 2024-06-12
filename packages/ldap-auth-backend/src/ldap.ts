@@ -4,7 +4,7 @@ import ldap from 'ldapjs';
 import { dn } from 'ldap-escape';
 import { authenticate, AuthenticationOptions } from 'ldap-authentication';
 
-import { AUTH_USER_NOT_FOUND, LDAP_CONNECT_FAIL } from './errors';
+import { AUTH_USER_DATA_ERROR, AUTH_USER_NOT_FOUND, LDAP_CONNECT_FAIL } from './errors';
 
 async function _verifyUserExistsNoAdmin(
     searchString: string,
@@ -85,8 +85,11 @@ export async function defaultLDAPAuthentication(
 
     try {
         const user = await authFunction(authObj);
-        if (!user[usernameAttribute as string]) {
+        if (!user) {
             throw new Error(AUTH_USER_NOT_FOUND);
+        }
+        if (!user[usernameAttribute as string]) {
+            throw new Error(AUTH_USER_DATA_ERROR);
         }
         return { uid: user[usernameAttribute as string] };
     } catch (e) {
