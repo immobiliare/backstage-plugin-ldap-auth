@@ -4,7 +4,11 @@ import ldap from 'ldapjs';
 import { dn } from 'ldap-escape';
 import { authenticate, AuthenticationOptions } from 'ldap-authentication';
 
-import { AUTH_USER_DATA_ERROR, AUTH_USER_NOT_FOUND, LDAP_CONNECT_FAIL } from './errors';
+import {
+    AUTH_USER_DATA_ERROR,
+    AUTH_USER_NOT_FOUND,
+    LDAP_CONNECT_FAIL,
+} from './errors';
 
 async function _verifyUserExistsNoAdmin(
     searchString: string,
