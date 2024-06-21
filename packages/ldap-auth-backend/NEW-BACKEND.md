@@ -129,7 +129,7 @@ auth:
                     # what is the user unique key in your ldap instance
                     usernameAttribute: 'uid' # defaults to `uid`
                     # directory where to search user
-                    # default search will be `[userSearchBase]=[username],[userSearchBase]`
+                    # default search will be `[usernameAttribute]=[username],[userSearchBase]`
 
                     # User able to list other users, this is used
                     # to check incoming JWT if user are already part of the LDAP
@@ -158,6 +158,7 @@ const backend = createBackend();
 // This is required to work
 backend.add(import('@backstage/plugin-auth-backend'));
 ...
+backend.add(import('@backstage/plugin-auth-backend'));
 backend.add(import('@immobiliarelabs/backstage-plugin-ldap-auth-backend'));
 ...
 backend.start();
