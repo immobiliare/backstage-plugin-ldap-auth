@@ -1,5 +1,5 @@
 import { defaultCheckUserExists, defaultLDAPAuthentication } from './ldap';
-import { AUTH_USER_NOT_FOUND } from './errors';
+import { AUTH_USER_DATA_ERROR } from './errors';
 import { AuthenticationOptions } from 'ldap-authentication';
 
 describe('LDAP authentication', () => {
@@ -35,7 +35,7 @@ describe('LDAP authentication', () => {
         );
 
         expect(authFunc).toBeCalled();
-        expect(out).rejects.toEqual(new Error(AUTH_USER_NOT_FOUND));
+        expect(out).rejects.toEqual(new Error(AUTH_USER_DATA_ERROR));
     });
 });
 

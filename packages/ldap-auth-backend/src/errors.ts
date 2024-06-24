@@ -8,3 +8,6 @@ export const AUTH_MISSING_CREDENTIALS =
 
 export const AUTH_USER_NOT_FOUND =
     'AUTH_USER_NOT_FOUND: Credential invalid or user doesnt exists';
+
+export const AUTH_USER_DATA_ERROR =
+    'AUTH_USER_DATA_ERROR: The user returned does not contain the configured usernameAttribute';
