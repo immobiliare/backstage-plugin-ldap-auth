@@ -99,7 +99,7 @@ describe('LdapAuthProvider login tests', () => {
             clearCookie: jest.fn(),
         };
         await provider.refresh(reqMock as any, resMock as any);
-        expect(resMock.json).toBeCalledWith({
+        expect(resMock.json).toHaveBeenCalledWith({
             backstageIdentity: {
                 identity: {
                     ownershipEntityRefs: [],
@@ -111,11 +111,11 @@ describe('LdapAuthProvider login tests', () => {
             profile: undefined,
             providerInfo: {},
         });
-        expect(authHandler).toBeCalledTimes(1);
-        expect(ldapAuthentication).toBeCalledTimes(1);
-        expect(checkUserExists).not.toBeCalled();
-        expect(resMock.cookie).toBeCalled();
-        expect(resMock.clearCookie).not.toBeCalled();
+        expect(authHandler).toHaveBeenCalledTimes(1);
+        expect(ldapAuthentication).toHaveBeenCalledTimes(1);
+        expect(checkUserExists).not.toHaveBeenCalled();
+        expect(resMock.cookie).toHaveBeenCalled();
+        expect(resMock.clearCookie).not.toHaveBeenCalled();
     });
 
     it('Test refresh with token', async () => {
@@ -141,7 +141,7 @@ describe('LdapAuthProvider login tests', () => {
             clearCookie: jest.fn(),
         };
         await provider.refresh(reqMock as any, resMock as any);
-        expect(resMock.json).toBeCalledWith({
+        expect(resMock.json).toHaveBeenCalledWith({
             backstageIdentity: {
                 identity: {
                     ownershipEntityRefs: [],
@@ -153,11 +153,11 @@ describe('LdapAuthProvider login tests', () => {
             profile: undefined,
             providerInfo: {},
         });
-        expect(authHandler).toBeCalledTimes(1);
-        expect(ldapAuthentication).not.toBeCalled();
-        expect(checkUserExists).toBeCalledTimes(1);
-        expect(resMock.cookie).toBeCalled();
-        expect(resMock.clearCookie).not.toBeCalled();
+        expect(authHandler).toHaveBeenCalledTimes(1);
+        expect(ldapAuthentication).not.toHaveBeenCalled();
+        expect(checkUserExists).toHaveBeenCalledTimes(1);
+        expect(resMock.cookie).toHaveBeenCalled();
+        expect(resMock.clearCookie).not.toHaveBeenCalled();
     });
 
     it('Test refresh should not accept GET', async () => {
@@ -184,12 +184,12 @@ describe('LdapAuthProvider login tests', () => {
         await expect(
             provider.refresh(reqMock as any, resMock as any)
         ).rejects.toEqual(new AuthenticationError('Method not allowed'));
-        expect(resMock.json).not.toBeCalled();
-        expect(authHandler).not.toBeCalled();
-        expect(ldapAuthentication).not.toBeCalled();
-        expect(checkUserExists).not.toBeCalled();
-        expect(resMock.cookie).not.toBeCalled();
-        expect(resMock.clearCookie).toBeCalledWith(COOKIE_FIELD_KEY);
+        expect(resMock.json).not.toHaveBeenCalled();
+        expect(authHandler).not.toHaveBeenCalled();
+        expect(ldapAuthentication).not.toHaveBeenCalled();
+        expect(checkUserExists).not.toHaveBeenCalled();
+        expect(resMock.cookie).not.toHaveBeenCalled();
+        expect(resMock.clearCookie).toHaveBeenCalledWith(COOKIE_FIELD_KEY);
     });
 
     it('Test refresh should throw right error if missing credentials or token', async () => {
@@ -208,12 +208,12 @@ describe('LdapAuthProvider login tests', () => {
         await expect(
             provider.refresh(reqMock as any, resMock as any)
         ).rejects.toEqual(new AuthenticationError(AUTH_MISSING_CREDENTIALS));
-        expect(resMock.json).not.toBeCalled();
-        expect(authHandler).not.toBeCalled();
-        expect(ldapAuthentication).not.toBeCalled();
-        expect(checkUserExists).not.toBeCalled();
-        expect(resMock.cookie).not.toBeCalled();
-        expect(resMock.clearCookie).toBeCalledWith(COOKIE_FIELD_KEY);
+        expect(resMock.json).not.toHaveBeenCalled();
+        expect(authHandler).not.toHaveBeenCalled();
+        expect(ldapAuthentication).not.toHaveBeenCalled();
+        expect(checkUserExists).not.toHaveBeenCalled();
+        expect(resMock.cookie).not.toHaveBeenCalled();
+        expect(resMock.clearCookie).toHaveBeenCalledWith(COOKIE_FIELD_KEY);
     });
 });
 
@@ -241,7 +241,7 @@ describe('LdapAuthProvider token invalidation tests', () => {
             clearCookie: jest.fn(),
         };
         await provider.refresh(reqMock as any, resMock as any);
-        expect(resMock.json).toBeCalledWith({
+        expect(resMock.json).toHaveBeenCalledWith({
             backstageIdentity: {
                 identity: {
                     ownershipEntityRefs: [],
@@ -281,7 +281,7 @@ describe('LdapAuthProvider token invalidation tests', () => {
             clearCookie: jest.fn(),
         };
         await provider.refresh(reqMock as any, resMock as any);
-        expect(resMock.json).toBeCalledWith({
+        expect(resMock.json).toHaveBeenCalledWith({
             backstageIdentity: {
                 identity: {
                     ownershipEntityRefs: [],
@@ -359,9 +359,9 @@ describe('LdapAuthProvider token logout', () => {
             provider.logout(reqMock as any, resMock as any)
         ).resolves.toEqual(undefined);
 
-        expect(resMock.status).toBeCalledWith(200);
-        expect(resMock.clearCookie).toBeCalledWith(COOKIE_FIELD_KEY);
-        expect(resMock.end).toBeCalled();
+        expect(resMock.status).toHaveBeenCalledWith(200);
+        expect(resMock.clearCookie).toHaveBeenCalledWith(COOKIE_FIELD_KEY);
+        expect(resMock.end).toHaveBeenCalled();
         timer.advanceTimersByTime(2000);
         expect(
             provider.refresh(reqMock as any, resMock as any)
