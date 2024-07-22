@@ -4487,7 +4487,7 @@ __metadata:
     "@backstage/dev-utils": "npm:^1.0.35"
     "@backstage/theme": "npm:^0.5.6"
     "@material-ui/core": "npm:^4.12.4"
-    "@react-hookz/web": "npm:^23.0.0"
+    "@react-hookz/web": "npm:^24.0.4"
     "@testing-library/jest-dom": "npm:^5.10.1"
     "@types/jest": "npm:^29.0.3"
     "@types/node": "npm:^20.5.9"
@@ -6438,23 +6438,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-hookz/web@npm:^23.0.0":
-  version: 23.1.0
-  resolution: "@react-hookz/web@npm:23.1.0"
-  dependencies:
-    "@react-hookz/deep-equal": "npm:^1.0.4"
-  peerDependencies:
-    js-cookie: ^3.0.5
-    react: ^16.8 || ^17 || ^18
-    react-dom: ^16.8 || ^17 || ^18
-  peerDependenciesMeta:
-    js-cookie:
-      optional: true
-  checksum: 10/7f345fc286ee3bae74b76b909898213a589250856783805d0356d8ef9ca0e3d1638e7499d8b77ae1dff6350dec230fda468e0e4c8fc05a9997902569d3d81b49
-  languageName: node
-  linkType: hard
-
-"@react-hookz/web@npm:^24.0.0":
+"@react-hookz/web@npm:^24.0.0, @react-hookz/web@npm:^24.0.4":
   version: 24.0.4
   resolution: "@react-hookz/web@npm:24.0.4"
   dependencies:
