@@ -4463,7 +4463,7 @@ __metadata:
     "@backstage/plugin-auth-backend": "npm:^0.22.9"
     "@backstage/plugin-auth-node": "npm:^0.4.17"
     "@types/ldap-escape": "npm:^2.0.2"
-    "@types/ldapjs": "npm:^2.2.4"
+    "@types/ldapjs": "npm:^3.0.6"
     "@types/node": "npm:^20.5.9"
     "@types/supertest": "npm:^6.0.2"
     keyv: "npm:^4.3.3"
@@ -8184,12 +8184,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/ldapjs@npm:^2.2.4":
-  version: 2.2.5
-  resolution: "@types/ldapjs@npm:2.2.5"
+"@types/ldapjs@npm:^3.0.6":
+  version: 3.0.6
+  resolution: "@types/ldapjs@npm:3.0.6"
   dependencies:
     "@types/node": "npm:*"
-  checksum: 10/6981e24944c8132eff6bf76d367a18aa34238fcb86c385b4711c577d62f087d770aa81f6975beddcca9f69c8ce002de73922e1f3689e1315f4ad9401edc54dcd
+  checksum: 10/39390e4fb2a45858919ae98a571c8e6b37deed70c6d2016f4f4dd034b420767b2d140e26a3b88d1c3a86dbc79f943cda0b5524049127cca9bc4aeea2bf1cb68f
   languageName: node
   linkType: hard
 
