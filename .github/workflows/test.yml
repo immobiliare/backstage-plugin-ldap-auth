@@ -39,6 +39,19 @@ jobs:
               run: yarn install
             - name: Test
               run: yarn prettier --check .
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  token: ${{ secrets.GITHUB_TOKEN }}
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: 18.x
+            - name: Install dependencies
+              run: yarn install
+            - name: Build packages
+              run: yarn build
     test:
         runs-on: ubuntu-latest
         steps:

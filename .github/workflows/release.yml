@@ -27,7 +27,7 @@ jobs:
             - name: Bootstrap lerna
               run: yarn
 
-            - name: Lerna build
+            - name: Build packages
               run: yarn build
 
             - name: Bump release
