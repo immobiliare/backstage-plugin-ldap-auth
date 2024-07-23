@@ -9,13 +9,18 @@
         "access": "public"
     },
     "backstage": {
-        "role": "frontend-plugin"
+        "role": "frontend-plugin",
+        "pluginId": "ldap-auth",
+        "pluginPackages": [
+            "@immobiliarelabs/backstage-plugin-ldap-auth"
+        ]
     },
     "repository": {
         "type": "git",
         "url": "git@github.com:immobiliare/backstage-plugin-ldap-auth.git",
         "directory": "packages/ldap-auth"
     },
+    "sideEffects": false,
     "scripts": {
         "start": "backstage-cli package start",
         "types": "tsc",

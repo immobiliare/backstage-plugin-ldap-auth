@@ -14,7 +14,9 @@
         "directory": "packages/ldap-auth-backend"
     },
     "backstage": {
-        "role": "backend-plugin-module"
+        "role": "backend-plugin-module",
+        "pluginId": "auth",
+        "pluginPackage": "@backstage/plugin-auth-backend"
     },
     "scripts": {
         "start": "backstage-cli package start",
