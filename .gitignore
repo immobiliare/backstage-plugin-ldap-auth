@@ -1,4 +1,5 @@
 packages/**/dist-types/
+dist-types
 
 # Logs
 logs

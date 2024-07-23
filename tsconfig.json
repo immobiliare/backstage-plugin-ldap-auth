@@ -1,6 +1,10 @@
 {
     "exclude": ["node_modules", "examples"],
+    "include": ["packages/*/src", "packages/*/dev"],
     "compilerOptions": {
+        "outDir": "dist-types",
+        "rootDir": ".",
+        "useUnknownInCatchVariables": false,
         "allowJs": true,
         "declaration": true,
         "declarationMap": false,

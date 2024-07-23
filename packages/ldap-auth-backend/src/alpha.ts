@@ -70,8 +70,10 @@ type TokenValidatorOptions = {
     ): TokenValidator | Promise<TokenValidator>;
 };
 
-export const tokenValidatorFactory = createServiceFactory(
-    (options?: TokenValidatorOptions) => ({
+export const tokenValidatorFactoryWithOptions = (
+    options?: TokenValidatorOptions
+) =>
+    createServiceFactory({
         service: tokenValidatorRef,
         deps: { config: coreServices.rootConfig },
         factory({ config }) {
@@ -80,7 +82,11 @@ export const tokenValidatorFactory = createServiceFactory(
                 new JWTTokenValidator(new Keyv())
             );
         },
-    })
+    });
+
+export const tokenValidatorFactory = Object.assign(
+    tokenValidatorFactoryWithOptions,
+    tokenValidatorFactoryWithOptions()
 );
 
 export default createBackendModule({
