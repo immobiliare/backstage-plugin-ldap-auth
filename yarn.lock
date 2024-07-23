@@ -23767,6 +23767,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "root@workspace:."
   dependencies:
+    "@backstage/cli": "npm:^0.26.11"
     "@commitlint/cli": "npm:^17.1.2"
     "@commitlint/config-conventional": "npm:^17.1.0"
     "@typescript-eslint/eslint-plugin": "npm:^6.6.0"
