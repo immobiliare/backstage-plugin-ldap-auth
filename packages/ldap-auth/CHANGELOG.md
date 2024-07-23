@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.3.0-alpha.0](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v4.2.0...v4.3.0-alpha.0) (2024-07-23)
+
+### Features
+
+-   bump dependecies and remove deprecations ([918c021](https://github.com/immobiliare/backstage-plugin-ldap-auth/commit/918c02115a5f1c9e65b10a797a16775779420e90))
+
 # [4.2.0](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v4.2.0-alpha.0...v4.2.0) (2024-03-26)
 
 **Note:** Version bump only for package @immobiliarelabs/backstage-plugin-ldap-auth
