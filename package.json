@@ -5,6 +5,7 @@
         "packages/*"
     ],
     "devDependencies": {
+        "@backstage/cli": "^0.26.11",
         "@commitlint/cli": "^17.1.2",
         "@commitlint/config-conventional": "^17.1.0",
         "@typescript-eslint/eslint-plugin": "^6.6.0",
@@ -29,7 +30,7 @@
     "scripts": {
         "style:lint": "eslint packages --ext .ts",
         "style:prettier": "prettier \"packages/**/*.ts\" --list-different --write",
-        "build": "tsc && npx lerna run build",
+        "build": "tsc && backstage-cli repo build --all",
         "test": "lerna run test:ci",
         "bootstrap": "npx lerna bootstrap",
         "publish:ci": "lerna publish from-package --yes --pre-dist-tag alpha",
