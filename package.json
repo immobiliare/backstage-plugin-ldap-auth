@@ -16,7 +16,7 @@
         "husky": "^8.0.1",
         "is-ci": "^3.0.1",
         "lerna": "^8.1.7",
-        "lint-staged": "^13.0.3",
+        "lint-staged": "^15.2.8",
         "markdown-toc": "^1.2.0",
         "prettier": "^3.0.3",
         "typescript": "^5.5.3"
