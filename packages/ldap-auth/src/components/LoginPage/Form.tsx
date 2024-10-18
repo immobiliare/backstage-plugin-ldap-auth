@@ -93,42 +93,47 @@ export const LoginForm = ({
             <Content>
                 <Container maxWidth="sm">
                     <Paper elevation={4} className={classes.paper}>
-                        <TextField
-                            required
-                            label={usernameLabel || 'LDAP Name'}
-                            onChange={(e) => setUsername(e.target.value)}
-                            value={username}
-                            id="username"
-                            error={uError}
-                            helperText={helperTextUsername}
-                            fullWidth
-                            size="small"
-                            margin="dense"
-                        />
-                        <TextField
-                            required
-                            label="Password"
-                            onChange={(e) => setPassword(e.target.value)}
-                            value={password}
-                            id="password"
-                            type="password"
-                            error={pError}
-                            helperText={helperTextPassword}
-                            fullWidth
-                            size="small"
-                            margin="dense"
-                        />
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            size="large"
-                            fullWidth
-                            onClick={onClick}
-                            type="submit"
-                            style={{ marginTop: 16 }}
-                        >
-                            Login
-                        </Button>
+                        <form onSubmit={(e) => e.preventDefault()}>
+                            <TextField
+                                required
+                                label={usernameLabel || 'LDAP Name'}
+                                onChange={(e) => setUsername(e.target.value)}
+                                value={username}
+                                type="username"
+                                autoComplete="username"
+                                id="username"
+                                error={uError}
+                                helperText={helperTextUsername}
+                                fullWidth
+                                size="small"
+                                margin="dense"
+                            />
+                            <TextField
+                                required
+                                label="Password"
+                                onChange={(e) => setPassword(e.target.value)}
+                                value={password}
+                                id="password"
+                                type="password"
+                                autoComplete="password"
+                                error={pError}
+                                helperText={helperTextPassword}
+                                fullWidth
+                                size="small"
+                                margin="dense"
+                            />
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                size="large"
+                                fullWidth
+                                onClick={onClick}
+                                type="submit"
+                                style={{ marginTop: 16 }}
+                            >
+                                Login
+                            </Button>
+                        </form>
                     </Paper>
                 </Container>
             </Content>
