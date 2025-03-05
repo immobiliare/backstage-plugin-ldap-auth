@@ -69,41 +69,7 @@ If you didn't have already, you need to configure Backstage's official LDAP plug
 yarn add @backstage/plugin-catalog-backend-module-ldap
 ```
 
-> `packages/backend/src/plugins/catalog.ts`
-
-```ts
-import type { Router } from 'express';
-import type { PluginEnvironment } from '../types';
-
-import { CatalogBuilder } from '@backstage/plugin-catalog-backend';
-import { ScaffolderEntitiesProcessor } from '@backstage/plugin-scaffolder-backend';
-import {
-  LdapOrgEntityProvider,
-} from '@backstage/plugin-catalog-backend-module-ldap';
-
-export default async function createPlugin(
-  env: PluginEnvironment,
-): Promise<Router> {
-  const builder = await CatalogBuilder.create(env);
-
-  builder.addEntityProvider(
-    LdapOrgEntityProvider.fromConfig(env.config, {
-      id: '<YOUR-ID>',
-      target: 'ldaps://<YOUR-ADDRESS>',
-      logger: env.logger,
-      schedule: env.scheduler.createScheduledTaskRunner({
-        frequency: // whatever
-        timeout: // whatever
-      }),
-    }),
-  );
-
-  builder.addProcessor(new ScaffolderEntitiesProcessor());
-  const { processingEngine, router } = await builder.build();
-  await processingEngine.start();
-  return router;
-}
-```
+and follow this [guide](https://backstage.io/docs/integrations/ldap/org)
 
 ### Connection Configuration
 
