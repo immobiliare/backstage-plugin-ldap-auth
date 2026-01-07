@@ -32,7 +32,7 @@ const passwordSchema = new PasswordValidator();
 const usernameSchema = new PasswordValidator();
 
 passwordSchema.is().min(4).not().spaces();
-usernameSchema.is().min(4).is().max(40).not().spaces();
+usernameSchema.is().min(3).is().max(40).not().spaces();
 
 export const LoginForm = ({
     onSubmit,
