@@ -2809,9 +2809,14 @@ __metadata:
   linkType: hard
 
 "@backstage/cli-common@npm:^0.1.14":
-  version: 0.1.14
-  resolution: "@backstage/cli-common@npm:0.1.14"
-  checksum: 10/524476200019cba6c078e8e69e6a619f6d4041907c88a9666ae89b6a22e51d9854815bd67bd2ce0307adf672c05cbeb450b825e1d2562ec7d272b51b83ef4adf
+  version: 0.1.17
+  resolution: "@backstage/cli-common@npm:0.1.17"
+  dependencies:
+    "@backstage/errors": "npm:^1.2.7"
+    cross-spawn: "npm:^7.0.3"
+    global-agent: "npm:^3.0.0"
+    undici: "npm:^7.2.3"
+  checksum: 10/e5b1d87548c739012554bb68f5bcd84239f8692bbce3e79a46299cd70308ab144615be9d3ad96c78d4796eb52faa8d50f09226d3d61411c05251d4d0d24b7e7f
   languageName: node
   linkType: hard
 
@@ -3124,6 +3129,16 @@ __metadata:
     "@backstage/types": "npm:^1.1.1"
     serialize-error: "npm:^8.0.1"
   checksum: 10/f2cd9ed5eb26e15ed81237c9ade23316af80a77486fdce5ee217c7d07c4e9f6253516c0aec49e20779592e56f731a29a4edf46d1e8632fbc96c3603423de3c59
+  languageName: node
+  linkType: hard
+
+"@backstage/errors@npm:^1.2.7":
+  version: 1.2.7
+  resolution: "@backstage/errors@npm:1.2.7"
+  dependencies:
+    "@backstage/types": "npm:^1.2.1"
+    serialize-error: "npm:^8.0.1"
+  checksum: 10/99bbe2cbb9f6672afe30bab02ab1cf48daa8e994fb0c5b9390075ebf9357d5f7d450b9ea889e908e2823ee47cbf5405432e32171d338653bebf1b5914b735c35
   languageName: node
   linkType: hard
 
@@ -3660,6 +3675,13 @@ __metadata:
   version: 1.1.1
   resolution: "@backstage/types@npm:1.1.1"
   checksum: 10/222f0534af8cc5d144a9ed11ca7118aaa6ec8a15b69dcb51588f4dd716d52944f7a456c9679c1263e9fb8a2684cf55b9d39473938ecf39c85c99ca14a7c048b0
+  languageName: node
+  linkType: hard
+
+"@backstage/types@npm:^1.2.1":
+  version: 1.2.2
+  resolution: "@backstage/types@npm:1.2.2"
+  checksum: 10/813129ae2f4be2765b54a16457955c8bbeb7cc6685bc2cae8b981ae7010353d9cd1110acf846f5c23cf7fbbb6bee6d56b629d5f59933247bb529f4816218c1e7
   languageName: node
   linkType: hard
 
@@ -26209,6 +26231,13 @@ __metadata:
   version: 5.26.5
   resolution: "undici-types@npm:5.26.5"
   checksum: 10/0097779d94bc0fd26f0418b3a05472410408877279141ded2bd449167be1aed7ea5b76f756562cb3586a07f251b90799bab22d9019ceba49c037c76445f7cddd
+  languageName: node
+  linkType: hard
+
+"undici@npm:^7.2.3":
+  version: 7.19.0
+  resolution: "undici@npm:7.19.0"
+  checksum: 10/5a60b11ed23b2eea74e71123595ffe2b91005b80295051e1ba89119ee9b547ea09c395fd992d7609e0507452177853a8c0405d1a9e7938b2e17292b7aeaba6b0
   languageName: node
   linkType: hard
 
