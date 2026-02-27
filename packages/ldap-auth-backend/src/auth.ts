@@ -4,13 +4,18 @@ import type {
     LDAPUser,
 } from './types';
 
-import { ProfileInfo } from '@backstage/core-plugin-api';
-import { AuthHandler } from '@backstage/plugin-auth-backend';
+import { ProfileInfo } from '@backstage/plugin-auth-node';
 
 import {
     AuthResolverContext,
     SignInResolver,
 } from '@backstage/plugin-auth-node';
+
+/** @internal Replaces the removed AuthHandler type from \@backstage/plugin-auth-backend */
+type AuthHandler<T> = (
+    input: T,
+    ctx: AuthResolverContext
+) => Promise<{ profile: ProfileInfo }>;
 
 import { parseJwtPayload } from './jwt';
 

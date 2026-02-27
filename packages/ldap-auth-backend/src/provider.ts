@@ -8,7 +8,7 @@ import type {
     UserIdentityId,
 } from './types';
 
-import { createAuthProviderIntegration } from '@backstage/plugin-auth-backend';
+import { AuthProviderFactory } from '@backstage/plugin-auth-node';
 
 import {
     AuthProviderRouteHandlers,
@@ -168,8 +168,8 @@ export class ProviderLdapAuthProvider implements AuthProviderRouteHandlers {
     }
 }
 
-export const ldap = createAuthProviderIntegration({
-    create(options: ProviderCreateOptions) {
+export const ldap = {
+    create(options: ProviderCreateOptions): AuthProviderFactory {
         return ({ config, resolverContext }) => {
             const cnf = config.get(
                 process.env.NODE_ENV || 'development'
@@ -213,4 +213,4 @@ export const ldap = createAuthProviderIntegration({
             });
         };
     },
-});
+};
