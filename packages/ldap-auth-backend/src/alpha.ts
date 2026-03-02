@@ -9,13 +9,8 @@ import {
 import { authProvidersExtensionPoint } from '@backstage/plugin-auth-node';
 import { JWTTokenValidator, TokenValidator } from './jwt';
 import { ldap } from './provider';
-import {
-    LDAPResponse,
-    ProviderCreateOptions,
-    Resolvers,
-    SignInResolver,
-} from './types';
-import { AuthHandler } from '@backstage/plugin-auth-backend';
+import { ProviderCreateOptions, Resolvers, SignInResolver } from './types';
+import { defaultAuthHandler } from './auth';
 import Keyv from 'keyv';
 
 interface LdapAuthSetter {
@@ -23,7 +18,7 @@ interface LdapAuthSetter {
 }
 
 class LdapAuthExt implements LdapAuthSetter {
-    #authHandler: AuthHandler<Partial<LDAPResponse>> | undefined;
+    #authHandler: typeof defaultAuthHandler | undefined;
     #resolvers: Resolvers | undefined;
     #signInResolver: SignInResolver | undefined;
     #tokenValidatorExt: TokenValidator | undefined;
