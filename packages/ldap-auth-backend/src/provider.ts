@@ -60,7 +60,7 @@ export class ProviderLdapAuthProvider implements AuthProviderRouteHandlers {
         return;
     }
 
-    async check(uid: string): Promise<undefined | Error> {
+    async check(uid: string): Promise<void> {
         const exists = await this.checkUserExists(
             {
                 ...this.ldapAuthenticationOptions,

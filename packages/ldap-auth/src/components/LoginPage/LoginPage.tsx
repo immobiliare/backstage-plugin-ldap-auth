@@ -17,8 +17,7 @@
 import { Progress } from '@backstage/core-components';
 import { type SignInPageProps, discoveryApiRef, useApi } from '@backstage/core-plugin-api';
 import { useAsync } from '@react-hookz/web';
-import type React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { LoginForm } from './Form';
 import { LdapSignInIdentity } from './Identity';
 
