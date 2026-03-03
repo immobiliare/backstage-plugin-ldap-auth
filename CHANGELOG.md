@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.0](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v4.4.0-alpha.3...v5.0.0-alpha.0) (2026-03-03)
+
+
+### Features
+
+* updated linting + hooks ([f44ca22](https://github.com/immobiliare/backstage-plugin-ldap-auth/commit/f44ca229569b899ccdcec68b58c35fa1e8dd7d2f))
+
+
+### BREAKING CHANGES
+
+* switched to biome + lefthook
+
+
+
+
+
 # [4.4.0-alpha.3](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v4.4.0-alpha.2...v4.4.0-alpha.3) (2026-03-03)
 
 **Note:** Version bump only for package root
