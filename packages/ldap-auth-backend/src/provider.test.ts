@@ -1,28 +1,22 @@
-import { AuthResolverContext } from '@backstage/plugin-auth-node';
-import { ProviderLdapAuthProvider } from './provider';
-import { defaultCheckUserExists, defaultLDAPAuthentication } from './ldap';
-import { defaultAuthHandler, defaultSigninResolver } from './auth';
-import { COOKIE_FIELD_KEY, JWTTokenValidator } from './jwt';
-import { AuthenticationOptions } from 'ldap-authentication';
-import jwt from 'jsonwebtoken';
 import { AuthenticationError } from '@backstage/errors';
-import { AUTH_MISSING_CREDENTIALS, JWT_EXPIRED_TOKEN } from './errors';
+import { AuthResolverContext } from '@backstage/plugin-auth-node';
+import jwt from 'jsonwebtoken';
 import Keyv from 'keyv';
+import { AuthenticationOptions } from 'ldap-authentication';
+import { defaultAuthHandler, defaultSigninResolver } from './auth';
+import { AUTH_MISSING_CREDENTIALS, JWT_EXPIRED_TOKEN } from './errors';
+import { COOKIE_FIELD_KEY, JWTTokenValidator } from './jwt';
+import { defaultCheckUserExists, defaultLDAPAuthentication } from './ldap';
+import { ProviderLdapAuthProvider } from './provider';
 
 export function createProvider() {
     const sub = 'my-uid-name';
     const token = jwt.sign({ sub }, 'secret', {
         expiresIn: '1min',
     });
-    const authHandler = jest.fn(
-        defaultAuthHandler
-    ) as typeof defaultAuthHandler;
-    const checkUserExists = jest.fn(() =>
-        Promise.resolve(true)
-    ) as typeof defaultCheckUserExists;
-    const signInResolver = jest.fn(
-        defaultSigninResolver
-    ) as typeof defaultSigninResolver;
+    const authHandler = jest.fn(defaultAuthHandler) as typeof defaultAuthHandler;
+    const checkUserExists = jest.fn(() => Promise.resolve(true)) as typeof defaultCheckUserExists;
+    const signInResolver = jest.fn(defaultSigninResolver) as typeof defaultSigninResolver;
     const signInWithCatalogUser = jest.fn(async ({}) => ({
         token,
     }));
@@ -33,11 +27,7 @@ export function createProvider() {
         },
     }));
     const ldapAuthentication = jest.fn(
-        async (
-            username: string,
-            password: string,
-            ldapAuthOptions: AuthenticationOptions
-        ) =>
+        async (username: string, password: string, ldapAuthOptions: AuthenticationOptions) =>
             defaultLDAPAuthentication(
                 username,
                 password,
@@ -80,14 +70,8 @@ export function createProvider() {
 
 describe('LdapAuthProvider login tests', () => {
     it('Test refresh for login with username and password', async () => {
-        const {
-            provider,
-            sub,
-            token,
-            ldapAuthentication,
-            authHandler,
-            checkUserExists,
-        } = createProvider();
+        const { provider, sub, token, ldapAuthentication, authHandler, checkUserExists } =
+            createProvider();
         const reqMock = {
             body: { username: sub, password: 'hello-world' },
             // [COOKIE_FIELD_KEY]: 'token-for-user:my-uid-name',
@@ -119,14 +103,8 @@ describe('LdapAuthProvider login tests', () => {
     });
 
     it('Test refresh with token', async () => {
-        const {
-            provider,
-            sub,
-            token,
-            ldapAuthentication,
-            authHandler,
-            checkUserExists,
-        } = createProvider();
+        const { provider, sub, token, ldapAuthentication, authHandler, checkUserExists } =
+            createProvider();
         const oldToken = jwt.sign({ sub }, 'secret', {
             expiresIn: '1min',
         });
@@ -161,13 +139,8 @@ describe('LdapAuthProvider login tests', () => {
     });
 
     it('Test refresh should not accept GET', async () => {
-        const {
-            provider,
-            sub,
-            ldapAuthentication,
-            authHandler,
-            checkUserExists,
-        } = createProvider();
+        const { provider, sub, ldapAuthentication, authHandler, checkUserExists } =
+            createProvider();
         const oldToken = jwt.sign({ sub }, 'secret', {
             expiresIn: '1min',
         });
@@ -181,9 +154,9 @@ describe('LdapAuthProvider login tests', () => {
             json: jest.fn(),
             clearCookie: jest.fn(),
         };
-        await expect(
-            provider.refresh(reqMock as any, resMock as any)
-        ).rejects.toEqual(new AuthenticationError('Method not allowed'));
+        await expect(provider.refresh(reqMock as any, resMock as any)).rejects.toEqual(
+            new AuthenticationError('Method not allowed')
+        );
         expect(resMock.json).not.toHaveBeenCalled();
         expect(authHandler).not.toHaveBeenCalled();
         expect(ldapAuthentication).not.toHaveBeenCalled();
@@ -193,8 +166,7 @@ describe('LdapAuthProvider login tests', () => {
     });
 
     it('Test refresh should throw right error if missing credentials or token', async () => {
-        const { provider, ldapAuthentication, authHandler, checkUserExists } =
-            createProvider();
+        const { provider, ldapAuthentication, authHandler, checkUserExists } = createProvider();
         const reqMock = {
             body: {},
             cookies: {},
@@ -205,9 +177,9 @@ describe('LdapAuthProvider login tests', () => {
             json: jest.fn(),
             clearCookie: jest.fn(),
         };
-        await expect(
-            provider.refresh(reqMock as any, resMock as any)
-        ).rejects.toEqual(new AuthenticationError(AUTH_MISSING_CREDENTIALS));
+        await expect(provider.refresh(reqMock as any, resMock as any)).rejects.toEqual(
+            new AuthenticationError(AUTH_MISSING_CREDENTIALS)
+        );
         expect(resMock.json).not.toHaveBeenCalled();
         expect(authHandler).not.toHaveBeenCalled();
         expect(ldapAuthentication).not.toHaveBeenCalled();
@@ -255,9 +227,9 @@ describe('LdapAuthProvider token invalidation tests', () => {
         });
         // Not I redo the request with the old token
         timer.advanceTimersByTime(2000);
-        expect(
-            provider.refresh(reqMock as any, resMock as any)
-        ).rejects.toEqual(new Error(JWT_EXPIRED_TOKEN));
+        expect(provider.refresh(reqMock as any, resMock as any)).rejects.toEqual(
+            new Error(JWT_EXPIRED_TOKEN)
+        );
     });
 
     it('Test refresh the new token should be valid', async () => {
@@ -267,8 +239,7 @@ describe('LdapAuthProvider token invalidation tests', () => {
             expiresIn: '1min',
         });
         timer.advanceTimersByTime(2000);
-        const { provider, sub, token, signInWithCatalogUser } =
-            createProvider();
+        const { provider, sub, token, signInWithCatalogUser } = createProvider();
 
         const reqMock = {
             body: {},
@@ -305,9 +276,7 @@ describe('LdapAuthProvider token invalidation tests', () => {
             })
         );
         reqMock.cookies[COOKIE_FIELD_KEY] = token;
-        await expect(
-            provider.refresh(reqMock as any, resMock as any)
-        ).resolves.toEqual(undefined);
+        await expect(provider.refresh(reqMock as any, resMock as any)).resolves.toEqual(undefined);
         expect(resMock.json).lastCalledWith({
             backstageIdentity: {
                 identity: {
@@ -355,16 +324,14 @@ describe('LdapAuthProvider token logout', () => {
 
         reqMock.cookies[COOKIE_FIELD_KEY] = token;
         timer.advanceTimersByTime(2000);
-        await expect(
-            provider.logout(reqMock as any, resMock as any)
-        ).resolves.toEqual(undefined);
+        await expect(provider.logout(reqMock as any, resMock as any)).resolves.toEqual(undefined);
 
         expect(resMock.status).toHaveBeenCalledWith(200);
         expect(resMock.clearCookie).toHaveBeenCalledWith(COOKIE_FIELD_KEY);
         expect(resMock.end).toHaveBeenCalled();
         timer.advanceTimersByTime(2000);
-        expect(
-            provider.refresh(reqMock as any, resMock as any)
-        ).rejects.toEqual(new Error(JWT_EXPIRED_TOKEN));
+        expect(provider.refresh(reqMock as any, resMock as any)).rejects.toEqual(
+            new Error(JWT_EXPIRED_TOKEN)
+        );
     });
 });

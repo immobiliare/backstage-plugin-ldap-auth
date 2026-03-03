@@ -93,11 +93,11 @@ export type BackstageJWTPayload = {
     exp: number;
 };
 
-import type { TokenValidator } from './jwt';
 import type { AuthResolverContext } from '@backstage/plugin-auth-node';
 import type { AuthenticationOptions } from 'ldap-authentication';
-import { defaultAuthHandler, defaultSigninResolver } from './auth';
-import { defaultCheckUserExists, defaultLDAPAuthentication } from './ldap';
+import type { defaultAuthHandler, defaultSigninResolver } from './auth';
+import type { TokenValidator } from './jwt';
+import type { defaultCheckUserExists, defaultLDAPAuthentication } from './ldap';
 
 export type CookiesOptions = {
     field: string;

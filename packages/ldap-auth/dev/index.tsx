@@ -1,7 +1,7 @@
-import React from 'react';
+import type { IdentityApi } from '@backstage/core-plugin-api';
 import { createDevApp } from '@backstage/dev-utils';
+import React from 'react';
 import { LdapAuthFrontendPage, ldapAuthFrontendPlugin } from '../src';
-import { IdentityApi } from '@backstage/core-plugin-api';
 
 createDevApp()
     .registerPlugin(ldapAuthFrontendPlugin)
@@ -13,10 +13,10 @@ createDevApp()
                     helperTextUsername:
                         "Usually it's  the first letter of your name followed by the surname, e.g. Dario Rossi 👉 drossi",
                 }}
-                onSignInSuccess={function (_identityApi: IdentityApi): void {
+                onSignInSuccess={(_identityApi: IdentityApi): void => {
                     console.log('LoggedIn');
                 }}
-            ></LdapAuthFrontendPage>
+            />
         ),
         title: 'Root Page',
         path: '/backstage-plugin-ldap',

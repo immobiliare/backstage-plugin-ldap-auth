@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-import {
+import type {
     BackstageUserIdentity,
-    discoveryApiRef,
     IdentityApi,
     ProfileInfo,
+    discoveryApiRef,
 } from '@backstage/core-plugin-api';
 import { ResponseError } from '@backstage/errors';
-import { LdapSession, ldapSessionSchema } from './types';
+import { type LdapSession, ldapSessionSchema } from './types';
 
 export const DEFAULTS = {
     // The amount of time between token refreshes, if we fail to get an actual
@@ -158,27 +158,22 @@ export class LdapSignInIdentity implements IdentityApi {
     getSessionSync(): LdapSession {
         if (this.state.type === 'active') {
             return this.state.session;
-        } else if (this.state.type === 'fetching' && this.state.previous) {
+        }
+        if (this.state.type === 'fetching' && this.state.previous) {
             return this.state.previous;
         }
-        throw new Error(
-            'No session available. Try reloading your browser page.'
-        );
+        throw new Error('No session available. Try reloading your browser page.');
     }
 
     async getSessionAsync(forceRefresh?: boolean): Promise<LdapSession> {
         if (this.state.type === 'fetching') {
             return this.state.promise;
-        } else if (
-            this.state.type === 'active' &&
-            new Date() < this.state.expiresAt &&
-            !forceRefresh
-        ) {
+        }
+        if (this.state.type === 'active' && new Date() < this.state.expiresAt && !forceRefresh) {
             return this.state.session;
         }
 
-        const previous =
-            this.state.type === 'active' ? this.state.session : undefined;
+        const previous = this.state.type === 'active' ? this.state.session : undefined;
 
         const promise = this.fetchSession().then(
             (session) => {
@@ -210,15 +205,12 @@ export class LdapSignInIdentity implements IdentityApi {
     async loginAsync(auth: Auth): Promise<LdapSession> {
         if (this.state.type === 'fetching') {
             return this.state.promise;
-        } else if (
-            this.state.type === 'active' &&
-            new Date() < this.state.expiresAt
-        ) {
+        }
+        if (this.state.type === 'active' && new Date() < this.state.expiresAt) {
             return this.state.session;
         }
 
-        const previous =
-            this.state.type === 'active' ? this.state.session : undefined;
+        const previous = this.state.type === 'active' ? this.state.session : undefined;
 
         const promise = this.fetchSessionWithAuth(auth).then(
             (session) => {
@@ -253,19 +245,16 @@ export class LdapSignInIdentity implements IdentityApi {
         // Note that we do not use the fetchApi here, since this all happens before
         // sign-in completes so there can be no automatic token injection and
         // similar.
-        const response = await fetch(
-            `${baseUrl}/${this.options.provider}/refresh`,
-            {
-                method: 'POST',
-                signal: this.abortController.signal,
-                headers: {
-                    'x-requested-with': 'XMLHttpRequest',
-                    'Content-Type': 'application/json',
-                },
-                credentials: 'include',
-                body: JSON.stringify(auth),
-            }
-        );
+        const response = await fetch(`${baseUrl}/${this.options.provider}/refresh`, {
+            method: 'POST',
+            signal: this.abortController.signal,
+            headers: {
+                'x-requested-with': 'XMLHttpRequest',
+                'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+            body: JSON.stringify(auth),
+        });
 
         if (!response.ok) {
             throw await ResponseError.fromResponse(response);
@@ -280,15 +269,12 @@ export class LdapSignInIdentity implements IdentityApi {
         // Note that we do not use the fetchApi here, since this all happens before
         // sign-in completes so there can be no automatic token injection and
         // similar.
-        const response = await fetch(
-            `${baseUrl}/${this.options.provider}/refresh`,
-            {
-                method: 'POST',
-                signal: this.abortController.signal,
-                headers: { 'x-requested-with': 'XMLHttpRequest' },
-                credentials: 'include',
-            }
-        );
+        const response = await fetch(`${baseUrl}/${this.options.provider}/refresh`, {
+            method: 'POST',
+            signal: this.abortController.signal,
+            headers: { 'x-requested-with': 'XMLHttpRequest' },
+            credentials: 'include',
+        });
 
         if (!response.ok) {
             throw await ResponseError.fromResponse(response);

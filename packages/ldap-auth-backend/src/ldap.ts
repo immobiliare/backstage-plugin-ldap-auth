@@ -1,14 +1,10 @@
 import type { LDAPUser } from './types';
 
-import ldap from 'ldapjs';
+import type { AuthenticationOptions, authenticate } from 'ldap-authentication';
 import { dn } from 'ldap-escape';
-import { authenticate, AuthenticationOptions } from 'ldap-authentication';
+import ldap from 'ldapjs';
 
-import {
-    AUTH_USER_DATA_ERROR,
-    AUTH_USER_NOT_FOUND,
-    LDAP_CONNECT_FAIL,
-} from './errors';
+import { AUTH_USER_DATA_ERROR, AUTH_USER_NOT_FOUND, LDAP_CONNECT_FAIL } from './errors';
 
 async function _verifyUserExistsNoAdmin(
     searchString: string,
@@ -25,8 +21,7 @@ async function _verifyUserExistsNoAdmin(
         client.on('error', reject);
         client.on('connectError', reject);
     });
-    if (client instanceof Error)
-        throw new Error(`${LDAP_CONNECT_FAIL} ${client.message}`);
+    if (client instanceof Error) throw new Error(`${LDAP_CONNECT_FAIL} ${client.message}`);
     return new Promise((resolve, reject) => {
         client.search(searchString, searchOpts, (error, res) => {
             if (error) reject(error);
@@ -48,14 +43,9 @@ export const defaultCheckUserExists = async (
     // This fallback is for clients with no need for an admin to list users
     // I'll remove this if we can add this option to the auth library.
     if (!ldapAuthOptions.adminDn || !ldapAuthOptions.adminPassword) {
-        const {
-            username,
-            userSearchBase,
-            usernameAttribute = 'uid',
-        } = ldapAuthOptions;
+        const { username, userSearchBase, usernameAttribute = 'uid' } = ldapAuthOptions;
         return _verifyUserExistsNoAdmin(
-            dn`${usernameAttribute as string}=${username as string},` +
-                userSearchBase,
+            dn`${usernameAttribute as string}=${username as string},` + userSearchBase,
             ldapAuthOptions.ldapOpts
         );
     }
@@ -76,8 +66,7 @@ export async function defaultLDAPAuthentication(
     const { usernameAttribute = 'uid' } = ldapAuthOptions;
 
     const userDn =
-        dn`${usernameAttribute as string}=${username as string},` +
-        ldapAuthOptions.userSearchBase;
+        dn`${usernameAttribute as string}=${username as string},` + ldapAuthOptions.userSearchBase;
 
     const authObj = {
         ...ldapAuthOptions,
@@ -97,9 +86,7 @@ export async function defaultLDAPAuthentication(
         }
         return { uid: user[usernameAttribute as string] };
     } catch (e) {
-        console.error(
-            'There was an error when trying to login with ldap-authentication'
-        );
+        console.error('There was an error when trying to login with ldap-authentication');
         throw e;
     }
 }

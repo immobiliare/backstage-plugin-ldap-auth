@@ -4,7 +4,6 @@
 <h1 align="center">@immobiliarelabs/backstage-plugin-ldap-auth-backend</h1>
 
 ![npm (scoped)](https://img.shields.io/npm/v/@immobiliarelabs/backstage-plugin-ldap-auth-backend?style=flat-square)
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier?style=flat-square)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square)](https://github.com/semantic-release/semantic-release)
 ![license](https://img.shields.io/github/license/immobiliare/backstage-plugin-ldap-auth?style=flat-square)
 
@@ -26,18 +25,18 @@ All the current LTS versions are supported.
 
 <!-- toc -->
 
--   [Installation](#installation)
--   [Configurations](#configurations)
-    -   [Setup](#setup)
-    -   [Connection Configuration](#connection-configuration)
-    -   [Add the authentication backend plugin](#add-the-authentication-backend-plugin)
-    -   [Custom LDAP Configurations](#custom-ldap-configurations)
-        -   [Custom authentication function](#custom-authentication-function)
-        -   [Custom check if user exists](#custom-check-if-user-exists)
-    -   [Add the login form](#add-the-login-form)
--   [Powered Apps](#powered-apps)
--   [Support & Contribute](#support--contribute)
--   [License](#license)
+- [Installation](#installation)
+- [Configurations](#configurations)
+  * [Setup](#setup)
+  * [Connection Configuration](#connection-configuration)
+  * [Add the authentication backend plugin](#add-the-authentication-backend-plugin)
+  * [Custom LDAP Configurations](#custom-ldap-configurations)
+    + [Custom authentication function](#custom-authentication-function)
+    + [Custom check if user exists](#custom-check-if-user-exists)
+  * [Add the login form](#add-the-login-form)
+- [Powered Apps](#powered-apps)
+- [Support & Contribute](#support--contribute)
+- [License](#license)
 
 <!-- tocstop -->
 

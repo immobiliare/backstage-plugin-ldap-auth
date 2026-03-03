@@ -1,6 +1,6 @@
-import { defaultCheckUserExists, defaultLDAPAuthentication } from './ldap';
-import { AUTH_USER_DATA_ERROR } from './errors';
 import { AuthenticationOptions } from 'ldap-authentication';
+import { AUTH_USER_DATA_ERROR } from './errors';
+import { defaultCheckUserExists, defaultLDAPAuthentication } from './ldap';
 
 describe('LDAP authentication', () => {
     it('LDAP authentication success', async () => {
@@ -49,9 +49,7 @@ describe('LDAP check user exists', () => {
             adminPassword: 'secretPassword',
         };
         const authFunc = jest.fn(() => Promise.resolve(true));
-        await expect(
-            defaultCheckUserExists(options, authFunc)
-        ).resolves.toEqual(true);
+        await expect(defaultCheckUserExists(options, authFunc)).resolves.toEqual(true);
 
         expect(authFunc).toBeCalledWith({ ...options, verifyUserExists: true });
     });
