@@ -14,16 +14,13 @@
  * limitations under the License.
  */
 
-import {
-    discoveryApiRef,
-    SignInPageProps,
-    useApi,
-} from '@backstage/core-plugin-api';
-import React, { useState, useEffect } from 'react';
-import { useAsync } from '@react-hookz/web';
 import { Progress } from '@backstage/core-components';
-import { LdapSignInIdentity } from './Identity';
+import { type SignInPageProps, discoveryApiRef, useApi } from '@backstage/core-plugin-api';
+import { useAsync } from '@react-hookz/web';
+import type React from 'react';
+import { useEffect, useState } from 'react';
 import { LoginForm } from './Form';
+import { LdapSignInIdentity } from './Identity';
 
 /**
  * Props for {@link LdapSignInPage}.
@@ -75,13 +72,11 @@ export const LdapSignInPage = (props: LdapSignInPageProps) => {
         props.onSignInSuccess(identity);
     });
 
-    const [{ status: statusRefresh }, { execute: executeRefresh }] = useAsync(
-        async () => {
-            await identity.fetch();
+    const [{ status: statusRefresh }, { execute: executeRefresh }] = useAsync(async () => {
+        await identity.fetch();
 
-            props.onSignInSuccess(identity);
-        }
-    );
+        props.onSignInSuccess(identity);
+    });
 
     useEffect(() => {
         executeRefresh();
@@ -93,13 +88,10 @@ export const LdapSignInPage = (props: LdapSignInPageProps) => {
         setTimeout(execute, 0);
     }
 
-    if (
-        status === 'loading' ||
-        statusRefresh === 'loading' ||
-        statusRefresh === 'not-executed'
-    ) {
+    if (status === 'loading' || statusRefresh === 'loading' || statusRefresh === 'not-executed') {
         return <Progress />;
-    } else if (status === 'success' || statusRefresh === 'success') {
+    }
+    if (status === 'success' || statusRefresh === 'success') {
         return null;
     }
 

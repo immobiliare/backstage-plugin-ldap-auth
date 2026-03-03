@@ -1,5 +1,5 @@
 import {
-    RootConfigService,
+    type RootConfigService,
     coreServices,
     createBackendModule,
     createExtensionPoint,
@@ -7,11 +7,11 @@ import {
     createServiceRef,
 } from '@backstage/backend-plugin-api';
 import { authProvidersExtensionPoint } from '@backstage/plugin-auth-node';
-import { JWTTokenValidator, TokenValidator } from './jwt';
-import { ldap } from './provider';
-import { ProviderCreateOptions, Resolvers, SignInResolver } from './types';
-import { defaultAuthHandler } from './auth';
 import Keyv from 'keyv';
+import type { defaultAuthHandler } from './auth';
+import { JWTTokenValidator, type TokenValidator } from './jwt';
+import { ldap } from './provider';
+import type { ProviderCreateOptions, Resolvers, SignInResolver } from './types';
 
 interface LdapAuthSetter {
     set(opt: ProviderCreateOptions): void;
@@ -60,22 +60,15 @@ export const tokenValidatorRef = createServiceRef<TokenValidator>({
 });
 
 type TokenValidatorOptions = {
-    createTokenValidator(
-        config: RootConfigService
-    ): TokenValidator | Promise<TokenValidator>;
+    createTokenValidator(config: RootConfigService): TokenValidator | Promise<TokenValidator>;
 };
 
-export const tokenValidatorFactoryWithOptions = (
-    options?: TokenValidatorOptions
-) =>
+export const tokenValidatorFactoryWithOptions = (options?: TokenValidatorOptions) =>
     createServiceFactory({
         service: tokenValidatorRef,
         deps: { config: coreServices.rootConfig },
         factory({ config }) {
-            return (
-                options?.createTokenValidator(config) ||
-                new JWTTokenValidator(new Keyv())
-            );
+            return options?.createTokenValidator(config) || new JWTTokenValidator(new Keyv());
         },
     });
 
@@ -89,10 +82,7 @@ export default createBackendModule({
     moduleId: 'ldap',
     register(reg) {
         const ldapAuthSetter = new LdapAuthExt();
-        reg.registerExtensionPoint<LdapAuthSetter>(
-            ldapAuthExtensionPoint,
-            ldapAuthSetter
-        );
+        reg.registerExtensionPoint<LdapAuthSetter>(ldapAuthExtensionPoint, ldapAuthSetter);
 
         reg.registerInit({
             deps: {
@@ -103,8 +93,7 @@ export default createBackendModule({
                 providers.registerProvider({
                     providerId: 'ldap',
                     factory: ldap.create({
-                        tokenValidator:
-                            ldapAuthSetter.tokenValidatorExt || tokenValidator,
+                        tokenValidator: ldapAuthSetter.tokenValidatorExt || tokenValidator,
                         authHandler: ldapAuthSetter.authHandler,
                         resolvers: ldapAuthSetter.resolvers,
                         signIn: ldapAuthSetter.signInResolver,

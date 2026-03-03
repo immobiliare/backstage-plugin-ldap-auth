@@ -1,21 +1,11 @@
-import type {
-    BackstageSignInResult,
-    BackstageIdentityResponse,
-    LDAPUser,
-} from './types';
+import type { BackstageIdentityResponse, BackstageSignInResult, LDAPUser } from './types';
 
-import { ProfileInfo } from '@backstage/plugin-auth-node';
+import type { ProfileInfo } from '@backstage/plugin-auth-node';
 
-import {
-    AuthResolverContext,
-    SignInResolver,
-} from '@backstage/plugin-auth-node';
+import type { AuthResolverContext, SignInResolver } from '@backstage/plugin-auth-node';
 
 /** @internal Replaces the removed AuthHandler type from \@backstage/plugin-auth-backend */
-type AuthHandler<T> = (
-    input: T,
-    ctx: AuthResolverContext
-) => Promise<{ profile: ProfileInfo }>;
+type AuthHandler<T> = (input: T, ctx: AuthResolverContext) => Promise<{ profile: ProfileInfo }>;
 
 import { parseJwtPayload } from './jwt';
 
@@ -38,10 +28,9 @@ export const defaultSigninResolver: SignInResolver<LDAPUser> = async (
     { result },
     ctx: AuthResolverContext
 ): Promise<BackstageSignInResult> => {
-    const backstageIdentity: BackstageSignInResult =
-        await ctx.signInWithCatalogUser({
-            entityRef: result.uid as string,
-        });
+    const backstageIdentity: BackstageSignInResult = await ctx.signInWithCatalogUser({
+        entityRef: result.uid as string,
+    });
 
     return backstageIdentity;
 };

@@ -1,8 +1,8 @@
 import { Content, Page } from '@backstage/core-components';
-import React, { useEffect, useState } from 'react';
-import { Paper, TextField, Container, Button } from '@material-ui/core';
+import { Button, Container, Paper, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import PasswordValidator from 'password-validator';
+import React, { useEffect, useState } from 'react';
 
 export type LoginFormProps = {
     onSubmit: (username: string, password: string) => void;
@@ -44,10 +44,8 @@ export const LoginForm = ({
     validateUsername,
     usernameLabel,
 }: LoginFormProps) => {
-    const validatePasswd =
-        validatePassword || passwordSchema.validate.bind(passwordSchema);
-    const validateUsern =
-        validateUsername || usernameSchema.validate.bind(usernameSchema);
+    const validatePasswd = validatePassword || passwordSchema.validate.bind(passwordSchema);
+    const validateUsern = validateUsername || usernameSchema.validate.bind(usernameSchema);
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');

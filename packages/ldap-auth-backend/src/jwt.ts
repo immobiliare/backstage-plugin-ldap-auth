@@ -1,7 +1,7 @@
 import type Keyv from 'keyv';
 
+import { JWT_EXPIRED_TOKEN, JWT_INVALID_TOKEN } from './errors';
 import type { BackstageJWTPayload } from './types';
-import { JWT_INVALID_TOKEN, JWT_EXPIRED_TOKEN } from './errors';
 
 export const COOKIE_FIELD_KEY = 'backstage-token';
 
@@ -29,7 +29,7 @@ export class JWTTokenValidator implements TokenValidator {
 
     constructor(store: Keyv, increaseTokenExpireMs?: number) {
         this.store = store;
-        this.increaseTokenExpireMs = isNaN(increaseTokenExpireMs || 0)
+        this.increaseTokenExpireMs = Number.isNaN(increaseTokenExpireMs || 0)
             ? 0
             : increaseTokenExpireMs || 0;
     }
@@ -51,10 +51,7 @@ export class JWTTokenValidator implements TokenValidator {
     async isValid(jwt: string) {
         const { sub, iat, exp } = parseJwtPayload(jwt);
 
-        if (
-            normalizeTime(Date.now()) >
-            exp + normalizeTime(this.increaseTokenExpireMs)
-        ) {
+        if (normalizeTime(Date.now()) > exp + normalizeTime(this.increaseTokenExpireMs)) {
             // is expired?
             throw new Error(JWT_EXPIRED_TOKEN);
         }

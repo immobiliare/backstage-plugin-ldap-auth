@@ -1,4 +1,4 @@
-import { parseJwtPayload, JWTTokenValidator, normalizeTime } from './jwt';
+import { JWTTokenValidator, normalizeTime, parseJwtPayload } from './jwt';
 
 import jwt from 'jsonwebtoken';
 import Keyv from 'keyv';
@@ -49,9 +49,7 @@ describe('Token Validator', () => {
         await validator.invalidateToken(j);
         timer.advanceTimersByTime(1500);
 
-        await expect(validator.isValid(j)).rejects.toEqual(
-            new Error(JWT_EXPIRED_TOKEN)
-        );
+        await expect(validator.isValid(j)).rejects.toEqual(new Error(JWT_EXPIRED_TOKEN));
     });
 
     it('invalidating the last tokens should invalidate all tokens', async () => {
@@ -70,9 +68,7 @@ describe('Token Validator', () => {
         });
         timer.advanceTimersByTime(1500);
 
-        for (const promiseOut of [...tokens, lastToken].map(
-            validator.isValid.bind(validator)
-        )) {
+        for (const promiseOut of [...tokens, lastToken].map(validator.isValid.bind(validator))) {
             await expect(promiseOut).resolves.toEqual(true);
         }
         timer.advanceTimersByTime(1500);
@@ -80,12 +76,8 @@ describe('Token Validator', () => {
         await validator.invalidateToken(lastToken);
         timer.advanceTimersByTime(1500);
 
-        for (const promiseOut of [...tokens, lastToken].map(
-            validator.isValid.bind(validator)
-        )) {
-            await expect(promiseOut).rejects.toEqual(
-                new Error(JWT_EXPIRED_TOKEN)
-            );
+        for (const promiseOut of [...tokens, lastToken].map(validator.isValid.bind(validator))) {
+            await expect(promiseOut).rejects.toEqual(new Error(JWT_EXPIRED_TOKEN));
         }
     });
 
@@ -102,21 +94,15 @@ describe('Token Validator', () => {
         });
         timer.advanceTimersByTime(1500);
 
-        for (const promiseOut of tokens.map(
-            validator.isValid.bind(validator)
-        )) {
+        for (const promiseOut of tokens.map(validator.isValid.bind(validator))) {
             await expect(promiseOut).resolves.toEqual(true);
         }
 
         // tokens should invalid after 1 hour and 1 second
         timer.advanceTimersByTime(60 * 60 * 10e3 + 1500);
 
-        for (const promiseOut of tokens.map(
-            validator.isValid.bind(validator)
-        )) {
-            await expect(promiseOut).rejects.toEqual(
-                new Error(JWT_EXPIRED_TOKEN)
-            );
+        for (const promiseOut of tokens.map(validator.isValid.bind(validator))) {
+            await expect(promiseOut).rejects.toEqual(new Error(JWT_EXPIRED_TOKEN));
         }
     });
 
@@ -133,30 +119,22 @@ describe('Token Validator', () => {
         });
         timer.advanceTimersByTime(1500);
 
-        for (const promiseOut of tokens.map(
-            validator.isValid.bind(validator)
-        )) {
+        for (const promiseOut of tokens.map(validator.isValid.bind(validator))) {
             await expect(promiseOut).resolves.toEqual(true);
         }
 
         // tokens should invalid after 1 hour and 1 second
         timer.advanceTimersByTime(60 * 60 * 10e3 + 1500);
 
-        for (const promiseOut of tokens.map(
-            validator.isValid.bind(validator)
-        )) {
+        for (const promiseOut of tokens.map(validator.isValid.bind(validator))) {
             await expect(promiseOut).resolves.toEqual(true);
         }
 
         // tokens should invalid after 1 hour and 1 second
         timer.advanceTimersByTime(60 * 60 * 10e3 + 1500);
 
-        for (const promiseOut of tokens.map(
-            validator.isValid.bind(validator)
-        )) {
-            await expect(promiseOut).rejects.toEqual(
-                new Error(JWT_EXPIRED_TOKEN)
-            );
+        for (const promiseOut of tokens.map(validator.isValid.bind(validator))) {
+            await expect(promiseOut).rejects.toEqual(new Error(JWT_EXPIRED_TOKEN));
         }
     });
 
@@ -176,8 +154,6 @@ describe('Token Validator', () => {
 
         timer.advanceTimersByTime(1500);
 
-        await expect(validator.isValid(token)).rejects.toEqual(
-            new Error(JWT_EXPIRED_TOKEN)
-        );
+        await expect(validator.isValid(token)).rejects.toEqual(new Error(JWT_EXPIRED_TOKEN));
     });
 });

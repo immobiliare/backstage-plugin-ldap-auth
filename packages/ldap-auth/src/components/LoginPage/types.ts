@@ -1,7 +1,4 @@
-import {
-    BackstageIdentityResponse,
-    ProfileInfo,
-} from '@backstage/core-plugin-api';
+import type { BackstageIdentityResponse, ProfileInfo } from '@backstage/core-plugin-api';
 import { z } from 'zod';
 
 export const ldapSessionSchema = z.object({

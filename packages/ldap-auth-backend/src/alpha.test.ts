@@ -1,13 +1,9 @@
-import {
-    ldapAuthExtensionPoint,
-    default as ldapAuthModule,
-    tokenValidatorFactory,
-} from './alpha';
-import { mockServices, startTestBackend } from '@backstage/backend-test-utils';
-import request from 'supertest';
-import { COOKIE_FIELD_KEY, JWTTokenValidator } from './jwt';
-import Keyv from 'keyv';
 import { createBackendModule } from '@backstage/backend-plugin-api';
+import { mockServices, startTestBackend } from '@backstage/backend-test-utils';
+import Keyv from 'keyv';
+import request from 'supertest';
+import { ldapAuthExtensionPoint, default as ldapAuthModule, tokenValidatorFactory } from './alpha';
+import { COOKIE_FIELD_KEY, JWTTokenValidator } from './jwt';
 
 describe('ldapProvider new backend system', () => {
     it('extension point should work', async () => {
@@ -62,8 +58,7 @@ describe('ldapProvider new backend system', () => {
                                 ldapAuth.set({
                                     tokenValidator: createTokenValidator(),
                                     resolvers: {
-                                        ldapAuthentication:
-                                            ldapAuthenticationMock,
+                                        ldapAuthentication: ldapAuthenticationMock,
                                     },
                                     authHandler: authHandlerMock as any,
                                     signIn: { resolver: signIn },
@@ -95,9 +90,7 @@ describe('ldapProvider new backend system', () => {
         });
 
         const agent = request.agent(server);
-        await agent
-            .post('/api/auth/ldap/refresh')
-            .send({ username: 'hello', password: 'world' });
+        await agent.post('/api/auth/ldap/refresh').send({ username: 'hello', password: 'world' });
 
         expect(ldapAuthenticationMock).toHaveBeenCalled();
         expect(invalidateTokenMock).not.toHaveBeenCalled();
