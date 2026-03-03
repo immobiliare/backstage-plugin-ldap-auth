@@ -50,6 +50,12 @@ export class ProviderLdapAuthProvider implements AuthProviderRouteHandlers {
         this.ldapAuthenticationOptions = options.ldapAuthenticationOptions;
         this.cookies = options.cookies as CookiesOptions;
         this.jwtValidator = options.tokenValidator || new TokenValidatorNoop();
+
+        // ldap-authenticate only support ONE url for now, we take the first one
+        if (Array.isArray(this.ldapAuthenticationOptions?.ldapOpts?.url)) {
+            this.ldapAuthenticationOptions.ldapOpts.url = this.ldapAuthenticationOptions.ldapOpts.url[0];
+        }
+
     }
 
     // must keep this methods for the interface
