@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
-import { type AuthenticationOptions, authenticate } from 'ldap-authentication';
 import type {
+    LdapAuthenticationOptions,
     BackstageLdapAuthConfiguration,
     CookiesOptions,
     ProviderConstructor,
@@ -38,7 +38,7 @@ export class ProviderLdapAuthProvider implements AuthProviderRouteHandlers {
     private readonly signInResolver: typeof defaultSigninResolver;
     private readonly resolverContext: AuthResolverContext;
     private readonly jwtValidator: TokenValidator;
-    private readonly ldapAuthenticationOptions: AuthenticationOptions;
+    private readonly ldapAuthenticationOptions: LdapAuthenticationOptions;
     private readonly cookies: CookiesOptions;
 
     constructor(options: ProviderConstructor) {
@@ -71,8 +71,7 @@ export class ProviderLdapAuthProvider implements AuthProviderRouteHandlers {
             {
                 ...this.ldapAuthenticationOptions,
                 username: uid,
-            },
-            authenticate
+            }
         );
         if (!exists) throw new Error(JWT_INVALID_TOKEN);
     }
@@ -92,8 +91,7 @@ export class ProviderLdapAuthProvider implements AuthProviderRouteHandlers {
                 const { uid } = await this.ldapAuthentication(
                     username,
                     password,
-                    this.ldapAuthenticationOptions,
-                    authenticate
+                    this.ldapAuthenticationOptions
                 );
                 result = { uid: uid as string };
             } else if (token) {

@@ -10,7 +10,7 @@ export default async function createPlugin(
     providerFactories: {
       ldap: ldap.create({
         resolvers: {
-            async checkUserExists(ldapAuthOptions, searchFunction): Promise<boolean> {
+            async checkUserExists(ldapAuthOptions): Promise<boolean> {
                 const { username } = ldapAuthOptions;
 
                 // Do you custom checks
@@ -19,6 +19,7 @@ export default async function createPlugin(
                 return true;
             }
         }
+      })
     },
   });
 }
