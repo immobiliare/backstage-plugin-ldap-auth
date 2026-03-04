@@ -94,7 +94,19 @@ export type BackstageJWTPayload = {
 };
 
 import type { AuthResolverContext } from '@backstage/plugin-auth-node';
-import type { AuthenticationOptions } from 'ldap-authentication';
+import type { ClientOptions } from 'ldapts';
+
+export interface LdapAuthenticationOptions {
+    ldapOpts: ClientOptions;
+    userSearchBase?: string;
+    usernameAttribute?: string;
+    username?: string;
+    adminDn?: string;
+    adminPassword?: string;
+    starttls?: boolean;
+    userPassword?: string;
+}
+
 import type { defaultAuthHandler, defaultSigninResolver } from './auth';
 import type { TokenValidator } from './jwt';
 import type { defaultCheckUserExists, defaultLDAPAuthentication } from './ldap';
@@ -106,7 +118,7 @@ export type CookiesOptions = {
 
 export type BackstageLdapAuthConfiguration = {
     cookies?: Partial<CookiesOptions>;
-    ldapAuthenticationOptions: AuthenticationOptions;
+    ldapAuthenticationOptions: LdapAuthenticationOptions;
 };
 
 export type Resolvers = {
@@ -132,7 +144,7 @@ export type ProviderCreateOptions = {
 
 export type ProviderConstructor = {
     cookies: BackstageLdapAuthConfiguration['cookies'];
-    ldapAuthenticationOptions: AuthenticationOptions;
+    ldapAuthenticationOptions: LdapAuthenticationOptions;
     authHandler: typeof defaultAuthHandler;
     signInResolver: typeof defaultSigninResolver;
     checkUserExists: typeof defaultCheckUserExists;

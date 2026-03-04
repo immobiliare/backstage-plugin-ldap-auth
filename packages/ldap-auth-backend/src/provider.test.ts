@@ -2,7 +2,7 @@ import { AuthenticationError } from '@backstage/errors';
 import { AuthResolverContext } from '@backstage/plugin-auth-node';
 import jwt from 'jsonwebtoken';
 import Keyv from 'keyv';
-import { AuthenticationOptions } from 'ldap-authentication';
+import { LdapAuthenticationOptions } from './types';
 import { defaultAuthHandler, defaultSigninResolver } from './auth';
 import { AUTH_MISSING_CREDENTIALS, JWT_EXPIRED_TOKEN } from './errors';
 import { COOKIE_FIELD_KEY, JWTTokenValidator } from './jwt';
@@ -27,16 +27,7 @@ export function createProvider() {
         },
     }));
     const ldapAuthentication = jest.fn(
-        async (username: string, password: string, ldapAuthOptions: AuthenticationOptions) =>
-            defaultLDAPAuthentication(
-                username,
-                password,
-                ldapAuthOptions,
-                (options: AuthenticationOptions) =>
-                    Promise.resolve({
-                        [options.usernameAttribute as string]: sub,
-                    })
-            )
+        async (_username: string, _password: string, _ldapAuthOptions: LdapAuthenticationOptions) => Promise.resolve({ uid: sub })
     ) as typeof defaultLDAPAuthentication;
     const provider = new ProviderLdapAuthProvider({
         resolverContext: {
