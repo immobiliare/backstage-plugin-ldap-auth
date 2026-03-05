@@ -18,7 +18,7 @@ import { Progress } from '@backstage/core-components';
 import { type SignInPageProps, discoveryApiRef, useApi } from '@backstage/core-plugin-api';
 import { useAsync } from '@react-hookz/web';
 import React, { useEffect, useState } from 'react';
-import { LoginForm } from './Form';
+import { LoginForm, type LoginFormStyles } from './Form';
 import { LdapSignInIdentity } from './Identity';
 
 /**
@@ -28,6 +28,7 @@ import { LdapSignInIdentity } from './Identity';
  */
 export type LdapSignInPageProps = SignInPageProps & {
     provider: string;
+    logo?: React.ReactNode;
     children?: React.ReactNode | null;
     onSignInError?: (error: Error) => void;
     options?: {
@@ -36,6 +37,8 @@ export type LdapSignInPageProps = SignInPageProps & {
         validateUsername?: (usr: string) => boolean;
         validatePassword?: (pass: string) => boolean;
         usernameLabel?: string;
+        /** Optional inline style overrides for the login form layout. */
+        styles?: LoginFormStyles;
     };
 };
 
@@ -105,6 +108,7 @@ export const LdapSignInPage = (props: LdapSignInPageProps) => {
                 onSubmit={onSubmit}
                 onSignInError={onSignInError}
                 error={error}
+                logo={props.logo}
                 {...props.options}
             />
         </>

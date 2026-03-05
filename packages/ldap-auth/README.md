@@ -22,6 +22,8 @@ All the current LTS versions are supported.
 
 - [Installation](#installation)
 - [Configuration](#configuration)
+  * [Old Frontend System](#old-frontend-system)
+  * [New Frontend System](#new-frontend-system)
 - [Powered Apps](#powered-apps)
 - [Support & Contribute](#support--contribute)
 - [License](#license)
@@ -53,23 +55,87 @@ The component out of the box only shows the form, but you can pass down children
   <img src="https://github.com/immobiliare/backstage-plugin-ldap-auth/blob/main/screen.png?raw=true?cdn=1" width="600px" />
 </p>
 
-In the `App.tsx` file, change the `createApp` function adding a `components` with our custom `SignInPage`
+### Old Frontend System
+
+In the `App.tsx` file, change the `createApp` function adding a `components` section with our custom `SignInPage`.
 
 **Note:** This components isn't only UI, it also brings all the token state management and HTTP API calls to the backstage auth routes we already configured in the backend part.
+
+You can customize the login page by passing down a `logo` component and an `options.styles` object.
 
 > `packages/app/src/App.tsx`
 
 ```tsx
 import { LdapAuthFrontendPage } from '@immobiliarelabs/backstage-plugin-ldap-auth';
+// Import your custom logo component
+import LogoFull from './components/topbar/LogoFull';
 
 const app = createApp({
     // ...
     components: {
         SignInPage: (props) => (
-            <LdapAuthFrontendPage {...props} provider="ldap" />
+            <LdapAuthFrontendPage 
+                {...props} 
+                provider="ldap" 
+                logo={<LogoFull />}
+                options={{
+                    styles: {
+                        container: {
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            minHeight: '100vh',
+                            background: '#1a1a2e',
+                        },
+                        paper: { borderRadius: 16, maxWidth: 400 },
+                        form: { padding: '1rem' },
+                    }
+                }}
+            />
         ),
     },
     // ...
+});
+```
+
+### New Frontend System
+
+In the new frontend system, you can use the newly exported `createLdapAuthModule` helper from the `/alpha` path.
+
+It accepts an optional `logo` and `options.styles` to easily customize the sign-in page without writing any boilerplate code.
+
+Then, add it to your app's features in `packages/app/src/App.tsx` (or `packages/app/src/index.tsx` depending on your setup):
+
+> `packages/app/src/App.tsx`
+
+```tsx
+import { createFrontendApp } from '@backstage/frontend-app-api';
+import { createLdapAuthModule } from '@immobiliarelabs/backstage-plugin-ldap-auth/alpha';
+// Import your custom logo component
+import LogoFull from './components/topbar/LogoFull';
+
+export const app = createFrontendApp({
+  features: [
+    // ... other features and plugins
+    createLdapAuthModule({
+      logo: <LogoFull />,
+      options: {
+        styles: {
+          container: {
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            minHeight: '100vh',
+            background: '#1a1a2e',
+          },
+          paper: { borderRadius: 16, maxWidth: 400 },
+          form: { padding: '1rem' },
+        },
+      },
+    }),
+  ],
 });
 ```
 

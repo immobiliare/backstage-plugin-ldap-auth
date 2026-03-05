@@ -2089,7 +2089,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/frontend-plugin-api@npm:^0.14.0":
+"@backstage/frontend-plugin-api@npm:^0.14.0, @backstage/frontend-plugin-api@npm:^0.14.1":
   version: 0.14.1
   resolution: "@backstage/frontend-plugin-api@npm:0.14.1"
   dependencies:
@@ -3542,6 +3542,8 @@ __metadata:
     "@backstage/core-components": "npm:^0.18.7"
     "@backstage/core-plugin-api": "npm:^1.12.3"
     "@backstage/dev-utils": "npm:^1.1.20"
+    "@backstage/frontend-plugin-api": "npm:^0.14.1"
+    "@backstage/plugin-app-react": "npm:^0.2.0"
     "@backstage/theme": "npm:^0.7.2"
     "@material-ui/core": "npm:^4.12.4"
     "@react-hookz/web": "npm:^23.0.0"
@@ -3550,13 +3552,16 @@ __metadata:
     "@types/node": "npm:^20.5.9"
     cross-fetch: "npm:^3.1.5"
     password-validator: "npm:^5.3.0"
-    react: "npm:^18.2.0"
-    react-dom: "npm:^18.2.0"
+    react: "npm:18.3.1"
+    react-dom: "npm:18.3.1"
     react-router: "npm:^6.4.5"
     react-router-dom: "npm:^6.4.5"
     zod: "npm:^3.17.3"
   peerDependencies:
-    react: ^16.13.1 || ^17.0.0
+    react: ^18.0.0
+    react-dom: ^18.0.0
+    react-router: ^6.30.2
+    react-router-dom: ^6.30.2
   languageName: unknown
   linkType: soft
 
@@ -24456,7 +24461,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^18.2.0":
+"react-dom@npm:18.3.1":
   version: 18.3.1
   resolution: "react-dom@npm:18.3.1"
   dependencies:
@@ -24790,7 +24795,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:^18.2.0":
+"react@npm:18.3.1":
   version: 18.3.1
   resolution: "react@npm:18.3.1"
   dependencies:
