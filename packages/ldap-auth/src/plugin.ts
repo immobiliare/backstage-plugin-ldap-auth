@@ -6,4 +6,7 @@ export const ldapAuthFrontendPlugin = createPlugin({
     id: 'ldap-auth-frontend',
 });
 
+/** @deprecated Use ldapAuthFrontendPlugin instead */
+export const ldapAuthPlugin = ldapAuthFrontendPlugin;
+
 export const LdapAuthFrontendPage = LdapSignInPage;

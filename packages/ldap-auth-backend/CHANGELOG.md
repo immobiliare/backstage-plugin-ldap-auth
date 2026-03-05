@@ -6,6 +6,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 # [5.0.0-alpha.3](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v5.0.0-alpha.2...v5.0.0-alpha.3) (2026-03-03)
 
 
+### Features
+
+* **backend:** migrated from `ldapjs` to `ldapts` ([#ref](https://github.com/vmaranduca/ldapts))
+* **backend:** added support for `starttls` in LDAP configuration
+
 ### Bug Fixes
 
 * **ldap-authenticate:** only support one url for now ([999df4a](https://github.com/immobiliare/backstage-plugin-ldap-auth/commit/999df4a2bfbb9c222554e8796a9dac727a650903))

@@ -74,7 +74,7 @@ and follow this [guide](https://backstage.io/docs/integrations/ldap/org)
 
 > Adds connection configuration inside your backstage YAML config file, eg: `app-config.yaml`
 
-We use [`ldap-authentication`](https://github.com/shaozi/ldap-authentication) for authentication, you can find all the configurations at this [link], `ldapOpts` fields are options provided to lower level ldap client read more at [`ldapjs` ](https://github.com/ldapjs/node-ldapjs)
+We use [`ldapts`](https://github.com/ldapts/ldapts) for authentication, you can find all the configurations at this [link](https://github.com/ldapts/ldapts/blob/main/README.md).
 
 > Add in you You backstage configuration file
 
@@ -101,10 +101,12 @@ auth:
                     # NOTE: If no admin user/pass provided we'll attempt a credential-less search
                     adminDn: uid={ADMIN_USERNAME},ou=users,dc=ns,dc=farm
                     adminPassword: ''
+                    
+                    # Optional: Use StartTLS
+                    # starttls: true
 
                     ldapOpts:
-                        url:
-                            - 'ldaps://123.123.123.123'
+                        url: 'ldaps://123.123.123.123'
                         tlsOptions:
                             rejectUnauthorized: false
 ```
@@ -186,13 +188,11 @@ export default createBackendModule({
                         async ldapAuthentication(
                             username,
                             password,
-                            ldapOptions,
-                            authFunction
-                        ): LDAPUser {
-                            // modify your ldapOptions and do whatever you need to format it
-                            // ...
-                            const user = await authFunction(ldapOptions);
-                            return { uid: user.uid };
+                            options
+                        ): Promise<LDAPUser> {
+                            // perform your custom authentication logic here
+                            // you can use the defaultLDAPAuthentication helper if you just want to wrap it
+                            return { uid: username };
                         },
                     },
                 });
@@ -218,10 +218,9 @@ export default createBackendModule({
                 ldapAuth.set({
                     resolvers: {
                         async checkUserExists(
-                            ldapAuthOptions,
-                            searchFunction
+                            options
                         ): Promise<boolean> {
-                            const { username } = ldapAuthOptions;
+                            const { username } = options;
 
                             // Do you custom checks
                             // ....

@@ -4,18 +4,43 @@ import { makeStyles } from '@material-ui/core/styles';
 import PasswordValidator from 'password-validator';
 import React, { useEffect, useState } from 'react';
 
+/**
+ * Style overrides for the login form layout.
+ *
+ * @public
+ */
+export type LoginFormStyles = {
+    /** Style for the outermost container wrapping children and the form. */
+    container?: React.CSSProperties;
+    /** Style for the Content wrapper (controls overall layout/centering). */
+    content?: React.CSSProperties;
+    /** Style for the Paper card containing the form. */
+    paper?: React.CSSProperties;
+    /** Style for the form element itself. */
+    form?: React.CSSProperties;
+};
+
 export type LoginFormProps = {
     onSubmit: (username: string, password: string) => void;
     onSignInError?: (error: Error) => void;
     error?: Error;
+    logo?: React.ReactNode;
     helperTextUsername?: string;
     helperTextPassword?: string;
     validateUsername?: (usr: string) => boolean;
     validatePassword?: (pass: string) => boolean;
     usernameLabel?: string;
+    /** Optional inline style overrides for the login form layout. */
+    styles?: LoginFormStyles;
 };
 
 const useStyles = makeStyles((theme) => ({
+    content: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '100%',
+    },
     paper: {
         padding: theme.spacing(2),
         textAlign: 'center',
@@ -38,11 +63,13 @@ export const LoginForm = ({
     onSubmit,
     onSignInError,
     error,
+    logo,
     helperTextUsername,
     helperTextPassword,
     validatePassword,
     validateUsername,
     usernameLabel,
+    styles: styleOverrides,
 }: LoginFormProps) => {
     const validatePasswd = validatePassword || passwordSchema.validate.bind(passwordSchema);
     const validateUsern = validateUsername || usernameSchema.validate.bind(usernameSchema);
@@ -88,10 +115,15 @@ export const LoginForm = ({
 
     return (
         <Page themeId="tool">
-            <Content>
-                <Container maxWidth="sm">
-                    <Paper elevation={4} className={classes.paper}>
-                        <form onSubmit={(e) => e.preventDefault()}>
+            <Content noPadding>
+                <div 
+                    className={classes.content} 
+                    style={{ width: '100%', height: '100%', ...styleOverrides?.content }}
+                >
+                    <div style={{ width: '100%', maxWidth: 600, ...styleOverrides?.container }}>
+                        <Paper elevation={4} className={classes.paper} style={styleOverrides?.paper}>
+                            <form onSubmit={(e) => e.preventDefault()} style={styleOverrides?.form}>
+                                {logo}
                             <TextField
                                 required
                                 label={usernameLabel || 'LDAP Name'}
@@ -133,7 +165,8 @@ export const LoginForm = ({
                             </Button>
                         </form>
                     </Paper>
-                </Container>
+                    </div>
+                </div>
             </Content>
         </Page>
     );
