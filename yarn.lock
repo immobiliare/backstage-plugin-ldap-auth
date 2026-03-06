@@ -697,18 +697,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/middleware-sdk-sts@npm:^3.616.0":
-  version: 3.616.0
-  resolution: "@aws-sdk/middleware-sdk-sts@npm:3.616.0"
-  dependencies:
-    "@aws-sdk/middleware-signing": "npm:3.616.0"
-    "@aws-sdk/types": "npm:3.609.0"
-    "@smithy/types": "npm:^3.3.0"
-    tslib: "npm:^2.6.2"
-  checksum: 10/cbdab78a89e324d0ed16350c41d4d5b8246a5bdfcbf473d90b77a13fd736571d6189ab441cf1c8272c385e016212a1dc6913ba9781135bbd9417588e8f0c2e14
-  languageName: node
-  linkType: hard
-
 "@aws-sdk/middleware-signing@npm:3.616.0":
   version: 3.616.0
   resolution: "@aws-sdk/middleware-signing@npm:3.616.0"
@@ -3513,11 +3501,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@immobiliarelabs/backstage-plugin-ldap-auth-backend@workspace:packages/ldap-auth-backend"
   dependencies:
-    "@aws-sdk/middleware-sdk-sts": "npm:^3.616.0"
     "@backstage/backend-plugin-api": "npm:^1.7.0"
     "@backstage/backend-test-utils": "npm:^1.11.0"
     "@backstage/cli": "npm:^0.35.4"
-    "@backstage/core-plugin-api": "npm:^1.12.3"
     "@backstage/errors": "npm:^1.2.7"
     "@backstage/plugin-auth-backend": "npm:^0.27.0"
     "@backstage/plugin-auth-node": "npm:^0.6.13"
