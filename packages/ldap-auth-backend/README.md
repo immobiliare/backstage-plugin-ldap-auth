@@ -25,6 +25,8 @@ All the current LTS versions are supported.
 
 <!-- toc -->
 
+- [Migration to v5.x: `ldapjs` to `ldapts`](#migration-to-v5x-ldapjs-to-ldapts)
+  * [Migration Guide](#migration-guide)
 - [Installation](#installation)
 - [Configurations](#configurations)
   * [Setup](#setup)
@@ -39,6 +41,18 @@ All the current LTS versions are supported.
 - [License](#license)
 
 <!-- tocstop -->
+
+## Migration to v5.x: `ldapjs` to `ldapts`
+
+Starting with version `5.x`, we have fully replaced `ldapjs` and `ldap-authentication` with [`ldapts`](https://github.com/ldapts/ldapts). This architectural switch was necessary because `ldapjs` is no longer maintained and has been deprecated.
+
+### Migration Guide
+
+If you were heavily relying on custom resolvers or internal `ldapjs` types, follow these steps to migrate:
+
+1. **Custom Resolver Changes**: The `ldapAuthentication` and `checkUserExists` resolvers have updated type signatures to accommodate `ldapts`. If you wrote custom resolvers in `4.x`, ensure your functions now accept the `ldapts` `ClientOptions` and return objects that comply with the new signatures.
+2. **Standard Configurations**: For most users using the standard configurations via `app-config.yaml`, the update is drop-in.
+3. **StartTLS Support**: We now fully support the usage of `starttls: true` natively using `ldapts`, which can be turned on in your config!
 
 ## Installation
 
