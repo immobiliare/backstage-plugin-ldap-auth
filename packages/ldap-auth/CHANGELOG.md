@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.4](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v5.0.0-alpha.3...v5.0.0-alpha.4) (2026-03-06)
+
+
+### Features
+
+* new frontend system ([0bb75c1](https://github.com/immobiliare/backstage-plugin-ldap-auth/commit/0bb75c111bb062675d60e1532a025cb760a28806))
+
+
+
+
+
 # [5.0.0-alpha.3](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v5.0.0-alpha.2...v5.0.0-alpha.3) (2026-03-03)
 
 **Note:** Version bump only for package @immobiliarelabs/backstage-plugin-ldap-auth
