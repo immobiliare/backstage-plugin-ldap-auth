@@ -3,13 +3,13 @@ pre-commit:
     commands:
         biome:
             glob: '*.{js,ts,jsx,tsx,json}'
-            run: yarn biome check --write --no-errors-on-unmatched --files-ignore-unknown=true {staged_files}
+            run: yarn biome check --write --no-errors-on-unmatched --files-ignore-unknown=true {staged_files} && git add {staged_files}
         markdown-toc:
             glob: '**/*.md'
             run: |
                 for file in {staged_files}; do
                     yarn markdown-toc -i "$file"
-                done
+                done && git add {staged_files}
 
 commit-msg:
     skip: [ci]
