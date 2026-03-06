@@ -20,15 +20,25 @@ All the current LTS versions are supported.
 
 <!-- toc -->
 
+- [Migration to v5.x & Breaking Changes](#migration-to-v5x--breaking-changes)
 - [Installation](#installation)
 - [Configuration](#configuration)
-  * [Old Frontend System](#old-frontend-system)
   * [New Frontend System](#new-frontend-system)
+  * [Old Frontend System](#old-frontend-system)
+- [Supported Backstage Versions](#supported-backstage-versions)
 - [Powered Apps](#powered-apps)
 - [Support & Contribute](#support--contribute)
 - [License](#license)
 
 <!-- tocstop -->
+
+## Migration to v5.x & Breaking Changes
+
+Starting with version `5.x`, this plugin has fully migrated to Backstage's New Frontend System as the primary way of usage.
+
+**Disclaimer**: This matches how we internally use the plugin at ImmobiliareLabs after completing our migration to the New Frontend System. If you encounter issues with this setup and are unable or unwilling to migrate yet, we recommend using or sticking to the `4.x` versions of this plugin for now.
+
+Additional breaking changes and context for the backend are available in the [Backend README](../ldap-auth-backend/README.md#migration-to-v5x--ldapjs-to-ldapts).
 
 ## Installation
 
@@ -54,6 +64,46 @@ The component out of the box only shows the form, but you can pass down children
 <p align="center">
   <img src="https://github.com/immobiliare/backstage-plugin-ldap-auth/blob/main/screen.png?raw=true?cdn=1" width="600px" />
 </p>
+
+### New Frontend System
+
+In the new frontend system, you can use the newly exported `createLdapAuthModule` helper from the `/alpha` path (or directly if exported from index in future releases).
+
+It accepts an optional `logo` and `options.styles` to easily customize the sign-in page without writing any boilerplate code.
+
+Then, add it to your app's features in `packages/app/src/App.tsx` (or `packages/app/src/index.tsx` depending on your setup):
+
+> `packages/app/src/App.tsx`
+
+```tsx
+import { createFrontendApp } from '@backstage/frontend-app-api';
+import { createLdapAuthModule } from '@immobiliarelabs/backstage-plugin-ldap-auth/alpha';
+// Import your custom logo component
+import LogoFull from './components/topbar/LogoFull';
+
+export const app = createFrontendApp({
+  features: [
+    // ... other features and plugins
+    createLdapAuthModule({
+      logo: <LogoFull />,
+      options: {
+        styles: {
+          container: {
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            minHeight: '100vh',
+            background: '#1a1a2e',
+          },
+          paper: { borderRadius: 16, maxWidth: 400 },
+          form: { padding: '1rem' },
+        },
+      },
+    }),
+  ],
+});
+```
 
 ### Old Frontend System
 
@@ -99,47 +149,11 @@ const app = createApp({
 });
 ```
 
-### New Frontend System
-
-In the new frontend system, you can use the newly exported `createLdapAuthModule` helper from the `/alpha` path.
-
-It accepts an optional `logo` and `options.styles` to easily customize the sign-in page without writing any boilerplate code.
-
-Then, add it to your app's features in `packages/app/src/App.tsx` (or `packages/app/src/index.tsx` depending on your setup):
-
-> `packages/app/src/App.tsx`
-
-```tsx
-import { createFrontendApp } from '@backstage/frontend-app-api';
-import { createLdapAuthModule } from '@immobiliarelabs/backstage-plugin-ldap-auth/alpha';
-// Import your custom logo component
-import LogoFull from './components/topbar/LogoFull';
-
-export const app = createFrontendApp({
-  features: [
-    // ... other features and plugins
-    createLdapAuthModule({
-      logo: <LogoFull />,
-      options: {
-        styles: {
-          container: {
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            minHeight: '100vh',
-            background: '#1a1a2e',
-          },
-          paper: { borderRadius: 16, maxWidth: 400 },
-          form: { padding: '1rem' },
-        },
-      },
-    }),
-  ],
-});
-```
-
 Now follow instructions at [@immobiliarelabs/backstage-plugin-ldap-auth-backend](../ldap-auth-backend/README.md) to add backend authentication logic!
+
+## Supported Backstage Versions
+
+This plugin currently supports **Backstage v1.30 and above**. We continuously test against recent versions of Backstage to ensure compatibility with both the Old and New Frontend Systems.
 
 ## Powered Apps
 
