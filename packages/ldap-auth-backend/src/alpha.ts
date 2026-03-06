@@ -92,12 +92,12 @@ export default createBackendModule({
             async init({ providers, tokenValidator }) {
                 providers.registerProvider({
                     providerId: 'ldap',
-                    factory: ldap.create({
+                    factory: (deps) => ldap.create({
                         tokenValidator: ldapAuthSetter.tokenValidatorExt || tokenValidator,
                         authHandler: ldapAuthSetter.authHandler,
                         resolvers: ldapAuthSetter.resolvers,
                         signIn: ldapAuthSetter.signInResolver,
-                    }),
+                    })(deps),
                 });
             },
         });
