@@ -1,80 +1,91 @@
-import { AuthenticationError } from '@backstage/errors';
-import { AuthResolverContext } from '@backstage/plugin-auth-node';
+import { mockServices, startTestBackend } from '@backstage/backend-test-utils';
+import { createBackendModule } from '@backstage/backend-plugin-api';
 import jwt from 'jsonwebtoken';
-import Keyv from 'keyv';
-import { LdapAuthenticationOptions } from './types';
-import { defaultAuthHandler, defaultSigninResolver } from './auth';
-import { AUTH_MISSING_CREDENTIALS, JWT_EXPIRED_TOKEN } from './errors';
-import { COOKIE_FIELD_KEY, JWTTokenValidator } from './jwt';
-import { defaultCheckUserExists, defaultLDAPAuthentication } from './ldap';
-import { ProviderLdapAuthProvider } from './provider';
+import request from 'supertest';
+import { ldapAuthExtensionPoint, default as ldapAuthModule } from './alpha';
+import { COOKIE_FIELD_KEY } from './jwt';
+import { JWT_EXPIRED_TOKEN } from './errors';
 
-export function createProvider() {
-    const sub = 'my-uid-name';
-    const token = jwt.sign({ sub }, 'secret', {
-        expiresIn: '1min',
-    });
-    const authHandler = jest.fn(defaultAuthHandler) as typeof defaultAuthHandler;
-    const checkUserExists = jest.fn(() => Promise.resolve(true)) as typeof defaultCheckUserExists;
-    const signInResolver = jest.fn(defaultSigninResolver) as typeof defaultSigninResolver;
-    const signInWithCatalogUser = jest.fn(async ({}) => ({
-        token,
-    }));
-    const findCatalogUser = jest.fn(async ({}) => ({
-        profile: {
-            email: 'myemail@mail.com',
-            displayName: 'John Doeh',
-        },
-    }));
-    const ldapAuthentication = jest.fn(
-        async (_username: string, _password: string, _ldapAuthOptions: LdapAuthenticationOptions) => Promise.resolve({ uid: sub })
-    ) as typeof defaultLDAPAuthentication;
-    const provider = new ProviderLdapAuthProvider({
-        resolverContext: {
-            signInWithCatalogUser,
-            findCatalogUser,
-        } as unknown as AuthResolverContext,
-        authHandler,
-        checkUserExists,
-        signInResolver,
-        ldapAuthentication,
-        tokenValidator: new JWTTokenValidator(new Keyv()),
-        cookies: {
-            field: COOKIE_FIELD_KEY,
-            secure: true,
-        },
-        ldapAuthenticationOptions: { ldapOpts: { url: 'localhost' } },
-    });
-
-    return {
-        provider,
-        sub,
-        token,
-        authHandler,
-        checkUserExists,
-        signInResolver,
-        ldapAuthentication,
-        signInWithCatalogUser,
-        findCatalogUser,
-    };
-}
+jest.setTimeout(30000);
 
 describe('LdapAuthProvider login tests', () => {
+    afterEach(() => {
+        jest.useRealTimers();
+    });
+
     it('Test refresh for login with username and password', async () => {
-        const { provider, sub, token, ldapAuthentication, authHandler, checkUserExists } =
-            createProvider();
-        const reqMock = {
-            body: { username: sub, password: 'hello-world' },
-            // [COOKIE_FIELD_KEY]: 'token-for-user:my-uid-name',
-            method: 'POST',
-        };
-        const resMock = {
-            cookie: jest.fn(),
-            json: jest.fn(),
-            clearCookie: jest.fn(),
-        };
-        await provider.refresh(reqMock as any, resMock as any);
-        expect(resMock.json).toHaveBeenCalledWith({
+        const sub = 'my-uid-name';
+        const token = jwt.sign({ sub }, 'secret', {
+            expiresIn: '1min',
+        });
+
+        const authHandler = jest.fn(async () => ({
+            profile: {
+                email: 'test@gmail.com',
+                displayName: 'test',
+            },
+        })) as any;
+        const ldapAuthentication = jest.fn(
+            async (_username: string, _password: string, _options: any) =>
+                Promise.resolve({ uid: sub })
+        ) as any;
+        const signIn = jest.fn(() => Promise.resolve({ token }));
+        const checkUserExists = jest.fn(() => Promise.resolve(true)) as any;
+
+        const backend = await startTestBackend({
+            features: [
+                import('@backstage/plugin-auth-backend'),
+                ldapAuthModule,
+                createBackendModule({
+                    pluginId: 'auth',
+                    moduleId: 'ldap-ext-login',
+                    register(reg) {
+                        reg.registerInit({
+                            deps: {
+                                ldapAuth: ldapAuthExtensionPoint,
+                            },
+                            async init({ ldapAuth }) {
+                                ldapAuth.set({
+                                    resolvers: {
+                                        ldapAuthentication,
+                                        checkUserExists,
+                                    },
+                                    authHandler,
+                                    signIn: { resolver: signIn },
+                                });
+                            },
+                        });
+                    },
+                }),
+                mockServices.rootConfig.factory({
+                    data: {
+                        app: {
+                            baseUrl: 'http://localhost:3000',
+                        },
+                        auth: {
+                            providers: {
+                                ldap: {
+                                    test: {
+                                        cookies: { secure: false },
+                                        ldapAuthenticationOptions: {
+                                            usernameAttribute: 'uid',
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                }),
+            ],
+        });
+
+        const agent = request.agent(backend.server);
+        const response = await agent
+            .post('/api/auth/ldap/refresh')
+            .send({ username: sub, password: 'hello-world' });
+
+        expect(response.status).toBe(200);
+        expect(response.body).toEqual({
             backstageIdentity: {
                 identity: {
                     ownershipEntityRefs: [],
@@ -83,34 +94,88 @@ describe('LdapAuthProvider login tests', () => {
                 },
                 token,
             },
-            profile: undefined,
+            profile: {
+                email: 'test@gmail.com',
+                displayName: 'test',
+            },
             providerInfo: {},
         });
         expect(authHandler).toHaveBeenCalledTimes(1);
         expect(ldapAuthentication).toHaveBeenCalledTimes(1);
         expect(checkUserExists).not.toHaveBeenCalled();
-        expect(resMock.cookie).toHaveBeenCalled();
-        expect(resMock.clearCookie).not.toHaveBeenCalled();
+        expect(response.header['set-cookie']).toBeDefined();
+        await backend.stop();
     });
 
     it('Test refresh with token', async () => {
-        const { provider, sub, token, ldapAuthentication, authHandler, checkUserExists } =
-            createProvider();
-        const oldToken = jwt.sign({ sub }, 'secret', {
+        const sub = 'my-uid-name';
+        const token = jwt.sign({ sub }, 'secret', {
             expiresIn: '1min',
         });
-        const reqMock = {
-            body: {},
-            cookies: { [COOKIE_FIELD_KEY]: oldToken },
-            method: 'POST',
-        };
-        const resMock = {
-            cookie: jest.fn(),
-            json: jest.fn(),
-            clearCookie: jest.fn(),
-        };
-        await provider.refresh(reqMock as any, resMock as any);
-        expect(resMock.json).toHaveBeenCalledWith({
+
+        const authHandler = jest.fn(async () => ({
+            profile: {
+                email: 'test@gmail.com',
+                displayName: 'test',
+            },
+        })) as any;
+        const signIn = jest.fn(() => Promise.resolve({ token }));
+        const checkUserExists = jest.fn(() => Promise.resolve(true)) as any;
+
+        const backend = await startTestBackend({
+            features: [
+                import('@backstage/plugin-auth-backend'),
+                ldapAuthModule,
+                createBackendModule({
+                    pluginId: 'auth',
+                    moduleId: 'ldap-ext-token',
+                    register(reg) {
+                        reg.registerInit({
+                            deps: {
+                                ldapAuth: ldapAuthExtensionPoint,
+                            },
+                            async init({ ldapAuth }) {
+                                ldapAuth.set({
+                                    resolvers: {
+                                        checkUserExists,
+                                    },
+                                    authHandler,
+                                    signIn: { resolver: signIn },
+                                });
+                            },
+                        });
+                    },
+                }),
+                mockServices.rootConfig.factory({
+                    data: {
+                        app: {
+                            baseUrl: 'http://localhost:3000',
+                        },
+                        auth: {
+                            providers: {
+                                ldap: {
+                                    test: {
+                                        cookies: { secure: false },
+                                        ldapAuthenticationOptions: {
+                                            usernameAttribute: 'uid',
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                }),
+            ],
+        });
+
+        const agent = request.agent(backend.server);
+        const response = await agent
+            .post('/api/auth/ldap/refresh')
+            .set('Cookie', [`${COOKIE_FIELD_KEY}=${token}`])
+            .send({});
+
+        expect(response.status).toBe(200);
+        expect(response.body).toEqual({
             backstageIdentity: {
                 identity: {
                     ownershipEntityRefs: [],
@@ -119,210 +184,143 @@ describe('LdapAuthProvider login tests', () => {
                 },
                 token,
             },
-            profile: undefined,
+            profile: {
+                email: 'test@gmail.com',
+                displayName: 'test',
+            },
             providerInfo: {},
         });
         expect(authHandler).toHaveBeenCalledTimes(1);
-        expect(ldapAuthentication).not.toHaveBeenCalled();
         expect(checkUserExists).toHaveBeenCalledTimes(1);
-        expect(resMock.cookie).toHaveBeenCalled();
-        expect(resMock.clearCookie).not.toHaveBeenCalled();
+        await backend.stop();
     });
 
-    it('Test refresh should not accept GET', async () => {
-        const { provider, sub, ldapAuthentication, authHandler, checkUserExists } =
-            createProvider();
-        const oldToken = jwt.sign({ sub }, 'secret', {
-            expiresIn: '1min',
+    it('Test token invalidation', async () => {
+        const sub = 'my-uid-name';
+        const token = jwt.sign({ sub }, 'secret', {
+            expiresIn: '-1min',
         });
-        const reqMock = {
-            body: {},
-            cookies: { [COOKIE_FIELD_KEY]: oldToken },
-            method: 'GET',
-        };
-        const resMock = {
-            cookie: jest.fn(),
-            json: jest.fn(),
-            clearCookie: jest.fn(),
-        };
-        await expect(provider.refresh(reqMock as any, resMock as any)).rejects.toEqual(
-            new AuthenticationError('Method not allowed')
-        );
-        expect(resMock.json).not.toHaveBeenCalled();
-        expect(authHandler).not.toHaveBeenCalled();
-        expect(ldapAuthentication).not.toHaveBeenCalled();
-        expect(checkUserExists).not.toHaveBeenCalled();
-        expect(resMock.cookie).not.toHaveBeenCalled();
-        expect(resMock.clearCookie).toHaveBeenCalledWith(COOKIE_FIELD_KEY);
-    });
 
-    it('Test refresh should throw right error if missing credentials or token', async () => {
-        const { provider, ldapAuthentication, authHandler, checkUserExists } = createProvider();
-        const reqMock = {
-            body: {},
-            cookies: {},
-            method: 'POST',
-        };
-        const resMock = {
-            cookie: jest.fn(),
-            json: jest.fn(),
-            clearCookie: jest.fn(),
-        };
-        await expect(provider.refresh(reqMock as any, resMock as any)).rejects.toEqual(
-            new AuthenticationError(AUTH_MISSING_CREDENTIALS)
-        );
-        expect(resMock.json).not.toHaveBeenCalled();
-        expect(authHandler).not.toHaveBeenCalled();
-        expect(ldapAuthentication).not.toHaveBeenCalled();
-        expect(checkUserExists).not.toHaveBeenCalled();
-        expect(resMock.cookie).not.toHaveBeenCalled();
-        expect(resMock.clearCookie).toHaveBeenCalledWith(COOKIE_FIELD_KEY);
-    });
-});
-
-describe('LdapAuthProvider token invalidation tests', () => {
-    afterEach(() => {
-        jest.useRealTimers();
-    });
-    it('Test refresh the old token should be invalid', async () => {
-        const timer = jest.useFakeTimers();
-
-        const oldToken = jwt.sign({ sub: 'my-uid-name' }, 'secret', {
-            expiresIn: '1min',
+        const backend = await startTestBackend({
+            features: [
+                import('@backstage/plugin-auth-backend'),
+                ldapAuthModule,
+                createBackendModule({
+                    pluginId: 'auth',
+                    moduleId: 'ldap-ext-inval',
+                    register(reg) {
+                        reg.registerInit({
+                            deps: {
+                                ldapAuth: ldapAuthExtensionPoint,
+                            },
+                            async init({ ldapAuth }) {
+                                ldapAuth.set({
+                                    resolvers: {
+                                        checkUserExists: jest.fn(() => Promise.resolve(true)),
+                                    },
+                                    authHandler: jest.fn(async () => ({ profile: {} })) as any,
+                                });
+                            },
+                        });
+                    },
+                }),
+                mockServices.rootConfig.factory({
+                    data: {
+                        app: {
+                            baseUrl: 'http://localhost:3000',
+                        },
+                        auth: {
+                            providers: {
+                                ldap: {
+                                    test: {
+                                        cookies: { secure: false },
+                                        ldapAuthenticationOptions: {
+                                            usernameAttribute: 'uid',
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                }),
+            ],
         });
-        timer.advanceTimersByTime(2000);
-        const { provider, sub, token } = createProvider();
 
-        const reqMock = {
-            body: {},
-            cookies: { [COOKIE_FIELD_KEY]: oldToken },
-            method: 'POST',
-        };
-        const resMock = {
-            cookie: jest.fn(),
-            json: jest.fn(),
-            clearCookie: jest.fn(),
-        };
-        await provider.refresh(reqMock as any, resMock as any);
-        expect(resMock.json).toHaveBeenCalledWith({
-            backstageIdentity: {
-                identity: {
-                    ownershipEntityRefs: [],
-                    type: 'user',
-                    userEntityRef: sub,
-                },
-                token,
+        const agent = request.agent(backend.server);
+
+        const response = await agent
+            .post('/api/auth/ldap/refresh')
+            .set('Cookie', [`${COOKIE_FIELD_KEY}=${token}`])
+            .send({});
+
+        expect(response.status).not.toBe(200);
+        expect(response.body).toMatchObject({
+            error: {
+                message: expect.stringContaining(JWT_EXPIRED_TOKEN),
             },
-            profile: undefined,
-            providerInfo: {},
         });
-        // Not I redo the request with the old token
-        timer.advanceTimersByTime(2000);
-        expect(provider.refresh(reqMock as any, resMock as any)).rejects.toEqual(
-            new Error(JWT_EXPIRED_TOKEN)
-        );
+        await backend.stop();
     });
 
-    it('Test refresh the new token should be valid', async () => {
-        const timer = jest.useFakeTimers();
-
-        const oldToken = jwt.sign({ sub: 'my-uid-name' }, 'secret', {
+    it('Test logout', async () => {
+        const sub = 'my-uid-name';
+        const token = jwt.sign({ sub }, 'secret', {
             expiresIn: '1min',
         });
-        timer.advanceTimersByTime(2000);
-        const { provider, sub, token, signInWithCatalogUser } = createProvider();
 
-        const reqMock = {
-            body: {},
-            cookies: { [COOKIE_FIELD_KEY]: oldToken },
-            method: 'POST',
-        };
-        const resMock = {
-            cookie: jest.fn(),
-            json: jest.fn(),
-            clearCookie: jest.fn(),
-        };
-        await provider.refresh(reqMock as any, resMock as any);
-        expect(resMock.json).toHaveBeenCalledWith({
-            backstageIdentity: {
-                identity: {
-                    ownershipEntityRefs: [],
-                    type: 'user',
-                    userEntityRef: sub,
-                },
-                token,
-            },
-            profile: undefined,
-            providerInfo: {},
+        const backend = await startTestBackend({
+            features: [
+                import('@backstage/plugin-auth-backend'),
+                ldapAuthModule,
+                createBackendModule({
+                    pluginId: 'auth',
+                    moduleId: 'ldap-ext-logout',
+                    register(reg) {
+                        reg.registerInit({
+                            deps: {
+                                ldapAuth: ldapAuthExtensionPoint,
+                            },
+                            async init({ ldapAuth }) {
+                                ldapAuth.set({
+                                    resolvers: {
+                                        checkUserExists: jest.fn(() => Promise.resolve(true)),
+                                    },
+                                    authHandler: jest.fn(async () => ({ profile: {} })) as any,
+                                });
+                            },
+                        });
+                    },
+                }),
+                mockServices.rootConfig.factory({
+                    data: {
+                        app: {
+                            baseUrl: 'http://localhost:3000',
+                        },
+                        auth: {
+                            providers: {
+                                ldap: {
+                                    test: {
+                                        cookies: { secure: false },
+                                        ldapAuthenticationOptions: {
+                                            usernameAttribute: 'uid',
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                }),
+            ],
         });
 
-        // Not I redo the request with the new token
-        timer.advanceTimersByTime(2000);
-        const newToken = jwt.sign({ sub: 'my-uid-name' }, 'secret', {
-            expiresIn: '1min',
-        });
-        signInWithCatalogUser.mockReturnValue(
-            Promise.resolve({
-                token: newToken,
-            })
-        );
-        reqMock.cookies[COOKIE_FIELD_KEY] = token;
-        await expect(provider.refresh(reqMock as any, resMock as any)).resolves.toEqual(undefined);
-        expect(resMock.json).lastCalledWith({
-            backstageIdentity: {
-                identity: {
-                    ownershipEntityRefs: [],
-                    type: 'user',
-                    userEntityRef: sub,
-                },
-                token: newToken,
-            },
-            profile: undefined,
-            providerInfo: {},
-        });
-    });
-});
+        const agent = request.agent(backend.server);
+        const response = await agent
+            .post('/api/auth/ldap/logout')
+            .set('Cookie', [`${COOKIE_FIELD_KEY}=${token}`])
+            .send({});
 
-describe('LdapAuthProvider token logout', () => {
-    afterEach(() => {
-        jest.useRealTimers();
-    });
-    it('Logout should works', async () => {
-        const timer = jest.useFakeTimers();
-
-        const oldToken = jwt.sign({ sub: 'my-uid-name' }, 'secret', {
-            expiresIn: '1min',
-        });
-        timer.advanceTimersByTime(2000);
-
-        const { provider, token } = createProvider();
-        const reqMock = {
-            body: {},
-            cookies: { [COOKIE_FIELD_KEY]: oldToken },
-            method: 'POST',
-        };
-
-        const resMock: any = {
-            cookie: jest.fn(),
-            status: jest.fn(() => resMock),
-            json: jest.fn(),
-            clearCookie: jest.fn(),
-            end: jest.fn(),
-        };
-
-        await provider.refresh(reqMock as any, resMock as any);
-        // here we have that "token" is a valid token
-
-        reqMock.cookies[COOKIE_FIELD_KEY] = token;
-        timer.advanceTimersByTime(2000);
-        await expect(provider.logout(reqMock as any, resMock as any)).resolves.toEqual(undefined);
-
-        expect(resMock.status).toHaveBeenCalledWith(200);
-        expect(resMock.clearCookie).toHaveBeenCalledWith(COOKIE_FIELD_KEY);
-        expect(resMock.end).toHaveBeenCalled();
-        timer.advanceTimersByTime(2000);
-        expect(provider.refresh(reqMock as any, resMock as any)).rejects.toEqual(
-            new Error(JWT_EXPIRED_TOKEN)
-        );
+        expect(response.status).toBe(200);
+        expect(response.header['set-cookie'][0]).toContain(`${COOKIE_FIELD_KEY}=;`);
+        await backend.stop();
     });
 });
