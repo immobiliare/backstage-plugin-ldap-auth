@@ -31,9 +31,7 @@
     },
     "dependencies": {
         "@backstage/backend-plugin-api": "^1.7.0",
-        "@backstage/core-plugin-api": "^1.12.3",
         "@backstage/errors": "^1.2.7",
-        "@backstage/plugin-auth-backend": "^0.27.0",
         "@backstage/plugin-auth-node": "^0.6.13",
         "keyv": "^4.3.3",
         "ldap-escape": "^2.0.6",
@@ -43,9 +41,9 @@
         "react": "^16.13.1 || ^17.0.0"
     },
     "devDependencies": {
-        "@aws-sdk/middleware-sdk-sts": "^3.616.0",
         "@backstage/backend-test-utils": "^1.11.0",
         "@backstage/cli": "^0.35.4",
+        "@backstage/plugin-auth-backend": "^0.27.0",
         "@types/ldap-escape": "^2.0.2",
         "@types/node": "^20.5.9",
         "@types/supertest": "^6.0.2",
