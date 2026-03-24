@@ -19,8 +19,6 @@ This plugin is not meant to be used alone but in pair with:
 -   The official [@backstage/plugin-catalog-backend-module-ldap](https://www.npmjs.com/package/@backstage/plugin-catalog-backend-module-ldap) which keeps in sync your LDAP users with Backstage user catalogs!
 -   Its sibling frontend package [@immobiliarelabs/backstage-plugin-ldap-auth](https://www.npmjs.com/package/@immobiliarelabs/backstage-plugin-ldap-auth)
 
-All the current LTS versions are supported.
-
 ## Table of Content
 
 <!-- toc -->
@@ -31,7 +29,8 @@ All the current LTS versions are supported.
 - [Configurations](#configurations)
   * [Setup](#setup)
   * [Connection Configuration](#connection-configuration)
-  * [Add the authentication backend plugin](#add-the-authentication-backend-plugin)
+  * [New Backend System](#new-backend-system)
+  * [Old Backend System (Legacy)](#old-backend-system-legacy)
   * [Custom LDAP Configurations](#custom-ldap-configurations)
     + [Custom authentication function](#custom-authentication-function)
     + [Custom check if user exists](#custom-check-if-user-exists)
@@ -44,7 +43,10 @@ All the current LTS versions are supported.
 
 ## Migration to v5.x: `ldapjs` to `ldapts`
 
-Starting with version `5.x`, we have fully replaced `ldapjs` and `ldap-authentication` with [`ldapts`](https://github.com/ldapts/ldapts). This architectural switch was necessary because `ldapjs` is no longer maintained and has been deprecated.
+> [!IMPORTANT]
+> Starting with version `5.x`, we have fully replaced `ldapjs` and `ldap-authentication` with [`ldapts`](https://github.com/ldapts/ldapts). This architectural switch was necessary because `ldapjs` is no longer maintained and has been deprecated.
+>
+> This version also targets the **New Backstage Backend System** (Backstage version **>= 1.48.3**). For legacy support, please stay on version **`4.x.x`**.
 
 ### Migration Guide
 
@@ -121,30 +123,38 @@ auth:
 
                     ldapOpts:
                         url: 'ldaps://123.123.123.123'
+                        # Common ldapts options (mapping to ldapjs ones)
                         tlsOptions:
                             rejectUnauthorized: false
+                        # timeout: 5000
+                        # connectTimeout: 10000
+                        # strictDN: true
+
+> [!TIP]
+> Since we use [`ldapts`](https://github.com/ldapts/ldapts), almost all `ClientOptions` from `ldapts` can be passed under `ldapOpts`.
 ```
 
-### Add the authentication backend plugin
+### New Backend System
 
-This is for a basic usage: - single process - No custom auth or user object marshaling - in-memory sessions
+For the new Backstage backend system, simply add the module to your backend.
 
-For more uses cases you can see the [example folders](https://github.com/immobiliare/backstage-plugin-ldap-auth/tree/main/examples)
-
-> `packages/backend/src/plugins/auth.ts`
+> `packages/backend/src/index.ts`
 
 ```ts
+import { createBackend } from '@backstage/backend-defaults';
+
 const backend = createBackend();
 
-// This is required to work
 backend.add(import('@backstage/plugin-auth-backend'));
-...
-backend.add(import('@backstage/plugin-auth-backend'));
+// ... other plugins
 backend.add(import('@immobiliarelabs/backstage-plugin-ldap-auth-backend'));
-...
-backend.start();
 
+backend.start();
 ```
+
+### Old Backend System (Legacy)
+
+If you are still using the old backend system, follow the instructions below. Note that we recommend migrating to the New Backend System as this plugin is optimized for it.
 
 If you want to connect to Postgres for the store of the token (default is in memory):
 

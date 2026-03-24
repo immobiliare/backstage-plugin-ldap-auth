@@ -8,11 +8,27 @@
 ![license](https://img.shields.io/github/license/immobiliare/backstage-plugin-ldap-auth?style=flat-square)
 ![npm (scoped)](https://img.shields.io/npm/v/@immobiliarelabs/backstage-plugin-ldap-auth?style=flat-square)
 
-> [Backstage](https://backstage.io/) plugins to authenticate users to an LDAP server
+This monorepo containing two Backstage plugins to add LDAP authentication to your Backstage instance. It provides a sign-in page, token management, and server-side auth logic for your LDAP server.
 
-This is a monorepo containing two Backstage plugins, one for the frontend and one for the backend, both used to provide login screen, token management and server-side auth logic to your LDAP server.
+> [!IMPORTANT]
+> **Breaking Change**: Starting with version `5.x`, this plugin has fully migrated to support the **New Backstage Backend and Frontend Systems** (Backstage version **>= 1.48.3**).
+> 
+> We have also migrated from `ldapjs` (which is deprecated and unmaintained) to [`ldapts`](https://github.com/ldapts/ldapts). While most options remain the same, please refer to the new project for connection options and troubleshooting.
+>
+> **Legacy Support**: If you are still using the old Backstage systems and cannot migrate yet, please continue using version **`4.x.x`** of these plugins.
 
-This project is also meant to be used in pair with the official [@backstage/plugin-catalog-backend-module-ldap](https://www.npmjs.com/package/@backstage/plugin-catalog-backend-module-ldap) which imports and keeps in sync your LDAP users but won't authenticate them.
+## Quick Start
+
+1. **Install** the packages in your Backstage repository:
+   ```bash
+   yarn workspace app add @immobiliarelabs/backstage-plugin-ldap-auth
+   yarn workspace backend add @immobiliarelabs/backstage-plugin-ldap-auth-backend
+   ```
+2. **Configure Backend**: Add the LDAP module to your backend in `packages/backend/src/index.ts`.
+3. **Configure Frontend**: Add `createLdapAuthModule` to your app features in `packages/app/src/App.tsx`.
+
+> [!TIP]
+> This project is meant to be used in pair with the official [@backstage/plugin-catalog-backend-module-ldap](https://www.npmjs.com/package/@backstage/plugin-catalog-backend-module-ldap) to keep your LDAP users in sync.
 
 ## Plugins
 
@@ -22,19 +38,12 @@ This project is also meant to be used in pair with the official [@backstage/plug
 -   [`packages/ldap-auth`](./packages/ldap-auth/README.md)- Frontend Login Page and token usage and retention logics
 
 <p align="center">
-  <img src="https://github.com/immobiliare/backstage-plugin-ldap-auth/blob/main/screen.png?raw=true" width="600px" />
+  <img src="https://github.com/immobiliare/backstage-plugin-ldap-auth/blob/main/screen.jpg?raw=true" width="600px" />
 </p>
-
-## Backstage compatibility
-
-| backstage |              |
-| --------- | ------------ |
-| 1.6.x     | `stable`     |
-| <=1.5.x   | `not tested` |
 
 ## Powered Apps
 
-Backstage Plugin LDAP Auth was created by the amazing Node.js team at [ImmobiliareLabs](http://labs.immobiliare.it/), the Tech dept of [Immobiliare.it](https://www.immobiliare.it), the #1 real estate company in Italy.
+Backstage Plugin LDAP Auth was created by the Node.js team at [ImmobiliareLabs](http://labs.immobiliare.it/), the Tech dept of [Immobiliare.it](https://www.immobiliare.it), the #1 real estate company in Italy.
 
 We are currently using Backstage Plugin LDAP Auth in our products as well as our internal toolings.
 

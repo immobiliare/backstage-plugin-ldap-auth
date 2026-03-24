@@ -21,11 +21,11 @@ All the current LTS versions are supported.
 <!-- toc -->
 
 - [Migration to v5.x & Breaking Changes](#migration-to-v5x--breaking-changes)
+  * [Key Changes](#key-changes)
 - [Installation](#installation)
 - [Configuration](#configuration)
   * [New Frontend System](#new-frontend-system)
-  * [Old Frontend System](#old-frontend-system)
-- [Supported Backstage Versions](#supported-backstage-versions)
+  * [Old Frontend System (Legacy)](#old-frontend-system-legacy)
 - [Powered Apps](#powered-apps)
 - [Support & Contribute](#support--contribute)
 - [License](#license)
@@ -34,11 +34,14 @@ All the current LTS versions are supported.
 
 ## Migration to v5.x & Breaking Changes
 
-Starting with version `5.x`, this plugin has fully migrated to Backstage's New Frontend System as the primary way of usage.
+> [!IMPORTANT]
+> Starting with version `5.x`, this plugin has fully migrated to support the **New Backstage Backend and Frontend Systems** (Backstage version **>= 1.48.3**).
+>
+> This matches our internal usage at ImmobiliareLabs. If you are unable or unwilling to migrate yet, we recommend sticking to the **`4.x.x`** versions of this plugin.
 
-**Disclaimer**: This matches how we internally use the plugin at ImmobiliareLabs after completing our migration to the New Frontend System. If you encounter issues with this setup and are unable or unwilling to migrate yet, we recommend using or sticking to the `4.x` versions of this plugin for now.
-
-Additional breaking changes and context for the backend are available in the [Backend README](../ldap-auth-backend/README.md#migration-to-v5x--ldapjs-to-ldapts).
+### Key Changes
+- **Backend**: Migrated from `ldapjs` to [`ldapts`](https://github.com/ldapts/ldapts). See the [Backend README](../ldap-auth-backend/README.md#migration-to-v5x-ldapjs-to-ldapts) for more details.
+- **Frontend**: Primary usage is now via the New Frontend System using `createLdapAuthModule`.
 
 ## Installation
 
@@ -62,54 +65,111 @@ $ yarn workspace backend add @immobiliarelabs/backstage-plugin-ldap-auth-backend
 The component out of the box only shows the form, but you can pass down children components to render your logos/top bar os whatever you want!
 
 <p align="center">
-  <img src="https://github.com/immobiliare/backstage-plugin-ldap-auth/blob/main/screen.png?raw=true?cdn=1" width="600px" />
+  <img src="https://github.com/immobiliare/backstage-plugin-ldap-auth/blob/main/screen.jpg?raw=true?cdn=1" width="600px" />
 </p>
 
 ### New Frontend System
 
-In the new frontend system, you can use the newly exported `createLdapAuthModule` helper from the `/alpha` path (or directly if exported from index in future releases).
-
-It accepts an optional `logo` and `options.styles` to easily customize the sign-in page without writing any boilerplate code.
-
-Then, add it to your app's features in `packages/app/src/App.tsx` (or `packages/app/src/index.tsx` depending on your setup):
+In the new frontend system, you can use the `createLdapAuthModule` helper from the `/alpha` path. It allows you to provide a custom logo and detailed styling to match your brand.
 
 > `packages/app/src/App.tsx`
 
 ```tsx
-import { createFrontendApp } from '@backstage/frontend-app-api';
+import { createApp } from '@backstage/frontend-app-api';
 import { createLdapAuthModule } from '@immobiliarelabs/backstage-plugin-ldap-auth/alpha';
-// Import your custom logo component
-import LogoFull from './components/topbar/LogoFull';
+import { Box, Typography } from '@material-ui/core';
 
-export const app = createFrontendApp({
+// 1. Define your custom styles
+export const loginStyles = {
+  content: {
+    height: '100vh',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'var(--login-bg-color)',
+    backgroundImage:
+      'linear-gradient(rgba(15, 23, 41, 0.8), rgba(15, 23, 41, 0.8)), url("{{ YOUR BACKGROUND IMAGE }}")',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    width: '100%',
+    maxWidth: 'none',
+    position: 'relative' as const,
+  },
+  container: {
+    display: 'flex',
+    flexDirection: 'column' as const,
+    alignItems: 'center',
+  },
+  paper: {
+    padding: '3rem',
+    maxWidth: 480,
+    width: '100%',
+    backgroundColor: 'var(--login-paper-bg)',
+    color: '#ffffff',
+    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.15)',
+    border: '1px solid rgba(255, 255, 255, 0.1)',
+    backdropFilter: 'blur(50px)',
+  },
+  form: {
+    display: 'flex',
+    flexDirection: 'column' as const,
+    marginTop: '1.5rem',
+    gap: '1.25rem',
+  },
+};
+
+// 2. Create a custom logo component
+export const LoginLogo = () => (
+  <Box
+    sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      gap: 1,
+      mb: 2,
+    }}
+  >
+    <LogoFull style={{ width: '250px', height: 'auto' }} />
+    <Typography
+      variant="subtitle1"
+      sx={{
+        color: 'rgba(255, 255, 255, 0.7)',
+        fontWeight: 500,
+        letterSpacing: '0.05rem',
+        textTransform: 'uppercase',
+        fontSize: '0.875rem',
+      }}
+    >
+      Your developer portal
+    </Typography>
+  </Box>
+);
+
+// 3. Add the module to your app
+// The /alpha path is used because the new frontend system is still in alpha/beta in Backstage
+const app = createApp({
   features: [
-    // ... other features and plugins
+    // ...
     createLdapAuthModule({
-      logo: <LogoFull />,
+      logo: <LoginLogo />,
       options: {
-        styles: {
-          container: {
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            minHeight: '100vh',
-            background: '#1a1a2e',
-          },
-          paper: { borderRadius: 16, maxWidth: 400 },
-          form: { padding: '1rem' },
-        },
+        styles: loginStyles,
       },
     }),
   ],
 });
+
+export default app.createRoot();
 ```
 
-### Old Frontend System
+> [!NOTE]
+> The `sx` prop used in the example above is supported by MUI 4 if you have `@material-ui/core/styles` set up correctly or if you have migrated to `@mui/material` (MUI 5).
 
-In the `App.tsx` file, change the `createApp` function adding a `components` section with our custom `SignInPage`.
+### Old Frontend System (Legacy)
 
-**Note:** This components isn't only UI, it also brings all the token state management and HTTP API calls to the backstage auth routes we already configured in the backend part.
+If you are still using the old frontend system, you can use the `LdapAuthFrontendPage` component. However, the current version of this plugin is optimized for the new system. We recommend staying on version **`4.x.x`** for legacy applications.
+
+If you must use the latest version with the old system, you can still configure it in your `App.tsx`:
 
 You can customize the login page by passing down a `logo` component and an `options.styles` object.
 
@@ -150,10 +210,6 @@ const app = createApp({
 ```
 
 Now follow instructions at [@immobiliarelabs/backstage-plugin-ldap-auth-backend](../ldap-auth-backend/README.md) to add backend authentication logic!
-
-## Supported Backstage Versions
-
-This plugin currently supports **Backstage v1.30 and above**. We continuously test against recent versions of Backstage to ensure compatibility with both the Old and New Frontend Systems.
 
 ## Powered Apps
 
