@@ -21,7 +21,7 @@ import {
   useApi,
 } from "@backstage/core-plugin-api";
 import { useAsync } from "@react-hookz/web";
-import type React from "react";
+import React from "react";
 import { useEffect, useState } from "react";
 import { LoginForm, type LoginFormStyles } from "./Form";
 import { LdapSignInIdentity } from "./Identity";

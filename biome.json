@@ -33,6 +33,7 @@
         "noImplicitAnyLet": "off"
       },
       "style": {
+        "useImportType": "off",
         "noParameterAssign": "error",
         "useAsConstAssertion": "error",
         "useDefaultParameterLast": "error",

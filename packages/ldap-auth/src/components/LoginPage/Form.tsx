@@ -2,7 +2,7 @@ import { Content, Page } from "@backstage/core-components";
 import { Button, Paper, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import PasswordValidator from "password-validator";
-import type React from "react";
+import React from "react";
 import { useEffect, useState } from "react";
 
 /**
