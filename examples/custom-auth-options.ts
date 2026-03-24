@@ -10,7 +10,7 @@ export default async function createPlugin(
     providerFactories: {
       ldap: ldap.create({
         resolvers: {
-          async ldapAuthentication(username, password, ldapOptions): LDAPUser {
+          async ldapAuthentication(username, password, ldapOptions): Promise<LDAPUser> {
             const user = await defaultLDAPAuthentication(username, password, ldapOptions)
             return { uid: user.uid };
           }
