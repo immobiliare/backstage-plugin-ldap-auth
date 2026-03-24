@@ -3,10 +3,9 @@
 </p>
 <h1 align="center">Backstage Plugin LDAP Auth</h1>
 
-![release workflow](https://img.shields.io/github/workflow/status/immobiliare/backstage-plugin-ldap-auth/Release?style=flat-square)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square)](https://github.com/semantic-release/semantic-release)
+![npm (scoped)](https://img.shields.io/npm/v/@immobiliarelabs/backstage-plugin-ldap-auth-backend?style=flat-square)
 ![license](https://img.shields.io/github/license/immobiliare/backstage-plugin-ldap-auth?style=flat-square)
-![npm (scoped)](https://img.shields.io/npm/v/@immobiliarelabs/backstage-plugin-ldap-auth?style=flat-square)
 
 This monorepo containing two Backstage plugins to add LDAP authentication to your Backstage instance. It provides a sign-in page, token management, and server-side auth logic for your LDAP server.
 
@@ -17,7 +16,12 @@ This monorepo containing two Backstage plugins to add LDAP authentication to you
 >
 > **Legacy Support**: If you are still using the old Backstage systems and cannot migrate yet, please continue using version **`4.x.x`** of these plugins.
 
+<p align="center">
+  <img src="https://github.com/immobiliare/backstage-plugin-ldap-auth/blob/main/screen.jpg?raw=true" width="600px" />
+</p>
+
 ## Quick Start
+
 
 1. **Install** the packages in your Backstage repository:
    ```bash
@@ -36,10 +40,6 @@ This monorepo containing two Backstage plugins to add LDAP authentication to you
 
 -   [`packages/ldap-auth-backend`](./packages/ldap-auth-backend/README.md) - Back to back authentication and token validation and management
 -   [`packages/ldap-auth`](./packages/ldap-auth/README.md)- Frontend Login Page and token usage and retention logics
-
-<p align="center">
-  <img src="https://github.com/immobiliare/backstage-plugin-ldap-auth/blob/main/screen.jpg?raw=true" width="600px" />
-</p>
 
 ## Powered Apps
 

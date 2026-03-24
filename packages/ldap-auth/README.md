@@ -4,8 +4,8 @@
 <h1 align="center">@immobiliarelabs/backstage-plugin-ldap-auth</h1>
 
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square)](https://github.com/semantic-release/semantic-release)
+![npm (scoped)](https://img.shields.io/npm/v/@immobiliarelabs/backstage-plugin-ldap-auth-backend?style=flat-square)
 ![license](https://img.shields.io/github/license/immobiliare/backstage-plugin-ldap-auth?style=flat-square)
-![npm (scoped)](https://img.shields.io/npm/v/@immobiliarelabs/backstage-plugin-ldap-auth?style=flat-square)
 
 > Login page and client-side token management for BAckstage LDAP Authentication Plugin
 
@@ -15,6 +15,10 @@ This plugin is not meant to be used alone but in pair with:
 -   Its sibling backend package [@immobiliarelabs/backstage-plugin-ldap-auth-backend](https://www.npmjs.com/package/@immobiliarelabs/backstage-plugin-ldap-auth-backend)
 
 All the current LTS versions are supported.
+
+<p align="center">
+  <img src="https://github.com/immobiliare/backstage-plugin-ldap-auth/blob/main/screen.jpg?raw=true?cdn=1" width="600px" />
+</p>
 
 ## Table of Content
 
@@ -63,10 +67,6 @@ $ yarn workspace backend add @immobiliarelabs/backstage-plugin-ldap-auth-backend
 > The react components accepts childrens to allow you to customize the login page look and feel
 
 The component out of the box only shows the form, but you can pass down children components to render your logos/top bar os whatever you want!
-
-<p align="center">
-  <img src="https://github.com/immobiliare/backstage-plugin-ldap-auth/blob/main/screen.jpg?raw=true?cdn=1" width="600px" />
-</p>
 
 ### New Frontend System
 
