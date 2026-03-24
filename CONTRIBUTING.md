@@ -14,7 +14,7 @@ This projects uses [commitlint](https://commitlint.js.org/) with Angular configu
 
 Style and lint errors should be fixed with
 
-$ yarn style:lint && yarn style:prettier
+$ yarn style:lint && yarn style:lint
 # follow instruction to fix if any
 ```
 

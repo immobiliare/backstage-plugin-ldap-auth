@@ -25,7 +25,6 @@
     },
     "scripts": {
         "style:lint": "biome lint ./packages",
-        "style:prettier": "biome format --write ./packages",
         "style:check": "biome check ./packages",
         "build": "tsc && backstage-cli repo build --all",
         "test": "lerna run test:ci",
