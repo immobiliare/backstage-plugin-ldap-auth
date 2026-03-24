@@ -1,7 +1,7 @@
-import { ldapAuthPlugin } from './plugin';
+import { ldapAuthPlugin } from "./plugin";
 
-describe('ldap-auth-frontend', () => {
-    it('should export plugin', () => {
-        expect(ldapAuthPlugin).toBeDefined();
-    });
+describe("ldap-auth-frontend", () => {
+  it("should export plugin", () => {
+    expect(ldapAuthPlugin).toBeDefined();
+  });
 });

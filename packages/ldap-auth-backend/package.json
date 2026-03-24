@@ -1,56 +1,54 @@
 {
-    "name": "@immobiliarelabs/backstage-plugin-ldap-auth-backend",
-    "description": "Backstage LDAP Authentication plugin, this packages adds backend authentication and token generation/validation/management; sibling of @immobiliarelabs/backstage-plugin-ldap-auth",
-    "version": "5.0.0-alpha.5",
-    "main": "dist/index.cjs.js",
-    "types": "dist/index.d.ts",
-    "license": "MIT",
-    "publishConfig": {
-        "access": "public"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git@github.com:immobiliare/backstage-plugin-ldap-auth.git",
-        "directory": "packages/ldap-auth-backend"
-    },
-    "backstage": {
-        "role": "backend-plugin-module",
-        "pluginId": "auth",
-        "pluginPackage": "@backstage/plugin-auth-backend"
-    },
-    "scripts": {
-        "start": "backstage-cli package start",
-        "types": "tsc",
-        "build": "backstage-cli package build",
-        "lint": "backstage-cli package lint",
-        "test": "NODE_OPTIONS=--experimental-vm-modules backstage-cli package test",
-        "test:ci": "NODE_OPTIONS=--experimental-vm-modules backstage-cli package test --watch false",
-        "clean": "backstage-cli package clean",
-        "prepack": "backstage-cli package prepack",
-        "postpack": "backstage-cli package postpack"
-    },
-    "dependencies": {
-        "@backstage/backend-plugin-api": "^1.7.0",
-        "@backstage/errors": "^1.2.7",
-        "@backstage/plugin-auth-node": "^0.6.13",
-        "keyv": "^4.3.3",
-        "ldap-escape": "^2.0.6",
-        "ldapts": "^8.1.7"
-    },
-    "peerDependencies": {
-        "react": "^16.13.1 || ^17.0.0"
-    },
-    "devDependencies": {
-        "@backstage/backend-test-utils": "^1.11.0",
-        "@backstage/cli": "^0.35.4",
-        "@backstage/plugin-auth-backend": "^0.27.0",
-        "@types/ldap-escape": "^2.0.2",
-        "@types/node": "^20.5.9",
-        "@types/supertest": "^6.0.2",
-        "supertest": "^6.3.4",
-        "typescript": "^5.5.3"
-    },
-    "files": [
-        "dist"
-    ]
+  "name": "@immobiliarelabs/backstage-plugin-ldap-auth-backend",
+  "description": "Backstage LDAP Authentication plugin, this packages adds backend authentication and token generation/validation/management; sibling of @immobiliarelabs/backstage-plugin-ldap-auth",
+  "version": "5.0.0-alpha.5",
+  "main": "dist/index.cjs.js",
+  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:immobiliare/backstage-plugin-ldap-auth.git",
+    "directory": "packages/ldap-auth-backend"
+  },
+  "backstage": {
+    "role": "backend-plugin-module",
+    "pluginId": "auth",
+    "pluginPackage": "@backstage/plugin-auth-backend"
+  },
+  "scripts": {
+    "start": "backstage-cli package start",
+    "types": "tsc",
+    "build": "backstage-cli package build",
+    "lint": "backstage-cli package lint",
+    "test": "NODE_OPTIONS=--experimental-vm-modules backstage-cli package test",
+    "test:ci": "NODE_OPTIONS=--experimental-vm-modules backstage-cli package test --watch false",
+    "clean": "backstage-cli package clean",
+    "prepack": "backstage-cli package prepack",
+    "postpack": "backstage-cli package postpack"
+  },
+  "dependencies": {
+    "@backstage/backend-plugin-api": "^1.7.0",
+    "@backstage/errors": "^1.2.7",
+    "@backstage/plugin-auth-node": "^0.6.13",
+    "keyv": "^4.3.3",
+    "ldap-escape": "^2.0.6",
+    "ldapts": "^8.1.7"
+  },
+  "peerDependencies": {
+    "react": "^16.13.1 || ^17.0.0"
+  },
+  "devDependencies": {
+    "@backstage/backend-test-utils": "^1.11.0",
+    "@backstage/cli": "^0.35.4",
+    "@backstage/plugin-auth-backend": "^0.27.0",
+    "@types/ldap-escape": "^2.0.2",
+    "@types/node": "^20.5.9",
+    "@types/supertest": "^6.0.2",
+    "supertest": "^6.3.4",
+    "typescript": "^5.5.3"
+  },
+  "files": ["dist"]
 }
