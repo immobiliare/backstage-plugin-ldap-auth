@@ -2,7 +2,7 @@ pre-commit:
     skip: [ci]
     commands:
         biome:
-            glob: '*.{js,ts,jsx,tsx,json}'
+            glob: '**/*.{js,ts,jsx,tsx,json}'
             run: yarn biome check --write --no-errors-on-unmatched --files-ignore-unknown=true {staged_files} && git add {staged_files}
         markdown-toc:
             glob: '**/*.md'
