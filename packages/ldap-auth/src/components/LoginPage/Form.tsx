@@ -2,8 +2,7 @@ import { Content, Page } from "@backstage/core-components";
 import { Button, Paper, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import PasswordValidator from "password-validator";
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 /**
  * Style overrides for the login form layout.

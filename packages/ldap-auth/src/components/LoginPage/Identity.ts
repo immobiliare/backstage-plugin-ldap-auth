@@ -16,9 +16,9 @@
 
 import type {
   BackstageUserIdentity,
+  discoveryApiRef,
   IdentityApi,
   ProfileInfo,
-  discoveryApiRef,
 } from "@backstage/core-plugin-api";
 import { ResponseError } from "@backstage/errors";
 import { type LdapSession, ldapSessionSchema } from "./types";

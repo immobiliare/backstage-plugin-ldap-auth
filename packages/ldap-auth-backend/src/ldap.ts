@@ -1,6 +1,6 @@
 import { dn } from "ldap-escape";
-import { Client } from "ldapts";
 import type { ClientOptions } from "ldapts";
+import { Client } from "ldapts";
 import {
   AUTH_USER_DATA_ERROR,
   AUTH_USER_NOT_FOUND,

@@ -50,5 +50,7 @@
     "supertest": "^6.3.4",
     "typescript": "^5.5.3"
   },
-  "files": ["dist"]
+  "files": [
+    "dist"
+  ]
 }

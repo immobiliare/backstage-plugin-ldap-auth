@@ -1,4 +1,25 @@
+import { AuthenticationError } from "@backstage/errors";
+import type {
+  AuthProviderFactory,
+  AuthProviderRouteHandlers,
+  AuthResolverContext,
+} from "@backstage/plugin-auth-node";
 import type { Request, Response } from "express";
+import {
+  defaultAuthHandler,
+  defaultSigninResolver,
+  prepareBackstageIdentityResponse,
+} from "./auth";
+import { AUTH_MISSING_CREDENTIALS, JWT_INVALID_TOKEN } from "./errors";
+import {
+  COOKIE_FIELD_KEY,
+  type JWTTokenValidator,
+  normalizeTime,
+  parseJwtPayload,
+  type TokenValidator,
+  TokenValidatorNoop,
+} from "./jwt";
+import { defaultCheckUserExists, defaultLDAPAuthentication } from "./ldap";
 import type {
   BackstageLdapAuthConfiguration,
   CookiesOptions,
@@ -7,32 +28,6 @@ import type {
   ProviderCreateOptions,
   UserIdentityId,
 } from "./types";
-
-import type { AuthProviderFactory } from "@backstage/plugin-auth-node";
-
-import type {
-  AuthProviderRouteHandlers,
-  AuthResolverContext,
-} from "@backstage/plugin-auth-node";
-
-import { AuthenticationError } from "@backstage/errors";
-import { AUTH_MISSING_CREDENTIALS, JWT_INVALID_TOKEN } from "./errors";
-
-import {
-  defaultAuthHandler,
-  defaultSigninResolver,
-  prepareBackstageIdentityResponse,
-} from "./auth";
-import {
-  COOKIE_FIELD_KEY,
-  type JWTTokenValidator,
-  type TokenValidator,
-  TokenValidatorNoop,
-  normalizeTime,
-  parseJwtPayload,
-} from "./jwt";
-
-import { defaultCheckUserExists, defaultLDAPAuthentication } from "./ldap";
 
 export class ProviderLdapAuthProvider implements AuthProviderRouteHandlers {
   private readonly checkUserExists: typeof defaultCheckUserExists;
@@ -139,7 +134,7 @@ export class ProviderLdapAuthProvider implements AuthProviderRouteHandlers {
       // should not happen but in case it will trigger browser for login page
       const maxAge = Math.ceil(
         new Date(exp * 1000).valueOf() -
-          new Date().valueOf() +
+          Date.now() +
           ((this.jwtValidator as JWTTokenValidator)?.increaseTokenExpireMs ||
             0),
       );

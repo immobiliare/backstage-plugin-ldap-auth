@@ -1,8 +1,8 @@
+export type { LoginFormStyles } from "./components/LoginPage/Form";
+export type { LdapSignInPageProps } from "./components/LoginPage/LoginPage";
+export { LdapSignInPage } from "./components/LoginPage/LoginPage";
 export {
+  LdapAuthFrontendPage,
   ldapAuthFrontendPlugin,
   ldapAuthPlugin,
-  LdapAuthFrontendPage,
 } from "./plugin";
-export { LdapSignInPage } from "./components/LoginPage/LoginPage";
-export type { LdapSignInPageProps } from "./components/LoginPage/LoginPage";
-export type { LoginFormStyles } from "./components/LoginPage/Form";

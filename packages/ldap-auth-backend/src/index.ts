@@ -1,6 +1,6 @@
-export { prepareBackstageIdentityResponse } from "./auth";
-export { ldap, ProviderLdapAuthProvider } from "./provider";
-export { JWTTokenValidator, parseJwtPayload, normalizeTime } from "./jwt";
-export type { TokenValidator } from "./jwt";
 export * from "./alpha";
 export { default } from "./alpha";
+export { prepareBackstageIdentityResponse } from "./auth";
+export type { TokenValidator } from "./jwt";
+export { JWTTokenValidator, normalizeTime, parseJwtPayload } from "./jwt";
+export { ldap, ProviderLdapAuthProvider } from "./provider";

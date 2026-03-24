@@ -1,8 +1,7 @@
-import { JWTTokenValidator, normalizeTime, parseJwtPayload } from "./jwt";
-
 import jwt from "jsonwebtoken";
 import Keyv from "keyv";
 import { JWT_EXPIRED_TOKEN } from "./errors";
+import { JWTTokenValidator, normalizeTime, parseJwtPayload } from "./jwt";
 
 describe("parseJwtPayload", () => {
   it("should parse jwt", () => {

@@ -1,10 +1,10 @@
 import {
-  type RootConfigService,
   coreServices,
   createBackendModule,
   createExtensionPoint,
   createServiceFactory,
   createServiceRef,
+  type RootConfigService,
 } from "@backstage/backend-plugin-api";
 import { authProvidersExtensionPoint } from "@backstage/plugin-auth-node";
 import Keyv from "keyv";

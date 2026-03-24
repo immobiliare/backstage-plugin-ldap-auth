@@ -1,15 +1,13 @@
 import type {
+  AuthResolverContext,
+  ProfileInfo,
+  SignInResolver,
+} from "@backstage/plugin-auth-node";
+import type {
   BackstageIdentityResponse,
   BackstageSignInResult,
   LDAPUser,
 } from "./types";
-
-import type { ProfileInfo } from "@backstage/plugin-auth-node";
-
-import type {
-  AuthResolverContext,
-  SignInResolver,
-} from "@backstage/plugin-auth-node";
 
 /** @internal Replaces the removed AuthHandler type from \@backstage/plugin-auth-backend */
 type AuthHandler<T> = (
