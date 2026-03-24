@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.5](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v4.3.1...v5.0.0-alpha.5) (2026-03-24)
+
+
+### Bug Fixes
+
+* Change username minimum length from 4 to 3 ([ccd2bd2](https://github.com/immobiliare/backstage-plugin-ldap-auth/commit/ccd2bd20f67fef5fbd50fed2888c9f175d446dee))
+
+
+### Features
+
+* new frontend system ([50af137](https://github.com/immobiliare/backstage-plugin-ldap-auth/commit/50af137939c8d5ad8baf132e2cab991b0a0d3aee))
+* update to backstage 1.48 ([86f99f1](https://github.com/immobiliare/backstage-plugin-ldap-auth/commit/86f99f128ef2c57616a624484cc10e6a34882bff))
+* updated linting + hooks ([49e9a35](https://github.com/immobiliare/backstage-plugin-ldap-auth/commit/49e9a35242ec4d8db75540aba5224d81e56805ee))
+
+
+### BREAKING CHANGES
+
+* switched to biome + lefthook
+
+
+
+
+
 # [5.0.0-alpha.3](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v5.0.0-alpha.2...v5.0.0-alpha.3) (2026-03-03)
 
 **Note:** Version bump only for package @immobiliarelabs/backstage-plugin-ldap-auth
