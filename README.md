@@ -16,9 +16,7 @@ This monorepo containing two Backstage plugins to add LDAP authentication to you
 >
 > **Legacy Support**: If you are still using the old Backstage systems and cannot migrate yet, please continue using version **`4.x.x`** of these plugins.
 
-<p align="center">
-  <img src="https://github.com/immobiliare/backstage-plugin-ldap-auth/blob/main/screen.jpg?raw=true" width="600px" />
-</p>
+<p align="center"><img src="https://github.com/immobiliare/backstage-plugin-ldap-auth/blob/main/screen.jpg?raw=true?cdn=1" width="600px" alt="LDAP Auth login page screenshot" /></p>
 
 ## Quick Start
 

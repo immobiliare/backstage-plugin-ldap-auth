@@ -16,9 +16,7 @@ This plugin is not meant to be used alone but in pair with:
 
 All the current LTS versions are supported.
 
-<p align="center">
-  <img src="https://github.com/immobiliare/backstage-plugin-ldap-auth/blob/main/screen.jpg?raw=true?cdn=1" width="600px" />
-</p>
+<p align="center"><img src="https://github.com/immobiliare/backstage-plugin-ldap-auth/blob/main/screen.jpg?raw=true?cdn=1" width="600px" alt="LDAP Auth login page screenshot" /></p>
 
 ## Table of Content
 
