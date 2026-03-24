@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.6](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v5.0.0-alpha.5...v5.0.0-alpha.6) (2026-03-24)
+
+
+### Bug Fixes
+
+* abort controller initialization ([a849190](https://github.com/immobiliare/backstage-plugin-ldap-auth/commit/a849190aad62499f2bab5a637b34e4b4ffb0fb4f))
+* update ldapAuthentication ([8cb11dc](https://github.com/immobiliare/backstage-plugin-ldap-auth/commit/8cb11dc328726d2af63b104091124cea5615c57d))
+
+
+
+
+
 # [5.0.0-alpha.5](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v4.3.1...v5.0.0-alpha.5) (2026-03-24)
 
 
