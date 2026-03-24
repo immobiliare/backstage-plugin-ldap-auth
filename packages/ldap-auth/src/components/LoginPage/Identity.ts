@@ -80,7 +80,7 @@ export type Auth = { username: string; password: string };
  */
 export class LdapSignInIdentity implements IdentityApi {
     private readonly options: ProxiedSignInIdentityOptions;
-    private readonly abortController: AbortController;
+    private abortController: AbortController;
     private state: State;
 
     constructor(options: ProxiedSignInIdentityOptions) {
@@ -145,6 +145,7 @@ export class LdapSignInIdentity implements IdentityApi {
     /** {@inheritdoc @backstage/core-plugin-api#IdentityApi.signOut} */
     async signOut(): Promise<void> {
         this.abortController.abort();
+        this.abortController = new AbortController();
         const token = await this.getIdToken();
         const baseUrl = await this.options.discoveryApi.getBaseUrl('auth');
         await fetch(`${baseUrl}/${this.options.provider}/logout`, {
@@ -245,9 +246,10 @@ export class LdapSignInIdentity implements IdentityApi {
         // Note that we do not use the fetchApi here, since this all happens before
         // sign-in completes so there can be no automatic token injection and
         // similar.
+        const abortController = new AbortController();
         const response = await fetch(`${baseUrl}/${this.options.provider}/refresh`, {
             method: 'POST',
-            signal: this.abortController.signal,
+            signal: abortController.signal,
             headers: {
                 'x-requested-with': 'XMLHttpRequest',
                 'Content-Type': 'application/json',
@@ -269,9 +271,10 @@ export class LdapSignInIdentity implements IdentityApi {
         // Note that we do not use the fetchApi here, since this all happens before
         // sign-in completes so there can be no automatic token injection and
         // similar.
+        const abortController = new AbortController();
         const response = await fetch(`${baseUrl}/${this.options.provider}/refresh`, {
             method: 'POST',
-            signal: this.abortController.signal,
+            signal: abortController.signal,
             headers: { 'x-requested-with': 'XMLHttpRequest' },
             credentials: 'include',
         });
