@@ -29,7 +29,7 @@
         "style:check": "biome check ./packages",
         "build": "tsc && backstage-cli repo build --all",
         "test": "lerna run test:ci",
-        "bootstrap": "npx lerna bootstrap",
+        "bootstrap": "yarn",
         "publish:ci": "lerna publish from-package --yes --pre-dist-tag alpha",
         "version:release": "lerna version --yes --conventional-commits --conventional-graduate --create-release github --message 'chore(release): publish'",
         "version:prerelease": "lerna version --yes --force-publish --conventional-commits --conventional-prerelease --create-release github --message 'chore(prerelease): publish'",
