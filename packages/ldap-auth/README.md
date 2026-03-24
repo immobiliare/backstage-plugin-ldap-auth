@@ -116,21 +116,19 @@ export const loginStyles = {
   },
 };
 
-// 2. Create a custom logo component
+// 2. Create a custom logo component using MUI v4 patterns
 export const LoginLogo = () => (
   <Box
-    sx={{
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      gap: 1,
-      mb: 2,
-    }}
+    display="flex"
+    flexDirection="column"
+    alignItems="center"
+    marginBottom={2}
+    style={{ gap: '8px' }}
   >
     <LogoFull style={{ width: '250px', height: 'auto' }} />
     <Typography
       variant="subtitle1"
-      sx={{
+      style={{
         color: 'rgba(255, 255, 255, 0.7)',
         fontWeight: 500,
         letterSpacing: '0.05rem',
@@ -161,7 +159,7 @@ export default app.createRoot();
 ```
 
 > [!NOTE]
-> The `sx` prop used in the example above is supported by MUI 4 if you have `@material-ui/core/styles` set up correctly or if you have migrated to `@mui/material` (MUI 5).
+> The example above uses **MUI v4** patterns (standard props for `Box` and `style` for other CSS properties). If you have migrated your Backstage instance to **MUI v5** (`@mui/material`), you can use the more modern [`sx` prop](https://mui.com/system/getting-started/the-sx-prop/) for styling components.
 
 ### Old Frontend System (Legacy)
 
