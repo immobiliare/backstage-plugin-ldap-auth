@@ -39,6 +39,7 @@ This plugin is not meant to be used alone but in pair with:
     + [Custom authentication function](#custom-authentication-function)
     + [Custom check if user exists](#custom-check-if-user-exists)
   * [Add the login form](#add-the-login-form)
+- [Detailed Examples](#detailed-examples)
 - [Powered Apps](#powered-apps)
 - [Support & Contribute](#support--contribute)
 - [License](#license)
@@ -289,7 +290,17 @@ const app = createApp({
 });
 ```
 
-And you're ready to go! If you need more use cases, like having multiple processes and need a shared token store instead of in-memory look at the [example folders](https://github.com/immobiliare/backstage-plugin-ldap-auth/examples/)
+And you're ready to go!
+
+## Detailed Examples
+
+You can find more advanced use cases and detailed configurations in our [examples](../../examples) folder:
+
+- [**Custom Authentication Resolver**](../../examples/custom-auth-options.ts): Learn how to inject your own LDAP authentication logic using the New Backend System.
+- [**Custom User Check Resolver**](../../examples/custom-check-user-exists.ts): Customize how the plugin verifies if a user still exists in LDAP.
+- [**Enhance User Profile**](../../examples/enhance-user-object.md): Adding extra information (like Gravatar pictures) to the Backstage user profile during sign-in.
+- [**PostgreSQL Token Store**](../../examples/jwt-token-store-postgres.md): How to use a shared database for JWT tokens, essential for multi-instance or scaled deployments.
+- [**API Validation Guide**](../../examples/validate-api.md): A guide on protecting your custom backend APIs using the `TokenValidator` service.
 
 ## Powered Apps
 

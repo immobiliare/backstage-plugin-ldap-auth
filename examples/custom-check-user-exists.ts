@@ -1,25 +1,32 @@
-export default async function createPlugin(
-  env: PluginEnvironment,
-): Promise<Router> {
-  return await createRouter({
-    logger: env.logger,
-    config: env.config,
-    database: env.database,
-    discovery: env.discovery,
-    tokenManager: env.tokenManager,
-    providerFactories: {
-      ldap: ldap.create({
-        resolvers: {
-            async checkUserExists(ldapAuthOptions): Promise<boolean> {
-                const { username } = ldapAuthOptions;
+import {
+  coreServices,
+  createBackendModule,
+} from "@backstage/backend-plugin-api";
+import { ldapAuthExtensionPoint } from "@immobiliarelabs/backstage-plugin-ldap-auth-backend";
 
-                // Do you custom checks
-                // ....
-                
-                return true;
-            }
-        }
-      })
-    },
-  });
-}
+export default createBackendModule({
+  pluginId: "auth",
+  moduleId: "ldap-custom-check-user",
+  register(reg) {
+    reg.registerInit({
+      deps: {
+        config: coreServices.rootConfig,
+        ldapAuth: ldapAuthExtensionPoint,
+      },
+      async init({ ldapAuth }) {
+        ldapAuth.set({
+          resolvers: {
+            async checkUserExists(options) {
+              const { username } = options;
+
+              // Do your custom checks here
+              // ...
+
+              return true;
+            },
+          },
+        });
+      },
+    });
+  },
+});

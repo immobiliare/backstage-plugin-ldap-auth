@@ -1,21 +1,30 @@
-export default async function createPlugin(
-  env: PluginEnvironment,
-): Promise<Router> {
-  return await createRouter({
-    logger: env.logger,
-    config: env.config,
-    database: env.database,
-    discovery: env.discovery,
-    tokenManager: env.tokenManager,
-    providerFactories: {
-      ldap: ldap.create({
-        resolvers: {
-          async ldapAuthentication(username, password, ldapOptions): Promise<LDAPUser> {
-            const user = await defaultLDAPAuthentication(username, password, ldapOptions)
-            return { uid: user.uid };
-          }
-        }
-      })
-    },
-  });
-}
+import {
+  coreServices,
+  createBackendModule,
+} from "@backstage/backend-plugin-api";
+import { ldapAuthExtensionPoint } from "@immobiliarelabs/backstage-plugin-ldap-auth-backend";
+
+export default createBackendModule({
+  pluginId: "auth",
+  moduleId: "ldap-custom-auth",
+  register(reg) {
+    reg.registerInit({
+      deps: {
+        config: coreServices.rootConfig,
+        ldapAuth: ldapAuthExtensionPoint,
+      },
+      async init({ ldapAuth }) {
+        ldapAuth.set({
+          resolvers: {
+            async ldapAuthentication(username, password, ldapOptions) {
+              // Perform your custom authentication logic here.
+              // You can use the defaultLDAPAuthentication helper if you just want to wrap it.
+              // Note: ldapOptions now uses ldapts ClientOptions.
+              return { uid: username };
+            },
+          },
+        });
+      },
+    });
+  },
+});
