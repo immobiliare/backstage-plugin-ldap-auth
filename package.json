@@ -5,38 +5,33 @@
         "packages/*"
     ],
     "devDependencies": {
-        "@backstage/cli": "^0.26.11",
+        "@backstage/cli": "^0.35.4",
+        "@biomejs/biome": "^2.4.8",
         "@commitlint/cli": "^17.1.2",
         "@commitlint/config-conventional": "^17.1.0",
-        "@typescript-eslint/eslint-plugin": "^6.6.0",
-        "@typescript-eslint/parser": "^6.1.0",
-        "eslint": "^8.49.0",
-        "eslint-config-prettier": "^9.0.0",
-        "eslint-plugin-prettier": "^5.0.0",
-        "husky": "^8.0.1",
-        "is-ci": "^3.0.1",
-        "lerna": "^8.1.7",
-        "lint-staged": "^13.0.3",
+        "jest": "^29",
+        "jest-environment-jsdom": "^29",
+        "lefthook": "^2.1.2",
+        "lerna": "^9.0.5",
         "markdown-toc": "^1.2.0",
-        "prettier": "^3.0.3",
         "typescript": "^5.5.3"
     },
     "engines": {
-        "node": ">=18.0.0"
+        "node": "^22.0.0 || ^24.0.0"
     },
     "volta": {
-        "node": "20.15.1"
+        "node": "24.14.0"
     },
     "scripts": {
-        "style:lint": "eslint packages --ext .ts",
-        "style:prettier": "prettier \"packages/**/*.ts\" --list-different --write",
+        "style:lint": "biome lint ./packages",
+        "style:check": "biome check ./packages",
         "build": "tsc && backstage-cli repo build --all",
         "test": "lerna run test:ci",
-        "bootstrap": "npx lerna bootstrap",
+        "bootstrap": "yarn",
         "publish:ci": "lerna publish from-package --yes --pre-dist-tag alpha",
         "version:release": "lerna version --yes --conventional-commits --conventional-graduate --create-release github --message 'chore(release): publish'",
         "version:prerelease": "lerna version --yes --force-publish --conventional-commits --conventional-prerelease --create-release github --message 'chore(prerelease): publish'",
-        "prepare": "node prepare.js || echo 'Skipping prepare'"
+        "prepare": "lefthook install"
     },
     "packageManager": "yarn@4.3.1"
 }

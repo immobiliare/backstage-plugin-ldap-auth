@@ -1,62 +1,82 @@
 {
-    "name": "@immobiliarelabs/backstage-plugin-ldap-auth",
-    "description": "Backstage LDAP Authentication plugin, this packages adds frontend login page and token management sibling of @immobiliarelabs/backstage-plugin-ldap-auth-backend",
-    "version": "4.3.1",
-    "main": "dist/index.esm.js",
-    "types": "dist/index.d.ts",
-    "license": "MIT",
-    "publishConfig": {
-        "access": "public"
-    },
-    "backstage": {
-        "role": "frontend-plugin",
-        "pluginId": "ldap-auth",
-        "pluginPackages": [
-            "@immobiliarelabs/backstage-plugin-ldap-auth"
-        ]
-    },
-    "repository": {
-        "type": "git",
-        "url": "git@github.com:immobiliare/backstage-plugin-ldap-auth.git",
-        "directory": "packages/ldap-auth"
-    },
-    "sideEffects": false,
-    "scripts": {
-        "start": "backstage-cli package start",
-        "types": "tsc",
-        "build": "backstage-cli package build",
-        "lint": "backstage-cli package lint",
-        "test": "backstage-cli package test",
-        "test:ci": "backstage-cli package test --watch false",
-        "clean": "backstage-cli package clean",
-        "prepack": "backstage-cli package prepack",
-        "postpack": "backstage-cli package postpack"
-    },
-    "dependencies": {
-        "@backstage/core-components": "^0.14.9",
-        "@backstage/core-plugin-api": "^1.9.3",
-        "@backstage/theme": "^0.5.6",
-        "@material-ui/core": "^4.12.4",
-        "@react-hookz/web": "^23.0.0",
-        "password-validator": "^5.3.0",
-        "zod": "^3.17.3"
-    },
-    "peerDependencies": {
-        "react": "^16.13.1 || ^17.0.0"
-    },
-    "devDependencies": {
-        "@backstage/cli": "^0.26.11",
-        "@backstage/dev-utils": "^1.0.35",
-        "@testing-library/jest-dom": "^5.10.1",
-        "@types/jest": "^29.0.3",
-        "@types/node": "^20.5.9",
-        "cross-fetch": "^3.1.5",
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0",
-        "react-router": "^6.4.5",
-        "react-router-dom": "^6.4.5"
-    },
-    "files": [
-        "dist"
+  "name": "@immobiliarelabs/backstage-plugin-ldap-auth",
+  "description": "Backstage LDAP Authentication plugin, this packages adds frontend login page and token management sibling of @immobiliarelabs/backstage-plugin-ldap-auth-backend",
+  "version": "5.0.0-alpha.6",
+  "main": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./alpha": "./src/alpha.tsx",
+    "./package.json": "./package.json"
+  },
+  "typesVersions": {
+    "*": {
+      "alpha": [
+        "src/alpha.tsx"
+      ],
+      "package.json": [
+        "package.json"
+      ]
+    }
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "backstage": {
+    "role": "frontend-plugin",
+    "pluginId": "ldap-auth",
+    "pluginPackages": [
+      "@immobiliarelabs/backstage-plugin-ldap-auth"
     ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:immobiliare/backstage-plugin-ldap-auth.git",
+    "directory": "packages/ldap-auth"
+  },
+  "sideEffects": false,
+  "scripts": {
+    "start": "backstage-cli package start",
+    "types": "tsc",
+    "build": "backstage-cli package build",
+    "lint": "backstage-cli package lint",
+    "test": "backstage-cli package test",
+    "test:ci": "backstage-cli package test --watch false",
+    "clean": "backstage-cli package clean",
+    "prepack": "backstage-cli package prepack",
+    "postpack": "backstage-cli package postpack"
+  },
+  "dependencies": {
+    "@backstage/core-components": "^0.18.7",
+    "@backstage/core-plugin-api": "^1.12.3",
+    "@backstage/frontend-plugin-api": "^0.14.1",
+    "@backstage/plugin-app-react": "^0.2.0",
+    "@backstage/theme": "^0.7.2",
+    "@material-ui/core": "^4.12.4",
+    "@react-hookz/web": "^23.0.0",
+    "password-validator": "^5.3.0",
+    "zod": "^3.17.3"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router": "^6.30.2",
+    "react-router-dom": "^6.30.2"
+  },
+  "devDependencies": {
+    "@backstage/cli": "^0.35.4",
+    "@backstage/dev-utils": "^1.1.20",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@types/jest": "^29.0.3",
+    "@types/node": "^20.5.9",
+    "cross-fetch": "^3.1.5",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-router": "^6.30.2",
+    "react-router-dom": "^6.30.2"
+  },
+  "files": [
+    "dist"
+  ]
 }

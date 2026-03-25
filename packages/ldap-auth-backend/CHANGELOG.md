@@ -3,6 +3,108 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.6](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v5.0.0-alpha.5...v5.0.0-alpha.6) (2026-03-24)
+
+**Note:** Version bump only for package @immobiliarelabs/backstage-plugin-ldap-auth-backend
+
+
+
+
+
+# [5.0.0-alpha.5](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v4.3.1...v5.0.0-alpha.5) (2026-03-24)
+
+
+### Bug Fixes
+
+* **ldap-authenticate:** only support one url for now ([a76f0ea](https://github.com/immobiliare/backstage-plugin-ldap-auth/commit/a76f0ea5ddbad1ecf1d15165aeb11e5e05c470d9))
+* packages/ldap-auth-backend/package.json to reduce vulnerabilities ([8c752ae](https://github.com/immobiliare/backstage-plugin-ldap-auth/commit/8c752ae462ed305fbf2ced513823862c74b55135))
+
+
+### Features
+
+* new frontend system ([50af137](https://github.com/immobiliare/backstage-plugin-ldap-auth/commit/50af137939c8d5ad8baf132e2cab991b0a0d3aee))
+* update to backstage 1.48 ([86f99f1](https://github.com/immobiliare/backstage-plugin-ldap-auth/commit/86f99f128ef2c57616a624484cc10e6a34882bff))
+* updated linting + hooks ([49e9a35](https://github.com/immobiliare/backstage-plugin-ldap-auth/commit/49e9a35242ec4d8db75540aba5224d81e56805ee))
+
+
+### BREAKING CHANGES
+
+* switched to biome + lefthook
+
+
+
+
+
+# [5.0.0-alpha.3](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v5.0.0-alpha.2...v5.0.0-alpha.3) (2026-03-03)
+
+
+### Features
+
+* **backend:** migrated from `ldapjs` to `ldapts` ([#ref](https://github.com/vmaranduca/ldapts))
+* **backend:** added support for `starttls` in LDAP configuration
+
+### Bug Fixes
+
+* **ldap-authenticate:** only support one url for now ([999df4a](https://github.com/immobiliare/backstage-plugin-ldap-auth/commit/999df4a2bfbb9c222554e8796a9dac727a650903))
+
+
+
+
+
+# [5.0.0-alpha.2](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v5.0.0-alpha.1...v5.0.0-alpha.2) (2026-03-03)
+
+**Note:** Version bump only for package @immobiliarelabs/backstage-plugin-ldap-auth-backend
+
+
+
+
+
+# [5.0.0-alpha.1](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v5.0.0-alpha.0...v5.0.0-alpha.1) (2026-03-03)
+
+**Note:** Version bump only for package @immobiliarelabs/backstage-plugin-ldap-auth-backend
+
+
+
+
+
+# [5.0.0-alpha.0](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v4.4.0-alpha.3...v5.0.0-alpha.0) (2026-03-03)
+
+
+### Features
+
+* updated linting + hooks ([f44ca22](https://github.com/immobiliare/backstage-plugin-ldap-auth/commit/f44ca229569b899ccdcec68b58c35fa1e8dd7d2f))
+
+
+### BREAKING CHANGES
+
+* switched to biome + lefthook
+
+
+
+
+
+# [4.4.0-alpha.3](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v4.4.0-alpha.2...v4.4.0-alpha.3) (2026-03-03)
+
+**Note:** Version bump only for package @immobiliarelabs/backstage-plugin-ldap-auth-backend
+
+# [4.4.0-alpha.2](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v4.4.0-alpha.1...v4.4.0-alpha.2) (2026-03-03)
+
+**Note:** Version bump only for package @immobiliarelabs/backstage-plugin-ldap-auth-backend
+
+# [4.4.0-alpha.1](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v4.4.0-alpha.0...v4.4.0-alpha.1) (2026-03-03)
+
+**Note:** Version bump only for package @immobiliarelabs/backstage-plugin-ldap-auth-backend
+
+# [4.4.0-alpha.0](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v4.3.1...v4.4.0-alpha.0) (2026-03-02)
+
+### Bug Fixes
+
+-   packages/ldap-auth-backend/package.json to reduce vulnerabilities ([1a21898](https://github.com/immobiliare/backstage-plugin-ldap-auth/commit/1a21898bb6e8fa6d5b9aabef83d7e39e7d994730))
+
+### Features
+
+-   update to backstage 1.48 ([3b488fd](https://github.com/immobiliare/backstage-plugin-ldap-auth/commit/3b488fd9f67a8e724e79b34c99758c7058e1a9b2))
+
 ## [4.3.1](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v4.3.1-alpha.0...v4.3.1) (2024-10-18)
 
 **Note:** Version bump only for package @immobiliarelabs/backstage-plugin-ldap-auth-backend

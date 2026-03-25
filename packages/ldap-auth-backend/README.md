@@ -3,10 +3,11 @@
 </p>
 <h1 align="center">@immobiliarelabs/backstage-plugin-ldap-auth-backend</h1>
 
-![npm (scoped)](https://img.shields.io/npm/v/@immobiliarelabs/backstage-plugin-ldap-auth-backend?style=flat-square)
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier?style=flat-square)
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square)](https://github.com/semantic-release/semantic-release)
-![license](https://img.shields.io/github/license/immobiliare/backstage-plugin-ldap-auth?style=flat-square)
+<p align="center">
+  <img src="https://img.shields.io/badge/Backstage-%3E%3D%201.48.3-%239c27b0?style=flat-square&logo=backstage" alt="Backstage Version Support" />
+  <img src="https://img.shields.io/npm/v/@immobiliarelabs/backstage-plugin-ldap-auth-backend?style=flat-square" alt="npm (scoped)" />
+  <img src="https://img.shields.io/github/license/immobiliare/backstage-plugin-ldap-auth?style=flat-square" alt="license" />
+</p>
 
 > LDAP Authentication your [Backstage](https://backstage.io/) deployment
 
@@ -20,26 +21,45 @@ This plugin is not meant to be used alone but in pair with:
 -   The official [@backstage/plugin-catalog-backend-module-ldap](https://www.npmjs.com/package/@backstage/plugin-catalog-backend-module-ldap) which keeps in sync your LDAP users with Backstage user catalogs!
 -   Its sibling frontend package [@immobiliarelabs/backstage-plugin-ldap-auth](https://www.npmjs.com/package/@immobiliarelabs/backstage-plugin-ldap-auth)
 
-All the current LTS versions are supported.
+<p align="center"><img src="https://github.com/immobiliare/backstage-plugin-ldap-auth/blob/main/screen.jpg?raw=true?cdn=1" width="600px" alt="LDAP Auth login page screenshot" /></p>
 
 ## Table of Content
 
 <!-- toc -->
 
--   [Installation](#installation)
--   [Configurations](#configurations)
-    -   [Setup](#setup)
-    -   [Connection Configuration](#connection-configuration)
-    -   [Add the authentication backend plugin](#add-the-authentication-backend-plugin)
-    -   [Custom LDAP Configurations](#custom-ldap-configurations)
-        -   [Custom authentication function](#custom-authentication-function)
-        -   [Custom check if user exists](#custom-check-if-user-exists)
-    -   [Add the login form](#add-the-login-form)
--   [Powered Apps](#powered-apps)
--   [Support & Contribute](#support--contribute)
--   [License](#license)
+- [Migration to v5.x: `ldapjs` to `ldapts`](#migration-to-v5x-ldapjs-to-ldapts)
+  * [Migration Guide](#migration-guide)
+- [Installation](#installation)
+- [Configurations](#configurations)
+  * [Setup](#setup)
+  * [Connection Configuration](#connection-configuration)
+  * [New Backend System](#new-backend-system)
+  * [Old Backend System (Legacy)](#old-backend-system-legacy)
+  * [Custom LDAP Configurations](#custom-ldap-configurations)
+    + [Custom authentication function](#custom-authentication-function)
+    + [Custom check if user exists](#custom-check-if-user-exists)
+  * [Add the login form](#add-the-login-form)
+- [Detailed Examples](#detailed-examples)
+- [Powered Apps](#powered-apps)
+- [Support & Contribute](#support--contribute)
+- [License](#license)
 
 <!-- tocstop -->
+
+## Migration to v5.x: `ldapjs` to `ldapts`
+
+> [!IMPORTANT]
+> Starting with version `5.x`, we have fully replaced `ldapjs` and `ldap-authentication` with [`ldapts`](https://github.com/ldapts/ldapts). This architectural switch was necessary because `ldapjs` is no longer maintained and has been deprecated.
+>
+> This version also targets the **New Backstage Backend System** (Backstage version **>= 1.48.3**). For legacy support, please stay on version **`4.x.x`**.
+
+### Migration Guide
+
+If you were heavily relying on custom resolvers or internal `ldapjs` types, follow these steps to migrate:
+
+1. **Custom Resolver Changes**: The `ldapAuthentication` and `checkUserExists` resolvers have updated type signatures to accommodate `ldapts`. If you wrote custom resolvers in `4.x`, ensure your functions now accept the `ldapts` `ClientOptions` and return objects that comply with the new signatures.
+2. **Standard Configurations**: For most users using the standard configurations via `app-config.yaml`, the update is drop-in.
+3. **StartTLS Support**: We now fully support the usage of `starttls: true` natively using `ldapts`, which can be turned on in your config!
 
 ## Installation
 
@@ -75,7 +95,7 @@ and follow this [guide](https://backstage.io/docs/integrations/ldap/org)
 
 > Adds connection configuration inside your backstage YAML config file, eg: `app-config.yaml`
 
-We use [`ldap-authentication`](https://github.com/shaozi/ldap-authentication) for authentication, you can find all the configurations at this [link], `ldapOpts` fields are options provided to lower level ldap client read more at [`ldapjs` ](https://github.com/ldapjs/node-ldapjs)
+We use [`ldapts`](https://github.com/ldapts/ldapts) for authentication, you can find all the configurations at this [link](https://github.com/ldapts/ldapts/blob/main/README.md).
 
 > Add in you You backstage configuration file
 
@@ -102,34 +122,44 @@ auth:
                     # NOTE: If no admin user/pass provided we'll attempt a credential-less search
                     adminDn: uid={ADMIN_USERNAME},ou=users,dc=ns,dc=farm
                     adminPassword: ''
+                    
+                    # Optional: Use StartTLS
+                    # starttls: true
 
                     ldapOpts:
-                        url:
-                            - 'ldaps://123.123.123.123'
+                        url: 'ldaps://123.123.123.123'
+                        # Common ldapts options (mapping to ldapjs ones)
                         tlsOptions:
                             rejectUnauthorized: false
+                        # timeout: 5000
+                        # connectTimeout: 10000
+                        # strictDN: true
+
+> [!TIP]
+> Since we use [`ldapts`](https://github.com/ldapts/ldapts), almost all `ClientOptions` from `ldapts` can be passed under `ldapOpts`.
 ```
 
-### Add the authentication backend plugin
+### New Backend System
 
-This is for a basic usage: - single process - No custom auth or user object marshaling - in-memory sessions
+For the new Backstage backend system, simply add the module to your backend.
 
-For more uses cases you can see the [example folders](https://github.com/immobiliare/backstage-plugin-ldap-auth/tree/main/examples)
-
-> `packages/backend/src/plugins/auth.ts`
+> `packages/backend/src/index.ts`
 
 ```ts
+import { createBackend } from '@backstage/backend-defaults';
+
 const backend = createBackend();
 
-// This is required to work
 backend.add(import('@backstage/plugin-auth-backend'));
-...
-backend.add(import('@backstage/plugin-auth-backend'));
+// ... other plugins
 backend.add(import('@immobiliarelabs/backstage-plugin-ldap-auth-backend'));
-...
-backend.start();
 
+backend.start();
 ```
+
+### Old Backend System (Legacy)
+
+If you are still using the old backend system, follow the instructions below. Note that we recommend migrating to the New Backend System as this plugin is optimized for it.
 
 If you want to connect to Postgres for the store of the token (default is in memory):
 
@@ -187,13 +217,11 @@ export default createBackendModule({
                         async ldapAuthentication(
                             username,
                             password,
-                            ldapOptions,
-                            authFunction
-                        ): LDAPUser {
-                            // modify your ldapOptions and do whatever you need to format it
-                            // ...
-                            const user = await authFunction(ldapOptions);
-                            return { uid: user.uid };
+                            options
+                        ): Promise<LDAPUser> {
+                            // perform your custom authentication logic here
+                            // you can use the defaultLDAPAuthentication helper if you just want to wrap it
+                            return { uid: username };
                         },
                     },
                 });
@@ -219,10 +247,9 @@ export default createBackendModule({
                 ldapAuth.set({
                     resolvers: {
                         async checkUserExists(
-                            ldapAuthOptions,
-                            searchFunction
+                            options
                         ): Promise<boolean> {
-                            const { username } = ldapAuthOptions;
+                            const { username } = options;
 
                             // Do you custom checks
                             // ....
@@ -263,7 +290,17 @@ const app = createApp({
 });
 ```
 
-And you're ready to go! If you need more use cases, like having multiple processes and need a shared token store instead of in-memory look at the [example folders](https://github.com/immobiliare/backstage-plugin-ldap-auth/examples/)
+And you're ready to go!
+
+## Detailed Examples
+
+You can find more advanced use cases and detailed configurations in our [examples](../../examples) folder:
+
+- [**Custom Authentication Resolver**](../../examples/custom-auth-options.ts): Learn how to inject your own LDAP authentication logic using the New Backend System.
+- [**Custom User Check Resolver**](../../examples/custom-check-user-exists.ts): Customize how the plugin verifies if a user still exists in LDAP.
+- [**Enhance User Profile**](../../examples/enhance-user-object.md): Adding extra information (like Gravatar pictures) to the Backstage user profile during sign-in.
+- [**PostgreSQL Token Store**](../../examples/jwt-token-store-postgres.md): How to use a shared database for JWT tokens, essential for multi-instance or scaled deployments.
+- [**API Validation Guide**](../../examples/validate-api.md): A guide on protecting your custom backend APIs using the `TokenValidator` service.
 
 ## Powered Apps
 

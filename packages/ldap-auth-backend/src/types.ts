@@ -23,10 +23,10 @@
  * @public
  */
 export interface BackstageSignInResult {
-    /**
-     * The token used to authenticate the user within Backstage.
-     */
-    token: string;
+  /**
+   * The token used to authenticate the user within Backstage.
+   */
+  token: string;
 }
 
 /**
@@ -36,10 +36,10 @@ export interface BackstageSignInResult {
  * @public
  */
 export interface BackstageIdentityResponse extends BackstageSignInResult {
-    /**
-     * A plaintext description of the identity that is encapsulated within the token.
-     */
-    identity: BackstageUserIdentity;
+  /**
+   * A plaintext description of the identity that is encapsulated within the token.
+   */
+  identity: BackstageUserIdentity;
 }
 
 /**
@@ -48,95 +48,107 @@ export interface BackstageIdentityResponse extends BackstageSignInResult {
  * @public
  */
 export type BackstageUserIdentity = {
-    /**
-     * The type of identity that this structure represents. In the frontend app
-     * this will currently always be 'user'.
-     */
-    type: 'user';
+  /**
+   * The type of identity that this structure represents. In the frontend app
+   * this will currently always be 'user'.
+   */
+  type: "user";
 
-    /**
-     * The entityRef of the user in the catalog.
-     * For example User:default/sandra
-     */
-    userEntityRef: string;
+  /**
+   * The entityRef of the user in the catalog.
+   * For example User:default/sandra
+   */
+  userEntityRef: string;
 
-    /**
-     * The user and group entities that the user claims ownership through
-     */
-    ownershipEntityRefs: string[];
+  /**
+   * The user and group entities that the user claims ownership through
+   */
+  ownershipEntityRefs: string[];
 };
 
 export type LDAPResponse = {
-    dn: string;
-    controls?: [];
-    uid: string;
-    givenName: string;
-    cn: string;
-    uidNumber: string;
-    gidNumber: string;
-    homeDirectory: string;
-    mail: string;
-    sn: string;
-    objectClass: string[];
+  dn: string;
+  controls?: [];
+  uid: string;
+  givenName: string;
+  cn: string;
+  uidNumber: string;
+  gidNumber: string;
+  homeDirectory: string;
+  mail: string;
+  sn: string;
+  objectClass: string[];
 };
 
 export type LDAPUser = Partial<LDAPResponse>;
 
-export type UserIdentityId = Pick<LDAPResponse, 'uid'>;
+export type UserIdentityId = Pick<LDAPResponse, "uid">;
 
 export type BackstageJWTPayload = {
-    iss: string;
-    sub: string;
-    ent: string[];
-    aud: string;
-    iat: number;
-    exp: number;
+  iss: string;
+  sub: string;
+  ent: string[];
+  aud: string;
+  iat: number;
+  exp: number;
 };
 
-import type { TokenValidator } from './jwt';
-import type { AuthResolverContext } from '@backstage/plugin-auth-node';
-import type { AuthenticationOptions } from 'ldap-authentication';
-import { defaultAuthHandler, defaultSigninResolver } from './auth';
-import { defaultCheckUserExists, defaultLDAPAuthentication } from './ldap';
+import type { AuthResolverContext } from "@backstage/plugin-auth-node";
+import type { ClientOptions } from "ldapts";
+
+export interface LdapAuthenticationOptions {
+  ldapOpts: ClientOptions;
+  userSearchBase?: string;
+  usernameAttribute?: string;
+  username?: string;
+  adminDn?: string;
+  adminPassword?: string;
+  starttls?: boolean;
+  userPassword?: string;
+}
+
+import type { defaultAuthHandler, defaultSigninResolver } from "./auth";
+import type { TokenValidator } from "./jwt";
+import type { defaultCheckUserExists, defaultLDAPAuthentication } from "./ldap";
 
 export type CookiesOptions = {
-    field: string;
-    secure: boolean;
+  field: string;
+  secure: boolean;
 };
 
 export type BackstageLdapAuthConfiguration = {
-    cookies?: Partial<CookiesOptions>;
-    ldapAuthenticationOptions: AuthenticationOptions;
+  cookies?: Partial<CookiesOptions>;
+  ldapAuthenticationOptions: LdapAuthenticationOptions;
 };
 
 export type Resolvers = {
-    checkUserExists?: typeof defaultCheckUserExists;
-    ldapAuthentication?: typeof defaultLDAPAuthentication;
+  checkUserExists?: typeof defaultCheckUserExists;
+  ldapAuthentication?: typeof defaultLDAPAuthentication;
 };
 
 export type SignInResolver = {
-    resolver?: typeof defaultSigninResolver;
+  resolver?: typeof defaultSigninResolver;
 };
 
 export type ProviderCreateOptions = {
-    // Backstage Provider AuthHandler
-    authHandler?: typeof defaultAuthHandler;
-    // Backstage Provider SignInResolver
-    signIn?: SignInResolver;
+  // Backstage Provider AuthHandler
+  authHandler?: typeof defaultAuthHandler;
+  // Backstage Provider SignInResolver
+  signIn?: SignInResolver;
 
-    // Custom resolvers
-    resolvers?: Resolvers;
-    // Custom validator function for the JWT token if needed
-    tokenValidator?: TokenValidator;
+  // Custom resolvers
+  resolvers?: Resolvers;
+  // Custom validator function for the JWT token if needed
+  tokenValidator?: TokenValidator;
 };
 
 export type ProviderConstructor = {
-    cookies: BackstageLdapAuthConfiguration['cookies'];
-    ldapAuthenticationOptions: AuthenticationOptions;
-    authHandler: typeof defaultAuthHandler;
-    signInResolver: typeof defaultSigninResolver;
-    checkUserExists: typeof defaultCheckUserExists;
-    ldapAuthentication: typeof defaultLDAPAuthentication;
-    resolverContext: AuthResolverContext;
-    tokenValidator?: TokenValidator;
+  cookies: BackstageLdapAuthConfiguration["cookies"];
+  ldapAuthenticationOptions: LdapAuthenticationOptions;
+  authHandler: typeof defaultAuthHandler;
+  signInResolver: typeof defaultSigninResolver;
+  checkUserExists: typeof defaultCheckUserExists;
+  ldapAuthentication: typeof defaultLDAPAuthentication;
+  resolverContext: AuthResolverContext;
+  tokenValidator?: TokenValidator;
 };

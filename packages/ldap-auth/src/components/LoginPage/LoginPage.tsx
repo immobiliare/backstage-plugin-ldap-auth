@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
+import { Progress } from "@backstage/core-components";
 import {
-    discoveryApiRef,
-    SignInPageProps,
-    useApi,
-} from '@backstage/core-plugin-api';
-import React, { useState, useEffect } from 'react';
-import { useAsync } from '@react-hookz/web';
-import { Progress } from '@backstage/core-components';
-import { LdapSignInIdentity } from './Identity';
-import { LoginForm } from './Form';
+  discoveryApiRef,
+  type SignInPageProps,
+  useApi,
+} from "@backstage/core-plugin-api";
+import { useAsync } from "@react-hookz/web";
+import React, { useEffect, useState } from "react";
+import { LoginForm, type LoginFormStyles } from "./Form";
+import { LdapSignInIdentity } from "./Identity";
 
 /**
  * Props for {@link LdapSignInPage}.
@@ -31,16 +31,19 @@ import { LoginForm } from './Form';
  * @public
  */
 export type LdapSignInPageProps = SignInPageProps & {
-    provider: string;
-    children?: React.ReactNode | null;
-    onSignInError?: (error: Error) => void;
-    options?: {
-        helperTextPassword?: string;
-        helperTextUsername?: string;
-        validateUsername?: (usr: string) => boolean;
-        validatePassword?: (pass: string) => boolean;
-        usernameLabel?: string;
-    };
+  provider: string;
+  logo?: React.ReactNode;
+  children?: React.ReactNode | null;
+  onSignInError?: (error: Error) => void;
+  options?: {
+    helperTextPassword?: string;
+    helperTextUsername?: string;
+    validateUsername?: (usr: string) => boolean;
+    validatePassword?: (pass: string) => boolean;
+    usernameLabel?: string;
+    /** Optional inline style overrides for the login form layout. */
+    styles?: LoginFormStyles;
+  };
 };
 
 /**
@@ -59,63 +62,65 @@ export type LdapSignInPageProps = SignInPageProps & {
  * @public
  */
 export const LdapSignInPage = (props: LdapSignInPageProps) => {
-    const discoveryApi = useApi(discoveryApiRef);
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [identity] = useState(
-        new LdapSignInIdentity({
-            provider: props.provider,
-            discoveryApi,
-        })
-    );
+  const discoveryApi = useApi(discoveryApiRef);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [identity] = useState(
+    new LdapSignInIdentity({
+      provider: props.provider,
+      discoveryApi,
+    }),
+  );
 
-    const [{ status, error }, { execute }] = useAsync(async () => {
-        await identity.login({ username, password });
+  const [{ status, error }, { execute }] = useAsync(async () => {
+    await identity.login({ username, password });
 
-        props.onSignInSuccess(identity);
-    });
+    props.onSignInSuccess(identity);
+  });
 
-    const [{ status: statusRefresh }, { execute: executeRefresh }] = useAsync(
-        async () => {
-            await identity.fetch();
+  const [{ status: statusRefresh }, { execute: executeRefresh }] = useAsync(
+    async () => {
+      await identity.fetch();
 
-            props.onSignInSuccess(identity);
-        }
-    );
+      props.onSignInSuccess(identity);
+    },
+  );
 
-    useEffect(() => {
-        executeRefresh();
-    }, []);
+  useEffect(() => {
+    executeRefresh();
+  }, []);
 
-    function onSubmit(u: string, p: string) {
-        setUsername(u);
-        setPassword(p);
-        setTimeout(execute, 0);
-    }
+  function onSubmit(u: string, p: string) {
+    setUsername(u);
+    setPassword(p);
+    setTimeout(execute, 0);
+  }
 
-    if (
-        status === 'loading' ||
-        statusRefresh === 'loading' ||
-        statusRefresh === 'not-executed'
-    ) {
-        return <Progress />;
-    } else if (status === 'success' || statusRefresh === 'success') {
-        return null;
-    }
+  if (
+    status === "loading" ||
+    statusRefresh === "loading" ||
+    statusRefresh === "not-executed"
+  ) {
+    return <Progress />;
+  }
+  if (status === "success" || statusRefresh === "success") {
+    return null;
+  }
 
-    function onSignInError(error: Error) {
-        props?.onSignInError?.(error);
-    }
+  function onSignInError(error: Error) {
+    props?.onSignInError?.(error);
+  }
 
-    return (
-        <>
-            {props.children}
-            <LoginForm
-                onSubmit={onSubmit}
-                onSignInError={onSignInError}
-                error={error}
-                {...props.options}
-            />
-        </>
-    );
+  return (
+    <>
+      {props.children}
+      <LoginForm
+        onSubmit={onSubmit}
+        onSignInError={onSignInError}
+        error={error}
+        logo={props.logo}
+        {...props.options}
+      />
+    </>
+  );
 };

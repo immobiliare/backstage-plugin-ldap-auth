@@ -1,105 +1,156 @@
-import type { LDAPUser } from './types';
-
-import ldap from 'ldapjs';
-import { dn } from 'ldap-escape';
-import { authenticate, AuthenticationOptions } from 'ldap-authentication';
-
+import { dn } from "ldap-escape";
+import type { ClientOptions } from "ldapts";
+import { Client } from "ldapts";
 import {
-    AUTH_USER_DATA_ERROR,
-    AUTH_USER_NOT_FOUND,
-    LDAP_CONNECT_FAIL,
-} from './errors';
+  AUTH_USER_DATA_ERROR,
+  AUTH_USER_NOT_FOUND,
+  LDAP_CONNECT_FAIL,
+} from "./errors";
+import type { LDAPUser, LdapAuthenticationOptions } from "./types";
 
-async function _verifyUserExistsNoAdmin(
-    searchString: string,
-    ldapOpts: ldap.ClientOptions,
-    searchOpts = {}
-): Promise<boolean> {
-    const client: ldap.Client = await new Promise((resolve, reject) => {
-        ldapOpts.connectTimeout = ldapOpts.connectTimeout || 5000;
-        const client = ldap.createClient(ldapOpts);
+async function createClient(
+  ldapOpts: ClientOptions,
+  starttls: boolean | undefined,
+  bindDn: string,
+  bindPassword: string,
+): Promise<Client> {
+  const client = new Client({
+    ...ldapOpts,
+    connectTimeout: ldapOpts.connectTimeout || 5000,
+  });
 
-        client.on('connect', () => resolve(client));
-        client.on('timeout', reject);
-        client.on('connectTimeout', reject);
-        client.on('error', reject);
-        client.on('connectError', reject);
-    });
-    if (client instanceof Error)
-        throw new Error(`${LDAP_CONNECT_FAIL} ${client.message}`);
-    return new Promise((resolve, reject) => {
-        client.search(searchString, searchOpts, (error, res) => {
-            if (error) reject(error);
-            let exists = false; // avoids double resolve call if user exists
-            res.on('searchEntry', () => (exists = true));
-            res.on('error', () => client.unbind());
-            res.on('end', () => {
-                resolve(exists);
-                client.unbind();
-            });
-        });
-    });
+  if (starttls) await client.startTLS(ldapOpts.tlsOptions);
+  await client.bind(bindDn, bindPassword);
+
+  return client;
 }
 
 export const defaultCheckUserExists = async (
-    ldapAuthOptions: AuthenticationOptions,
-    searchFunction: typeof authenticate
+  options: LdapAuthenticationOptions,
 ): Promise<boolean> => {
-    // This fallback is for clients with no need for an admin to list users
-    // I'll remove this if we can add this option to the auth library.
-    if (!ldapAuthOptions.adminDn || !ldapAuthOptions.adminPassword) {
-        const {
-            username,
-            userSearchBase,
-            usernameAttribute = 'uid',
-        } = ldapAuthOptions;
-        return _verifyUserExistsNoAdmin(
-            dn`${usernameAttribute as string}=${username as string},` +
-                userSearchBase,
-            ldapAuthOptions.ldapOpts
-        );
-    }
+  const {
+    ldapOpts,
+    adminDn,
+    adminPassword,
+    username,
+    userSearchBase,
+    usernameAttribute = "uid",
+    starttls,
+  } = options;
 
-    return searchFunction({
-        ...ldapAuthOptions,
-        // this is used to serach for the user
-        verifyUserExists: true,
-    });
+  const bindDn = adminDn || "";
+  const bindPassword = adminPassword || "";
+
+  try {
+    const client = await createClient(ldapOpts, starttls, bindDn, bindPassword);
+    try {
+      const { searchEntries } = await client.search(userSearchBase || "", {
+        filter: `(${usernameAttribute}=${username})`,
+        scope: "sub",
+      });
+      return searchEntries.length > 0;
+    } finally {
+      if (client.isConnected) await client.unbind();
+    }
+  } catch (e) {
+    throw new Error(
+      `${LDAP_CONNECT_FAIL} ${e instanceof Error ? e.message : String(e)}`,
+    );
+  }
 };
 
 export async function defaultLDAPAuthentication(
-    username: string,
-    password: string,
-    ldapAuthOptions: AuthenticationOptions,
-    authFunction: typeof authenticate
+  username: string,
+  password: string,
+  options: LdapAuthenticationOptions,
 ): Promise<LDAPUser> {
-    const { usernameAttribute = 'uid' } = ldapAuthOptions;
+  const {
+    ldapOpts,
+    adminDn,
+    adminPassword,
+    userSearchBase,
+    usernameAttribute = "uid",
+    starttls,
+  } = options;
 
-    const userDn =
-        dn`${usernameAttribute as string}=${username as string},` +
-        ldapAuthOptions.userSearchBase;
+  let userDn = "";
+  let foundUser: Record<string, any> | null = null;
 
-    const authObj = {
-        ...ldapAuthOptions,
-        username,
-        usernameAttribute,
-        userDn,
-        userPassword: password,
-    };
-
-    try {
-        const user = await authFunction(authObj);
-        if (!user) {
-            throw new Error(AUTH_USER_NOT_FOUND);
-        }
-        if (!user[usernameAttribute as string]) {
-            throw new Error(AUTH_USER_DATA_ERROR);
-        }
-        return { uid: user[usernameAttribute as string] };
-    } catch (e) {
-        console.error(
-            'There was an error when trying to login with ldap-authentication'
+  try {
+    if (adminDn && adminPassword) {
+      let adminClient: Client | null = null;
+      try {
+        adminClient = await createClient(
+          ldapOpts,
+          starttls,
+          adminDn,
+          adminPassword,
         );
-        throw e;
+        const { searchEntries } = await adminClient.search(
+          userSearchBase || "",
+          {
+            filter: `(${usernameAttribute}=${username})`,
+            scope: "sub",
+          },
+        );
+        if (searchEntries.length === 0) {
+          throw new Error(AUTH_USER_NOT_FOUND);
+        }
+        foundUser = searchEntries[0];
+        userDn = foundUser.dn;
+      } finally {
+        if (adminClient?.isConnected) await adminClient.unbind();
+      }
+    } else {
+      userDn = dn`${usernameAttribute}=${username},` + (userSearchBase || "");
     }
+
+    let userClient: Client | null = null;
+    try {
+      userClient = await createClient(ldapOpts, starttls, userDn, password);
+
+      if (!foundUser && userSearchBase) {
+        const { searchEntries } = await userClient.search(userSearchBase, {
+          filter: `(${usernameAttribute}=${username})`,
+          scope: "sub",
+        });
+        if (searchEntries.length > 0) {
+          foundUser = searchEntries[0];
+        }
+      }
+    } finally {
+      if (userClient?.isConnected) await userClient.unbind();
+    }
+
+    if (!foundUser) {
+      throw new Error(AUTH_USER_NOT_FOUND);
+    }
+
+    const uidVal = foundUser[usernameAttribute];
+    if (!uidVal) {
+      throw new Error(AUTH_USER_DATA_ERROR);
+    }
+
+    return { uid: uidVal as string };
+  } catch (e) {
+    console.error("There was an error when trying to login with ldapts");
+    if (
+      e &&
+      typeof e === "object" &&
+      "name" in e &&
+      (e.name === "InvalidCredentialsError" || e.name === "NoSuchObjectError")
+    ) {
+      throw new Error(AUTH_USER_NOT_FOUND);
+    }
+    if (
+      e instanceof Error &&
+      (e.message.includes(AUTH_USER_NOT_FOUND) ||
+        e.message.includes(AUTH_USER_DATA_ERROR))
+    ) {
+      throw e;
+    }
+    throw new Error(
+      `${LDAP_CONNECT_FAIL} ${e instanceof Error ? e.message : String(e)}`,
+    );
+  }
 }
