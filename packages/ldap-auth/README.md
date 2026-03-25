@@ -3,9 +3,11 @@
 </p>
 <h1 align="center">@immobiliarelabs/backstage-plugin-ldap-auth</h1>
 
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square)](https://github.com/semantic-release/semantic-release)
-![npm (scoped)](https://img.shields.io/npm/v/@immobiliarelabs/backstage-plugin-ldap-auth-backend?style=flat-square)
-![license](https://img.shields.io/github/license/immobiliare/backstage-plugin-ldap-auth?style=flat-square)
+<p align="center">
+  <img src="https://img.shields.io/badge/Backstage-%3E%3D%201.48.3-%239c27b0?style=flat-square&logo=backstage" alt="Backstage Version Support" />
+  <img src="https://img.shields.io/npm/v/@immobiliarelabs/backstage-plugin-ldap-auth-backend?style=flat-square" alt="npm (scoped)" />
+  <img src="https://img.shields.io/github/license/immobiliare/backstage-plugin-ldap-auth?style=flat-square" alt="license" />
+</p>
 
 > Login page and client-side token management for BAckstage LDAP Authentication Plugin
 
