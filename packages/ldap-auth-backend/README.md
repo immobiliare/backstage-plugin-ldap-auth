@@ -41,6 +41,7 @@ This plugin is not meant to be used alone but in pair with:
   * [Add the login form](#add-the-login-form)
 - [Security Considerations](#security-considerations)
   * [Token Lifetime and Session Invalidation](#token-lifetime-and-session-invalidation)
+  * [User Enumeration Attacks](#user-enumeration-attacks)
 - [Detailed Examples](#detailed-examples)
 - [Powered Apps](#powered-apps)
 - [Support & Contribute](#support--contribute)
@@ -303,6 +304,12 @@ Tokens issued by this plugin expire naturally via their `exp` claim. On token re
 On explicit **logout**, all sessions for that user are invalidated immediately (this is the expected behavior).
 
 **Implications for internet-facing instances:** A stolen token remains usable until its `exp`. In practice this risk is low because tokens are stored as `httpOnly` cookies (XSS safe), but users should be aware of the trade-off, especially if using `increaseTokenExpireMs` to extend token lifetimes.
+
+### User Enumeration Attacks
+
+To prevent user enumeration (where an attacker can probe for valid usernames by looking at different error messages), this plugin intentionally returns a generic `401 Unauthorized` status and a unified error message (`AUTH_USER_NOT_FOUND: Credential invalid or user doesnt exists`) for both non-existent users and incorrect passwords.
+
+This is a security best practice for internet-facing Backstage instances. The frontend login page reflects this generic error without exposing whether the failure was due to the username or the password.
 
 > [!Note]
 > True per-token rotation on refresh is not currently possible due to a Backstage limitation: the tokens it issues do not include a `jti` (JWT ID) claim, which is the standard identifier needed to track and invalidate individual tokens. Without it, the only available key is the user ID (`sub`), which invalidates all sessions at once. This is not a design choice of this plugin — if Backstage adds `jti` support in the future, per-token rotation could be implemented. If this is a hard requirement for your deployment, you should evaluate complementary controls (short token TTLs, HTTPS-only, strict network access controls).

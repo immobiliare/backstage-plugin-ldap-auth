@@ -69,7 +69,7 @@ export class ProviderLdapAuthProvider implements AuthProviderRouteHandlers {
       ...this.ldapAuthenticationOptions,
       username: uid,
     });
-    if (!exists) throw new Error(JWT_INVALID_TOKEN);
+    if (!exists) throw new AuthenticationError(JWT_INVALID_TOKEN);
   }
 
   async refresh(req: Request, res: Response): Promise<void> {
