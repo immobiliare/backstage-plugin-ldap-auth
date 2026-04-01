@@ -39,6 +39,8 @@ This plugin is not meant to be used alone but in pair with:
     + [Custom authentication function](#custom-authentication-function)
     + [Custom check if user exists](#custom-check-if-user-exists)
   * [Add the login form](#add-the-login-form)
+- [Security Considerations](#security-considerations)
+  * [Token Lifetime and Session Invalidation](#token-lifetime-and-session-invalidation)
 - [Detailed Examples](#detailed-examples)
 - [Powered Apps](#powered-apps)
 - [Support & Contribute](#support--contribute)
@@ -291,6 +293,19 @@ const app = createApp({
 ```
 
 And you're ready to go!
+
+## Security Considerations
+
+### Token Lifetime and Session Invalidation
+
+Tokens issued by this plugin expire naturally via their `exp` claim. On token refresh, the old token is **not** explicitly invalidated — it remains valid until expiry. This is intentional: per-user invalidation on refresh would silently log out all other active sessions (other tabs, devices) for the same user, since invalidation is keyed by user ID (`sub`), not by individual token.
+
+On explicit **logout**, all sessions for that user are invalidated immediately (this is the expected behavior).
+
+**Implications for internet-facing instances:** A stolen token remains usable until its `exp`. In practice this risk is low because tokens are stored as `httpOnly` cookies (XSS safe), but users should be aware of the trade-off, especially if using `increaseTokenExpireMs` to extend token lifetimes.
+
+> [!Note]
+> True per-token rotation on refresh is not currently possible due to a Backstage limitation: the tokens it issues do not include a `jti` (JWT ID) claim, which is the standard identifier needed to track and invalidate individual tokens. Without it, the only available key is the user ID (`sub`), which invalidates all sessions at once. This is not a design choice of this plugin — if Backstage adds `jti` support in the future, per-token rotation could be implemented. If this is a hard requirement for your deployment, you should evaluate complementary controls (short token TTLs, HTTPS-only, strict network access controls).
 
 ## Detailed Examples
 
