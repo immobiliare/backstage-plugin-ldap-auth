@@ -59,7 +59,7 @@ type State =
     }
   | {
       type: "fetching";
-      promise: Promise<LdapSession>;
+      cookieFetchPromise: Promise<LdapSession>;
       previous: LdapSession | undefined;
     }
   | {
@@ -167,8 +167,19 @@ export class LdapSignInIdentity implements IdentityApi {
   }
 
   async getSessionAsync(forceRefresh?: boolean): Promise<LdapSession> {
+    // NOTE: Promise reuse (request coalescing) — if a cookie-refresh is already
+    // in flight, all concurrent callers (getIdToken, getCredentials, etc.) share
+    // the same promise instead of each firing a separate /refresh request.
+    // This is a client-side pattern borrowed from Backstage's server-side auth
+    // providers where it matters more. Here the real benefit is avoiding a burst
+    // of redundant POSTs on page load when many plugins mount simultaneously.
+    //
+    // CAUTION: do NOT extend this reuse to credential-based login. loginAsync
+    // deliberately does NOT reuse a cookie-refresh promise because that promise
+    // may be headed for a 401 and would incorrectly surface as a login failure.
+    // See loginAsync for the correct guard using credentialFetchInProgress.
     if (this.state.type === "fetching") {
-      return this.state.promise;
+      return this.state.cookieFetchPromise;
     }
     if (
       this.state.type === "active" &&
@@ -181,69 +192,51 @@ export class LdapSignInIdentity implements IdentityApi {
     const previous =
       this.state.type === "active" ? this.state.session : undefined;
 
-    const promise = this.fetchSession().then(
-      (session) => {
-        this.state = {
-          type: "active",
-          session,
-          expiresAt: tokenToExpiry(session.backstageIdentity.token),
-        };
-        return session;
-      },
-      (error) => {
-        this.state = {
-          type: "failed",
-          error,
-        };
-        throw error;
-      },
-    );
+    const promise = this.fetchSession();
 
     this.state = {
       type: "fetching",
-      promise,
+      cookieFetchPromise: promise,
       previous,
     };
 
-    return promise;
+    try {
+      const session = await promise;
+      this.state = {
+        type: "active",
+        session,
+        expiresAt: tokenToExpiry(session.backstageIdentity.token),
+      };
+      return session;
+    } catch (error) {
+      this.state = {
+        type: "failed",
+        error: error as Error,
+      };
+      throw error;
+    }
   }
 
   async loginAsync(auth: Auth): Promise<LdapSession> {
-    if (this.state.type === "fetching") {
-      return this.state.promise;
-    }
     if (this.state.type === "active" && new Date() < this.state.expiresAt) {
       return this.state.session;
     }
 
-    const previous =
-      this.state.type === "active" ? this.state.session : undefined;
-
-    const promise = this.fetchSessionWithAuth(auth).then(
-      (session) => {
-        this.state = {
-          type: "active",
-          session,
-          expiresAt: tokenToExpiry(session.backstageIdentity.token),
-        };
-        return session;
-      },
-      (error) => {
-        this.state = {
-          type: "failed",
-          error,
-        };
-        throw error;
-      },
-    );
-
-    this.state = {
-      type: "fetching",
-      promise,
-      previous,
-    };
-
-    return promise;
+    try {
+      const session = await this.fetchSessionWithAuth(auth);
+      this.state = {
+        type: "active",
+        session,
+        expiresAt: tokenToExpiry(session.backstageIdentity.token),
+      };
+      return session;
+    } catch (error) {
+      this.state = {
+        type: "failed",
+        error: error as Error,
+      };
+      throw error;
+    }
   }
 
   async fetchSessionWithAuth(auth: Auth): Promise<LdapSession> {
@@ -252,12 +245,11 @@ export class LdapSignInIdentity implements IdentityApi {
     // Note that we do not use the fetchApi here, since this all happens before
     // sign-in completes so there can be no automatic token injection and
     // similar.
-    const abortController = new AbortController();
     const response = await fetch(
       `${baseUrl}/${this.options.provider}/refresh`,
       {
         method: "POST",
-        signal: abortController.signal,
+        signal: this.abortController.signal,
         headers: {
           "x-requested-with": "XMLHttpRequest",
           "Content-Type": "application/json",
@@ -280,12 +272,11 @@ export class LdapSignInIdentity implements IdentityApi {
     // Note that we do not use the fetchApi here, since this all happens before
     // sign-in completes so there can be no automatic token injection and
     // similar.
-    const abortController = new AbortController();
     const response = await fetch(
       `${baseUrl}/${this.options.provider}/refresh`,
       {
         method: "POST",
-        signal: abortController.signal,
+        signal: this.abortController.signal,
         headers: { "x-requested-with": "XMLHttpRequest" },
         credentials: "include",
       },

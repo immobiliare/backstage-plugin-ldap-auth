@@ -1,4 +1,4 @@
-import { Content, Page } from "@backstage/core-components";
+import { Content, Page, ResponseErrorPanel } from "@backstage/core-components";
 import { Button, Paper, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import PasswordValidator from "password-validator";
@@ -92,6 +92,13 @@ export const LoginForm = ({
   }
 
   useEffect(() => {
+    if (error) {
+      setUError(true);
+      setPError(true);
+    }
+  }, [error]);
+
+  useEffect(() => {
     if (error && onSignInError) {
       onSignInError(error);
     }
@@ -139,6 +146,7 @@ export const LoginForm = ({
                 style={styleOverrides?.form}
               >
                 {logo}
+                {error && <ResponseErrorPanel error={error} />}
                 <TextField
                   required
                   label={usernameLabel || "LDAP Name"}

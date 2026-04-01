@@ -20,8 +20,7 @@ import {
   type SignInPageProps,
   useApi,
 } from "@backstage/core-plugin-api";
-import { useAsync } from "@react-hookz/web";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { LoginForm, type LoginFormStyles } from "./Form";
 import { LdapSignInIdentity } from "./Identity";
 
@@ -63,37 +62,56 @@ export type LdapSignInPageProps = SignInPageProps & {
  */
 export const LdapSignInPage = (props: LdapSignInPageProps) => {
   const discoveryApi = useApi(discoveryApiRef);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [identity] = useState(
-    new LdapSignInIdentity({
-      provider: props.provider,
-      discoveryApi,
-    }),
+  const identity = React.useMemo(
+    () =>
+      new LdapSignInIdentity({
+        provider: props.provider,
+        discoveryApi,
+      }),
+    [props.provider, discoveryApi],
   );
 
-  const [{ status, error }, { execute }] = useAsync(async () => {
-    await identity.login({ username, password });
+  const [status, setStatus] = useState<
+    "loading" | "error" | "not-executed" | "success"
+  >("not-executed");
+  const [statusRefresh, setStatusRefresh] = useState<
+    "loading" | "error" | "not-executed" | "success"
+  >("not-executed");
+  const [error, setError] = useState<Error | undefined>(undefined);
 
-    props.onSignInSuccess(identity);
-  });
-
-  const [{ status: statusRefresh }, { execute: executeRefresh }] = useAsync(
-    async () => {
-      await identity.fetch();
-
-      props.onSignInSuccess(identity);
+  const execute = useCallback(
+    async (u: string, p: string) => {
+      setStatus("loading");
+      setError(undefined);
+      try {
+        await identity.login({ username: u, password: p });
+        setStatus("success");
+        props.onSignInSuccess(identity);
+      } catch (e) {
+        setError(e as Error);
+        setStatus("error");
+      }
     },
+    [identity, props.onSignInSuccess],
   );
+
+  const executeRefresh = useCallback(async () => {
+    setStatusRefresh("loading");
+    try {
+      await identity.fetch();
+      setStatusRefresh("success");
+      props.onSignInSuccess(identity);
+    } catch {
+      setStatusRefresh("error");
+    }
+  }, [identity, props.onSignInSuccess]);
 
   useEffect(() => {
     executeRefresh();
-  }, []);
+  }, [executeRefresh]);
 
   function onSubmit(u: string, p: string) {
-    setUsername(u);
-    setPassword(p);
-    setTimeout(execute, 0);
+    execute(u, p);
   }
 
   if (

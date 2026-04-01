@@ -3822,7 +3822,6 @@ __metadata:
     "@backstage/plugin-app-react": "npm:^0.2.1"
     "@backstage/theme": "npm:^0.7.2"
     "@material-ui/core": "npm:^4.12.4"
-    "@react-hookz/web": "npm:^25.2.0"
     "@testing-library/jest-dom": "npm:^6.9.1"
     "@types/jest": "npm:^30.0.0"
     "@types/node": "npm:^20.5.9"
@@ -7581,22 +7580,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-hookz/web@npm:^25.2.0":
-  version: 25.2.0
-  resolution: "@react-hookz/web@npm:25.2.0"
-  dependencies:
-    "@ver0/deep-equal": "npm:^1.0.0"
-  peerDependencies:
-    js-cookie: ^3.0.5
-    react: ^16.8 || ^17 || ^18 || ^19
-    react-dom: ^16.8 || ^17 || ^18 || ^19
-  peerDependenciesMeta:
-    js-cookie:
-      optional: true
-  checksum: 10/c23a10a1028760951318df440d1c314b0a1d848fc4a80968f5c31a1c832b388cb300e4a7f9f4edf0b80e81274f53ca2adfe5fe0ea97cac92bd8fb1b94a15bae0
-  languageName: node
-  linkType: hard
-
 "@react-stately/autocomplete@npm:3.0.0-beta.4":
   version: 3.0.0-beta.4
   resolution: "@react-stately/autocomplete@npm:3.0.0-beta.4"
@@ -10913,13 +10896,6 @@ __metadata:
   version: 1.11.1
   resolution: "@unrs/resolver-binding-win32-x64-msvc@npm:1.11.1"
   conditions: os=win32 & cpu=x64
-  languageName: node
-  linkType: hard
-
-"@ver0/deep-equal@npm:^1.0.0":
-  version: 1.0.1
-  resolution: "@ver0/deep-equal@npm:1.0.1"
-  checksum: 10/7ab3679eaecdee998335e7873ac06b1d2121b8587f75bb4b25a0ece7c525754146ee9d3ef490705b00858990c9e369909e73bdfc858d1095113de637e3d03526
   languageName: node
   linkType: hard
 
