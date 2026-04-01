@@ -1,5 +1,5 @@
+import { AuthenticationError } from "@backstage/errors";
 import type Keyv from "keyv";
-
 import { JWT_EXPIRED_TOKEN, JWT_INVALID_TOKEN } from "./errors";
 import type { BackstageJWTPayload } from "./types";
 
@@ -13,7 +13,7 @@ export function parseJwtPayload(token: string): BackstageJWTPayload | never {
     const [, payload] = token.split(".");
     return JSON.parse(Buffer.from(payload, "base64").toString());
   } catch (_e) {
-    throw new Error(JWT_INVALID_TOKEN);
+    throw new AuthenticationError(JWT_INVALID_TOKEN);
   }
 }
 
@@ -56,7 +56,7 @@ export class JWTTokenValidator implements TokenValidator {
       exp + normalizeTime(this.increaseTokenExpireMs)
     ) {
       // is expired?
-      throw new Error(JWT_EXPIRED_TOKEN);
+      throw new AuthenticationError(JWT_EXPIRED_TOKEN);
     }
 
     // check if we have and entry in the cache
@@ -65,7 +65,7 @@ export class JWTTokenValidator implements TokenValidator {
 
       // if user signed off
       if (invalidBeforeDate && iat < invalidBeforeDate) {
-        throw new Error(JWT_EXPIRED_TOKEN);
+        throw new AuthenticationError(JWT_EXPIRED_TOKEN);
       }
     }
 

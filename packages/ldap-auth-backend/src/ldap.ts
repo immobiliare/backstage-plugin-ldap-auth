@@ -1,3 +1,4 @@
+import { AuthenticationError } from "@backstage/errors";
 import { dn } from "ldap-escape";
 import type { ClientOptions } from "ldapts";
 import { Client } from "ldapts";
@@ -94,7 +95,7 @@ export async function defaultLDAPAuthentication(
           },
         );
         if (searchEntries.length === 0) {
-          throw new Error(AUTH_USER_NOT_FOUND);
+          throw new AuthenticationError(AUTH_USER_NOT_FOUND);
         }
         foundUser = searchEntries[0];
         userDn = foundUser.dn;
@@ -123,12 +124,12 @@ export async function defaultLDAPAuthentication(
     }
 
     if (!foundUser) {
-      throw new Error(AUTH_USER_NOT_FOUND);
+      throw new AuthenticationError(AUTH_USER_NOT_FOUND);
     }
 
     const uidVal = foundUser[usernameAttribute];
     if (!uidVal) {
-      throw new Error(AUTH_USER_DATA_ERROR);
+      throw new AuthenticationError(AUTH_USER_DATA_ERROR);
     }
 
     return { uid: uidVal as string };
@@ -140,7 +141,7 @@ export async function defaultLDAPAuthentication(
       "name" in e &&
       (e.name === "InvalidCredentialsError" || e.name === "NoSuchObjectError")
     ) {
-      throw new Error(AUTH_USER_NOT_FOUND);
+      throw new AuthenticationError(AUTH_USER_NOT_FOUND);
     }
     if (
       e instanceof Error &&
