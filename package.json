@@ -14,7 +14,7 @@
         "lefthook": "^2.1.2",
         "lerna": "^9.0.5",
         "markdown-toc": "^1.2.0",
-        "typescript": "^5.5.3"
+        "typescript": "^6.0.2"
     },
     "engines": {
         "node": "^22.0.0 || ^24.0.0"
