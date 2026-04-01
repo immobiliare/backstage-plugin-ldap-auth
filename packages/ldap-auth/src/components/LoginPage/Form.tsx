@@ -1,6 +1,14 @@
 import { Content, Page, ResponseErrorPanel } from "@backstage/core-components";
-import { Button, Paper, TextField } from "@material-ui/core";
+import {
+  Button,
+  IconButton,
+  InputAdornment,
+  Paper,
+  TextField,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import PasswordValidator from "password-validator";
 import React, { useEffect, useState } from "react";
 
@@ -24,6 +32,7 @@ export type LoginFormProps = {
   onSubmit: (username: string, password: string) => void;
   onSignInError?: (error: Error) => void;
   error?: Error;
+  loading?: boolean;
   logo?: React.ReactNode;
   helperTextUsername?: string;
   helperTextPassword?: string;
@@ -63,6 +72,7 @@ export const LoginForm = ({
   onSubmit,
   onSignInError,
   error,
+  loading,
   logo,
   helperTextUsername,
   helperTextPassword,
@@ -78,6 +88,7 @@ export const LoginForm = ({
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [uError, setUError] = useState(Boolean(error));
   const [pError, setPError] = useState(Boolean(error));
   const classes = useStyles();
@@ -158,6 +169,7 @@ export const LoginForm = ({
                   error={uError}
                   helperText={helperTextUsername}
                   fullWidth
+                  disabled={loading}
                   size="small"
                   margin="dense"
                 />
@@ -167,13 +179,40 @@ export const LoginForm = ({
                   onChange={(e) => setPassword(e.target.value)}
                   value={password}
                   id="password"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   autoComplete="password"
                   error={pError}
                   helperText={helperTextPassword}
                   fullWidth
+                  disabled={loading}
                   size="small"
                   margin="dense"
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={() => setShowPassword(!showPassword)}
+                          onMouseDown={(e) => e.preventDefault()}
+                          size="small"
+                        >
+                          {showPassword ? (
+                            <Visibility
+                              fontSize="small"
+                              color="action"
+                              style={{ opacity: 0.5 }}
+                            />
+                          ) : (
+                            <VisibilityOff
+                              fontSize="small"
+                              color="action"
+                              style={{ opacity: 0.5 }}
+                            />
+                          )}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
                 />
                 <Button
                   variant="contained"
@@ -182,9 +221,10 @@ export const LoginForm = ({
                   fullWidth
                   onClick={onClick}
                   type="submit"
+                  disabled={loading}
                   style={{ marginTop: 16 }}
                 >
-                  Login
+                  {loading ? "Logging in..." : "Login"}
                 </Button>
               </form>
             </Paper>

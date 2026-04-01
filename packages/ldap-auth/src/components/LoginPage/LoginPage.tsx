@@ -114,11 +114,7 @@ export const LdapSignInPage = (props: LdapSignInPageProps) => {
     execute(u, p);
   }
 
-  if (
-    status === "loading" ||
-    statusRefresh === "loading" ||
-    statusRefresh === "not-executed"
-  ) {
+  if (statusRefresh === "loading" || statusRefresh === "not-executed") {
     return <Progress />;
   }
   if (status === "success" || statusRefresh === "success") {
@@ -136,6 +132,7 @@ export const LdapSignInPage = (props: LdapSignInPageProps) => {
         onSubmit={onSubmit}
         onSignInError={onSignInError}
         error={error}
+        loading={status === "loading"}
         logo={props.logo}
         {...props.options}
       />
