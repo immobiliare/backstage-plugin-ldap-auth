@@ -30,6 +30,7 @@ All the current LTS versions are supported.
 - [Configuration](#configuration)
   * [New Frontend System](#new-frontend-system)
   * [Old Frontend System (Legacy)](#old-frontend-system-legacy)
+- [Security](#security)
 - [Powered Apps](#powered-apps)
 - [Support & Contribute](#support--contribute)
 - [License](#license)
@@ -208,6 +209,12 @@ const app = createApp({
 ```
 
 Now follow instructions at [@immobiliarelabs/backstage-plugin-ldap-auth-backend](../ldap-auth-backend/README.md) to add backend authentication logic!
+
+## Security
+
+To protect your Backstage instance, this plugin intentionally returns a generic `401 Unauthorized` response for both incorrect passwords and non-existent users. This prevents user enumeration attacks where an attacker could probe your LDAP directory for valid usernames. 
+
+See the [Backend Security Considerations](../ldap-auth-backend/README.md#user-enumeration-attacks) for more details.
 
 ## Powered Apps
 

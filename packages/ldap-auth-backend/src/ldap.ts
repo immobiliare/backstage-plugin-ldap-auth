@@ -95,6 +95,9 @@ export async function defaultLDAPAuthentication(
           },
         );
         if (searchEntries.length === 0) {
+          // We intentionally return a generic AuthenticationError for both
+          // "user not found" and "wrong password" to prevent user enumeration
+          // attacks on internet-facing Backstage instances.
           throw new AuthenticationError(AUTH_USER_NOT_FOUND);
         }
         foundUser = searchEntries[0];
@@ -148,10 +151,13 @@ export async function defaultLDAPAuthentication(
       (e.message.includes(AUTH_USER_NOT_FOUND) ||
         e.message.includes(AUTH_USER_DATA_ERROR))
     ) {
-      throw e;
+      throw new AuthenticationError(e.message);
     }
-    throw new Error(
+
+    const error = new Error(
       `${LDAP_CONNECT_FAIL} ${e instanceof Error ? e.message : String(e)}`,
     );
+    error.stack = e instanceof Error ? e.stack : undefined;
+    throw error;
   }
 }
