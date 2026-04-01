@@ -3747,7 +3747,7 @@ __metadata:
     "@types/ldap-escape": "npm:^2.0.2"
     "@types/node": "npm:^20.5.9"
     "@types/supertest": "npm:^7.2.0"
-    keyv: "npm:^4.3.3"
+    keyv: "npm:^5.6.0"
     ldap-escape: "npm:^2.0.6"
     ldapts: "npm:^8.1.7"
     supertest: "npm:^7.2.2"
@@ -15781,7 +15781,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"form-data@npm:^4.0.0, form-data@npm:^4.0.5":
+"form-data@npm:^4.0.5":
   version: 4.0.5
   resolution: "form-data@npm:4.0.5"
   dependencies:
@@ -19345,7 +19345,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"keyv@npm:*, keyv@npm:^5.2.1":
+"keyv@npm:*, keyv@npm:^5.2.1, keyv@npm:^5.6.0":
   version: 5.6.0
   resolution: "keyv@npm:5.6.0"
   dependencies:
@@ -19354,7 +19354,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"keyv@npm:^4.3.3, keyv@npm:^4.5.3":
+"keyv@npm:^4.5.3":
   version: 4.5.4
   resolution: "keyv@npm:4.5.4"
   dependencies:
