@@ -46,8 +46,8 @@
     "@backstage/plugin-auth-backend": "^0.27.0",
     "@types/ldap-escape": "^2.0.2",
     "@types/node": "^20.5.9",
-    "@types/supertest": "^6.0.2",
-    "supertest": "^6.3.4",
+    "@types/supertest": "^7.2.0",
+    "supertest": "^7.2.2",
     "typescript": "^5.5.3"
   },
   "files": [
