@@ -105,8 +105,12 @@ export class ProviderLdapAuthProvider implements AuthProviderRouteHandlers {
         throw new AuthenticationError(AUTH_MISSING_CREDENTIALS);
       }
 
-      // invalidate old token
-      if (token) await this.jwtValidator.invalidateToken(token);
+      // Note: we intentionally do NOT call invalidateToken here.
+      // invalidateToken stores invalidBeforeDate keyed by user (sub),
+      // which invalidates ALL tokens for that user — including tokens
+      // held by other concurrent browser sessions/tabs. Tokens already
+      // expire naturally via their exp claim. invalidateToken is only
+      // needed for explicit logout.
 
       // This is used to return a backstage formated profile object
       const { profile } = await this.authHandler(
