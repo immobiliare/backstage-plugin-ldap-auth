@@ -3798,7 +3798,7 @@ __metadata:
     "@backstage/plugin-auth-backend": "npm:^0.27.3"
     "@backstage/plugin-auth-node": "npm:^0.6.14"
     "@types/ldap-escape": "npm:^2.0.2"
-    "@types/node": "npm:^20.5.9"
+    "@types/node": "npm:^25.5.0"
     "@types/supertest": "npm:^7.2.0"
     keyv: "npm:^5.6.0"
     ldap-escape: "npm:^2.0.6"
@@ -3824,7 +3824,7 @@ __metadata:
     "@material-ui/core": "npm:^4.12.4"
     "@testing-library/jest-dom": "npm:^6.9.1"
     "@types/jest": "npm:^30.0.0"
-    "@types/node": "npm:^20.5.9"
+    "@types/node": "npm:^25.5.0"
     cross-fetch: "npm:^4.1.0"
     password-validator: "npm:^5.3.0"
     react: "npm:19.2.4"
@@ -10245,7 +10245,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:>=13.7.0, @types/node@npm:^20.5.9":
+"@types/node@npm:*, @types/node@npm:>=13.7.0":
   version: 20.14.11
   resolution: "@types/node@npm:20.14.11"
   dependencies:
@@ -10267,6 +10267,15 @@ __metadata:
   dependencies:
     undici-types: "npm:~5.26.4"
   checksum: 10/ebb85c6edcec78df926de27d828ecbeb1b3d77c165ceef95bfc26e171edbc1924245db4eb2d7d6230206fe6b1a1f7665714fe1c70739e9f5980d8ce31af6ef82
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^25.5.0":
+  version: 25.5.0
+  resolution: "@types/node@npm:25.5.0"
+  dependencies:
+    undici-types: "npm:~7.18.0"
+  checksum: 10/b1e8116bd8c9ff62e458b76d28a59cf7631537bb17e8961464bf754dd5b07b46f1620f568b2f89970505af9eef478dd74c614651b454c1ea95949ec472c64fcb
   languageName: node
   linkType: hard
 
@@ -28440,6 +28449,13 @@ __metadata:
   version: 5.26.5
   resolution: "undici-types@npm:5.26.5"
   checksum: 10/0097779d94bc0fd26f0418b3a05472410408877279141ded2bd449167be1aed7ea5b76f756562cb3586a07f251b90799bab22d9019ceba49c037c76445f7cddd
+  languageName: node
+  linkType: hard
+
+"undici-types@npm:~7.18.0":
+  version: 7.18.2
+  resolution: "undici-types@npm:7.18.2"
+  checksum: 10/e61a5918f624d68420c3ca9d301e9f15b61cba6e97be39fe2ce266dd6151e4afe424d679372638826cb506be33952774e0424141200111a9857e464216c009af
   languageName: node
   linkType: hard
 
