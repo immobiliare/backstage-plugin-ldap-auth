@@ -3827,7 +3827,7 @@ __metadata:
     "@types/node": "npm:^25.5.0"
     cross-fetch: "npm:^4.1.0"
     password-validator: "npm:^5.3.0"
-    react: "npm:19.2.4"
+    react: "npm:19.2.5"
     react-dom: "npm:19.2.4"
     react-router: "npm:^7.13.2"
     react-router-dom: "npm:^7.13.2"
@@ -25165,10 +25165,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:19.2.4":
-  version: 19.2.4
-  resolution: "react@npm:19.2.4"
-  checksum: 10/18179fe217f67eb2d0bc61cd04e7ad3c282ea09a1dface7eacd71816f62609f4bbf566c447c704335284deb8397b00bca084e0cd60e6f437279a7498e2d0bfe0
+"react@npm:19.2.5":
+  version: 19.2.5
+  resolution: "react@npm:19.2.5"
+  checksum: 10/1c3c7ffecb90b7f89a5c3ef635e6811f3a84600097f203b918150cb7e6b0a52915e858e5b4c82317a520dffccfa46ee4819ccf92c59c5b2d6c25cffe258dd20c
   languageName: node
   linkType: hard
 
