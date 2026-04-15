@@ -1,12 +1,25 @@
 import { createBackendModule } from "@backstage/backend-plugin-api";
 import { mockServices, startTestBackend } from "@backstage/backend-test-utils";
-import jwt from "jsonwebtoken";
 import request from "supertest";
 import { ldapAuthExtensionPoint, default as ldapAuthModule } from "./alpha";
 import { JWT_EXPIRED_TOKEN } from "./errors";
 import { COOKIE_FIELD_KEY } from "./jwt";
 
 jest.setTimeout(30000);
+
+const signJwt = (payload: any, expiresInSeconds = 60) => {
+  const now = Math.floor(Date.now() / 1000);
+  const fullPayload = {
+    iat: now,
+    exp: now + expiresInSeconds,
+    ...payload,
+  };
+  const header = Buffer.from(
+    JSON.stringify({ alg: "HS256", typ: "JWT" }),
+  ).toString("base64");
+  const p = Buffer.from(JSON.stringify(fullPayload)).toString("base64");
+  return `${header}.${p}.signature`;
+};
 
 describe("LdapAuthProvider login tests", () => {
   afterEach(() => {
@@ -15,9 +28,7 @@ describe("LdapAuthProvider login tests", () => {
 
   it("Test refresh for login with username and password", async () => {
     const sub = "my-uid-name";
-    const token = jwt.sign({ sub }, "secret", {
-      expiresIn: "1min",
-    });
+    const token = signJwt({ sub });
 
     const authHandler = jest.fn(async () => ({
       profile: {
@@ -109,9 +120,7 @@ describe("LdapAuthProvider login tests", () => {
 
   it("Test refresh with token", async () => {
     const sub = "my-uid-name";
-    const token = jwt.sign({ sub }, "secret", {
-      expiresIn: "1min",
-    });
+    const token = signJwt({ sub });
 
     const authHandler = jest.fn(async () => ({
       profile: {
@@ -197,9 +206,7 @@ describe("LdapAuthProvider login tests", () => {
 
   it("Test token invalidation", async () => {
     const sub = "my-uid-name";
-    const token = jwt.sign({ sub }, "secret", {
-      expiresIn: "-1min",
-    });
+    const token = signJwt({ sub, exp: Math.floor(Date.now() / 1000) - 60 });
 
     const backend = await startTestBackend({
       features: [
@@ -264,9 +271,7 @@ describe("LdapAuthProvider login tests", () => {
 
   it("Test logout", async () => {
     const sub = "my-uid-name";
-    const token = jwt.sign({ sub }, "secret", {
-      expiresIn: "1min",
-    });
+    const token = signJwt({ sub });
 
     const backend = await startTestBackend({
       features: [
