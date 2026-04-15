@@ -3113,25 +3113,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/integration@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@backstage/integration@npm:2.0.0"
-  dependencies:
-    "@azure/identity": "npm:^4.0.0"
-    "@azure/storage-blob": "npm:^12.5.0"
-    "@backstage/config": "npm:^1.3.6"
-    "@backstage/errors": "npm:^1.2.7"
-    "@octokit/auth-app": "npm:^4.0.0"
-    "@octokit/rest": "npm:^19.0.3"
-    cross-fetch: "npm:^4.0.0"
-    git-url-parse: "npm:^15.0.0"
-    lodash: "npm:^4.17.21"
-    luxon: "npm:^3.0.0"
-    p-throttle: "npm:^4.1.1"
-  checksum: 10/c539567923548ec89a1ca89235bf3b1bf61018605e12c5de2ca3e7fc036d2a5d87ff83a5a24678449fc104aaf6cb80b15f3bf553cec020135e4d02658b0fe86b
-  languageName: node
-  linkType: hard
-
 "@backstage/integration@npm:^2.0.1":
   version: 2.0.1
   resolution: "@backstage/integration@npm:2.0.1"
@@ -4582,7 +4563,7 @@ __metadata:
     "@backstage/cli": "npm:^0.36.0"
     "@backstage/errors": "npm:^1.2.7"
     "@backstage/plugin-auth-backend": "npm:^0.28.0"
-    "@backstage/plugin-auth-node": "npm:^0.6.14"
+    "@backstage/plugin-auth-node": "npm:^0.7.0"
     "@types/ldap-escape": "npm:^2.0.2"
     "@types/node": "npm:^25.5.0"
     "@types/supertest": "npm:^7.2.0"
