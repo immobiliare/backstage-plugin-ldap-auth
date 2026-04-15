@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.2.0](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v5.1.0...v5.2.0) (2026-04-15)
+
+
+### Features
+
+* upgrade Backstage dependencies and replace jsonwebtoken with a custom JWT mock in tests ([ad87629](https://github.com/immobiliare/backstage-plugin-ldap-auth/commit/ad87629c71ba732e879fcfd6ac26c5ec88598623))
+
+
+
+
+
 # [5.1.0](https://github.com/immobiliare/backstage-plugin-ldap-auth/compare/v5.1.0-alpha.2...v5.1.0) (2026-04-01)
 
 **Note:** Version bump only for package @immobiliarelabs/backstage-plugin-ldap-auth-backend
