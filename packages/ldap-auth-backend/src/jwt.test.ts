@@ -1,14 +1,25 @@
-import jwt from "jsonwebtoken";
 import Keyv from "keyv";
 import { JWT_EXPIRED_TOKEN } from "./errors";
 import { JWTTokenValidator, normalizeTime, parseJwtPayload } from "./jwt";
 
+const signJwt = (payload: any, expiresInSeconds = 60) => {
+  const now = Math.floor(Date.now() / 1000);
+  const fullPayload = {
+    iat: now,
+    exp: now + expiresInSeconds,
+    ...payload,
+  };
+  const header = Buffer.from(
+    JSON.stringify({ alg: "HS256", typ: "JWT" }),
+  ).toString("base64url");
+  const p = Buffer.from(JSON.stringify(fullPayload)).toString("base64url");
+  return `${header}.${p}.signature`;
+};
+
 describe("parseJwtPayload", () => {
   it("should parse jwt", () => {
     const payload = { sub: "username" };
-    const j = jwt.sign(payload, "secret", {
-      expiresIn: "1min",
-    });
+    const j = signJwt(payload);
 
     const decoded = parseJwtPayload(j);
 
@@ -24,9 +35,7 @@ describe("Token Validator", () => {
   });
   const payload = { sub: "username" };
   it("should validate", async () => {
-    const j = jwt.sign(payload, "secret", {
-      expiresIn: "1min",
-    });
+    const j = signJwt(payload);
 
     const validator = new JWTTokenValidator(new Keyv());
     const out = await validator.isValid(j);
@@ -37,9 +46,7 @@ describe("Token Validator", () => {
     const timer = jest.useFakeTimers();
     const validator = new JWTTokenValidator(new Keyv());
     // Create token
-    const j = jwt.sign(payload, "secret", {
-      expiresIn: "1min",
-    });
+    const j = signJwt(payload);
     timer.advanceTimersByTime(1500);
 
     const out = await validator.isValid(j);
@@ -58,15 +65,11 @@ describe("Token Validator", () => {
     const validator = new JWTTokenValidator(new Keyv());
     // Create token
     const tokens = new Array(10).fill(null).map((_) => {
-      const out = jwt.sign(payload, "secret", {
-        expiresIn: "1min",
-      });
+      const out = signJwt(payload);
       timer.advanceTimersByTime(1500);
       return out;
     });
-    const lastToken = jwt.sign(payload, "secret", {
-      expiresIn: "1min",
-    });
+    const lastToken = signJwt(payload);
     timer.advanceTimersByTime(1500);
 
     for (const promiseOut of [...tokens, lastToken].map(
@@ -91,9 +94,7 @@ describe("Token Validator", () => {
     const validator = new JWTTokenValidator(new Keyv());
     // Create token
     const tokens = new Array(10).fill(null).map((_) => {
-      const out = jwt.sign(payload, "secret", {
-        expiresIn: "1min",
-      });
+      const out = signJwt(payload);
       timer.advanceTimersByTime(1500);
       return out;
     });
@@ -116,9 +117,7 @@ describe("Token Validator", () => {
     const validator = new JWTTokenValidator(new Keyv(), 60 * 60 * 10e3);
     // Create token
     const tokens = new Array(10).fill(null).map((_) => {
-      const out = jwt.sign(payload, "secret", {
-        expiresIn: "1min",
-      });
+      const out = signJwt(payload);
       timer.advanceTimersByTime(1500);
       return out;
     });
@@ -147,9 +146,7 @@ describe("Token Validator", () => {
     const timer = jest.useFakeTimers();
     const validator = new JWTTokenValidator(new Keyv());
 
-    const token = jwt.sign(payload, "secret", {
-      expiresIn: "1min",
-    });
+    const token = signJwt(payload);
     timer.advanceTimersByTime(1500);
 
     await expect(validator.isValid(token)).resolves.toEqual(true);
