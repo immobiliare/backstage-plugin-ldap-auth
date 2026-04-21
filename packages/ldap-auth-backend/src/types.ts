@@ -114,6 +114,7 @@ import type { defaultCheckUserExists, defaultLDAPAuthentication } from "./ldap";
 export type CookiesOptions = {
   field: string;
   secure: boolean;
+  sameSite: boolean | "lax" | "strict" | "none";
 };
 
 export type BackstageLdapAuthConfiguration = {

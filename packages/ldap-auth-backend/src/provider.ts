@@ -147,6 +147,7 @@ export class ProviderLdapAuthProvider implements AuthProviderRouteHandlers {
         maxAge,
         httpOnly: true,
         secure: this.cookies.secure,
+        sameSite: this.cookies.sameSite,
       });
 
       res.json(response);
@@ -178,6 +179,7 @@ export const ldap = {
       cnf.cookies = {
         field: cnf?.cookies?.field || COOKIE_FIELD_KEY,
         secure: cnf?.cookies?.secure || false,
+        sameSite: cnf?.cookies?.sameSite || false,
       };
 
       const authHandler =
