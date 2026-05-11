@@ -7,7 +7,7 @@
     "devDependencies": {
         "@backstage/cli": "^0.36.1",
         "@biomejs/biome": "^2.4.10",
-        "@commitlint/cli": "^20.5.0",
+        "@commitlint/cli": "^21.0.0",
         "@commitlint/config-conventional": "^20.5.0",
         "jest": "^30.3.0",
         "jest-environment-jsdom": "^30.3.0",
