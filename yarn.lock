@@ -3394,13 +3394,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/config-conventional@npm:^20.5.0":
-  version: 20.5.3
-  resolution: "@commitlint/config-conventional@npm:20.5.3"
+"@commitlint/config-conventional@npm:^21.0.0":
+  version: 21.0.0
+  resolution: "@commitlint/config-conventional@npm:21.0.0"
   dependencies:
-    "@commitlint/types": "npm:^20.5.0"
+    "@commitlint/types": "npm:^21.0.0"
     conventional-changelog-conventionalcommits: "npm:^9.2.0"
-  checksum: 10/77b27d1d0c47d1f7f3bd947c471249cea4e286a8094f5d62740b6a163374d997a26098cfacb5f0fa4478f50450a10968f5ef5fec2dea06f34a9412bc7935fb46
+  checksum: 10/f8d879228d46dd68135293851b76bd4419345829a4a7d8c3f6297d009a06af02079f4ab204958b5d3e8b94f6d440968a0e14075dca5ec6b3cf74272ba327cfbe
   languageName: node
   linkType: hard
 
@@ -3560,6 +3560,16 @@ __metadata:
     conventional-commits-parser: "npm:^6.3.0"
     picocolors: "npm:^1.1.1"
   checksum: 10/4ba62acd297549991fb3d126d2f97039d07ce52d5d96d41347ebebec9ac14223aac78dd23e8ac74d388fa042c7b0bc026c43662978b2a60dfdd11158fd7907ef
+  languageName: node
+  linkType: hard
+
+"@commitlint/types@npm:^21.0.0":
+  version: 21.0.0
+  resolution: "@commitlint/types@npm:21.0.0"
+  dependencies:
+    conventional-commits-parser: "npm:^6.3.0"
+    picocolors: "npm:^1.1.1"
+  checksum: 10/7464bd3113fb2933a4e1df02c8594970a15206a00a0746a3b3253bd9225b5615fdf9d8c776e2e2c9919435495bd07bb11b415a3cb88eb04533f386182414dbdb
   languageName: node
   linkType: hard
 
@@ -27314,7 +27324,7 @@ __metadata:
     "@backstage/cli": "npm:^0.36.1"
     "@biomejs/biome": "npm:^2.4.10"
     "@commitlint/cli": "npm:^20.5.0"
-    "@commitlint/config-conventional": "npm:^20.5.0"
+    "@commitlint/config-conventional": "npm:^21.0.0"
     jest: "npm:^30.3.0"
     jest-environment-jsdom: "npm:^30.3.0"
     lefthook: "npm:^2.1.4"
