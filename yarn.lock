@@ -2110,28 +2110,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/backend-plugin-api@npm:^1.9.1":
-  version: 1.9.1
-  resolution: "@backstage/backend-plugin-api@npm:1.9.1"
-  dependencies:
-    "@backstage/cli-common": "npm:^0.2.2"
-    "@backstage/config": "npm:^1.3.8"
-    "@backstage/errors": "npm:^1.3.1"
-    "@backstage/plugin-auth-node": "npm:^0.7.1"
-    "@backstage/plugin-permission-common": "npm:^0.9.9"
-    "@backstage/plugin-permission-node": "npm:^0.11.0"
-    "@backstage/types": "npm:^1.2.2"
-    "@types/express": "npm:^4.17.6"
-    "@types/json-schema": "npm:^7.0.6"
-    "@types/luxon": "npm:^3.0.0"
-    json-schema: "npm:^0.4.0"
-    knex: "npm:^3.0.0"
-    luxon: "npm:^3.0.0"
-    zod: "npm:^3.25.76 || ^4.0.0"
-  checksum: 10/deb919cbb1a8dbcd57c1ae8f37531db433422bdefd4f46d4bce21f0198cca33267223d296b8b6052d8cf9cb1e77f4b5ba75c1eecde159f4ca261e41d044b48dc
-  languageName: node
-  linkType: hard
-
 "@backstage/backend-test-utils@npm:^1.11.1":
   version: 1.11.3
   resolution: "@backstage/backend-test-utils@npm:1.11.3"
@@ -3005,6 +2983,29 @@ __metadata:
     "@types/react":
       optional: true
   checksum: 10/cba133859bc5feb099744a22694bf688b96c35fb924565f1b39123d441cdfea1348ea8301e6fe8275b1b2a2aa064943043ac49b3059f315f7b4c5efa5be1e425
+  languageName: node
+  linkType: hard
+
+"@backstage/frontend-plugin-api@npm:^0.17.0":
+  version: 0.17.0
+  resolution: "@backstage/frontend-plugin-api@npm:0.17.0"
+  dependencies:
+    "@backstage/errors": "npm:^1.3.1"
+    "@backstage/filter-predicates": "npm:^0.1.3"
+    "@backstage/types": "npm:^1.2.2"
+    "@backstage/version-bridge": "npm:^1.0.12"
+    "@standard-schema/spec": "npm:^1.1.0"
+    zod: "npm:^4.0.0"
+    zod-to-json-schema: "npm:^3.25.1"
+  peerDependencies:
+    "@types/react": ^17.0.0 || ^18.0.0
+    react: ^17.0.0 || ^18.0.0
+    react-dom: ^17.0.0 || ^18.0.0
+    react-router-dom: ^6.30.2
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 10/0d54b4685232c25d7d5d9e1b4060c4ed3873136a3f82538c155f9356d5e9c412677e461666f3918d19416ce97bb011ceec58b8535b935adedf2d3aae1386ffe4
   languageName: node
   linkType: hard
 
@@ -4536,7 +4537,7 @@ __metadata:
     "@backstage/core-components": "npm:^0.18.8"
     "@backstage/core-plugin-api": "npm:^1.12.4"
     "@backstage/dev-utils": "npm:^1.1.21"
-    "@backstage/frontend-plugin-api": "npm:^0.16.0"
+    "@backstage/frontend-plugin-api": "npm:^0.17.0"
     "@backstage/plugin-app-react": "npm:^0.2.1"
     "@backstage/theme": "npm:^0.7.2"
     "@material-ui/core": "npm:^4.12.4"
