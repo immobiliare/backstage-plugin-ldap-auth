@@ -112,6 +112,7 @@ auth:
                 cookies:
                     secure: false # https cookies or not
                     field: 'backstage-token' # default
+                    sameSite: false # default
 
                 ldapAuthenticationOptions:
                     userSearchBase: 'ou=users,dc=ns,dc=farm' # REQUIRED
