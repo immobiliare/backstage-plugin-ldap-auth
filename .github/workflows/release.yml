@@ -16,7 +16,7 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
           registry-url: "https://registry.npmjs.org"
@@ -51,7 +51,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_NODE_TOKEN }}
 
       - name: merge main -> next
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v7
         with:
           type: now
           from_branch: main
